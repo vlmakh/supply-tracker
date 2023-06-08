@@ -1,9 +1,10 @@
-import { FormStyled, FormField } from './FormAddTask.styled';
+import { FormStyled, FieldName, FormField } from './FormAddTask.styled';
 // import DatePicker from 'react-datepicker';
 // import 'react-datepicker/dist/react-datepicker.css';
 import { formatDate } from 'utils/formatDate';
 import { useEffect } from 'react';
 import { Formik, Field } from 'formik';
+import { addTask } from 'utils/operations';
 
 export const FormAddTask = ({ handleModal }) => {
   useEffect(() => {
@@ -14,7 +15,14 @@ export const FormAddTask = ({ handleModal }) => {
     };
   });
 
-  const handleSubmit = () => {};
+  const handleSubmit = (newTask, { resetForm }) => {
+    addTask(newTask)
+      .then(() => {
+        resetForm();
+        handleModal();
+      })
+      .catch(e => console.log(e.message));
+  };
 
   const handleEscape = event => {
     if (event.code === 'Escape') {
@@ -24,6 +32,9 @@ export const FormAddTask = ({ handleModal }) => {
 
   const today = new Date();
   const dateInvoice = new Date(today.getTime() + 86_400_000);
+  const datePayment = new Date(today.getTime() + 2 * 86_400_000);
+  const dateETD = new Date(today.getTime() + 3 * 86_400_000);
+  const dateETA = new Date(today.getTime() + 4 * 86_400_000);
 
   return (
     <Formik
@@ -31,11 +42,13 @@ export const FormAddTask = ({ handleModal }) => {
       initialValues={{
         name: '',
         qty: '',
+        unit: 'pcs',
         dateOrder: formatDate(today),
         dateInvoice: formatDate(dateInvoice),
-        datePayment: '',
-        dateETD: '',
-        dateETA: '',
+        datePayment: formatDate(datePayment),
+        dateETD: formatDate(dateETD),
+        dateETA: formatDate(dateETA),
+        // comments: '',
       }}
     >
       <FormStyled>
@@ -46,13 +59,15 @@ export const FormAddTask = ({ handleModal }) => {
         <p>Add new task</p>
 
         <FormField>
-          <span>Name</span>
+          <FieldName>Name</FieldName>
           <Field type="text" name="name" placeholder="name"></Field>
         </FormField>
 
         <FormField>
-          <span>Quantuty</span>
+          <FieldName>Quantity</FieldName>
+
           <Field type="text" name="qty" placeholder="quantity"></Field>
+
           <Field as="select" name="unit">
             <option value="pcs">pcs</option>
             <option value="m">m</option>
@@ -61,45 +76,51 @@ export const FormAddTask = ({ handleModal }) => {
         </FormField>
 
         <FormField>
-          <span>Order</span>
+          <FieldName>Order</FieldName>
           <Field type="text" name="dateOrder"></Field>
         </FormField>
 
         <FormField>
-          <span>Invoice</span>
+          <FieldName>Supplier</FieldName>
+          <Field type="text" name="supplier"></Field>
+        </FormField>
+
+        <FormField>
+          <FieldName>Invoice</FieldName>
           <Field type="text" name="dateInvoice"></Field>
-          <p>{formatDate(dateInvoice)}</p>
         </FormField>
 
         <FormField>
-          <span>Payment</span>
+          <FieldName>Payment</FieldName>
           <Field type="text" name="datePayment"></Field>
-          <p>{formatDate(dateInvoice)}</p>
         </FormField>
 
         <FormField>
-          <span>Delivery</span>
+          <FieldName>Freight</FieldName>
 
           <Field as="select" name="delivery">
             <option value="Nova poshta">Nova poshta</option>
             <option value="FCA">FCA</option>
             <option value="DAP">DAP</option>
-            <option value="DAP">SAT</option>
-            <option value="DAP">Delivery</option>
+            <option value="SAT">SAT</option>
+            <option value="Delivery">Delivery</option>
           </Field>
         </FormField>
 
         <FormField>
-          <span>ETD</span>
+          <FieldName>ETD</FieldName>
           <Field type="text" name="dateETD"></Field>
-          <p>{formatDate(dateInvoice)}</p>
         </FormField>
 
         <FormField>
-          <span>ETA</span>
+          <FieldName>ETA</FieldName>
           <Field type="text" name="dateETA"></Field>
-          <p>{formatDate(dateInvoice)}</p>
         </FormField>
+
+        {/* <FormField>
+          <FieldName>Comments</FieldName>
+          <Field type="text" name="comments"></Field>
+        </FormField> */}
 
         <button type="submit">Add</button>
       </FormStyled>

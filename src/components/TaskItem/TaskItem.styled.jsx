@@ -2,12 +2,12 @@ import styled from '@emotion/styled';
 
 export const Task = styled.tr`
   color: ${p => (p.completed ? 'lightgrey' : '#212121')};
-
 `;
 
-export const Name = styled.p`
+export const Name = styled.td`
   width: 240px;
   font-weight: 700;
+  text-align: left;
 `;
 
 export const Company = styled.p``;

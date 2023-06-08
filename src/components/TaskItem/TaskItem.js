@@ -1,4 +1,4 @@
-import { Task } from './TaskItem.styled';
+import { Task, Name } from './TaskItem.styled';
 import { useState } from 'react';
 import { updateTaskStatus } from 'utils/operations';
 
@@ -25,7 +25,7 @@ export const TaskItem = ({ task }) => {
           V
         </button>
       </td>
-      <td>{task.name} </td>
+      <Name>{task.name} </Name>
       <td>{task.qty} </td>
       <td> pcs</td>
       <td>{task.dateOrder} </td>

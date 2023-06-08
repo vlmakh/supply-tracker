@@ -12,22 +12,11 @@ export const Table = styled.table`
   }
 
   td {
-    width: 100px;
+    /* width: 100px; */
     font-size: 14px;
     border: 1px solid darkgrey;
-    text-align: center;
-  }
-
-  /* tr {
-    color: ${p => p.completed === 'true' ? 'grey' : "#212121"};    
-  }*/
+    /* text-align: center; */
+  }  
   `; 
 
-  // export const Checkbox = styled.input`
-  // /* display: none; */
-
-  // :checked ~ .td { //путь к родителю ????
-  //   color: grey;
-  // }
-// `;
 
