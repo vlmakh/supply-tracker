@@ -11,6 +11,7 @@ export const TaskTable = ({ tasks }) => {
       <thead>
         <tr>
           <th></th>
+          <th></th>
           <th>Name</th>
           <th>Qty</th>
           <th>Unit</th>
@@ -21,17 +22,18 @@ export const TaskTable = ({ tasks }) => {
           <th>Payment</th>
           <th>Freight</th>
           <th></th>
-          <th>ETA</th>
-          <th></th>
           <th>ETD</th>
+          <th></th>
+          <th>ETA</th>
           <th>Days</th>
           <th>Comments</th>
+          <th></th>
         </tr>
       </thead>
 
       <tbody>
-        {tasks.map(task => {
-          return <TaskItem key={task._id} task={task} />;
+        {tasks.map((task, idx) => {
+          return <TaskItem key={task._id} task={task} idx={idx} />;
         })}
       </tbody>
     </Table>

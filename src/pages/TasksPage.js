@@ -1,10 +1,11 @@
-import { Box } from 'components/Box/Box';
+import { Box } from 'components/Base/Box';
 import { TaskTable } from 'components/TaskTable/TaskTable';
 import { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { ModalWindow } from 'components/Modal/Modal.styled';
 import { FormAddTask } from 'components/FormAddTask/FormAddTask';
 import { getTasks, addTask } from 'utils/operations';
+import { AddTaskButton } from 'components/Base/Buttons.styled';
 
 export default function TaskPage({ isLoggedIn }) {
   const [tasks, setTasks] = useState([]);
@@ -43,9 +44,11 @@ export default function TaskPage({ isLoggedIn }) {
       <Box width="1200px" mt={5} mx="auto">
         {!isLoading && tasks && <TaskTable tasks={tasks} />}
 
-        <button type="button" onClick={handleModal}>
-          Add task
-        </button>
+        <Box textAlign="center" p={4}>
+          <AddTaskButton type="button" onClick={handleModal}>
+            Add task
+          </AddTaskButton>
+        </Box>
 
         {showModal && (
           <ModalWindow>

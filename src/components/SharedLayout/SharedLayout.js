@@ -1,7 +1,15 @@
 import { Outlet, Link } from 'react-router-dom';
 import { Suspense } from 'react';
-import { Layout, Header, Nav, Footer, MyLink } from './SharedLayout.styled';
+import {
+  Layout,
+  Header,
+  Nav,
+  DateToday,
+  Footer,
+  MyLink,
+} from './SharedLayout.styled';
 import { LogoVM } from 'components/LogoVM/LogoVM';
+import { formatDate } from 'utils/formatDate';
 
 export const SharedLayout = () => {
   return (
@@ -11,6 +19,7 @@ export const SharedLayout = () => {
           <Link to="/">Home</Link>
           <Link to="tasks">Tasks</Link>
         </Nav>
+        <DateToday>{formatDate(new Date())}</DateToday>
       </Header>
 
       <Suspense fallback={<div>Loading...</div>}>

@@ -4,6 +4,10 @@ export const Task = styled.tr`
   color: ${p => (p.completed ? 'lightgrey' : '#212121')};
 `;
 
+export const Num = styled.td`
+  text-align: right;
+`;
+
 export const Name = styled.td`
   width: 240px;
   font-weight: 700;

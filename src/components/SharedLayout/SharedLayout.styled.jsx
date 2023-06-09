@@ -9,6 +9,8 @@ export const Layout = styled.div`
 `;
 
 export const Header = styled.div`
+  display: flex;
+  align-items: center;
   border-bottom: 1px solid grey;
   position: fixed;
   top: 0;
@@ -24,6 +26,12 @@ export const Nav = styled.nav`
   height: 100%;
   gap: ${p => p.theme.space[4]}px;
 `;
+
+export const DateToday = styled.p`
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: 700;
+`
 
 export const Footer = styled.div`
   display: flex;
