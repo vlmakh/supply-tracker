@@ -119,16 +119,11 @@ export const addTask = async newTask => {
   }
 };
 
-export const deleteTask = async note => {
-  const { _id, name } = note;
+export const deleteTask = async id => {
   try {
-    const response = await axios.delete(`api/tasks/${_id}`);
+    const response = await axios.delete(`api/tasks/${id}`);
 
-    toast.success(() => (
-      <span>
-        <b>{name}</b> was deleted
-      </span>
-    ));
+    toast.success(() => 'Task was deleted');
 
     return response.data;
   } catch (error) {
