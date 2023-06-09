@@ -4,9 +4,9 @@ import { FormStyled, FieldName, FormField } from './FormAddTask.styled';
 import { formatDate } from 'utils/formatDate';
 import { useEffect } from 'react';
 import { Formik, Field } from 'formik';
-import { addTask } from 'utils/operations';
+// import { addTask } from 'utils/operations';
 
-export const FormAddTask = ({ handleModal }) => {
+export const FormAddTask = ({ handleModal, handleAddTask }) => {
   useEffect(() => {
     window.addEventListener('keydown', handleEscape);
 
@@ -16,12 +16,14 @@ export const FormAddTask = ({ handleModal }) => {
   });
 
   const handleSubmit = (newTask, { resetForm }) => {
-    addTask(newTask)
-      .then(() => {
-        resetForm();
-        handleModal();
-      })
-      .catch(e => console.log(e.message));
+    // addTask(newTask)
+    //   .then(() => {
+    //     resetForm();
+    //     handleModal();
+    //   })
+    //   .catch(e => console.log(e.message));
+
+    handleAddTask(newTask, resetForm);
   };
 
   const handleEscape = event => {
@@ -44,6 +46,7 @@ export const FormAddTask = ({ handleModal }) => {
         qty: '',
         unit: 'pcs',
         dateOrder: formatDate(today),
+        supplier: '',
         dateInvoice: formatDate(dateInvoice),
         datePayment: formatDate(datePayment),
         dateETD: formatDate(dateETD),

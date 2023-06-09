@@ -4,12 +4,12 @@ import { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { ModalWindow } from 'components/Modal/Modal.styled';
 import { FormAddTask } from 'components/FormAddTask/FormAddTask';
-import { getTasks } from 'utils/operations';
+import { getTasks, addTask } from 'utils/operations';
 
 export default function TaskPage({ isLoggedIn }) {
   const [tasks, setTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [showModal, setShowMhdal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     getTasks()
@@ -23,7 +23,17 @@ export default function TaskPage({ isLoggedIn }) {
   }, []);
 
   const handleModal = () => {
-    setShowMhdal(!showModal);
+    setShowModal(!showModal);
+  };
+
+  const handleAddTask = (newTask, resetForm) => {
+    addTask(newTask)
+      .then(data => {
+        resetForm();
+        handleModal();
+        tasks.push(data);
+      })
+      .catch(e => console.log(e.message));
   };
 
   return (
@@ -39,7 +49,10 @@ export default function TaskPage({ isLoggedIn }) {
 
         {showModal && (
           <ModalWindow>
-            <FormAddTask handleModal={handleModal} />
+            <FormAddTask
+              handleModal={handleModal}
+              handleAddTask={handleAddTask}
+            />
           </ModalWindow>
         )}
       </Box>

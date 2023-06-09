@@ -5,7 +5,7 @@ import { updateTaskStatus } from 'utils/operations';
 export const TaskItem = ({ task }) => {
   const [status, setStatus] = useState(task.completed);
 
-  const handleComplete = (id, status) => {
+  const handleCompleteTask = (id, status) => {
     updateTaskStatus(id, status)
       .then(() => setStatus(!status))
       .catch(e => console.log(e.message));
@@ -21,7 +21,10 @@ export const TaskItem = ({ task }) => {
     <Task completed={status}>
       <td>
         <input type="checkbox" checked={status} readOnly />
-        <button type="button" onClick={() => handleComplete(task._id, status)}>
+        <button
+          type="button"
+          onClick={() => handleCompleteTask(task._id, status)}
+        >
           V
         </button>
       </td>

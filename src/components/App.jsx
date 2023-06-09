@@ -1,17 +1,15 @@
 import { ThemeProvider } from '@emotion/react';
 import { theme } from 'utils/theme';
 import { SharedLayout } from './SharedLayout/SharedLayout';
-// import { HomePage } from 'pages/Home';
-// import {Login} from 'components/Login/Login'
 import { Routes, Route } from 'react-router-dom';
 import { useState, useEffect, lazy } from 'react';
 import { checkCurrentUser } from 'utils/operations';
 import { Toaster } from 'react-hot-toast';
 
-const HomePage = lazy(() => import('pages/Home'));
+const HomePage = lazy(() => import('pages/HomePage'));
 const Login = lazy(() => import('components/Login/Login'));
 const Signup = lazy(() => import('components/Signup/Signup'));
-const TaskPage = lazy(() => import('pages/Tasks'));
+const TaskPage = lazy(() => import('pages/TasksPage'));
 
 const startData = { token: null };
 const savedData = JSON.parse(localStorage.getItem('taskmgr'));
