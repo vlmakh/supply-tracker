@@ -35,15 +35,18 @@ export const FormField = styled.div`
   align-items: center;
   position: relative;
   width: 100%;
-
-  &:not(:first-of-type) {
-    margin-top: 16px;
-  }
+  margin-top: 16px;
+  
 `;
 
 export const Input = styled(Field)`
   padding: 4px;
   width: 60%;
+`;
+
+export const DateInput = styled(Field)`
+  padding: 4px;
+  width: 100px;
 `;
 
 export const Comments = styled(Field)`

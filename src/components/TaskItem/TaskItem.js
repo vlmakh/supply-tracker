@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { updateTaskStatus } from 'utils/operations';
 import { TDButton } from 'components/Base/Buttons.styled';
 import { AiFillEdit } from 'react-icons/ai';
-import { ModalWindow } from 'components/Modal/Modal.styled';
-import { FormTaskEdit } from 'components/FormTask/FormTaskEdit';
+// import { ModalWindow } from 'components/Modal/Modal.styled';
+// import { FormTaskEdit } from 'components/FormTask/FormTaskEdit';
 
 export const TaskItem = ({ task, idx }) => {
   const [status, setStatus] = useState(task.completed);

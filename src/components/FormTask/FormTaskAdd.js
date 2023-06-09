@@ -2,6 +2,7 @@ import {
   FormStyled,
   FieldName,
   Input,
+  DateInput,
   Comments,
   FormField,
   FormTitle,
@@ -13,6 +14,7 @@ import { useEffect } from 'react';
 import { Formik, Field } from 'formik';
 import { IoClose } from 'react-icons/io5';
 import { CloseButton, AddTaskButton } from 'components/Base/Buttons.styled';
+import { Box } from 'components/Base/Box';
 
 export const FormTaskAdd = ({ handleModal, handleAddTask }) => {
   useEffect(() => {
@@ -82,7 +84,7 @@ export const FormTaskAdd = ({ handleModal, handleAddTask }) => {
 
         <FormField>
           <FieldName>Order</FieldName>
-          <Input type="text" name="dateOrder"></Input>
+          <DateInput type="text" name="dateOrder"></DateInput>
         </FormField>
 
         <FormField>
@@ -90,15 +92,17 @@ export const FormTaskAdd = ({ handleModal, handleAddTask }) => {
           <Input type="text" name="supplier"></Input>
         </FormField>
 
-        <FormField>
-          <FieldName>Invoice</FieldName>
-          <Input type="text" name="dateInvoice"></Input>
-        </FormField>
+        <Box display="flex" alignItems="center">
+          <FormField>
+            <FieldName>Invoice</FieldName>
+            <DateInput type="text" name="dateInvoice"></DateInput>
+          </FormField>
 
-        <FormField>
-          <FieldName>Payment</FieldName>
-          <Input type="text" name="datePayment"></Input>
-        </FormField>
+          <FormField>
+            <FieldName>Payment</FieldName>
+            <DateInput type="text" name="datePayment"></DateInput>
+          </FormField>
+        </Box>
 
         <FormField>
           <FieldName>Freight</FieldName>
@@ -112,16 +116,18 @@ export const FormTaskAdd = ({ handleModal, handleAddTask }) => {
           </Input>
         </FormField>
 
-        <FormField>
-          <FieldName>ETD</FieldName>
-          <Input type="text" name="dateETD"></Input>
-        </FormField>
+        <Box display="flex" alignItems="center">
+          <FormField>
+            <FieldName>ETD</FieldName>
+            <DateInput type="text" name="dateETD"></DateInput>
+          </FormField>
 
-        <FormField>
-          <FieldName>ETA</FieldName>
-          <Input type="text" name="dateETA"></Input>
-          <p>{(dateETA - today) / 86_400_000}</p>
-        </FormField>
+          <FormField>
+            <FieldName>ETA</FieldName>
+            <DateInput type="text" name="dateETA"></DateInput>
+            {/* <p>{(dateETA - today) / 86_400_000}</p> */}
+          </FormField>
+        </Box>
 
         <FormField>
           <FieldName>Comments</FieldName>
