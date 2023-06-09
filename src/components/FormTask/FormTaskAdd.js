@@ -1,12 +1,20 @@
-import { FormStyled, FieldName, FormField } from './FormAddTask.styled';
+import {
+  FormStyled,
+  FieldName,
+  Input,
+  Comments,
+  FormField,
+  FormTitle,
+} from './FormTask.styled';
 // import DatePicker from 'react-datepicker';
 // import 'react-datepicker/dist/react-datepicker.css';
 import { formatDate } from 'utils/formatDate';
 import { useEffect } from 'react';
 import { Formik, Field } from 'formik';
-// import { addTask } from 'utils/operations';
+import { IoClose } from 'react-icons/io5';
+import { CloseButton, AddTaskButton } from 'components/Base/Buttons.styled';
 
-export const FormAddTask = ({ handleModal, handleAddTask }) => {
+export const FormTaskAdd = ({ handleModal, handleAddTask }) => {
   useEffect(() => {
     window.addEventListener('keydown', handleEscape);
 
@@ -16,13 +24,6 @@ export const FormAddTask = ({ handleModal, handleAddTask }) => {
   });
 
   const handleSubmit = (newTask, { resetForm }) => {
-    // addTask(newTask)
-    //   .then(() => {
-    //     resetForm();
-    //     handleModal();
-    //   })
-    //   .catch(e => console.log(e.message));
-
     handleAddTask(newTask, resetForm);
   };
 
@@ -46,30 +47,31 @@ export const FormAddTask = ({ handleModal, handleAddTask }) => {
         qty: '',
         unit: 'pcs',
         dateOrder: formatDate(today),
-        supplier: '',
+        supplier: ' ',
         dateInvoice: formatDate(dateInvoice),
         datePayment: formatDate(datePayment),
+        freight: 'Nova poshta',
         dateETD: formatDate(dateETD),
         dateETA: formatDate(dateETA),
-        // comments: '',
+        comments: ' ',
       }}
     >
       <FormStyled>
-        <button type="button" onClick={handleModal}>
-          X
-        </button>
+        <CloseButton type="button" onClick={handleModal}>
+          <IoClose size="20" />
+        </CloseButton>
 
-        <p>Add new task</p>
+        <FormTitle>Add new task</FormTitle>
 
         <FormField>
           <FieldName>Name</FieldName>
-          <Field type="text" name="name" placeholder="name"></Field>
+          <Input type="text" name="name" placeholder="name"></Input>
         </FormField>
 
         <FormField>
           <FieldName>Quantity</FieldName>
 
-          <Field type="text" name="qty" placeholder="quantity"></Field>
+          <Input type="text" name="qty" placeholder="quantity"></Input>
 
           <Field as="select" name="unit">
             <option value="pcs">pcs</option>
@@ -80,52 +82,53 @@ export const FormAddTask = ({ handleModal, handleAddTask }) => {
 
         <FormField>
           <FieldName>Order</FieldName>
-          <Field type="text" name="dateOrder"></Field>
+          <Input type="text" name="dateOrder"></Input>
         </FormField>
 
         <FormField>
           <FieldName>Supplier</FieldName>
-          <Field type="text" name="supplier"></Field>
+          <Input type="text" name="supplier"></Input>
         </FormField>
 
         <FormField>
           <FieldName>Invoice</FieldName>
-          <Field type="text" name="dateInvoice"></Field>
+          <Input type="text" name="dateInvoice"></Input>
         </FormField>
 
         <FormField>
           <FieldName>Payment</FieldName>
-          <Field type="text" name="datePayment"></Field>
+          <Input type="text" name="datePayment"></Input>
         </FormField>
 
         <FormField>
           <FieldName>Freight</FieldName>
 
-          <Field as="select" name="delivery">
+          <Input as="select" name="freight">
             <option value="Nova poshta">Nova poshta</option>
             <option value="FCA">FCA</option>
             <option value="DAP">DAP</option>
             <option value="SAT">SAT</option>
             <option value="Delivery">Delivery</option>
-          </Field>
+          </Input>
         </FormField>
 
         <FormField>
           <FieldName>ETD</FieldName>
-          <Field type="text" name="dateETD"></Field>
+          <Input type="text" name="dateETD"></Input>
         </FormField>
 
         <FormField>
           <FieldName>ETA</FieldName>
-          <Field type="text" name="dateETA"></Field>
+          <Input type="text" name="dateETA"></Input>
+          <p>{(dateETA - today) / 86_400_000}</p>
         </FormField>
 
-        {/* <FormField>
+        <FormField>
           <FieldName>Comments</FieldName>
-          <Field type="text" name="comments"></Field>
-        </FormField> */}
+          <Comments as="textarea" rows="4" name="comments"></Comments>
+        </FormField>
 
-        <button type="submit">Add</button>
+        <AddTaskButton type="submit">Add</AddTaskButton>
       </FormStyled>
     </Formik>
   );

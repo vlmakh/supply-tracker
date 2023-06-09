@@ -3,14 +3,14 @@ import { TaskTable } from 'components/TaskTable/TaskTable';
 import { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { ModalWindow } from 'components/Modal/Modal.styled';
-import { FormAddTask } from 'components/FormAddTask/FormAddTask';
+import { FormTaskAdd } from 'components/FormTask/FormTaskAdd';
 import { getTasks, addTask } from 'utils/operations';
 import { AddTaskButton } from 'components/Base/Buttons.styled';
 
 export default function TaskPage({ isLoggedIn }) {
   const [tasks, setTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [showModal, setShowModal] = useState(false);
+  const [showFormTaskAdd, setShowFormTaskAdd] = useState(false);
 
   useEffect(() => {
     getTasks()
@@ -24,14 +24,15 @@ export default function TaskPage({ isLoggedIn }) {
   }, []);
 
   const handleModal = () => {
-    setShowModal(!showModal);
+    setShowFormTaskAdd(!showFormTaskAdd);
   };
 
   const handleAddTask = (newTask, resetForm) => {
     addTask(newTask)
       .then(data => {
+        console.log(data);
         resetForm();
-        handleModal();
+        setShowFormTaskAdd(!showFormTaskAdd);
         tasks.push(data);
       })
       .catch(e => console.log(e.message));
@@ -50,9 +51,9 @@ export default function TaskPage({ isLoggedIn }) {
           </AddTaskButton>
         </Box>
 
-        {showModal && (
+        {showFormTaskAdd && (
           <ModalWindow>
-            <FormAddTask
+            <FormTaskAdd
               handleModal={handleModal}
               handleAddTask={handleAddTask}
             />

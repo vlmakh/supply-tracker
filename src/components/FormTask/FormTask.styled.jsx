@@ -3,11 +3,11 @@ import { Form, Field, ErrorMessage } from 'formik';
 
 export const FormStyled = styled(Form)`
 position: absolute;
-top: 30%;
+top: 20%;
 left: 40%;
   text-align: center;
   width: 100%;
-  padding: 16px;
+  padding: 16px 16px 32px;
   border: 1px solid #212121;
   border-radius: 4px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.8);
@@ -16,6 +16,12 @@ left: 40%;
   @media screen and (min-width: 500px) {
     width: 500px;
   }
+`;
+
+export const FormTitle = styled.p`
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 16px;
 `;
 
 export const FieldName = styled.span`
@@ -28,20 +34,24 @@ export const FormField = styled.div`
   display: flex;
   align-items: center;
   position: relative;
+  width: 100%;
 
   &:not(:first-of-type) {
     margin-top: 16px;
   }
 `;
 
-export const InputName = styled(Field)`
-  display: flex;
-  align-items: center;
-  margin-left: 8px;
+export const Input = styled(Field)`
   padding: 4px;
-  font-weight: 700;
-  width: 200px;
+  width: 60%;
 `;
+
+export const Comments = styled(Field)`
+  padding: 4px;
+  width: 60%;
+  resize: none;
+`;
+
 
 export const FormBtn = styled.button`
   display: flex;
