@@ -31,7 +31,6 @@ export const TaskItem = ({ task, idx, tasks }) => {
         tasks.splice(idx, 1, data);
         setShowFormTaskEdit(!showFormTaskEdit);
       })
-
       .catch(err => console.log(err.message));
   };
 

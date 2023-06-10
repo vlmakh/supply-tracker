@@ -41,6 +41,7 @@ export const TaskTable = ({ tasks }) => {
           <th>Comments</th>
           <th></th>
           <th></th>
+          <th></th>
         </tr>
       </thead>
 
