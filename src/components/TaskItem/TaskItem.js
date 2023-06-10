@@ -72,7 +72,7 @@ export const TaskItem = ({ task, idx }) => {
       </Task>
 
       {showFormTaskEdit && (
-        <Modal>
+        <Modal onClose={handleModal}>
           <FormTaskEdit
             handleModal={handleModal}
             handleEditTask={handleEditTask}

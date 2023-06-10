@@ -52,7 +52,7 @@ export default function TaskPage({ isLoggedIn }) {
         </Box>
 
         {showFormTaskAdd && (
-          <Modal>
+          <Modal onClose={handleModal}>
             <FormTaskAdd
               handleModal={handleModal}
               handleAddTask={handleAddTask}
