@@ -6,6 +6,7 @@ import {
   Comments,
   FormField,
   FormTitle,
+  ErrorStyled,
 } from './FormTask.styled';
 // import DatePicker from 'react-datepicker';
 // import 'react-datepicker/dist/react-datepicker.css';
@@ -15,6 +16,21 @@ import { Formik, Field } from 'formik';
 import { IoClose } from 'react-icons/io5';
 import { CloseButton, AddTaskFormButton } from 'components/Base/Buttons.styled';
 import { Box } from 'components/Base/Box';
+import * as yup from 'yup';
+
+let schema = yup.object().shape({
+  name: yup.string().required(),
+  qty: yup.number().required(),
+  unit: yup.string(),
+  dateOrder: yup.string().required(),
+  supplier: yup.string(),
+  dateInvoice: yup.string(),
+  datePayment: yup.string(),
+  freight: yup.string(),
+  dateETD: yup.string(),
+  dateETA: yup.string().required(),
+  comments: yup.string(),
+});
 
 export const FormTaskAdd = ({ handleModal, handleAddTask }) => {
   useEffect(() => {
@@ -57,6 +73,7 @@ export const FormTaskAdd = ({ handleModal, handleAddTask }) => {
         dateETA: formatDate(dateETA),
         comments: '-',
       }}
+      validationSchema={schema}
     >
       <FormStyled>
         <CloseButton type="button" onClick={handleModal}>
@@ -68,12 +85,14 @@ export const FormTaskAdd = ({ handleModal, handleAddTask }) => {
         <FormField>
           <FieldName>Name</FieldName>
           <Input type="text" name="name" placeholder="name"></Input>
+          <ErrorStyled component="div" name="name" />
         </FormField>
 
         <FormField>
           <FieldName>Quantity</FieldName>
 
           <Input type="text" name="qty" placeholder="quantity"></Input>
+          <ErrorStyled component="div" name="qty" />
 
           <Field as="select" name="unit">
             <option value="pcs">pcs</option>
@@ -85,6 +104,7 @@ export const FormTaskAdd = ({ handleModal, handleAddTask }) => {
         <FormField>
           <FieldName>Order</FieldName>
           <DateInput type="text" name="dateOrder"></DateInput>
+          <ErrorStyled component="div" name="dateOrder" />
         </FormField>
 
         <FormField>
@@ -125,6 +145,7 @@ export const FormTaskAdd = ({ handleModal, handleAddTask }) => {
           <FormField>
             <FieldName>ETA</FieldName>
             <DateInput type="text" name="dateETA"></DateInput>
+            <ErrorStyled component="div" name="dateETA" />
           </FormField>
         </Box>
 

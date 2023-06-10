@@ -79,6 +79,7 @@ export const FormBtn = styled.button`
 
 export const ErrorStyled = styled(ErrorMessage)`
   position: absolute;
+  left: 100px;
   bottom: 0;
   transform: translatey(100%);
 

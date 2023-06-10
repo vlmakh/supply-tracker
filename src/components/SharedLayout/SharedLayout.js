@@ -11,7 +11,7 @@ import { LogoVM } from 'components/LogoVM/LogoVM';
 import { formatDate } from 'utils/formatDate';
 import { logout } from 'utils/operations';
 
-export const SharedLayout = ({ isLoggedIn, setIsLoggedIn }) => {
+export const SharedLayout = ({ email, isLoggedIn, setIsLoggedIn }) => {
   const today = new Date();
 
   const handleLogout = () => {
@@ -23,6 +23,8 @@ export const SharedLayout = ({ isLoggedIn, setIsLoggedIn }) => {
   return (
     <Layout>
       <Header>
+        <p>{email}</p>
+
         <DateToday>{formatDate(today)}</DateToday>
 
         {isLoggedIn && (

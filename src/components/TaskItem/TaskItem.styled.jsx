@@ -10,7 +10,7 @@ export const Num = styled.td`
 
 export const Name = styled.td`
   width: 240px;
-  font-weight: 700;
+  /* font-weight: 700; */
   text-align: left;
 `;
 

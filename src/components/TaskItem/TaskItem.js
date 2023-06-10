@@ -2,9 +2,10 @@ import { Task, Num, Name } from './TaskItem.styled';
 import { useState } from 'react';
 import { updateTaskStatus, updateTask } from 'utils/operations';
 import { TDButton } from 'components/Base/Buttons.styled';
-import { AiFillEdit } from 'react-icons/ai';
+import { AiFillEdit, AiFillCopy } from 'react-icons/ai';
 import Modal from 'components/Modal/Modal';
 import { FormTaskEdit } from 'components/FormTask/FormTaskEdit';
+// import { formatDateUTC } from 'utils/formatDate';
 
 export const TaskItem = ({ task, idx, tasks }) => {
   const [status, setStatus] = useState(task.completed);
@@ -18,6 +19,10 @@ export const TaskItem = ({ task, idx, tasks }) => {
 
   const handleModal = () => {
     setShowFormTaskEdit(!showFormTaskEdit);
+  };
+
+  const handleCopy = () => {
+    console.log('copy');
   };
 
   const handleEditTask = newTask => {
@@ -58,6 +63,11 @@ export const TaskItem = ({ task, idx, tasks }) => {
         <td>
           <TDButton type="button" onClick={handleModal} disabled={status}>
             <AiFillEdit />
+          </TDButton>
+        </td>
+        <td>
+          <TDButton type="button" onClick={handleCopy}>
+            <AiFillCopy />
           </TDButton>
         </td>
       </Task>

@@ -5,3 +5,14 @@ export const formatDate = date => {
     return format(Date.parse(date), 'dd.MM.yyyy');
   }
 };
+
+export const formatDateUTC = date => {
+  // const dateTime = '2022-07-27T08:36:12';
+
+  if (date) {
+    const result = date.split('T')[0].split('-');
+
+    // console.log(result);
+    return [result[1], result[2] + 1, result[0]].join('.');
+  }
+};
