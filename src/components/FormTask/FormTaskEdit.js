@@ -24,8 +24,8 @@ export const FormTaskEdit = ({ handleModal, handleEditTask, task }) => {
     };
   });
 
-  const handleSubmit = (newTask, { resetForm }) => {
-    handleEditTask(newTask, resetForm);
+  const handleSubmit = newTask => {
+    handleEditTask(newTask);
   };
 
   const handleEscape = event => {

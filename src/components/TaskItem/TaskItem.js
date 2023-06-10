@@ -1,12 +1,12 @@
 import { Task, Num, Name } from './TaskItem.styled';
 import { useState } from 'react';
-import { updateTaskStatus } from 'utils/operations';
+import { updateTaskStatus, updateTask } from 'utils/operations';
 import { TDButton } from 'components/Base/Buttons.styled';
 import { AiFillEdit } from 'react-icons/ai';
 import Modal from 'components/Modal/Modal';
 import { FormTaskEdit } from 'components/FormTask/FormTaskEdit';
 
-export const TaskItem = ({ task, idx }) => {
+export const TaskItem = ({ task, idx, tasks }) => {
   const [status, setStatus] = useState(task.completed);
   const [showFormTaskEdit, setShowFormTaskEdit] = useState(false);
 
@@ -20,23 +20,14 @@ export const TaskItem = ({ task, idx }) => {
     setShowFormTaskEdit(!showFormTaskEdit);
   };
 
-  const handleEditTask = id => {
-    console.log(id);
-
-    // updateTask(id).then(data => {
-    //   const index = tasks.findIndex(
-    //     contact => contact.id === action.payload.id
-    //   );
-    //   state.items.splice(index, 1, action.payload);
-    // })
-    // setShowFormTaskEdit(!showFormTaskEdit);
+  const handleEditTask = newTask => {
+    updateTask(task._id, newTask)
+      .then(data => {
+        tasks.splice(idx, 1, data);
+        setShowFormTaskEdit(!showFormTaskEdit);
+      })
+      .catch(err => console.log(err.message));
   };
-
-  // const formatCompany = name => {
-  //   if (name.length > 20) {
-  //     return name.slice(0, 20) + '...';
-  //   } else return name;
-  // };
 
   return (
     <>
