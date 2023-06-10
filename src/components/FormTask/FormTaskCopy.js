@@ -6,8 +6,9 @@ import { IoClose } from 'react-icons/io5';
 import { CloseButton, AddTaskFormButton } from 'components/Base/Buttons.styled';
 import { schema } from './yupSchema';
 import { FormCommon } from './FormCommon';
+import { addTask } from 'utils/operations';
 
-export const FormTaskAdd = ({ handleModal, handleAddTask }) => {
+export const FormTaskCopy = ({ handleCopyTask, task }) => {
   useEffect(() => {
     window.addEventListener('keydown', handleEscape);
 
@@ -16,13 +17,17 @@ export const FormTaskAdd = ({ handleModal, handleAddTask }) => {
     };
   });
 
-  const handleSubmit = (newTask, { resetForm }) => {
-    handleAddTask(newTask, resetForm);
+  const handleSubmit = newTask => {
+    addTask(newTask)
+      .then(() => {
+        handleCopyTask();
+      })
+      .catch(e => console.log(e.message));
   };
 
   const handleEscape = event => {
     if (event.code === 'Escape') {
-      handleModal();
+      handleCopyTask();
     }
   };
 
@@ -36,22 +41,22 @@ export const FormTaskAdd = ({ handleModal, handleAddTask }) => {
     <Formik
       onSubmit={handleSubmit}
       initialValues={{
-        name: '',
-        qty: '',
-        unit: 'pcs',
+        name: task.name,
+        qty: task.qty,
+        unit: task.unit,
         dateOrder: formatDate(today),
-        supplier: '-',
+        supplier: task.supplier,
         dateInvoice: formatDate(dateInvoice),
         datePayment: formatDate(datePayment),
-        freight: 'Nova poshta',
+        freight: task.freight,
         dateETD: formatDate(dateETD),
         dateETA: formatDate(dateETA),
-        comments: '-',
+        comments: task.comments,
       }}
       validationSchema={schema}
     >
       <FormStyled>
-        <CloseButton type="button" onClick={handleModal}>
+        <CloseButton type="button" onClick={handleCopyTask}>
           <IoClose size="20" />
         </CloseButton>
 

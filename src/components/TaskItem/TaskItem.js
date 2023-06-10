@@ -5,11 +5,13 @@ import { TDButton } from 'components/Base/Buttons.styled';
 import { AiFillEdit, AiFillCopy, AiFillDelete } from 'react-icons/ai';
 import Modal from 'components/Modal/Modal';
 import { FormTaskEdit } from 'components/FormTask/FormTaskEdit';
+import { FormTaskCopy } from 'components/FormTask/FormTaskCopy';
 // import { formatDateUTC } from 'utils/formatDate';
 
 export const TaskItem = ({ task, idx, tasks }) => {
   const [status, setStatus] = useState(task.completed);
   const [showFormTaskEdit, setShowFormTaskEdit] = useState(false);
+  const [showFormTaskCopy, setShowFormTaskCopy] = useState(false);
 
   const handleCompleteTask = (id, status) => {
     updateTaskStatus(id, status)
@@ -21,8 +23,8 @@ export const TaskItem = ({ task, idx, tasks }) => {
     setShowFormTaskEdit(!showFormTaskEdit);
   };
 
-  const handleCopy = () => {
-    console.log('copy');
+  const handleCopyTask = () => {
+    setShowFormTaskCopy(!showFormTaskCopy);
   };
 
   const handleEditTask = newTask => {
@@ -72,7 +74,7 @@ export const TaskItem = ({ task, idx, tasks }) => {
           </TDButton>
         </td>
         <td>
-          <TDButton type="button" onClick={handleCopy}>
+          <TDButton type="button" onClick={handleCopyTask}>
             <AiFillCopy />
           </TDButton>
         </td>
@@ -90,6 +92,12 @@ export const TaskItem = ({ task, idx, tasks }) => {
             handleEditTask={handleEditTask}
             task={task}
           />
+        </Modal>
+      )}
+
+      {showFormTaskCopy && (
+        <Modal onClose={handleCopyTask}>
+          <FormTaskCopy handleCopyTask={handleCopyTask} task={task} />
         </Modal>
       )}
     </>
