@@ -24,7 +24,7 @@ export const theme = {
   },
   shadows: {
     link: '0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff',
-    project: '0 0px 8px rgba(250, 250, 250, 0.6)',
+    box: '0 0px 8px rgba(0, 0, 0, 0.6)',
     inner: 'inset 0 0 8px rgba(255, 255, 255, 0.6)',
   },
 };

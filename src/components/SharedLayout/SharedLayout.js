@@ -12,6 +12,8 @@ import { formatDate } from 'utils/formatDate';
 import { logout } from 'utils/operations';
 
 export const SharedLayout = ({ isLoggedIn, setIsLoggedIn }) => {
+  const today = new Date();
+
   const handleLogout = () => {
     logout().then(() => {
       setIsLoggedIn(false);
@@ -21,7 +23,7 @@ export const SharedLayout = ({ isLoggedIn, setIsLoggedIn }) => {
   return (
     <Layout>
       <Header>
-        <DateToday>{formatDate(new Date())}</DateToday>
+        <DateToday>{formatDate(today)}</DateToday>
 
         {isLoggedIn && (
           <Link to="/" onClick={handleLogout}>

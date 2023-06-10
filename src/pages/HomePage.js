@@ -15,7 +15,7 @@ export default function HomePage({ isLoggedIn }) {
 
       <HomeBox>
         <ImgBox>
-          <img src={logo} alt="logo" width="300" />
+          <img src={logo} alt="logo" width="200" />
         </ImgBox>
 
         <FormBox>

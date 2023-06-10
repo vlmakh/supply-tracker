@@ -2,25 +2,14 @@ import styled from '@emotion/styled';
 import { Form, Field, ErrorMessage } from 'formik';
 import { NavLink } from 'react-router-dom';
 
-export const HomeBox = styled.div`
-  /* position: absolute;
-  top: 50%;
-  left: 50%; */
-  /* transform: translateY(-50%) translateX(-50%); */
-  /* height: 300px; */
-
-
-  
-    width: 720px;
-    display: flex;
-    justify-content: space-between;
-    margin: 40px auto 0;
-  
+export const HomeBox = styled.div`  
+    width: 400px;
+    margin: 40px auto 0;  
 `;
 
 export const ImgBox = styled.div`
-  width: 300px;
-
+  width: 80px;
+  margin: 0 auto;
   @media screen and (max-width: 767.98px) {
     display: none;
   }
@@ -29,6 +18,7 @@ export const ImgBox = styled.div`
 export const FormBox = styled.div`
   width: 360px;
   height: 300px;
+  margin: 16px auto;
   background-color: white;
   border: ${p => p.theme.borders.dark};
   border-radius: ${p => p.theme.radii.normal};
