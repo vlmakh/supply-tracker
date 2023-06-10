@@ -27,13 +27,15 @@ export default function TaskPage({ isLoggedIn }) {
     setShowFormTaskAdd(!showFormTaskAdd);
   };
 
-  const handleAddTask = (newTask, resetForm) => {
+  const handleAddTask = newTask => {
     addTask(newTask)
       .then(data => {
-        console.log(data);
-        resetForm();
-        setShowFormTaskAdd(!showFormTaskAdd);
-        tasks.push(data);
+        // console.log(data);
+        // resetForm();
+        if (data._id) {
+          setShowFormTaskAdd(!showFormTaskAdd);
+          tasks.push(data);
+        } else throw new Error();
       })
       .catch(e => console.log(e.message));
   };

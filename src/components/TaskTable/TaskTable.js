@@ -45,9 +45,7 @@ export const TaskTable = ({ tasks }) => {
 
       <tbody>
         {tasks.map((task, idx) => {
-          return (
-            <TaskItem key={task._id} task={task} idx={idx} tasks={tasks} />
-          );
+          return <TaskItem key={idx} task={task} idx={idx} tasks={tasks} />;
         })}
       </tbody>
     </Table>

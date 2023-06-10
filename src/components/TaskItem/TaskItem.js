@@ -23,8 +23,8 @@ export const TaskItem = ({ task, idx, tasks }) => {
   const handleEditTask = newTask => {
     updateTask(task._id, newTask)
       .then(data => {
-        tasks.splice(idx, 1, data);
         setShowFormTaskEdit(!showFormTaskEdit);
+        return tasks.splice(idx, 1, data);
       })
       .catch(err => console.log(err.message));
   };

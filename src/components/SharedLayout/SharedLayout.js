@@ -3,23 +3,31 @@ import { Suspense } from 'react';
 import {
   Layout,
   Header,
-  Nav,
   DateToday,
   Footer,
   MyLink,
 } from './SharedLayout.styled';
 import { LogoVM } from 'components/LogoVM/LogoVM';
 import { formatDate } from 'utils/formatDate';
+import { logout } from 'utils/operations';
 
-export const SharedLayout = () => {
+export const SharedLayout = ({ isLoggedIn, setIsLoggedIn }) => {
+  const handleLogout = () => {
+    logout().then(() => {
+      setIsLoggedIn(false);
+    });
+  };
+
   return (
     <Layout>
       <Header>
-        <Nav>
-          <Link to="/">Home</Link>
-          <Link to="tasks">Tasks</Link>
-        </Nav>
         <DateToday>{formatDate(new Date())}</DateToday>
+
+        {isLoggedIn && (
+          <Link to="/" onClick={handleLogout}>
+            Logout
+          </Link>
+        )}
       </Header>
 
       <Suspense fallback={<div>Loading...</div>}>

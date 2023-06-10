@@ -46,7 +46,7 @@ export const FormTaskEdit = ({ handleModal, handleEditTask, task }) => {
         dateInvoice: task.dateInvoice,
         datePayment: task.datePayment,
         freight: task.freight,
-        dateETD: task.dateETD,
+        dateETD: task.dateETD || '-',
         dateETA: task.dateETA,
         comments: task.comments,
       }}

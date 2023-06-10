@@ -2,18 +2,20 @@ import styled from '@emotion/styled';
 import { Form, Field, ErrorMessage } from 'formik';
 import { NavLink } from 'react-router-dom';
 
-export const HomeBox = styled('div')`
-  position: absolute;
+export const HomeBox = styled.div`
+  /* position: absolute;
   top: 50%;
-  left: 50%;
-  transform: translateY(-50%) translateX(-50%);
-  height: 300px;
+  left: 50%; */
+  /* transform: translateY(-50%) translateX(-50%); */
+  /* height: 300px; */
 
-  @media screen and (min-width: 768px) {
+
+  
     width: 720px;
     display: flex;
     justify-content: space-between;
-  }
+    margin: 40px auto 0;
+  
 `;
 
 export const ImgBox = styled.div`

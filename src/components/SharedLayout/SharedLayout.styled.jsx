@@ -2,7 +2,8 @@ import styled from '@emotion/styled';
 
 export const Layout = styled.div`
   display: grid;
-  grid-template-rows: 1fr auto;
+  /* place-content: center; */
+  grid-template-rows: 1fr auto auto;
   min-height: 100vh;
   padding-top: ${p => p.theme.space[1]}px;
   background-color: ${p => p.theme.colors.bcgMain};

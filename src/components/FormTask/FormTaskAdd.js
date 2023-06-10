@@ -49,13 +49,13 @@ export const FormTaskAdd = ({ handleModal, handleAddTask }) => {
         qty: '',
         unit: 'pcs',
         dateOrder: formatDate(today),
-        supplier: ' ',
+        supplier: '-',
         dateInvoice: formatDate(dateInvoice),
         datePayment: formatDate(datePayment),
         freight: 'Nova poshta',
         dateETD: formatDate(dateETD),
         dateETA: formatDate(dateETA),
-        comments: ' ',
+        comments: '-',
       }}
     >
       <FormStyled>
