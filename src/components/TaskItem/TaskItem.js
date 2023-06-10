@@ -1,8 +1,8 @@
 import { Task, Num, Name } from './TaskItem.styled';
 import { useState } from 'react';
-import { updateTaskStatus, updateTask } from 'utils/operations';
+import { updateTaskStatus, updateTask, deleteTask } from 'utils/operations';
 import { TDButton } from 'components/Base/Buttons.styled';
-import { AiFillEdit, AiFillCopy } from 'react-icons/ai';
+import { AiFillEdit, AiFillCopy, AiFillDelete } from 'react-icons/ai';
 import Modal from 'components/Modal/Modal';
 import { FormTaskEdit } from 'components/FormTask/FormTaskEdit';
 // import { formatDateUTC } from 'utils/formatDate';
@@ -28,9 +28,16 @@ export const TaskItem = ({ task, idx, tasks }) => {
   const handleEditTask = newTask => {
     updateTask(task._id, newTask)
       .then(data => {
+        tasks.splice(idx, 1, data);
         setShowFormTaskEdit(!showFormTaskEdit);
-        return tasks.splice(idx, 1, data);
       })
+
+      .catch(err => console.log(err.message));
+  };
+
+  const handleDelete = id => {
+    deleteTask(id)
+      .then(() => tasks.filter(task => task._id !== id))
       .catch(err => console.log(err.message));
   };
 
@@ -68,6 +75,11 @@ export const TaskItem = ({ task, idx, tasks }) => {
         <td>
           <TDButton type="button" onClick={handleCopy}>
             <AiFillCopy />
+          </TDButton>
+        </td>
+        <td>
+          <TDButton type="button" onClick={() => handleDelete(task._id)}>
+            <AiFillDelete />
           </TDButton>
         </td>
       </Task>
