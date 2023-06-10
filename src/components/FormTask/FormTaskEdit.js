@@ -4,8 +4,9 @@ import { Formik } from 'formik';
 import { IoClose } from 'react-icons/io5';
 import { CloseButton, AddTaskButton } from 'components/Base/Buttons.styled';
 import { FormCommon } from './FormCommon';
+import { updateTask } from 'utils/operations';
 
-export const FormTaskEdit = ({ handleModal, handleEditTask, task }) => {
+export const FormTaskEdit = ({ handleModal, handleEditTask, task, tasks }) => {
   useEffect(() => {
     window.addEventListener('keydown', handleEscape);
 
@@ -15,7 +16,13 @@ export const FormTaskEdit = ({ handleModal, handleEditTask, task }) => {
   });
 
   const handleSubmit = newTask => {
-    handleEditTask(newTask);
+    updateTask(task._id, newTask)
+      .then(data => {
+        const idx = tasks.findIndex(task => task._id === data._id);
+        tasks.splice(idx, 1, data);
+        handleEditTask();
+      })
+      .catch(err => console.log(err.message));
   };
 
   const handleEscape = event => {

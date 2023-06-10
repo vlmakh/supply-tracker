@@ -1,12 +1,11 @@
 import { Task, Num, Name } from './TaskItem.styled';
 import { useState } from 'react';
-import { updateTaskStatus, updateTask, deleteTask } from 'utils/operations';
+import { updateTaskStatus, deleteTask } from 'utils/operations';
 import { TDButton } from 'components/Base/Buttons.styled';
 import { AiFillEdit, AiFillCopy, AiFillDelete } from 'react-icons/ai';
 import Modal from 'components/Modal/Modal';
 import { FormTaskEdit } from 'components/FormTask/FormTaskEdit';
 import { FormTaskCopy } from 'components/FormTask/FormTaskCopy';
-// import { formatDateUTC } from 'utils/formatDate';
 
 export const TaskItem = ({ task, idx, tasks }) => {
   const [status, setStatus] = useState(task.completed);
@@ -19,21 +18,12 @@ export const TaskItem = ({ task, idx, tasks }) => {
       .catch(e => console.log(e.message));
   };
 
-  const handleModal = () => {
-    setShowFormTaskEdit(!showFormTaskEdit);
-  };
-
   const handleCopyTask = () => {
     setShowFormTaskCopy(!showFormTaskCopy);
   };
 
-  const handleEditTask = newTask => {
-    updateTask(task._id, newTask)
-      .then(data => {
-        tasks.splice(idx, 1, data);
-        setShowFormTaskEdit(!showFormTaskEdit);
-      })
-      .catch(err => console.log(err.message));
+  const handleEditTask = () => {
+    setShowFormTaskEdit(!showFormTaskEdit);
   };
 
   const handleDelete = id => {
@@ -69,7 +59,7 @@ export const TaskItem = ({ task, idx, tasks }) => {
         <td> </td>
         <td> {task.comments} </td>
         <td>
-          <TDButton type="button" onClick={handleModal} disabled={status}>
+          <TDButton type="button" onClick={handleEditTask} disabled={status}>
             <AiFillEdit />
           </TDButton>
         </td>
@@ -86,18 +76,22 @@ export const TaskItem = ({ task, idx, tasks }) => {
       </Task>
 
       {showFormTaskEdit && (
-        <Modal onClose={handleModal}>
+        <Modal onClose={handleEditTask}>
           <FormTaskEdit
-            handleModal={handleModal}
             handleEditTask={handleEditTask}
             task={task}
+            tasks={tasks}
           />
         </Modal>
       )}
 
       {showFormTaskCopy && (
         <Modal onClose={handleCopyTask}>
-          <FormTaskCopy handleCopyTask={handleCopyTask} task={task} />
+          <FormTaskCopy
+            handleCopyTask={handleCopyTask}
+            task={task}
+            tasks={tasks}
+          />
         </Modal>
       )}
     </>

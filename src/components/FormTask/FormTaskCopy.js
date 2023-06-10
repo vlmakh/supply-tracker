@@ -8,7 +8,7 @@ import { schema } from './yupSchema';
 import { FormCommon } from './FormCommon';
 import { addTask } from 'utils/operations';
 
-export const FormTaskCopy = ({ handleCopyTask, task }) => {
+export const FormTaskCopy = ({ handleCopyTask, task, tasks }) => {
   useEffect(() => {
     window.addEventListener('keydown', handleEscape);
 
@@ -19,8 +19,11 @@ export const FormTaskCopy = ({ handleCopyTask, task }) => {
 
   const handleSubmit = newTask => {
     addTask(newTask)
-      .then(() => {
-        handleCopyTask();
+      .then(data => {
+        if (data._id) {
+          handleCopyTask();
+          tasks.push(data);
+        } else throw new Error();
       })
       .catch(e => console.log(e.message));
   };
