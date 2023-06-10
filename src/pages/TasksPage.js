@@ -2,7 +2,7 @@ import { Box } from 'components/Base/Box';
 import { TaskTable } from 'components/TaskTable/TaskTable';
 import { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
-import { ModalWindow } from 'components/Modal/Modal.styled';
+import Modal from 'components/Modal/Modal';
 import { FormTaskAdd } from 'components/FormTask/FormTaskAdd';
 import { getTasks, addTask } from 'utils/operations';
 import { AddTaskButton } from 'components/Base/Buttons.styled';
@@ -52,12 +52,12 @@ export default function TaskPage({ isLoggedIn }) {
         </Box>
 
         {showFormTaskAdd && (
-          <ModalWindow>
+          <Modal>
             <FormTaskAdd
               handleModal={handleModal}
               handleAddTask={handleAddTask}
             />
-          </ModalWindow>
+          </Modal>
         )}
       </Box>
     </>

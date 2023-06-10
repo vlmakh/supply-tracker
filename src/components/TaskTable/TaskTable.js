@@ -1,9 +1,21 @@
 import { Table } from './TaskTable.styled';
 import { TaskItem } from 'components/TaskItem/TaskItem';
+// import { updateTask } from 'utils/operations';
+// import { useState } from 'react';
 
 export const TaskTable = ({ tasks }) => {
-  // const completeTask = id => {
-  //   console.log('Task status was changed');
+  // const [showFormTaskEdit, setShowFormTaskEdit] = useState(false);
+
+  // const handleEditTask = id => {
+  //   console.log(id);
+
+  // updateTask(id).then(data => {
+  //   const index = tasks.findIndex(
+  //     contact => contact.id === action.payload.id
+  //   );
+  //   state.items.splice(index, 1, action.payload);
+  // })
+  // setShowFormTaskEdit(!showFormTaskEdit);
   // };
 
   return (
@@ -33,7 +45,14 @@ export const TaskTable = ({ tasks }) => {
 
       <tbody>
         {tasks.map((task, idx) => {
-          return <TaskItem key={task._id} task={task} idx={idx} />;
+          return (
+            <TaskItem
+              key={task._id}
+              task={task}
+              idx={idx}
+              // handleEditTask={handleEditTask}
+            />
+          );
         })}
       </tbody>
     </Table>

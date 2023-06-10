@@ -13,7 +13,7 @@ import { formatDate } from 'utils/formatDate';
 import { useEffect } from 'react';
 import { Formik, Field } from 'formik';
 import { IoClose } from 'react-icons/io5';
-import { CloseButton, AddTaskButton } from 'components/Base/Buttons.styled';
+import { CloseButton, AddTaskFormButton } from 'components/Base/Buttons.styled';
 import { Box } from 'components/Base/Box';
 
 export const FormTaskAdd = ({ handleModal, handleAddTask }) => {
@@ -125,7 +125,6 @@ export const FormTaskAdd = ({ handleModal, handleAddTask }) => {
           <FormField>
             <FieldName>ETA</FieldName>
             <DateInput type="text" name="dateETA"></DateInput>
-            {/* <p>{(dateETA - today) / 86_400_000}</p> */}
           </FormField>
         </Box>
 
@@ -134,7 +133,7 @@ export const FormTaskAdd = ({ handleModal, handleAddTask }) => {
           <Comments as="textarea" rows="4" name="comments"></Comments>
         </FormField>
 
-        <AddTaskButton type="submit">Add</AddTaskButton>
+        <AddTaskFormButton type="submit">Add</AddTaskFormButton>
       </FormStyled>
     </Formik>
   );

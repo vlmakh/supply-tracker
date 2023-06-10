@@ -8,7 +8,14 @@ export const TDButton = styled.button`
 `;
 
 export const AddTaskButton = styled.button`
-    width: 60%;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 16px;
+    padding: 4px 16px;
+`;
+
+export const AddTaskFormButton = styled.button`
+    width: 50%;
     font-weight: 700;
     cursor: pointer;
     margin-top: 16px;

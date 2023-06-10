@@ -3,12 +3,12 @@ import { useState } from 'react';
 import { updateTaskStatus } from 'utils/operations';
 import { TDButton } from 'components/Base/Buttons.styled';
 import { AiFillEdit } from 'react-icons/ai';
-// import { ModalWindow } from 'components/Modal/Modal.styled';
-// import { FormTaskEdit } from 'components/FormTask/FormTaskEdit';
+import Modal from 'components/Modal/Modal';
+import { FormTaskEdit } from 'components/FormTask/FormTaskEdit';
 
 export const TaskItem = ({ task, idx }) => {
   const [status, setStatus] = useState(task.completed);
-  // const [showEditTaskModal, setShowEditTaskModal] = useState(false);
+  const [showFormTaskEdit, setShowFormTaskEdit] = useState(false);
 
   const handleCompleteTask = (id, status) => {
     updateTaskStatus(id, status)
@@ -16,10 +16,20 @@ export const TaskItem = ({ task, idx }) => {
       .catch(e => console.log(e.message));
   };
 
+  const handleModal = () => {
+    setShowFormTaskEdit(!showFormTaskEdit);
+  };
+
   const handleEditTask = id => {
     console.log(id);
 
-    // setShowEditTaskModal(!showEditTaskModal);
+    // updateTask(id).then(data => {
+    //   const index = tasks.findIndex(
+    //     contact => contact.id === action.payload.id
+    //   );
+    //   state.items.splice(index, 1, action.payload);
+    // })
+    // setShowFormTaskEdit(!showFormTaskEdit);
   };
 
   // const formatCompany = name => {
@@ -55,21 +65,21 @@ export const TaskItem = ({ task, idx }) => {
         <td> </td>
         <td> {task.comments} </td>
         <td>
-          <TDButton type="button" onClick={() => handleEditTask(task._id)}>
+          <TDButton type="button" onClick={handleModal} disabled={status}>
             <AiFillEdit />
           </TDButton>
         </td>
       </Task>
 
-      {/* {showEditTaskModal && (
-        <ModalWindow>
+      {showFormTaskEdit && (
+        <Modal>
           <FormTaskEdit
-            // handleModal={handleModal}
+            handleModal={handleModal}
             handleEditTask={handleEditTask}
             task={task}
           />
-        </ModalWindow>
-      )} */}
+        </Modal>
+      )}
     </>
   );
 };
