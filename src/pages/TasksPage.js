@@ -34,7 +34,7 @@ export default function TaskPage({ isLoggedIn, isLoading }) {
       <Box width="1200px" mt={5} mx="auto">
         {!isLoading && tasks && <TaskTable />}
 
-        <Box textAlign="center" p={4}>
+        <Box p={4}>
           <AddTaskButton type="button" onClick={handleModal}>
             Add task
           </AddTaskButton>

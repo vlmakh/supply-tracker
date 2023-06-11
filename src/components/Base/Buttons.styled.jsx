@@ -10,7 +10,6 @@ export const TDButton = styled.button`
 export const AddTaskButton = styled.button`
     font-weight: 700;
     cursor: pointer;
-    margin-top: 16px;
     padding: 4px 16px;
 `;
 

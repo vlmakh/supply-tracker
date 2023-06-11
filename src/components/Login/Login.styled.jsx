@@ -10,9 +10,7 @@ export const HomeBox = styled.div`
 export const ImgBox = styled.div`
   width: 80px;
   margin: 0 auto;
-  @media screen and (max-width: 767.98px) {
-    display: none;
-  }
+  
 `;
 
 export const FormBox = styled.div`

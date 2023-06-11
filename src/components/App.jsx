@@ -58,7 +58,7 @@ export const App = () => {
       .finally(() => {
         setIsLoading(false);
       });
-  }, []);
+  }, [isLoggedIn]);
 
   return (
     <ThemeProvider theme={theme}>
