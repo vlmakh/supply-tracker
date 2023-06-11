@@ -1,4 +1,6 @@
 import styled from '@emotion/styled';
+import { formatDate } from 'utils/formatDate';
+const today = formatDate(new Date());
 
 export const Task = styled.tr`
   color: ${p => (p.completed ? 'lightgrey' : '#212121')};
@@ -15,8 +17,9 @@ export const Name = styled.td`
 
 export const Company = styled.p``;
 
-export const Date = styled.p`
-  font-weight: 700;
+export const Data = styled.td`
+ font-weight: ${p => (p.today === today && '700')};
+  color:  ${p => (p.today === today && 'blue')};
 `;
 
 export const Transport = styled.p`

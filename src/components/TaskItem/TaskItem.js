@@ -1,4 +1,4 @@
-import { Task, Num, Name } from './TaskItem.styled';
+import { Task, Num, Name, Data } from './TaskItem.styled';
 import { useState, useContext } from 'react';
 import { updateTaskStatus, deleteTask } from 'utils/operations';
 import { TDButton } from 'components/Base/Buttons.styled';
@@ -48,16 +48,16 @@ export const TaskItem = ({ task, idx }) => {
         <Name>{task.name} </Name>
         <td>{task.qty} </td>
         <td> pcs</td>
-        <td>{task.dateOrder} </td>
+        <Data today={task.dateOrder}>{task.dateOrder} </Data>
         <td> {task.supplier}</td>
-        <td>{task.dateInvoice} </td>
+        <Data today={task.dateInvoice}>{task.dateInvoice} </Data>
         <td> </td>
-        <td>{task.datePayment} </td>
+        <Data today={task.datePayment}>{task.datePayment} </Data>
         <td>{task.freight}</td>
         <td> </td>
-        <td> {task.dateETD}</td>
+        <Data today={task.dateETD}> {task.dateETD}</Data>
         <td> </td>
-        <td> {task.dateETA}</td>
+        <Data today={task.dateETA}> {task.dateETA}</Data>
         <td> </td>
         <td> {task.comments} </td>
         <td>
