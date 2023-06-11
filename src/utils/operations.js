@@ -1,8 +1,7 @@
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
-// axios.defaults.baseURL = 'https://task-mgr-1z3i.onrender.com';
-axios.defaults.baseURL = 'http://localhost:3001';
+axios.defaults.baseURL = process.env.REACT_APP_MAIN_URL;
 
 const token = {
   set(token) {
