@@ -6,7 +6,7 @@ import { CloseButton, AddTaskButton } from 'components/Base/Buttons.styled';
 import { FormCommon } from './FormCommon';
 import { updateTask } from 'utils/operations';
 
-export const FormTaskEdit = ({ handleModal, handleEditTask, task, tasks }) => {
+export const FormTaskEdit = ({ handleEditTask, task, tasks }) => {
   useEffect(() => {
     window.addEventListener('keydown', handleEscape);
 
@@ -27,7 +27,7 @@ export const FormTaskEdit = ({ handleModal, handleEditTask, task, tasks }) => {
 
   const handleEscape = event => {
     if (event.code === 'Escape') {
-      handleModal();
+      handleEditTask();
     }
   };
 
@@ -49,7 +49,7 @@ export const FormTaskEdit = ({ handleModal, handleEditTask, task, tasks }) => {
       }}
     >
       <FormStyled>
-        <CloseButton type="button" onClick={handleModal}>
+        <CloseButton type="button" onClick={handleEditTask}>
           <IoClose size="20" />
         </CloseButton>
 
