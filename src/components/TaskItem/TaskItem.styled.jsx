@@ -18,8 +18,13 @@ export const Name = styled.td`
 export const Company = styled.p``;
 
 export const Data = styled.td`
- font-weight: ${p => (p.today === today && '700')};
-  color:  ${p => (p.today === today && 'blue')};
+  font-weight: 700;
+  color: ${p => p.today === today && 'blue'};
+`;
+
+export const DataETA = styled.td`
+  font-weight: 700;
+  color: ${p => !p.completed && p.today === today && 'blue'};
 `;
 
 export const Transport = styled.p`

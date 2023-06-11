@@ -114,7 +114,7 @@ export const addTask = async newTask => {
 
     return response.data;
   } catch (error) {
-    toast.error(error.response.message);
+    toast.error(error.message);
   }
 };
 

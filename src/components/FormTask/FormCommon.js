@@ -5,6 +5,7 @@ import {
   DateInput,
   Comments,
   FormField,
+  ErrorStyled,
 } from './FormTask.styled';
 // import DatePicker from 'react-datepicker';
 // import 'react-datepicker/dist/react-datepicker.css';
@@ -16,12 +17,14 @@ export const FormCommon = () => {
       <FormField>
         <FieldName>Name</FieldName>
         <Input type="text" name="name" placeholder="name"></Input>
+        <ErrorStyled component="div" name="name" />
       </FormField>
 
       <FormField>
         <FieldName>Quantity</FieldName>
 
         <Input type="text" name="qty" placeholder="quantity"></Input>
+        <ErrorStyled component="div" name="qty" />
 
         <Field as="select" name="unit">
           <option value="pcs">pcs</option>
@@ -33,6 +36,7 @@ export const FormCommon = () => {
       <FormField>
         <FieldName>Order</FieldName>
         <DateInput type="text" name="dateOrder"></DateInput>
+        <ErrorStyled component="div" name="dateOrder" />
       </FormField>
 
       <FormField>
@@ -73,6 +77,7 @@ export const FormCommon = () => {
         <FormField>
           <FieldName>ETA</FieldName>
           <DateInput type="text" name="dateETA"></DateInput>
+          <ErrorStyled component="div" name="dateETA" />
         </FormField>
       </Box>
 

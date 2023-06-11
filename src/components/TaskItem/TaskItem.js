@@ -1,4 +1,4 @@
-import { Task, Num, Name, Data } from './TaskItem.styled';
+import { Task, Num, Name, Data, DataETA } from './TaskItem.styled';
 import { useState, useContext } from 'react';
 import { updateTaskStatus, deleteTask } from 'utils/operations';
 import { TDButton } from 'components/Base/Buttons.styled';
@@ -57,7 +57,9 @@ export const TaskItem = ({ task, idx }) => {
         <td> </td>
         <Data today={task.dateETD}> {task.dateETD}</Data>
         <td> </td>
-        <Data today={task.dateETA}> {task.dateETA}</Data>
+        <DataETA today={task.dateETA} completed={status}>
+          {task.dateETA}
+        </DataETA>
         <td> </td>
         <td> {task.comments} </td>
         <td>
