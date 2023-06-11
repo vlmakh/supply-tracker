@@ -1,5 +1,5 @@
 import { Outlet, Link } from 'react-router-dom';
-import { Suspense } from 'react';
+import { Suspense, useContext } from 'react';
 import {
   Layout,
   Header,
@@ -10,9 +10,17 @@ import {
 import { LogoVM } from 'components/LogoVM/LogoVM';
 import { formatDate } from 'utils/formatDate';
 import { logout } from 'utils/operations';
+import { TaskContext } from 'utils/context';
 
 export const SharedLayout = ({ email, isLoggedIn, setIsLoggedIn }) => {
+  const { tasks } = useContext(TaskContext);
   const today = new Date();
+
+  const calcCompleted = array => {
+    if (array.length) {
+      return array.filter(item => item.completed).length;
+    }
+  };
 
   const handleLogout = () => {
     logout().then(() => {
@@ -23,14 +31,21 @@ export const SharedLayout = ({ email, isLoggedIn, setIsLoggedIn }) => {
   return (
     <Layout>
       <Header>
-        <p>{email}</p>
-
-        <DateToday>{formatDate(today)}</DateToday>
-
         {isLoggedIn && (
-          <Link to="/" onClick={handleLogout}>
-            Logout
-          </Link>
+          <>
+            <p>{email}</p>
+            {tasks.length > 0 && (
+              <p>
+                <b>
+                  {calcCompleted(tasks)} / {tasks.length}
+                </b>
+              </p>
+            )}
+            <DateToday>{formatDate(today)}</DateToday>
+            <Link to="/" onClick={handleLogout}>
+              Logout
+            </Link>
+          </>
         )}
       </Header>
 

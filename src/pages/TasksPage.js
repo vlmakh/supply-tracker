@@ -1,29 +1,19 @@
 import { Box } from 'components/Base/Box';
 import { TaskTable } from 'components/TaskTable/TaskTable';
-import { useState, useReducer, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import { Navigate } from 'react-router-dom';
 import Modal from 'components/Modal/Modal';
 import { FormTaskAdd } from 'components/FormTask/FormTaskAdd';
-import { getTasks, addTask } from 'utils/operations';
+import { addTask } from 'utils/operations';
 import { AddTaskButton } from 'components/Base/Buttons.styled';
 import { TaskContext } from 'utils/context';
-import { reducer } from 'utils/reducer';
+// import { reducer } from 'utils/reducer';
 
-export default function TaskPage({ isLoggedIn }) {
-  const [tasks, dispatch] = useReducer(reducer, []);
-  const [isLoading, setIsLoading] = useState(true);
+export default function TaskPage({ isLoggedIn, isLoading }) {
+  // const [tasks, dispatch] = useReducer(reducer, []);
+  const { dispatch, tasks } = useContext(TaskContext);
+  // const [isLoading, setIsLoading] = useState(true);
   const [showFormTaskAdd, setShowFormTaskAdd] = useState(false);
-
-  useEffect(() => {
-    getTasks()
-      .then(tasks => {
-        dispatch({ type: 'getTasks', tasks });
-      })
-      .catch(error => {})
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, []);
 
   const handleModal = () => {
     setShowFormTaskAdd(!showFormTaskAdd);
@@ -44,26 +34,26 @@ export default function TaskPage({ isLoggedIn }) {
     <>
       {!isLoggedIn && <Navigate to="/" />}
 
-      <TaskContext.Provider value={{ dispatch, tasks }}>
-        <Box width="1200px" mt={5} mx="auto">
-          {!isLoading && tasks && <TaskTable />}
+      {/* <TaskContext.Provider value={{ dispatch, tasks }}> */}
+      <Box width="1200px" mt={5} mx="auto">
+        {!isLoading && tasks && <TaskTable />}
 
-          <Box textAlign="center" p={4}>
-            <AddTaskButton type="button" onClick={handleModal}>
-              Add task
-            </AddTaskButton>
-          </Box>
-
-          {showFormTaskAdd && (
-            <Modal onClose={handleModal}>
-              <FormTaskAdd
-                handleModal={handleModal}
-                handleAddTask={handleAddTask}
-              />
-            </Modal>
-          )}
+        <Box textAlign="center" p={4}>
+          <AddTaskButton type="button" onClick={handleModal}>
+            Add task
+          </AddTaskButton>
         </Box>
-      </TaskContext.Provider>
+
+        {showFormTaskAdd && (
+          <Modal onClose={handleModal}>
+            <FormTaskAdd
+              handleModal={handleModal}
+              handleAddTask={handleAddTask}
+            />
+          </Modal>
+        )}
+      </Box>
+      {/* </TaskContext.Provider> */}
     </>
   );
 }

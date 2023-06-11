@@ -2,11 +2,14 @@ import { ThemeProvider } from '@emotion/react';
 import { theme } from 'utils/theme';
 import { SharedLayout } from './SharedLayout/SharedLayout';
 import { Routes, Route } from 'react-router-dom';
-import { useState, useEffect, lazy } from 'react';
+import { useState, useEffect, lazy, useReducer } from 'react';
+import { reducer } from 'utils/reducer';
 import { checkCurrentUser } from 'utils/operations';
 import { Toaster } from 'react-hot-toast';
 import Modal from 'components/Modal/Modal';
 import { Loader } from './Loader/Loader';
+import { getTasks } from 'utils/operations';
+import { TaskContext } from 'utils/context';
 
 const HomePage = lazy(() => import('pages/HomePage'));
 const Login = lazy(() => import('components/Login/Login'));
@@ -23,6 +26,7 @@ export const App = () => {
   const [token, setToken] = useState(data.token);
   const [isLoading, setIsLoading] = useState(true)
   const [isLoggedIn, setIsLoggedIn] = useState(false);  
+  const [tasks, dispatch] = useReducer(reducer, []);
   // const [totalTasks, setTotalTasks] = useState(0);
 
   useEffect(() => {
@@ -45,8 +49,20 @@ export const App = () => {
     localStorage.setItem('taskmgr', JSON.stringify(data));
   }, [data]);
 
+  useEffect(() => {
+    getTasks()
+      .then(tasks => {
+        dispatch({ type: 'getTasks', tasks });
+      })
+      .catch(error => {})
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
+      <TaskContext.Provider value={{ dispatch, tasks }}>
       <Routes>
         <Route
           path="/"
@@ -75,23 +91,27 @@ export const App = () => {
             <Route path="/signup" element={<Signup />} />
           </Route>
 
-          <Route path="tasks" element={<TaskPage isLoggedIn={isLoggedIn} />} />
+            <Route path="tasks" element={<TaskPage isLoggedIn={isLoggedIn} isLoading={isLoading } />} />
         </Route>
       </Routes>
+
+      
+      </TaskContext.Provider>
 
       {isLoading && (
         <Modal>
           <Loader />
         </Modal>
       )}
-
+      
       <Toaster
         position="top-center"
         toastOptions={{
           duration: 2000,
           
         }}
-      />
+        />
+        
     </ThemeProvider>
   );
 };
