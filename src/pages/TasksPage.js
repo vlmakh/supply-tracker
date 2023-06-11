@@ -44,9 +44,9 @@ export default function TaskPage({ isLoggedIn }) {
     <>
       {!isLoggedIn && <Navigate to="/" />}
 
-      <TaskContext.Provider value={{ dispatch }}>
+      <TaskContext.Provider value={{ dispatch, tasks }}>
         <Box width="1200px" mt={5} mx="auto">
-          {!isLoading && tasks && <TaskTable tasks={tasks} />}
+          {!isLoading && tasks && <TaskTable />}
 
           <Box textAlign="center" p={4}>
             <AddTaskButton type="button" onClick={handleModal}>

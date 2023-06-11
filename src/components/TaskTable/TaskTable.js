@@ -1,7 +1,11 @@
 import { Table } from './TaskTable.styled';
 import { TaskItem } from 'components/TaskItem/TaskItem';
+import { useContext } from 'react';
+import { TaskContext } from 'utils/context';
 
-export const TaskTable = ({ tasks }) => {
+export const TaskTable = () => {
+  const { tasks } = useContext(TaskContext);
+
   return (
     <Table>
       <thead>
