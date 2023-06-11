@@ -5,6 +5,8 @@ import { Routes, Route } from 'react-router-dom';
 import { useState, useEffect, lazy } from 'react';
 import { checkCurrentUser } from 'utils/operations';
 import { Toaster } from 'react-hot-toast';
+import Modal from 'components/Modal/Modal';
+import { Loader } from './Loader/Loader';
 
 const HomePage = lazy(() => import('pages/HomePage'));
 const Login = lazy(() => import('components/Login/Login'));
@@ -19,7 +21,9 @@ export const App = () => {
   const [user, setUser] = useState(null);
   const [email, setEmail] = useState(null);
   const [token, setToken] = useState(data.token);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(true)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);  
+  // const [totalTasks, setTotalTasks] = useState(0);
 
   useEffect(() => {
     checkCurrentUser(token)
@@ -27,12 +31,14 @@ export const App = () => {
         setUser(data.name);
         setEmail(data.email);
         setIsLoggedIn(true);
+        setIsLoading(false);
       })
       .catch(error => {});
   });
 
   useEffect(() => {
     setData({ token });
+    setIsLoading(false);
   }, [token]);
 
   useEffect(() => {
@@ -72,6 +78,12 @@ export const App = () => {
           <Route path="tasks" element={<TaskPage isLoggedIn={isLoggedIn} />} />
         </Route>
       </Routes>
+
+      {isLoading && (
+        <Modal>
+          <Loader />
+        </Modal>
+      )}
 
       <Toaster
         position="top-center"

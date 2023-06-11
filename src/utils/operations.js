@@ -98,7 +98,7 @@ export const getTasks = async () => {
 
     return response.data;
   } catch (error) {
-    toast.error("Something's wrong. Please login again");
+    toast.error(errorMsg);
   }
 };
 
@@ -122,7 +122,7 @@ export const deleteTask = async id => {
   try {
     const response = await axios.delete(`api/tasks/${id}`);
 
-    toast.success(() => 'Task was deleted');
+    toast.success('Task was deleted');
 
     return response.data;
   } catch (error) {
