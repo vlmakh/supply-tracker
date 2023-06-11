@@ -21,13 +21,12 @@ const savedData = JSON.parse(localStorage.getItem('taskmgr'));
 
 export const App = () => {
   const [data, setData] = useState(savedData ?? startData);
-  const [user, setUser] = useState(null);
-  const [email, setEmail] = useState(null);
+  const [user, setUser] = useState(data.user ?? null);
+  const [email, setEmail] = useState(data.email ?? null);
   const [token, setToken] = useState(data.token);
   const [isLoading, setIsLoading] = useState(true)
   const [isLoggedIn, setIsLoggedIn] = useState(false);  
   const [tasks, dispatch] = useReducer(reducer, []);
-  // const [totalTasks, setTotalTasks] = useState(0);
 
   useEffect(() => {
     checkCurrentUser(token)
@@ -50,6 +49,7 @@ export const App = () => {
   }, [data]);
 
   useEffect(() => {
+    setIsLoading(true);
     getTasks()
       .then(tasks => {
         dispatch({ type: 'getTasks', tasks });

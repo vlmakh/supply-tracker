@@ -16,7 +16,11 @@ export const TaskItem = ({ task, idx }) => {
 
   const handleCompleteTask = (id, status) => {
     updateTaskStatus(id, status)
-      .then(() => setStatus(!status))
+      .then(data => {
+        setStatus(!status);
+        dispatch({ type: 'editTask', newTask: data, taskId: id });
+      })
+
       .catch(e => console.log(e.message));
   };
 

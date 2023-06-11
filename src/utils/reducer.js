@@ -20,7 +20,7 @@ export const reducer = (tasks, action) => {
       //   tasks.splice(idx, 1, action.newTask);
       //   return tasks;
       return tasks.map(task => {
-        return task._id === action.taskId ? { task, ...action.newTask } : task;
+        return task._id === action.taskId ? action.newTask : task;
       });
 
     default:
