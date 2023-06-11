@@ -34,7 +34,7 @@ export const SharedLayout = ({ email, isLoggedIn, setIsLoggedIn }) => {
         {isLoggedIn && (
           <>
             <p>{email}</p>
-            {tasks.length > 0 && (
+            {tasks && (
               <p>
                 <b>
                   {calcCompleted(tasks)} / {tasks.length}

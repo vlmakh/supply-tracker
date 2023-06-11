@@ -7,12 +7,9 @@ import { FormTaskAdd } from 'components/FormTask/FormTaskAdd';
 import { addTask } from 'utils/operations';
 import { AddTaskButton } from 'components/Base/Buttons.styled';
 import { TaskContext } from 'utils/context';
-// import { reducer } from 'utils/reducer';
 
 export default function TaskPage({ isLoggedIn, isLoading }) {
-  // const [tasks, dispatch] = useReducer(reducer, []);
   const { dispatch, tasks } = useContext(TaskContext);
-  // const [isLoading, setIsLoading] = useState(true);
   const [showFormTaskAdd, setShowFormTaskAdd] = useState(false);
 
   const handleModal = () => {
@@ -34,7 +31,6 @@ export default function TaskPage({ isLoggedIn, isLoading }) {
     <>
       {!isLoggedIn && <Navigate to="/" />}
 
-      {/* <TaskContext.Provider value={{ dispatch, tasks }}> */}
       <Box width="1200px" mt={5} mx="auto">
         {!isLoading && tasks && <TaskTable />}
 
@@ -53,7 +49,6 @@ export default function TaskPage({ isLoggedIn, isLoading }) {
           </Modal>
         )}
       </Box>
-      {/* </TaskContext.Provider> */}
     </>
   );
 }

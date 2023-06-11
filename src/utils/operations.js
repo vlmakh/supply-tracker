@@ -98,7 +98,7 @@ export const getTasks = async () => {
 
     return response.data;
   } catch (error) {
-    toast.error(errorMsg);
+    console.log(error.message);
   }
 };
 
