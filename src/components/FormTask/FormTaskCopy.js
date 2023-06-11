@@ -1,14 +1,17 @@
 import { FormStyled, FormTitle } from './FormTask.styled';
 import { formatDate } from 'utils/formatDate';
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import { Formik } from 'formik';
 import { IoClose } from 'react-icons/io5';
 import { CloseButton, AddTaskFormButton } from 'components/Base/Buttons.styled';
 import { schema } from './yupSchema';
 import { FormCommon } from './FormCommon';
 import { addTask } from 'utils/operations';
+import { TaskContext } from 'utils/context';
 
-export const FormTaskCopy = ({ handleCopyTask, task, tasks }) => {
+export const FormTaskCopy = ({ handleCopyTask, task }) => {
+  const { dispatch } = useContext(TaskContext);
+
   useEffect(() => {
     window.addEventListener('keydown', handleEscape);
 
@@ -22,7 +25,8 @@ export const FormTaskCopy = ({ handleCopyTask, task, tasks }) => {
       .then(data => {
         if (data._id) {
           handleCopyTask();
-          tasks.push(data);
+
+          dispatch({ type: 'addTask', newTask: data });
         } else throw new Error();
       })
       .catch(e => console.log(e.message));

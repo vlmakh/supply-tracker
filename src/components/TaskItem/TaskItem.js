@@ -1,16 +1,18 @@
 import { Task, Num, Name } from './TaskItem.styled';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { updateTaskStatus, deleteTask } from 'utils/operations';
 import { TDButton } from 'components/Base/Buttons.styled';
 import { AiFillEdit, AiFillCopy, AiFillDelete } from 'react-icons/ai';
 import Modal from 'components/Modal/Modal';
 import { FormTaskEdit } from 'components/FormTask/FormTaskEdit';
 import { FormTaskCopy } from 'components/FormTask/FormTaskCopy';
+import { TaskContext } from 'utils/context';
 
-export const TaskItem = ({ task, idx, tasks }) => {
+export const TaskItem = ({ task, idx }) => {
   const [status, setStatus] = useState(task.completed);
   const [showFormTaskEdit, setShowFormTaskEdit] = useState(false);
   const [showFormTaskCopy, setShowFormTaskCopy] = useState(false);
+  const { dispatch } = useContext(TaskContext);
 
   const handleCompleteTask = (id, status) => {
     updateTaskStatus(id, status)
@@ -28,7 +30,7 @@ export const TaskItem = ({ task, idx, tasks }) => {
 
   const handleDelete = id => {
     deleteTask(id)
-      .then(() => tasks.filter(task => task._id !== id))
+      .then(dispatch({ type: 'deleteTask', taskId: id }))
       .catch(err => console.log(err.message));
   };
 
@@ -77,21 +79,13 @@ export const TaskItem = ({ task, idx, tasks }) => {
 
       {showFormTaskEdit && (
         <Modal onClose={handleEditTask}>
-          <FormTaskEdit
-            handleEditTask={handleEditTask}
-            task={task}
-            tasks={tasks}
-          />
+          <FormTaskEdit handleEditTask={handleEditTask} task={task} />
         </Modal>
       )}
 
       {showFormTaskCopy && (
         <Modal onClose={handleCopyTask}>
-          <FormTaskCopy
-            handleCopyTask={handleCopyTask}
-            task={task}
-            tasks={tasks}
-          />
+          <FormTaskCopy handleCopyTask={handleCopyTask} task={task} />
         </Modal>
       )}
     </>

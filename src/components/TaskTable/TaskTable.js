@@ -1,23 +1,7 @@
 import { Table } from './TaskTable.styled';
 import { TaskItem } from 'components/TaskItem/TaskItem';
-// import { updateTask } from 'utils/operations';
-// import { useState } from 'react';
 
 export const TaskTable = ({ tasks }) => {
-  // const [showFormTaskEdit, setShowFormTaskEdit] = useState(false);
-
-  // const handleEditTask = id => {
-  //   console.log(id);
-
-  // updateTask(id).then(data => {
-  //   const index = tasks.findIndex(
-  //     contact => contact.id === action.payload.id
-  //   );
-  //   state.items.splice(index, 1, action.payload);
-  // })
-  // setShowFormTaskEdit(!showFormTaskEdit);
-  // };
-
   return (
     <Table>
       <thead>
@@ -47,7 +31,7 @@ export const TaskTable = ({ tasks }) => {
 
       <tbody>
         {tasks.map((task, idx) => {
-          return <TaskItem key={idx} task={task} idx={idx} tasks={tasks} />;
+          return <TaskItem key={idx} task={task} idx={idx} />;
         })}
       </tbody>
     </Table>

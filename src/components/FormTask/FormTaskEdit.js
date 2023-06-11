@@ -1,12 +1,15 @@
 import { FormStyled, FormTitle } from './FormTask.styled';
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import { Formik } from 'formik';
 import { IoClose } from 'react-icons/io5';
 import { CloseButton, AddTaskButton } from 'components/Base/Buttons.styled';
 import { FormCommon } from './FormCommon';
 import { updateTask } from 'utils/operations';
+import { TaskContext } from 'utils/context';
 
-export const FormTaskEdit = ({ handleEditTask, task, tasks }) => {
+export const FormTaskEdit = ({ handleEditTask, task }) => {
+  const { dispatch } = useContext(TaskContext);
+
   useEffect(() => {
     window.addEventListener('keydown', handleEscape);
 
@@ -18,8 +21,8 @@ export const FormTaskEdit = ({ handleEditTask, task, tasks }) => {
   const handleSubmit = newTask => {
     updateTask(task._id, newTask)
       .then(data => {
-        const idx = tasks.findIndex(task => task._id === data._id);
-        tasks.splice(idx, 1, data);
+        dispatch({ type: 'editTask', newTask: data, taskId: task._id });
+
         handleEditTask();
       })
       .catch(err => console.log(err.message));
