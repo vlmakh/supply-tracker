@@ -10,7 +10,6 @@ import {
   Supplier,
   DataETA,
   Info,
-  Days,
   Freight,
 } from './TaskItem.styled';
 import { useState, useContext } from 'react';
@@ -109,8 +108,6 @@ export const TaskItem = ({ task, idx }) => {
         <DataETA today={task.dateETA} completed={status}>
           {task.dateETA}
         </DataETA>
-
-        <Days> </Days>
 
         <Info> {formatSupplier(task.comments)} </Info>
 
