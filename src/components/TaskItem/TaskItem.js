@@ -1,5 +1,7 @@
 import {
   Task,
+  Checkbox,
+  CheckBtn,
   Num,
   Name,
   Data,
@@ -11,7 +13,8 @@ import {
 import { useState, useContext } from 'react';
 import { updateTaskStatus, deleteTask } from 'utils/operations';
 import { TDButton } from 'components/Base/Buttons.styled';
-import { AiFillCopy, AiFillDelete } from 'react-icons/ai';
+import { FaCheck, FaArrowAltCircleRight } from 'react-icons/fa';
+import { MdContentCopy, MdDeleteOutline } from 'react-icons/md';
 import Modal from 'components/Modal/Modal';
 import { FormTaskEdit } from 'components/FormTask/FormTaskEdit';
 import { FormTaskCopy } from 'components/FormTask/FormTaskCopy';
@@ -50,18 +53,29 @@ export const TaskItem = ({ task, idx }) => {
   return (
     <>
       <Task completed={status}>
+        <Num>{idx + 1} </Num>
         <td>
-          <input
+          <Checkbox
             type="checkbox"
             checked={status}
-            onChange={() => handleCompleteTask(task._id, status)}
+            readOnly
+            // onChange={() => handleCompleteTask(task._id, status)}
           />
+          <CheckBtn
+            type="button"
+            onClick={() => handleCompleteTask(task._id, status)}
+          >
+            {status ? (
+              <FaCheck size="18" />
+            ) : (
+              <FaArrowAltCircleRight size="18" />
+            )}
+          </CheckBtn>
         </td>
-        <Num>{idx + 1} </Num>
 
         <td>
           <TDButton type="button" onClick={handleCopyTask}>
-            <AiFillCopy />
+            <MdContentCopy size="18" />
           </TDButton>
         </td>
         <Name>
@@ -88,7 +102,7 @@ export const TaskItem = ({ task, idx }) => {
 
         <td>
           <TDButton type="button" onClick={() => handleDelete(task._id)}>
-            <AiFillDelete />
+            <MdDeleteOutline size="18" />
           </TDButton>
         </td>
       </Task>

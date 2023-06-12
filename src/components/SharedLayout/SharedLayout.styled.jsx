@@ -8,15 +8,15 @@ export const Layout = styled.div`
   background-color: ${p => p.theme.colors.bcgMain};
 `;
 
-export const Header = styled.div`
- 
+export const Header = styled.div` 
   border-bottom: 1px solid grey;
   position: fixed;
   top: 0;
   z-index: 100;
   width: 100%;
   height: ${p => p.theme.space[5]}px;
-  /* padding: 0 16px; */
+  padding: 4px 0;
+  background-color: white;
 `;
 
 export const Nav = styled.nav`

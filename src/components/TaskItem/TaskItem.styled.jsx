@@ -6,6 +6,23 @@ export const Task = styled.tr`
   color: ${p => (p.completed ? 'lightgrey' : '#212121')};
 `;
 
+export const Checkbox = styled.input`
+  display: none;
+
+  :checked + button {
+    color: lightgrey;
+  }
+`;
+
+export const CheckBtn = styled.button`
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  width: 24px;
+  padding: 0;
+  color: green;
+`;
+
 export const Num = styled.td`
   text-align: right;
 `;
@@ -30,7 +47,7 @@ export const DataETA = styled.td`
   font-weight: 700;
   color: ${p => !p.completed && p.today === today && 'blue'};
 
-   @media screen and (max-width: 1199.98px) {
+  @media screen and (max-width: 1199.98px) {
     display: none;
   }
 `;
@@ -38,7 +55,7 @@ export const DataETA = styled.td`
 export const Info = styled.td`
   width: 100px;
 
-   @media screen and (max-width: 1199.98px) {
+  @media screen and (max-width: 1199.98px) {
     display: none;
   }
 `;
@@ -47,7 +64,7 @@ export const Freight = styled.td`
   width: 100px;
   text-align: center;
 
-   @media screen and (max-width: 1199.98px) {
+  @media screen and (max-width: 1199.98px) {
     display: none;
   }
 `;
@@ -55,7 +72,7 @@ export const Freight = styled.td`
 export const Days = styled.td`
   text-align: center;
 
-   @media screen and (max-width: 1199.98px) {
+  @media screen and (max-width: 1199.98px) {
     display: none;
   }
 `;

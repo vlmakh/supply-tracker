@@ -18,6 +18,10 @@ export const Table = styled.table`
    margin: 0 auto;
   }
 
+  thead {
+    /* position: fixed; */
+  }
+
   th {
     text-transform: uppercase;
     background-color: darkcyan;
