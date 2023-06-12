@@ -2,7 +2,7 @@ import { FormStyled, FormTitle } from './FormTask.styled';
 import { useEffect, useContext } from 'react';
 import { Formik } from 'formik';
 import { IoClose } from 'react-icons/io5';
-import { CloseButton, AddTaskButton } from 'components/Base/Buttons.styled';
+import { CloseButton, AddTaskFormButton } from 'components/Base/Buttons.styled';
 import { FormCommon } from './FormCommon';
 import { updateTask } from 'utils/operations';
 import { TaskContext } from 'utils/context';
@@ -60,7 +60,7 @@ export const FormTaskEdit = ({ handleEditTask, task }) => {
 
         <FormCommon />
 
-        <AddTaskButton type="submit">Save</AddTaskButton>
+        <AddTaskFormButton type="submit">Save</AddTaskFormButton>
       </FormStyled>
     </Formik>
   );

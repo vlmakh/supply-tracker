@@ -1,6 +1,8 @@
 import {
   FieldName,
   Input,
+  Qty,
+  Unit,
   DateInput,
   Comments,
   FormField,
@@ -8,7 +10,6 @@ import {
 } from './FormTask.styled';
 // import DatePicker from 'react-datepicker';
 // import 'react-datepicker/dist/react-datepicker.css';
-import { Field } from 'formik';
 
 export const FormCommon = () => {
   return (
@@ -22,14 +23,14 @@ export const FormCommon = () => {
       <FormField>
         <FieldName>Quantity</FieldName>
 
-        <Input type="text" name="qty" placeholder="quantity"></Input>
+        <Qty type="text" name="qty" placeholder="quantity"></Qty>
         <ErrorStyled component="div" name="qty" />
 
-        <Field as="select" name="unit">
+        <Unit as="select" name="unit">
           <option value="pcs">pcs</option>
           <option value="m">m</option>
           <option value="kg">kg</option>
-        </Field>
+        </Unit>
       </FormField>
 
       <FormField>

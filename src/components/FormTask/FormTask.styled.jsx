@@ -45,6 +45,16 @@ export const Input = styled(Field)`
   width: 60%;
 `;
 
+export const Qty = styled(Field)`
+  padding: 4px;
+  width: 40%;
+`;
+
+export const Unit = styled(Field)`
+  padding: 4px;
+  width: 20%;
+`;
+
 export const DateInput = styled(Field)`
   padding: 4px;
   width: 100px;
