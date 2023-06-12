@@ -7,6 +7,7 @@ import {
   Footer,
   MyLink,
 } from './SharedLayout.styled';
+import { Container } from 'components/Container/Container.styled';
 import { LogoVM } from 'components/LogoVM/LogoVM';
 import { formatDate } from 'utils/formatDate';
 import { logout } from 'utils/operations';
@@ -31,22 +32,24 @@ export const SharedLayout = ({ email, isLoggedIn, setIsLoggedIn }) => {
   return (
     <Layout>
       <Header>
-        {isLoggedIn && (
-          <>
-            <p>{email}</p>
-            {tasks && (
-              <p>
-                <b>
-                  {calcCompleted(tasks)} / {tasks.length}
-                </b>
-              </p>
-            )}
-            <DateToday>{formatDate(today)}</DateToday>
-            <Link to="/" onClick={handleLogout}>
-              Logout
-            </Link>
-          </>
-        )}
+        <Container>
+          {isLoggedIn && (
+            <>
+              <p>{email}</p>
+              {tasks && (
+                <p>
+                  <b>
+                    {calcCompleted(tasks)} / {tasks.length}
+                  </b>
+                </p>
+              )}
+              <DateToday>{formatDate(today)}</DateToday>
+              <Link to="/" onClick={handleLogout}>
+                Logout
+              </Link>
+            </>
+          )}
+        </Container>
       </Header>
 
       <Suspense fallback={<div>Loading...</div>}>

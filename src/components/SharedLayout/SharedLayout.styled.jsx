@@ -2,7 +2,6 @@ import styled from '@emotion/styled';
 
 export const Layout = styled.div`
   display: grid;
-  /* place-content: center; */
   grid-template-rows: 1fr auto auto;
   min-height: 100vh;
   padding-top: ${p => p.theme.space[1]}px;
@@ -10,16 +9,14 @@ export const Layout = styled.div`
 `;
 
 export const Header = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+ 
   border-bottom: 1px solid grey;
   position: fixed;
   top: 0;
   z-index: 100;
   width: 100%;
   height: ${p => p.theme.space[5]}px;
-  padding: 0 16px;
+  /* padding: 0 16px; */
 `;
 
 export const Nav = styled.nav`

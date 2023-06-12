@@ -1,4 +1,3 @@
-import { Box } from 'components/Base/Box';
 import {
   FieldName,
   Input,
@@ -44,17 +43,15 @@ export const FormCommon = () => {
         <Input type="text" name="supplier"></Input>
       </FormField>
 
-      <Box display="flex" alignItems="center">
-        <FormField>
-          <FieldName>Invoice</FieldName>
-          <DateInput type="text" name="dateInvoice"></DateInput>
-        </FormField>
+      <FormField>
+        <FieldName>Invoice</FieldName>
+        <DateInput type="text" name="dateInvoice"></DateInput>
+      </FormField>
 
-        <FormField>
-          <FieldName>Payment</FieldName>
-          <DateInput type="text" name="datePayment"></DateInput>
-        </FormField>
-      </Box>
+      <FormField>
+        <FieldName>Payment</FieldName>
+        <DateInput type="text" name="datePayment"></DateInput>
+      </FormField>
 
       <FormField>
         <FieldName>Freight</FieldName>
@@ -68,18 +65,16 @@ export const FormCommon = () => {
         </Input>
       </FormField>
 
-      <Box display="flex" alignItems="center">
-        <FormField>
-          <FieldName>ETD</FieldName>
-          <DateInput type="text" name="dateETD"></DateInput>
-        </FormField>
+      <FormField>
+        <FieldName>ETD</FieldName>
+        <DateInput type="text" name="dateETD"></DateInput>
+      </FormField>
 
-        <FormField>
-          <FieldName>ETA</FieldName>
-          <DateInput type="text" name="dateETA"></DateInput>
-          <ErrorStyled component="div" name="dateETA" />
-        </FormField>
-      </Box>
+      <FormField>
+        <FieldName>ETA</FieldName>
+        <DateInput type="text" name="dateETA"></DateInput>
+        <ErrorStyled component="div" name="dateETA" />
+      </FormField>
 
       <FormField>
         <FieldName>Comments</FieldName>

@@ -10,6 +10,10 @@ export const FormStyled = styled(Form)`
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.8);
   background-color: white;
 
+  @media screen and (max-width: 499px) {
+    width: 100vw;
+  }
+
   @media screen and (min-width: 500px) {
     width: 500px;
   }

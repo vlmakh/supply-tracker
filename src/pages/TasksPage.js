@@ -31,7 +31,7 @@ export default function TaskPage({ isLoggedIn, isLoading }) {
     <>
       {!isLoggedIn && <Navigate to="/" />}
 
-      <Box width="1200px" mt={5} mx="auto">
+      <Box mt={5} mx="auto">
         {!isLoading && tasks && <TaskTable />}
 
         <Box p={4}>

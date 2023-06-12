@@ -5,7 +5,7 @@ export const Overlay = styled.div`
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+    height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,7 +14,11 @@ export const Overlay = styled.div`
 `;
 
 export const ModalWindow = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   max-height: calc(100vh - 24px);
   overflow-y: clip;
-  overflow-x: visible;  
+  overflow-x: visible;
 `;
