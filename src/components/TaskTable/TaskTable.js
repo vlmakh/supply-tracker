@@ -1,4 +1,4 @@
-import { Table, THDesktop } from './TaskTable.styled';
+import { Table, THTablet, THDesktop } from './TaskTable.styled';
 import { TaskItem } from 'components/TaskItem/TaskItem';
 import { useContext } from 'react';
 import { TaskContext } from 'utils/context';
@@ -17,7 +17,7 @@ export const TaskTable = () => {
           <th>Qty</th>
           <th>Unit</th>
           <THDesktop>Order</THDesktop>
-          <THDesktop>Supplier</THDesktop>
+          <THTablet>Supplier</THTablet>
           <THDesktop>Invoice</THDesktop>
           <THDesktop></THDesktop>
           <THDesktop>Payment</THDesktop>

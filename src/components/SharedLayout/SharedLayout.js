@@ -1,4 +1,4 @@
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { Suspense, useContext } from 'react';
 import {
   Layout,
@@ -6,14 +6,17 @@ import {
   DateToday,
   Footer,
   MyLink,
+  Green,
+  Logout,
 } from './SharedLayout.styled';
 import { Container } from 'components/Container/Container.styled';
 import { LogoVM } from 'components/LogoVM/LogoVM';
 import { formatDate } from 'utils/formatDate';
 import { logout } from 'utils/operations';
 import { TaskContext } from 'utils/context';
+import { IoMdLogOut } from 'react-icons/io';
 
-export const SharedLayout = ({ email, isLoggedIn, setIsLoggedIn }) => {
+export const SharedLayout = ({ user, isLoggedIn, setIsLoggedIn }) => {
   const { tasks } = useContext(TaskContext);
   const today = new Date();
 
@@ -35,18 +38,19 @@ export const SharedLayout = ({ email, isLoggedIn, setIsLoggedIn }) => {
         <Container>
           {isLoggedIn && (
             <>
-              <p>{email}</p>
               {tasks && (
                 <p>
                   <b>
-                    {calcCompleted(tasks)} / {tasks.length}
+                    {tasks.length} / <Green>{calcCompleted(tasks)} </Green>
                   </b>
                 </p>
               )}
               <DateToday>{formatDate(today)}</DateToday>
-              <Link to="/" onClick={handleLogout}>
-                Logout
-              </Link>
+
+              <Logout to="/" onClick={handleLogout}>
+                {user}
+                <IoMdLogOut size="18" />
+              </Logout>
             </>
           )}
         </Container>

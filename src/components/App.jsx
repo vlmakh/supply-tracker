@@ -67,7 +67,7 @@ export const App = () => {
         <Route
           path="/"
           element={
-            <SharedLayout
+            <SharedLayout 
               user={user}
               email={email}
               setIsLoggedIn={setIsLoggedIn}

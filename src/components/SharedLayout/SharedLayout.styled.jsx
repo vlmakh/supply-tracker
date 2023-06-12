@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { NavLink } from 'react-router-dom';
 
 export const Layout = styled.div`
   display: grid;
@@ -8,15 +9,22 @@ export const Layout = styled.div`
   background-color: ${p => p.theme.colors.bcgMain};
 `;
 
-export const Header = styled.div` 
+export const Header = styled.div`
   border-bottom: 1px solid grey;
   position: fixed;
   top: 0;
   z-index: 100;
   width: 100%;
   height: ${p => p.theme.space[5]}px;
-  padding: 4px 0;
+  padding: 8px 0 4px;
   background-color: white;
+`;
+
+export const Green = styled.span`
+  border-radius: 50%;
+  background-color: green;
+  color: white;
+  padding: 2px;
 `;
 
 export const Nav = styled.nav`
@@ -28,7 +36,7 @@ export const Nav = styled.nav`
 
 export const DateToday = styled.p`
   font-weight: 700;
-`
+`;
 
 export const Footer = styled.div`
   display: flex;
@@ -56,4 +64,10 @@ export const MyLink = styled.a`
   :focus {
     color: ${p => p.theme.colors.accent};
   }
+`;
+
+export const Logout = styled(NavLink)`
+  display: flex;
+  gap: 8px;
+  align-items: center;
 `;

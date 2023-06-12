@@ -3,8 +3,11 @@ import {
   Checkbox,
   CheckBtn,
   Num,
+  Btn,
   Name,
+  Qty,
   Data,
+  Supplier,
   DataETA,
   Info,
   Days,
@@ -54,7 +57,7 @@ export const TaskItem = ({ task, idx }) => {
     <>
       <Task completed={status}>
         <Num>{idx + 1} </Num>
-        <td>
+        <Btn>
           <Checkbox
             type="checkbox"
             checked={status}
@@ -71,22 +74,22 @@ export const TaskItem = ({ task, idx }) => {
               <FaArrowAltCircleRight size="18" />
             )}
           </CheckBtn>
-        </td>
+        </Btn>
 
-        <td>
+        <Btn>
           <TDButton type="button" onClick={handleCopyTask}>
             <MdContentCopy size="18" />
           </TDButton>
-        </td>
+        </Btn>
         <Name>
           <TDButton type="button" onClick={handleEditTask} disabled={status}>
             {task.name}
           </TDButton>
         </Name>
-        <td>{task.qty} </td>
+        <Qty>{task.qty} </Qty>
         <td> pcs</td>
         <Data today={task.dateOrder}>{task.dateOrder} </Data>
-        <Info> {task.supplier}</Info>
+        <Supplier> {task.supplier}</Supplier>
         <Data today={task.dateInvoice}>{task.dateInvoice} </Data>
         <Days> </Days>
         <Data today={task.datePayment}>{task.datePayment} </Data>
@@ -100,11 +103,11 @@ export const TaskItem = ({ task, idx }) => {
         <Days> </Days>
         <Info> {task.comments} </Info>
 
-        <td>
+        <Btn>
           <TDButton type="button" onClick={() => handleDelete(task._id)}>
             <MdDeleteOutline size="18" />
           </TDButton>
-        </td>
+        </Btn>
       </Task>
 
       {showFormTaskEdit && (

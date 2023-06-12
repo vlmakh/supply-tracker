@@ -36,6 +36,12 @@ export const Table = styled.table`
   }
 `;
 
+export const THTablet = styled.th`
+  @media screen and (max-width: 767.98px) {
+    display: none;
+  }
+`;
+
 export const THDesktop = styled.th`
   @media screen and (max-width: 1199.98px) {
     display: none;

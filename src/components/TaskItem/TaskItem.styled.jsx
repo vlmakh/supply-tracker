@@ -27,12 +27,35 @@ export const Num = styled.td`
   text-align: right;
 `;
 
+export const Btn = styled.td`
+  width: 24px;
+`;
+
 export const Name = styled.td`
-  width: 240px;
+  min-width: 240px;
   text-align: left;
 `;
 
-export const Company = styled.p``;
+export const Qty = styled.td`
+  text-align: right;
+`;
+
+export const Supplier = styled.td`
+  width: 100px;
+
+  @media screen and (max-width: 767.98px) {
+    display: none;
+  }
+`;
+
+export const Freight = styled.td`
+  width: 100px;
+  text-align: center;
+
+  @media screen and (max-width: 1199.98px) {
+    display: none;
+  }
+`;
 
 export const Data = styled.td`
   font-weight: 700;
@@ -54,15 +77,6 @@ export const DataETA = styled.td`
 
 export const Info = styled.td`
   width: 100px;
-
-  @media screen and (max-width: 1199.98px) {
-    display: none;
-  }
-`;
-
-export const Freight = styled.td`
-  width: 100px;
-  text-align: center;
 
   @media screen and (max-width: 1199.98px) {
     display: none;
