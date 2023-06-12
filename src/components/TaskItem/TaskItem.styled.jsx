@@ -32,7 +32,7 @@ export const Btn = styled.td`
 `;
 
 export const Name = styled.td`
-  min-width: 240px;
+  min-width: 200px;
   text-align: left;
 `;
 

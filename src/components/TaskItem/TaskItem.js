@@ -14,10 +14,11 @@ import {
   Freight,
 } from './TaskItem.styled';
 import { useState, useContext } from 'react';
-import { updateTaskStatus, deleteTask } from 'utils/operations';
+import { updateTaskStatus } from 'utils/operations';
 import { TDButton } from 'components/Base/Buttons.styled';
 import { FaCheck, FaArrowAltCircleRight } from 'react-icons/fa';
-import { MdContentCopy, MdDeleteOutline } from 'react-icons/md';
+import { MdContentCopy } from 'react-icons/md';
+// import { MdDeleteOutline } from 'react-icons/md';
 import Modal from 'components/Modal/Modal';
 import { FormTaskEdit } from 'components/FormTask/FormTaskEdit';
 import { FormTaskCopy } from 'components/FormTask/FormTaskCopy';
@@ -28,6 +29,12 @@ export const TaskItem = ({ task, idx }) => {
   const [showFormTaskEdit, setShowFormTaskEdit] = useState(false);
   const [showFormTaskCopy, setShowFormTaskCopy] = useState(false);
   const { dispatch } = useContext(TaskContext);
+
+  const formatSupplier = name => {
+    if (name.length > 18) {
+      return name.slice(0, 17) + '...';
+    } else return name;
+  };
 
   const handleCompleteTask = (id, status) => {
     updateTaskStatus(id, status)
@@ -46,16 +53,17 @@ export const TaskItem = ({ task, idx }) => {
     setShowFormTaskEdit(!showFormTaskEdit);
   };
 
-  const handleDelete = id => {
-    deleteTask(id)
-      .then(dispatch({ type: 'deleteTask', taskId: id }))
-      .catch(err => console.log(err.message));
-  };
+  // const handleDelete = id => {
+  //   deleteTask(id)
+  //     .then(dispatch({ type: 'deleteTask', taskId: id }))
+  //     .catch(err => console.log(err.message));
+  // };
 
   return (
     <>
       <Task completed={status}>
         <Num>{idx + 1} </Num>
+
         <Btn>
           <Checkbox type="checkbox" checked={status} readOnly />
           <CheckBtn
@@ -75,33 +83,42 @@ export const TaskItem = ({ task, idx }) => {
             <MdContentCopy size="18" />
           </TDButton>
         </Btn>
+
         <Name>
           <TDButton type="button" onClick={handleEditTask} disabled={status}>
             {task.name}
           </TDButton>
         </Name>
+
         <Qty>{task.qty} </Qty>
+
         <td> pcs</td>
+
         <Data today={task.dateOrder}>{task.dateOrder} </Data>
-        <Supplier> {task.supplier}</Supplier>
+
+        <Supplier> {formatSupplier(task.supplier)}</Supplier>
+
         <Data today={task.dateInvoice}>{task.dateInvoice} </Data>
-        <Days> </Days>
+
         <Data today={task.datePayment}>{task.datePayment} </Data>
+
         <Freight>{task.freight}</Freight>
-        <Days> </Days>
+
         <Data today={task.dateETD}> {task.dateETD}</Data>
-        <Days> </Days>
+
         <DataETA today={task.dateETA} completed={status}>
           {task.dateETA}
         </DataETA>
-        <Days> </Days>
-        <Info> {task.comments} </Info>
 
-        <Btn>
+        <Days> </Days>
+
+        <Info> {formatSupplier(task.comments)} </Info>
+
+        {/* <Btn>
           <TDButton type="button" onClick={() => handleDelete(task._id)}>
             <MdDeleteOutline size="18" />
           </TDButton>
-        </Btn>
+        </Btn> */}
       </Task>
 
       {showFormTaskEdit && (
