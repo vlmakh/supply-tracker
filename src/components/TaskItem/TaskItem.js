@@ -11,7 +11,7 @@ import {
 import { useState, useContext } from 'react';
 import { updateTaskStatus, deleteTask } from 'utils/operations';
 import { TDButton } from 'components/Base/Buttons.styled';
-import { AiFillEdit, AiFillCopy, AiFillDelete } from 'react-icons/ai';
+import { AiFillCopy, AiFillDelete } from 'react-icons/ai';
 import Modal from 'components/Modal/Modal';
 import { FormTaskEdit } from 'components/FormTask/FormTaskEdit';
 import { FormTaskCopy } from 'components/FormTask/FormTaskCopy';
@@ -58,17 +58,17 @@ export const TaskItem = ({ task, idx }) => {
           />
         </td>
         <Num>{idx + 1} </Num>
-        <td>
-          <TDButton type="button" onClick={handleEditTask} disabled={status}>
-            <AiFillEdit />
-          </TDButton>
-        </td>
+
         <td>
           <TDButton type="button" onClick={handleCopyTask}>
             <AiFillCopy />
           </TDButton>
         </td>
-        <Name>{task.name} </Name>
+        <Name>
+          <TDButton type="button" onClick={handleEditTask} disabled={status}>
+            {task.name}
+          </TDButton>
+        </Name>
         <td>{task.qty} </td>
         <td> pcs</td>
         <Data today={task.dateOrder}>{task.dateOrder} </Data>

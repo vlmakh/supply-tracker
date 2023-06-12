@@ -4,7 +4,9 @@ export const TDButton = styled.button`
     border: none;
     background-color: transparent;
     padding: 0;
-    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    cursor: ${p => !p.disabled && 'pointer'};
 `;
 
 export const AddTaskButton = styled.button`

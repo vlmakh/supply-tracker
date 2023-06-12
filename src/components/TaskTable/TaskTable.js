@@ -13,7 +13,6 @@ export const TaskTable = () => {
           <th></th>
           <th></th>
           <th></th>
-          <th></th>
           <th>Name</th>
           <th>Qty</th>
           <th>Unit</th>
