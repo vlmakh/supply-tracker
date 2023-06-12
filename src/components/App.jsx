@@ -7,7 +7,7 @@ import { reducer } from 'utils/reducer';
 import { checkCurrentUser } from 'utils/operations';
 import { Toaster } from 'react-hot-toast';
 import Modal from 'components/Modal/Modal';
-import { Loader } from './Loader/Loader';
+import { Loader } from 'components/Loader/Loader';
 import { getTasks } from 'utils/operations';
 import { TaskContext } from 'utils/context';
 
@@ -24,8 +24,8 @@ export const App = () => {
   const [user, setUser] = useState(data.user ?? null);
   const [email, setEmail] = useState(data.email ?? null);
   const [token, setToken] = useState(data.token);
-  const [isLoading, setIsLoading] = useState(true)
-  const [isLoggedIn, setIsLoggedIn] = useState(false);  
+  const [isLoading, setIsLoading] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [tasks, dispatch] = useReducer(reducer, []);
 
   useEffect(() => {
@@ -63,39 +63,46 @@ export const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <TaskContext.Provider value={{ dispatch, tasks }}>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <SharedLayout 
-              user={user}
-              email={email}
-              setIsLoggedIn={setIsLoggedIn}
-              setToken={setToken}
-              isLoggedIn={isLoggedIn}
-            />
-          }
-        >
-          <Route path="/" element={<HomePage isLoggedIn={isLoggedIn} />}>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <SharedLayout
+                user={user}
+                email={email}
+                setIsLoggedIn={setIsLoggedIn}
+                setToken={setToken}
+                isLoggedIn={isLoggedIn}
+              />
+            }
+          >
+            <Route path="/" element={<HomePage isLoggedIn={isLoggedIn} />}>
+              <Route
+                index
+                element={
+                  <Login
+                    setUser={setUser}
+                    token={token}
+                    setToken={setToken}
+                    setIsLoggedIn={setIsLoggedIn}
+                  />
+                }
+              />
+              <Route path="/signup" element={<Signup />} />
+            </Route>
+
             <Route
-              index
+              path="tasks"
               element={
-                <Login
-                  setUser={setUser}
-                  token={token}
-                  setToken={setToken}
-                  setIsLoggedIn={setIsLoggedIn}
+                <TaskPage
+                  isLoggedIn={isLoggedIn}
+                  isLoading={isLoading}
+                  setIsLoading={setIsLoading}
                 />
               }
             />
-            <Route path="/signup" element={<Signup />} />
           </Route>
-
-            <Route path="tasks" element={<TaskPage isLoggedIn={isLoggedIn} isLoading={isLoading } />} />
-        </Route>
-      </Routes>
-
-      
+        </Routes>
       </TaskContext.Provider>
 
       {isLoading && (
@@ -103,15 +110,13 @@ export const App = () => {
           <Loader />
         </Modal>
       )}
-      
+
       <Toaster
         position="top-center"
         toastOptions={{
           duration: 2000,
-          
         }}
-        />
-        
+      />
     </ThemeProvider>
   );
 };

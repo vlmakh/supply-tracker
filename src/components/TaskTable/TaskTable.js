@@ -25,7 +25,7 @@ export const TaskTable = () => {
           <THDesktop></THDesktop>
           <THDesktop>ETD</THDesktop>
           <THDesktop></THDesktop>
-          <THDesktop>ETA</THDesktop>
+          <THTablet>ETA</THTablet>
           <THDesktop>Days</THDesktop>
           <THDesktop>Comments</THDesktop>
 

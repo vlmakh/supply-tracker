@@ -70,7 +70,7 @@ export const DataETA = styled.td`
   font-weight: 700;
   color: ${p => !p.completed && p.today === today && 'blue'};
 
-  @media screen and (max-width: 1199.98px) {
+  @media screen and (max-width: 767.98px) {
     display: none;
   }
 `;

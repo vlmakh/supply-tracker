@@ -7,8 +7,9 @@ import { FormTaskAdd } from 'components/FormTask/FormTaskAdd';
 import { addTask } from 'utils/operations';
 import { AddTaskButton } from 'components/Base/Buttons.styled';
 import { TaskContext } from 'utils/context';
+import { Loader } from 'components/Loader/Loader';
 
-export default function TaskPage({ isLoggedIn, isLoading }) {
+export default function TaskPage({ isLoggedIn, isLoading, setIsLoading }) {
   const { dispatch, tasks } = useContext(TaskContext);
   const [showFormTaskAdd, setShowFormTaskAdd] = useState(false);
 
@@ -17,6 +18,7 @@ export default function TaskPage({ isLoggedIn, isLoading }) {
   };
 
   const handleAddTask = newTask => {
+    setIsLoading(true);
     addTask(newTask)
       .then(data => {
         if (data._id) {
@@ -24,7 +26,8 @@ export default function TaskPage({ isLoggedIn, isLoading }) {
           dispatch({ type: 'addTask', newTask: data });
         } else throw new Error();
       })
-      .catch(e => console.log(e.message));
+      .catch(e => console.log(e.message))
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -49,6 +52,12 @@ export default function TaskPage({ isLoggedIn, isLoading }) {
           </Modal>
         )}
       </Box>
+
+      {isLoading && (
+        <Modal>
+          <Loader />
+        </Modal>
+      )}
     </>
   );
 }

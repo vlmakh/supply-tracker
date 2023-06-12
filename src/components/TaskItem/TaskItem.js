@@ -35,7 +35,6 @@ export const TaskItem = ({ task, idx }) => {
         setStatus(!status);
         dispatch({ type: 'editTask', newTask: data, taskId: id });
       })
-
       .catch(e => console.log(e.message));
   };
 
@@ -58,12 +57,7 @@ export const TaskItem = ({ task, idx }) => {
       <Task completed={status}>
         <Num>{idx + 1} </Num>
         <Btn>
-          <Checkbox
-            type="checkbox"
-            checked={status}
-            readOnly
-            // onChange={() => handleCompleteTask(task._id, status)}
-          />
+          <Checkbox type="checkbox" checked={status} readOnly />
           <CheckBtn
             type="button"
             onClick={() => handleCompleteTask(task._id, status)}
