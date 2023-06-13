@@ -21,7 +21,7 @@ export const FormTaskEdit = ({ handleEditTask, task }) => {
   });
 
   const handleSubmit = newTask => {
-    updateTask(task._id, newTask)
+    updateTask(task._id, { ...newTask, dateOrder })
       .then(data => {
         dispatch({ type: 'editTask', newTask: data, taskId: task._id });
 

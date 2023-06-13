@@ -12,11 +12,16 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 export const FormCommon = ({ dateOrder, setDateOrder }) => {
-  // const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
-  //   <button className="example-custom-input" onClick={onClick} ref={ref}>
-  //     {value}
-  //   </button>
-  // ));
+  // const DatepickerField = ({ field }) => (
+  //   <div>
+  //     <DatePicker
+  //       dateFormat="dd.MM.yyyy"
+  //       {...field}
+  //       selected={dateOrder}
+  //       onChange={date => setDateOrder(date)}
+  //     />
+  //   </div>
+  // );
 
   return (
     <>
@@ -41,16 +46,18 @@ export const FormCommon = ({ dateOrder, setDateOrder }) => {
 
       <FormField>
         <FieldName>Order</FieldName>
-        {/* <DateInput type="text" name="dateOrder">
-          {({ field }) => ( */}
-        <DatePicker
-          name="dateOrder"
-          // {...field}
-          selected={dateOrder}
-          onChange={date => setDateOrder(date)}
-        />
-        {/* )}
-        </DateInput> */}
+        <DateInput type="text" name="dateOrder">
+          {({ field }) => (
+            <div>
+              <DatePicker
+                dateFormat="dd.MM.yyyy"
+                {...field}
+                selected={dateOrder}
+                onChange={date => setDateOrder(date)}
+              />
+            </div>
+          )}
+        </DateInput>
         <ErrorStyled component="div" name="dateOrder" />
       </FormField>
 
