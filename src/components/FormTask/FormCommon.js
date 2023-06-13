@@ -11,7 +11,13 @@ import {
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-export const FormCommon = () => {
+export const FormCommon = ({ dateOrder, setDateOrder }) => {
+  // const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
+  //   <button className="example-custom-input" onClick={onClick} ref={ref}>
+  //     {value}
+  //   </button>
+  // ));
+
   return (
     <>
       <FormField>
@@ -35,7 +41,16 @@ export const FormCommon = () => {
 
       <FormField>
         <FieldName>Order</FieldName>
-        <DateInput type="text" name="dateOrder"></DateInput>
+        {/* <DateInput type="text" name="dateOrder">
+          {({ field }) => ( */}
+        <DatePicker
+          name="dateOrder"
+          // {...field}
+          selected={dateOrder}
+          onChange={date => setDateOrder(date)}
+        />
+        {/* )}
+        </DateInput> */}
         <ErrorStyled component="div" name="dateOrder" />
       </FormField>
 

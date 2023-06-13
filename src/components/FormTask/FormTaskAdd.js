@@ -1,6 +1,6 @@
 import { FormStyled, FormTitle } from './FormTask.styled';
 import { formatDate } from 'utils/formatDate';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Formik } from 'formik';
 import { IoClose } from 'react-icons/io5';
 import { CloseButton, AddTaskFormButton } from 'components/Base/Buttons.styled';
@@ -8,6 +8,8 @@ import { schema } from './yupSchema';
 import { FormCommon } from './FormCommon';
 
 export const FormTaskAdd = ({ handleModal, handleAddTask }) => {
+  const [dateOrder, setDateOrder] = useState(new Date());
+
   useEffect(() => {
     window.addEventListener('keydown', handleEscape);
 
@@ -39,7 +41,7 @@ export const FormTaskAdd = ({ handleModal, handleAddTask }) => {
         name: '',
         qty: '',
         unit: 'pcs',
-        dateOrder: formatDate(today),
+        dateOrder,
         supplier: '-',
         dateInvoice: formatDate(dateInvoice),
         datePayment: formatDate(datePayment),
@@ -57,7 +59,7 @@ export const FormTaskAdd = ({ handleModal, handleAddTask }) => {
 
         <FormTitle>Add new task</FormTitle>
 
-        <FormCommon />
+        <FormCommon dateOrder={dateOrder} setDateOrder={setDateOrder} />
 
         <AddTaskFormButton type="submit">Add</AddTaskFormButton>
       </FormStyled>
