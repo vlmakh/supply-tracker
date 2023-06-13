@@ -10,9 +10,9 @@ export const formatDateUTC = date => {
   // const dateTime = '2022-07-27T08:36:12';
 
   if (date) {
-    const result = date.split('T')[0].split('-');
+    const result = date.split('T')[0].split('-').reverse().join('.');
 
     // console.log(result);
-    return [result[1], result[2] + 1, result[0]].join('.');
+    return result;
   }
 };

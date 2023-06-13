@@ -13,15 +13,16 @@ import {
   Freight,
 } from './TaskItem.styled';
 import { useState, useContext } from 'react';
-import { updateTaskStatus } from 'utils/operations';
+import { updateTaskStatus, deleteTask } from 'utils/operations';
 import { TDButton } from 'components/Base/Buttons.styled';
 import { FaCheck, FaArrowAltCircleRight } from 'react-icons/fa';
 import { MdContentCopy } from 'react-icons/md';
-// import { MdDeleteOutline } from 'react-icons/md';
+import { MdDeleteOutline } from 'react-icons/md';
 import Modal from 'components/Modal/Modal';
 import { FormTaskEdit } from 'components/FormTask/FormTaskEdit';
 import { FormTaskCopy } from 'components/FormTask/FormTaskCopy';
 import { TaskContext } from 'utils/context';
+import { formatDateUTC } from 'utils/formatDate';
 
 export const TaskItem = ({ task, idx }) => {
   const [status, setStatus] = useState(task.completed);
@@ -52,11 +53,11 @@ export const TaskItem = ({ task, idx }) => {
     setShowFormTaskEdit(!showFormTaskEdit);
   };
 
-  // const handleDelete = id => {
-  //   deleteTask(id)
-  //     .then(dispatch({ type: 'deleteTask', taskId: id }))
-  //     .catch(err => console.log(err.message));
-  // };
+  const handleDelete = id => {
+    deleteTask(id)
+      .then(dispatch({ type: 'deleteTask', taskId: id }))
+      .catch(err => console.log(err.message));
+  };
 
   return (
     <>
@@ -93,7 +94,7 @@ export const TaskItem = ({ task, idx }) => {
 
         <td> pcs</td>
 
-        <Data today={task.dateOrder}>{task.dateOrder} </Data>
+        <Data today={task.dateOrder}>{formatDateUTC(task.dateOrder)} </Data>
 
         <Supplier> {formatSupplier(task.supplier)}</Supplier>
 
@@ -111,11 +112,11 @@ export const TaskItem = ({ task, idx }) => {
 
         <Info> {formatSupplier(task.comments)} </Info>
 
-        {/* <Btn>
+        <Btn>
           <TDButton type="button" onClick={() => handleDelete(task._id)}>
             <MdDeleteOutline size="18" />
           </TDButton>
-        </Btn> */}
+        </Btn>
       </Task>
 
       {showFormTaskEdit && (
