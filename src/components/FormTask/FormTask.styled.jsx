@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { Form, Field, ErrorMessage } from 'formik';
+import DatePicker from 'react-datepicker';
 
 export const FormStyled = styled(Form)`
   text-align: center;
@@ -56,6 +57,11 @@ export const Unit = styled(Field)`
 `;
 
 export const DateInput = styled(Field)`
+  padding: 4px;
+  width: 100px;
+`;
+
+export const DatePickerStyled = styled(DatePicker)`
   padding: 4px;
   width: 100px;
 `;

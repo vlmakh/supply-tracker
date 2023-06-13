@@ -7,8 +7,10 @@ import {
   Comments,
   FormField,
   ErrorStyled,
+  DatePickerStyled,
 } from './FormTask.styled';
-import DatePicker from 'react-datepicker';
+import { Field } from 'formik';
+// import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 export const FormCommon = ({ dateOrder, setDateOrder }) => {
@@ -46,10 +48,10 @@ export const FormCommon = ({ dateOrder, setDateOrder }) => {
 
       <FormField>
         <FieldName>Order</FieldName>
-        <DateInput type="text" name="dateOrder">
+        <Field type="text" name="dateOrder">
           {({ field }) => (
             <div>
-              <DatePicker
+              <DatePickerStyled
                 dateFormat="dd.MM.yyyy"
                 {...field}
                 selected={dateOrder}
@@ -57,7 +59,7 @@ export const FormCommon = ({ dateOrder, setDateOrder }) => {
               />
             </div>
           )}
-        </DateInput>
+        </Field>
         <ErrorStyled component="div" name="dateOrder" />
       </FormField>
 

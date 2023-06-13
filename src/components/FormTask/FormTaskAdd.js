@@ -19,7 +19,7 @@ export const FormTaskAdd = ({ handleModal, handleAddTask }) => {
   });
 
   const handleSubmit = (newTask, { resetForm }) => {
-    // console.log({ ...newTask, dateOrder });
+    // console.log(newTask);
     handleAddTask({ ...newTask, dateOrder }, resetForm);
   };
 
