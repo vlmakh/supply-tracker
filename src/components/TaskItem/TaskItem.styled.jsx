@@ -58,6 +58,7 @@ export const Freight = styled.td`
 `;
 
 export const Data = styled.td`
+  width: 72px;
   font-weight: 700;
   color: ${p => p.today === today && 'blue'};
 
@@ -76,7 +77,7 @@ export const DataETA = styled.td`
 `;
 
 export const Info = styled.td`
-  width: 100px;
+  min-width: 100px;
 
   @media screen and (max-width: 1199.98px) {
     display: none;
