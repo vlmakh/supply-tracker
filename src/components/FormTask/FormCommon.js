@@ -8,8 +8,8 @@ import {
   FormField,
   ErrorStyled,
 } from './FormTask.styled';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+// import DatePicker from 'react-datepicker';
+// import 'react-datepicker/dist/react-datepicker.css';
 
 export const FormCommon = () => {
   return (
