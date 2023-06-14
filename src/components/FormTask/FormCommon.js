@@ -10,7 +10,6 @@ import {
   DatePickerStyled,
 } from './FormTask.styled';
 import { Field } from 'formik';
-// import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 export const FormCommon = ({ dateOrder, setDateOrder }) => {
