@@ -10,6 +10,7 @@ import {
   Green,
   Logout,
 } from './SharedLayout.styled';
+// import { DatePickerStyled } from 'components/FormTask/FormTask.styled';
 import { Container } from 'components/Container/Container.styled';
 import { LogoVM } from 'components/LogoVM/LogoVM';
 import { formatDate } from 'utils/formatDate';
@@ -39,7 +40,9 @@ export const SharedLayout = ({
 
   const calcCompleted = array => {
     if (array.length) {
-      return array.filter(item => item.completed).length;
+      const completedTasks = array.filter(item => item.completed).length;
+      // console.log(completedTasks);
+      return completedTasks;
     }
   };
 
@@ -57,7 +60,7 @@ export const SharedLayout = ({
             <>
               {tasks && (
                 <TaskCalc>
-                  {tasks.length} / <Green>{calcCompleted(tasks)} </Green>
+                  {tasks.length} / <Green>{calcCompleted(tasks) ?? '0'} </Green>
                 </TaskCalc>
               )}
               <DateToday>{formatDate(today)}</DateToday>
