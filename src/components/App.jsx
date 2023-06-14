@@ -15,6 +15,7 @@ const HomePage = lazy(() => import('pages/HomePage'));
 const Login = lazy(() => import('components/Login/Login'));
 const Signup = lazy(() => import('components/Signup/Signup'));
 const TaskPage = lazy(() => import('pages/TasksPage'));
+const ErrorPage = lazy(() => import('pages/ErrorPage'));
 
 const startData = { token: null };
 const savedData = JSON.parse(localStorage.getItem('taskmgr'));
@@ -101,6 +102,8 @@ export const App = () => {
                 />
               }
             />
+
+            <Route path="*" element={<ErrorPage />} />
           </Route>
         </Routes>
       </TaskContext.Provider>
