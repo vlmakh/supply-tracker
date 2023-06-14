@@ -63,7 +63,7 @@ export const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <TaskContext.Provider value={{ dispatch, tasks }}>
+      <TaskContext.Provider value={{ dispatch, tasks, isLoading, setIsLoading }}>
         <Routes>
           <Route
             path="/"
@@ -97,8 +97,8 @@ export const App = () => {
               element={
                 <TaskPage
                   isLoggedIn={isLoggedIn}
-                  isLoading={isLoading}
-                  setIsLoading={setIsLoading}
+                  // isLoading={isLoading}
+                  // setIsLoading={setIsLoading}
                 />
               }
             />

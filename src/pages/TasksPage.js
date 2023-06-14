@@ -9,8 +9,8 @@ import { AddTaskButton } from 'components/Base/Buttons.styled';
 import { TaskContext } from 'utils/context';
 import { Loader } from 'components/Loader/Loader';
 
-export default function TaskPage({ isLoggedIn, isLoading, setIsLoading }) {
-  const { dispatch, tasks } = useContext(TaskContext);
+export default function TaskPage({ isLoggedIn }) {
+  const { dispatch, tasks, isLoading, setIsLoading } = useContext(TaskContext);
   const [showFormTaskAdd, setShowFormTaskAdd] = useState(false);
 
   const handleModal = () => {

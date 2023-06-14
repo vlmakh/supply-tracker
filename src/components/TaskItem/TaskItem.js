@@ -23,12 +23,13 @@ import { FormTaskEdit } from 'components/FormTask/FormTaskEdit';
 import { FormTaskCopy } from 'components/FormTask/FormTaskCopy';
 import { TaskContext } from 'utils/context';
 import { formatDateUTC } from 'utils/formatDate';
+import { Loader } from 'components/Loader/Loader';
 
 export const TaskItem = ({ task, idx }) => {
   const [status, setStatus] = useState(task.completed);
   const [showFormTaskEdit, setShowFormTaskEdit] = useState(false);
   const [showFormTaskCopy, setShowFormTaskCopy] = useState(false);
-  const { dispatch } = useContext(TaskContext);
+  const { dispatch, isLoading } = useContext(TaskContext);
 
   const formatSupplier = name => {
     if (name.length > 18) {
@@ -128,6 +129,12 @@ export const TaskItem = ({ task, idx }) => {
       {showFormTaskCopy && (
         <Modal onClose={handleCopyTask}>
           <FormTaskCopy handleCopyTask={handleCopyTask} task={task} />
+        </Modal>
+      )}
+
+      {isLoading && (
+        <Modal>
+          <Loader />
         </Modal>
       )}
     </>

@@ -10,7 +10,7 @@ import { TaskContext } from 'utils/context';
 export const FormTaskEdit = ({ handleEditTask, task }) => {
   const [dateOrder, setDateOrder] = useState(new Date());
 
-  const { dispatch } = useContext(TaskContext);
+  const { dispatch, setIsLoading } = useContext(TaskContext);
 
   useEffect(() => {
     window.addEventListener('keydown', handleEscape);
@@ -21,13 +21,15 @@ export const FormTaskEdit = ({ handleEditTask, task }) => {
   });
 
   const handleSubmit = newTask => {
+    setIsLoading(true);
     updateTask(task._id, { ...newTask, dateOrder })
       .then(data => {
         dispatch({ type: 'editTask', newTask: data, taskId: task._id });
 
         handleEditTask();
       })
-      .catch(err => console.log(err.message));
+      .catch(err => console.log(err.message))
+      .finally(() => setIsLoading(false));
   };
 
   const handleEscape = event => {

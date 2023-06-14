@@ -11,7 +11,7 @@ import { TaskContext } from 'utils/context';
 
 export const FormTaskCopy = ({ handleCopyTask, task }) => {
   const [dateOrder, setDateOrder] = useState(new Date());
-  const { dispatch } = useContext(TaskContext);
+  const { dispatch, setIsLoading } = useContext(TaskContext);
 
   useEffect(() => {
     window.addEventListener('keydown', handleEscape);
@@ -22,6 +22,7 @@ export const FormTaskCopy = ({ handleCopyTask, task }) => {
   });
 
   const handleSubmit = newTask => {
+    setIsLoading(true);
     addTask({ ...newTask, dateOrder })
       .then(data => {
         if (data._id) {
@@ -30,7 +31,8 @@ export const FormTaskCopy = ({ handleCopyTask, task }) => {
           dispatch({ type: 'addTask', newTask: data });
         } else throw new Error();
       })
-      .catch(e => console.log(e.message));
+      .catch(e => console.log(e.message))
+      .finally(() => setIsLoading(false));
   };
 
   const handleEscape = event => {
