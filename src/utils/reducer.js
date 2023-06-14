@@ -4,7 +4,7 @@ export const reducer = (tasks, action) => {
       if (!action.tasks) {
         return;
       }
-      return [...action.tasks];
+      return action.tasks;
 
     case 'addTask':
       const newTask = {

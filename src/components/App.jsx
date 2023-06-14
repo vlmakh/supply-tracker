@@ -68,6 +68,7 @@ export const App = () => {
     setIsLoading(true);
     getTasksByRange(start, end)
       .then(tasks => {
+        
         dispatch({ type: 'getTasks', tasks });
       })
       .catch(error => {})

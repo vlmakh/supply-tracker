@@ -108,7 +108,7 @@ export const getTasksByRange = async (startDate, endDate) => {
     const response = await axios.get(
       `api/tasks/range?startDate=${formatDateRequest(
         startDate
-      )}&endDate=${endDate}`
+      )}&endDate=${formatDateRequest(endDate)}T23:59:00.000Z`
     );
 
     return response.data;
