@@ -12,7 +12,12 @@ export const formatDateUTC = date => {
   if (date) {
     const result = date.split('T')[0].split('-').reverse().join('.');
 
-    // console.log(result);
     return result;
+  }
+};
+
+export const formatDateRequest = date => {
+  if (date) {
+    return format(Date.parse(date), 'yyyy-MM-dd');
   }
 };

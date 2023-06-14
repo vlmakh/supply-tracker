@@ -8,7 +8,7 @@ import { checkCurrentUser } from 'utils/operations';
 import { Toaster } from 'react-hot-toast';
 import Modal from 'components/Modal/Modal';
 import { Loader } from 'components/Loader/Loader';
-import { getTasks } from 'utils/operations';
+import { getTasks, getTasksByRange } from 'utils/operations';
 import { TaskContext } from 'utils/context';
 
 const HomePage = lazy(() => import('pages/HomePage'));
@@ -28,6 +28,9 @@ export const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [tasks, dispatch] = useReducer(reducer, []);
+
+  const [startDate, setStartDate] = useState(new Date()); //по умолч 1е число текущего месяца
+  const [endDate, setEndDate] = useState(new Date());  // по умолч сегодня
 
   useEffect(() => {
     checkCurrentUser(token)
@@ -61,6 +64,18 @@ export const App = () => {
       });
   }, [isLoggedIn]);
 
+  const hadleGetTasksByRange = (start, end) => {
+    setIsLoading(true);
+    getTasksByRange(start, end)
+      .then(tasks => {
+        dispatch({ type: 'getTasks', tasks });
+      })
+      .catch(error => {})
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <TaskContext.Provider value={{ dispatch, tasks, isLoading, setIsLoading }}>
@@ -72,8 +87,12 @@ export const App = () => {
                 user={user}
                 email={email}
                 setIsLoggedIn={setIsLoggedIn}
-                setToken={setToken}
                 isLoggedIn={isLoggedIn}
+                startDate={startDate}
+                setStartDate={setStartDate}
+                endDate={endDate}
+                setEndDate={setEndDate}
+                hadleGetTasksByRange={hadleGetTasksByRange}
               />
             }
           >

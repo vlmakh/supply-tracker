@@ -16,10 +16,26 @@ import { formatDate } from 'utils/formatDate';
 import { logout } from 'utils/operations';
 import { TaskContext } from 'utils/context';
 import { IoMdLogOut } from 'react-icons/io';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { Box } from 'components/Base/Box';
 
-export const SharedLayout = ({ user, isLoggedIn, setIsLoggedIn }) => {
+export const SharedLayout = ({
+  user,
+  isLoggedIn,
+  setIsLoggedIn,
+  startDate,
+  setStartDate,
+  endDate,
+  setEndDate,
+  hadleGetTasksByRange,
+}) => {
   const { tasks } = useContext(TaskContext);
   const today = new Date();
+
+  const handleApplyRange = () => {
+    hadleGetTasksByRange(startDate, endDate);
+  };
 
   const calcCompleted = array => {
     if (array.length) {
@@ -45,6 +61,30 @@ export const SharedLayout = ({ user, isLoggedIn, setIsLoggedIn }) => {
                 </TaskCalc>
               )}
               <DateToday>{formatDate(today)}</DateToday>
+
+              <Box display="flex">
+                <DatePicker
+                  dateFormat="dd.MM.yyyy"
+                  selected={startDate}
+                  onChange={date => setStartDate(date)}
+                  selectsStart
+                  startDate={startDate}
+                  endDate={endDate}
+                />
+                <DatePicker
+                  dateFormat="dd.MM.yyyy"
+                  selected={endDate}
+                  onChange={date => setEndDate(date)}
+                  selectsEnd
+                  startDate={startDate}
+                  endDate={endDate}
+                  minDate={startDate}
+                />
+
+                <button type="button" onClick={handleApplyRange}>
+                  Apply
+                </button>
+              </Box>
 
               <Logout to="/" onClick={handleLogout}>
                 {user}
