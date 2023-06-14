@@ -1,5 +1,5 @@
 import { FormStyled, FormTitle } from './FormTask.styled';
-import { useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Formik } from 'formik';
 import { IoClose } from 'react-icons/io5';
 import { CloseButton, AddTaskFormButton } from 'components/Base/Buttons.styled';
@@ -8,6 +8,8 @@ import { updateTask } from 'utils/operations';
 import { TaskContext } from 'utils/context';
 
 export const FormTaskEdit = ({ handleEditTask, task }) => {
+  const [dateOrder, setDateOrder] = useState(new Date());
+
   const { dispatch } = useContext(TaskContext);
 
   useEffect(() => {
@@ -19,7 +21,7 @@ export const FormTaskEdit = ({ handleEditTask, task }) => {
   });
 
   const handleSubmit = newTask => {
-    updateTask(task._id, newTask)
+    updateTask(task._id, { ...newTask, dateOrder })
       .then(data => {
         dispatch({ type: 'editTask', newTask: data, taskId: task._id });
 
@@ -41,7 +43,7 @@ export const FormTaskEdit = ({ handleEditTask, task }) => {
         name: task.name,
         qty: task.qty,
         unit: task.unit,
-        dateOrder: task.dateOrder,
+        dateOrder,
         supplier: task.supplier,
         dateInvoice: task.dateInvoice,
         datePayment: task.datePayment,
@@ -58,7 +60,7 @@ export const FormTaskEdit = ({ handleEditTask, task }) => {
 
         <FormTitle>Edit task</FormTitle>
 
-        <FormCommon />
+        <FormCommon dateOrder={dateOrder} setDateOrder={setDateOrder} />
 
         <AddTaskFormButton type="submit">Save</AddTaskFormButton>
       </FormStyled>

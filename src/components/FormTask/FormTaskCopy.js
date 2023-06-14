@@ -1,6 +1,6 @@
 import { FormStyled, FormTitle } from './FormTask.styled';
 import { formatDate } from 'utils/formatDate';
-import { useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Formik } from 'formik';
 import { IoClose } from 'react-icons/io5';
 import { CloseButton, AddTaskFormButton } from 'components/Base/Buttons.styled';
@@ -10,6 +10,7 @@ import { addTask } from 'utils/operations';
 import { TaskContext } from 'utils/context';
 
 export const FormTaskCopy = ({ handleCopyTask, task }) => {
+  const [dateOrder, setDateOrder] = useState(new Date());
   const { dispatch } = useContext(TaskContext);
 
   useEffect(() => {
@@ -21,7 +22,7 @@ export const FormTaskCopy = ({ handleCopyTask, task }) => {
   });
 
   const handleSubmit = newTask => {
-    addTask(newTask)
+    addTask({ ...newTask, dateOrder })
       .then(data => {
         if (data._id) {
           handleCopyTask();
@@ -51,7 +52,7 @@ export const FormTaskCopy = ({ handleCopyTask, task }) => {
         name: task.name,
         qty: task.qty,
         unit: task.unit,
-        dateOrder: formatDate(today),
+        dateOrder,
         supplier: task.supplier,
         dateInvoice: formatDate(dateInvoice),
         datePayment: formatDate(datePayment),
@@ -69,7 +70,7 @@ export const FormTaskCopy = ({ handleCopyTask, task }) => {
 
         <FormTitle>Add new task</FormTitle>
 
-        <FormCommon />
+        <FormCommon dateOrder={dateOrder} setDateOrder={setDateOrder} />
 
         <AddTaskFormButton type="submit">Add</AddTaskFormButton>
       </FormStyled>

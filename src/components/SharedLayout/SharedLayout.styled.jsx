@@ -15,23 +15,23 @@ export const Header = styled.div`
   top: 0;
   z-index: 100;
   width: 100%;
-  height: ${p => p.theme.space[5]}px;
-  padding: 8px 0 4px;
+  padding: 4px 0;
   background-color: white;
 `;
 
 export const Green = styled.span`
+  min-width: 24px;
+  display: inline-flex;
+  justify-content: center;
   border-radius: 50%;
   background-color: green;
   color: white;
-  padding: 2px;
+  padding: 2px 0;
 `;
 
-export const Nav = styled.nav`
-  display: flex;
-  align-items: center;
-  height: 100%;
-  gap: ${p => p.theme.space[4]}px;
+export const TaskCalc = styled.div`
+  font-weight: 700;
+  width: 60px;
 `;
 
 export const DateToday = styled.p`

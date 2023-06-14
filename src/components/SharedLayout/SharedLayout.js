@@ -4,6 +4,7 @@ import {
   Layout,
   Header,
   DateToday,
+  TaskCalc,
   Footer,
   MyLink,
   Green,
@@ -39,11 +40,9 @@ export const SharedLayout = ({ user, isLoggedIn, setIsLoggedIn }) => {
           {isLoggedIn && (
             <>
               {tasks && (
-                <p>
-                  <b>
-                    {tasks.length} / <Green>{calcCompleted(tasks)} </Green>
-                  </b>
-                </p>
+                <TaskCalc>
+                  {tasks.length} / <Green>{calcCompleted(tasks)} </Green>
+                </TaskCalc>
               )}
               <DateToday>{formatDate(today)}</DateToday>
 
