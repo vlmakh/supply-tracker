@@ -20,9 +20,9 @@ export default function Modal({ onClose, children }) {
   };
 
   const handleBackdrop = event => {
-    if (event.currentTarget === event.target) {
-      onClose();
-    }
+    // if (event.currentTarget === event.target) {
+    //   onClose();
+    // }
   };
 
   return createPortal(
