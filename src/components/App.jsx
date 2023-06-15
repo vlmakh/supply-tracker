@@ -17,14 +17,12 @@ const Signup = lazy(() => import('components/Signup/Signup'));
 const TaskPage = lazy(() => import('pages/TasksPage'));
 const ErrorPage = lazy(() => import('pages/ErrorPage'));
 
-const startData = { token: null };
 const savedData = JSON.parse(localStorage.getItem('splmgr'));
 
 export const App = () => {
-  const [data, setData] = useState(savedData ?? startData);
-  const [user, setUser] = useState(data.user ?? null);
-  const [email, setEmail] = useState(data.email ?? null);
-  const [token, setToken] = useState(data.token);
+  const [user, setUser] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [token, setToken] = useState(savedData ?? null);
   const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [tasks, dispatch] = useReducer(reducer, []);
@@ -49,13 +47,10 @@ export const App = () => {
   });
 
   useEffect(() => {
-    setData({ token });
+    setToken(token);
     setIsLoading(false);
+    localStorage.setItem('splmgr', JSON.stringify(token))
   }, [token]);
-
-  useEffect(() => {
-    localStorage.setItem('splmgr', JSON.stringify(data));
-  }, [data]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -98,6 +93,7 @@ export const App = () => {
                 endDate={endDate}
                 setEndDate={setEndDate}
                 hadleGetTasksByRange={hadleGetTasksByRange}
+                setToken={setToken}
               />
             }
           >

@@ -30,6 +30,7 @@ export const SharedLayout = ({
   endDate,
   setEndDate,
   hadleGetTasksByRange,
+  setToken,
 }) => {
   const { tasks } = useContext(TaskContext);
   const today = new Date();
@@ -49,6 +50,7 @@ export const SharedLayout = ({
   const handleLogout = () => {
     logout().then(() => {
       setIsLoggedIn(false);
+      setToken(null);
     });
   };
 
