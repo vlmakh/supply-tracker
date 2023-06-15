@@ -18,7 +18,7 @@ const TaskPage = lazy(() => import('pages/TasksPage'));
 const ErrorPage = lazy(() => import('pages/ErrorPage'));
 
 const startData = { token: null };
-const savedData = JSON.parse(localStorage.getItem('taskmgr'));
+const savedData = JSON.parse(localStorage.getItem('splmgr'));
 
 export const App = () => {
   const [data, setData] = useState(savedData ?? startData);
@@ -29,8 +29,13 @@ export const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [tasks, dispatch] = useReducer(reducer, []);
 
-  const [startDate, setStartDate] = useState(new Date()); //по умолч 1е число текущего месяца
-  const [endDate, setEndDate] = useState(new Date());  // по умолч сегодня
+  const today = new Date()
+  const getYear = today.getFullYear(); 
+  const getMonth = today.getMonth(); 
+  const firstOfMonth = new Date(getYear, getMonth, 1);
+
+  const [startDate, setStartDate] = useState(firstOfMonth); 
+  const [endDate, setEndDate] = useState(today);
 
   useEffect(() => {
     checkCurrentUser(token)
@@ -49,7 +54,7 @@ export const App = () => {
   }, [token]);
 
   useEffect(() => {
-    localStorage.setItem('taskmgr', JSON.stringify(data));
+    localStorage.setItem('splmgr', JSON.stringify(data));
   }, [data]);
 
   useEffect(() => {
