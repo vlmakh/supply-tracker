@@ -7,10 +7,10 @@ export const reducer = (tasks, action) => {
       return action.tasks;
 
     case 'addTask':
-      const newTask = {
-        ...action.newTask,
-      };
-      return [...tasks, newTask];
+      // const newTask = {
+      //   ...action.newTask,
+      // };
+      return [...tasks, action.newTask];
 
     case 'deleteTask':
       return tasks.filter(task => task._id !== action.taskId);
