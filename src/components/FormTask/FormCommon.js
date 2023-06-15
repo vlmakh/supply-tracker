@@ -18,6 +18,7 @@ export const FormCommon = ({ dateOrder, setDateOrder }) => {
   //     <DatePickerStyled
   //       dateFormat="dd.MM.yyyy"
   //       {...field}
+  //       {...props}
   //       selected={field.value}
   //       onChange={val => form.setFieldValue(field.name, val)}
   //     />
