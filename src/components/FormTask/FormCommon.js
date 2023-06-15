@@ -3,7 +3,7 @@ import {
   Input,
   Qty,
   Unit,
-  DateInput,
+  // DateInput,
   Comments,
   FormField,
   ErrorStyled,
@@ -12,7 +12,18 @@ import {
 import { Field } from 'formik';
 import 'react-datepicker/dist/react-datepicker.css';
 
-export const FormCommon = ({ dateOrder, setDateOrder }) => {
+export const FormCommon = ({
+  dateOrder,
+  setDateOrder,
+  dateInvoice,
+  setDateInvoice,
+  datePayment,
+  setDatePayment,
+  dateETD,
+  setDateETD,
+  dateETA,
+  setDateETA,
+}) => {
   // const DatepickerField = ({ field, form, ...props }) => (
   //   <div>
   //     <DatePickerStyled
@@ -70,12 +81,32 @@ export const FormCommon = ({ dateOrder, setDateOrder }) => {
 
       <FormField>
         <FieldName>Invoice</FieldName>
-        <DateInput type="text" name="dateInvoice"></DateInput>
+        <Field type="text" name="dateInvoice">
+          {() => (
+            <div>
+              <DatePickerStyled
+                dateFormat="dd.MM.yyyy"
+                selected={dateInvoice}
+                onChange={date => setDateInvoice(date)}
+              />
+            </div>
+          )}
+        </Field>
       </FormField>
 
       <FormField>
         <FieldName>Payment</FieldName>
-        <DateInput type="text" name="datePayment"></DateInput>
+        <Field type="text" name="datePayment">
+          {() => (
+            <div>
+              <DatePickerStyled
+                dateFormat="dd.MM.yyyy"
+                selected={datePayment}
+                onChange={date => setDatePayment(date)}
+              />
+            </div>
+          )}
+        </Field>
       </FormField>
 
       <FormField>
@@ -92,12 +123,32 @@ export const FormCommon = ({ dateOrder, setDateOrder }) => {
 
       <FormField>
         <FieldName>ETD</FieldName>
-        <DateInput type="text" name="dateETD"></DateInput>
+        <Field type="text" name="dateETD">
+          {() => (
+            <div>
+              <DatePickerStyled
+                dateFormat="dd.MM.yyyy"
+                selected={dateETD}
+                onChange={date => setDateETD(date)}
+              />
+            </div>
+          )}
+        </Field>
       </FormField>
 
       <FormField>
         <FieldName>ETA</FieldName>
-        <DateInput type="text" name="dateETA"></DateInput>
+        <Field type="text" name="dateETA">
+          {() => (
+            <div>
+              <DatePickerStyled
+                dateFormat="dd.MM.yyyy"
+                selected={dateETA}
+                onChange={date => setDateETA(date)}
+              />
+            </div>
+          )}
+        </Field>
         <ErrorStyled component="div" name="dateETA" />
       </FormField>
 

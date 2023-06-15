@@ -1,5 +1,5 @@
 import { FormStyled, FormTitle } from './FormTask.styled';
-import { formatDate } from 'utils/formatDate';
+// import { formatDate } from 'utils/formatDate';
 import { useState, useEffect } from 'react';
 import { Formik } from 'formik';
 import { IoClose } from 'react-icons/io5';
@@ -8,7 +8,26 @@ import { schema } from './yupSchema';
 import { FormCommon } from './FormCommon';
 
 export const FormTaskAdd = ({ handleModal, handleAddTask }) => {
-  const [dateOrder, setDateOrder] = useState(new Date());
+  const today = new Date();
+  // const dateInvoice = new Date(today.getTime() + 86_400_000);
+  // const datePayment = new Date(today.getTime() + 2 * 86_400_000);
+  // const dateETD = new Date(today.getTime() + 3 * 86_400_000);
+  // const dateETA = new Date(today.getTime() + 4 * 86_400_000);
+
+  const [dateOrder, setDateOrder] = useState(today);
+  const [dateInvoice, setDateInvoice] = useState(today.getTime() + 86_400_000);
+  const [datePayment, setDatePayment] = useState(
+    today.getTime() + 2 * 86_400_000
+  );
+  const [dateETD, setDateETD] = useState(today.getTime() + 3 * 86_400_000);
+  const [dateETA, setDateETA] = useState(today.getTime() + 4 * 86_400_000);
+  // const [formDate, setFormDate] = useState({
+  //   dateOrder: today,
+  //   dateInvoice,
+  //   datePayment,
+  //   dateETD,
+  //   dateETA,
+  // });
 
   useEffect(() => {
     window.addEventListener('keydown', handleEscape);
@@ -19,8 +38,11 @@ export const FormTaskAdd = ({ handleModal, handleAddTask }) => {
   });
 
   const handleSubmit = (newTask, { resetForm }) => {
-    // console.log(newTask);
-    handleAddTask({ ...newTask, dateOrder }, resetForm);
+    // console.log({...newTask, dateOrder, dateInvoice, datePayment, dateETD, dateETA });
+    handleAddTask(
+      { ...newTask, dateOrder, dateInvoice, datePayment, dateETD, dateETA },
+      resetForm
+    );
   };
 
   const handleEscape = event => {
@@ -28,12 +50,6 @@ export const FormTaskAdd = ({ handleModal, handleAddTask }) => {
       handleModal();
     }
   };
-
-  const today = new Date();
-  const dateInvoice = new Date(today.getTime() + 86_400_000);
-  const datePayment = new Date(today.getTime() + 2 * 86_400_000);
-  const dateETD = new Date(today.getTime() + 3 * 86_400_000);
-  const dateETA = new Date(today.getTime() + 4 * 86_400_000);
 
   return (
     <Formik
@@ -44,11 +60,11 @@ export const FormTaskAdd = ({ handleModal, handleAddTask }) => {
         unit: 'pcs',
         dateOrder,
         supplier: '-',
-        dateInvoice: formatDate(dateInvoice),
-        datePayment: formatDate(datePayment),
+        dateInvoice,
+        datePayment,
         freight: 'Nova poshta',
-        dateETD: formatDate(dateETD),
-        dateETA: formatDate(dateETA),
+        dateETD,
+        dateETA,
         comments: '-',
       }}
       validationSchema={schema}
@@ -60,7 +76,18 @@ export const FormTaskAdd = ({ handleModal, handleAddTask }) => {
 
         <FormTitle>Add new task</FormTitle>
 
-        <FormCommon dateOrder={dateOrder} setDateOrder={setDateOrder} />
+        <FormCommon
+          dateOrder={dateOrder}
+          setDateOrder={setDateOrder}
+          dateInvoice={dateInvoice}
+          setDateInvoice={setDateInvoice}
+          datePayment={datePayment}
+          setDatePayment={setDatePayment}
+          dateETD={dateETD}
+          setDateETD={setDateETD}
+          dateETA={dateETA}
+          setDateETA={setDateETA}
+        />
 
         <AddTaskFormButton type="submit">Add</AddTaskFormButton>
       </FormStyled>

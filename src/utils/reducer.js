@@ -7,6 +7,7 @@ export const reducer = (tasks, action) => {
       return action.tasks;
 
     case 'addTask':
+      console.log(action.newTask);
       return [...tasks, action.newTask];
 
     case 'deleteTask':

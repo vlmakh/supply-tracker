@@ -19,6 +19,6 @@ export const ModalWindow = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   max-height: calc(100vh - 24px);
-  overflow-y: clip;
+  /* overflow-y: clip; */
   overflow-x: visible;
 `;
