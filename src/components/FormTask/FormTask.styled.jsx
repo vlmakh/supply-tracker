@@ -63,7 +63,7 @@ export const DateInput = styled(Field)`
 
 export const DatePickerStyled = styled(DatePicker)`
   padding: 4px;
-  width: 100px;
+  width: 80px;
 `;
 
 export const Comments = styled(Field)`

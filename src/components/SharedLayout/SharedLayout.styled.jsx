@@ -36,7 +36,21 @@ export const TaskCalc = styled.div`
 
 export const DateToday = styled.p`
   font-weight: 700;
+
+  @media screen and (max-width: 767.98px) {
+    display: none;
+  }
 `;
+
+export const UserName = styled.span`
+  text-decoration: none;
+  color: #212121;
+  font-weight: 700;
+
+  @media screen and (max-width: 767.98px) {
+    display: none;
+  }
+`
 
 export const Footer = styled.div`
   display: flex;

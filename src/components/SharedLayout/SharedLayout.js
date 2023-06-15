@@ -8,16 +8,17 @@ import {
   Footer,
   MyLink,
   Green,
+  UserName,
   Logout,
 } from './SharedLayout.styled';
-// import { DatePickerStyled } from 'components/FormTask/FormTask.styled';
+import { DatePickerStyled } from 'components/FormTask/FormTask.styled';
 import { Container } from 'components/Container/Container.styled';
 import { LogoVM } from 'components/LogoVM/LogoVM';
 import { formatDate } from 'utils/formatDate';
 import { logout } from 'utils/operations';
 import { TaskContext } from 'utils/context';
 import { IoMdLogOut } from 'react-icons/io';
-import DatePicker from 'react-datepicker';
+// import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Box } from 'components/Base/Box';
 
@@ -68,7 +69,7 @@ export const SharedLayout = ({
               <DateToday>{formatDate(today)}</DateToday>
 
               <Box display="flex">
-                <DatePicker
+                <DatePickerStyled
                   dateFormat="dd.MM.yyyy"
                   selected={startDate}
                   onChange={date => setStartDate(date)}
@@ -76,7 +77,7 @@ export const SharedLayout = ({
                   startDate={startDate}
                   endDate={endDate}
                 />
-                <DatePicker
+                <DatePickerStyled
                   dateFormat="dd.MM.yyyy"
                   selected={endDate}
                   onChange={date => setEndDate(date)}
@@ -92,7 +93,7 @@ export const SharedLayout = ({
               </Box>
 
               <Logout to="/" onClick={handleLogout}>
-                {user}
+                <UserName>{user}</UserName>
                 <IoMdLogOut size="18" />
               </Logout>
             </>
