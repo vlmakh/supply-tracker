@@ -91,9 +91,9 @@ export const TaskItem = ({ task, idx }) => {
           </TDButton>
         </Name>
 
-        <Qty>{task.qty} </Qty>
+        <Qty>{task.qty}</Qty>
 
-        <td> pcs</td>
+        <td>{task.unit}</td>
 
         <Data today={task.dateOrder}>{formatDateUTC(task.dateOrder)} </Data>
 
