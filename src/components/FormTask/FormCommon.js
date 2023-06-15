@@ -13,13 +13,13 @@ import { Field } from 'formik';
 import 'react-datepicker/dist/react-datepicker.css';
 
 export const FormCommon = ({ dateOrder, setDateOrder }) => {
-  // const DatepickerField = ({ field }) => (
+  // const DatepickerField = ({ field, form, ...props }) => (
   //   <div>
-  //     <DatePicker
+  //     <DatePickerStyled
   //       dateFormat="dd.MM.yyyy"
   //       {...field}
-  //       selected={dateOrder}
-  //       onChange={date => setDateOrder(date)}
+  //       selected={field.value}
+  //       onChange={val => form.setFieldValue(field.name, val)}
   //     />
   //   </div>
   // );
