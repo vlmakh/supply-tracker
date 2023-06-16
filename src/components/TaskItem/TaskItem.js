@@ -38,6 +38,11 @@ export const TaskItem = ({ task, idx }) => {
   };
 
   const handleCompleteTask = (id, status) => {
+    if (task.dateETA < task.dateOrder) {
+      alert('ETA date must be later than order date');
+      return;
+    }
+
     updateTaskStatus(id, status)
       .then(data => {
         setStatus(!status);
