@@ -3,7 +3,6 @@ import {
   Input,
   Qty,
   Unit,
-  // DateInput,
   Comments,
   FormField,
   ErrorStyled,
@@ -90,6 +89,7 @@ export const FormCommon = ({
                 selected={dateInvoice}
                 onChange={date => setDateInvoice(date)}
                 calendarStartDay={1}
+                autoComplete="off"
               />
             </div>
           )}

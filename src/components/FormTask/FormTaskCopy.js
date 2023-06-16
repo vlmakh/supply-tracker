@@ -58,12 +58,6 @@ export const FormTaskCopy = ({ handleCopyTask, task }) => {
     }
   };
 
-  // const today = new Date();
-  // const dateInvoice = new Date(today.getTime() + 86_400_000);
-  // const datePayment = new Date(today.getTime() + 2 * 86_400_000);
-  // const dateETD = new Date(today.getTime() + 3 * 86_400_000);
-  // const dateETA = new Date(today.getTime() + 4 * 86_400_000);
-
   return (
     <Formik
       onSubmit={handleSubmit}

@@ -18,9 +18,11 @@ export default function TaskPage({ isLoggedIn }) {
   };
 
   const handleAddTask = newTask => {
+    // console.log('send:', newTask);
     setIsLoading(true);
     addTask(newTask)
       .then(data => {
+        // console.log('return:', data);
         if (data._id) {
           setShowFormTaskAdd(!showFormTaskAdd);
           dispatch({ type: 'addTask', newTask: data });

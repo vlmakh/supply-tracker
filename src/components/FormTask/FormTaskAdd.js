@@ -9,10 +9,6 @@ import { FormCommon } from './FormCommon';
 
 export const FormTaskAdd = ({ handleModal, handleAddTask }) => {
   const today = new Date();
-  // const dateInvoice = new Date(today.getTime() + 86_400_000);
-  // const datePayment = new Date(today.getTime() + 2 * 86_400_000);
-  // const dateETD = new Date(today.getTime() + 3 * 86_400_000);
-  // const dateETA = new Date(today.getTime() + 4 * 86_400_000);
 
   const [dateOrder, setDateOrder] = useState(today);
   const [dateInvoice, setDateInvoice] = useState(today.getTime() + 86_400_000);
@@ -21,13 +17,6 @@ export const FormTaskAdd = ({ handleModal, handleAddTask }) => {
   );
   const [dateETD, setDateETD] = useState(today.getTime() + 3 * 86_400_000);
   const [dateETA, setDateETA] = useState(today.getTime() + 4 * 86_400_000);
-  // const [formDate, setFormDate] = useState({
-  //   dateOrder: today,
-  //   dateInvoice,
-  //   datePayment,
-  //   dateETD,
-  //   dateETA,
-  // });
 
   useEffect(() => {
     window.addEventListener('keydown', handleEscape);
@@ -38,7 +27,6 @@ export const FormTaskAdd = ({ handleModal, handleAddTask }) => {
   });
 
   const handleSubmit = (newTask, { resetForm }) => {
-    // console.log({...newTask, dateOrder, dateInvoice, datePayment, dateETD, dateETA });
     handleAddTask(
       { ...newTask, dateOrder, dateInvoice, datePayment, dateETD, dateETA },
       resetForm

@@ -75,7 +75,7 @@ export const Comment = styled.td`
   min-width: 100px;
 
   @media screen and (max-width: 1199.98px) {
-    display: none;
+    display: none;  
   }
 `;
 
