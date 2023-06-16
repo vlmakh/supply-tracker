@@ -149,7 +149,6 @@ export const FormCommon = ({
             </div>
           )}
         </Field>
-        <ErrorStyled component="div" name="dateETA" />
       </FormField>
 
       <FormField>
