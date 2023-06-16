@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import { Suspense, useContext } from 'react';
+import { Suspense, useContext, useState } from 'react';
 import {
   Layout,
   Header,
@@ -8,8 +8,6 @@ import {
   Footer,
   MyLink,
   Green,
-  UserName,
-  Logout,
 } from './SharedLayout.styled';
 import { DatePickerStyled } from 'components/FormTask/FormTask.styled';
 import { Container } from 'components/Container/Container.styled';
@@ -17,10 +15,11 @@ import { LogoVM } from 'components/LogoVM/LogoVM';
 import { formatDate } from 'utils/formatDate';
 import { logout } from 'utils/operations';
 import { TaskContext } from 'utils/context';
-import { IoMdLogOut } from 'react-icons/io';
-// import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Box } from 'components/Base/Box';
+import { UserMenu } from 'components/UserMenu/UserMenu';
+import { HiOutlineUserCircle } from 'react-icons/hi';
+import { UserMenuBtn } from 'components/Base/Buttons.styled';
 
 export const SharedLayout = ({
   user,
@@ -34,10 +33,15 @@ export const SharedLayout = ({
   setToken,
 }) => {
   const { tasks, setIsLoading } = useContext(TaskContext);
+  const [showUserMenu, setShowUserMenu] = useState(false);
   const today = new Date();
 
   const handleApplyRange = () => {
     hadleGetTasksByRange(startDate, endDate);
+  };
+
+  const handleShowUserMenu = () => {
+    setShowUserMenu(!showUserMenu);
   };
 
   const calcCompleted = array => {
@@ -96,10 +100,11 @@ export const SharedLayout = ({
                 </button>
               </Box>
 
-              <Logout to="/" onClick={handleLogout}>
-                <UserName>{user}</UserName>
-                <IoMdLogOut size="18" />
-              </Logout>
+              <UserMenuBtn type="button" onClick={handleShowUserMenu}>
+                <HiOutlineUserCircle size="24" />
+              </UserMenuBtn>
+
+              {showUserMenu && <UserMenu handleLogout={handleLogout} />}
             </>
           )}
         </Container>

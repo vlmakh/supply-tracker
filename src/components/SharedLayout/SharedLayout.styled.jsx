@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { NavLink } from 'react-router-dom';
 
 export const Layout = styled.div`
   display: grid;
@@ -42,16 +41,6 @@ export const DateToday = styled.p`
   }
 `;
 
-export const UserName = styled.span`
-  text-decoration: none;
-  color: #212121;
-  font-weight: 700;
-
-  @media screen and (max-width: 767.98px) {
-    display: none;
-  }
-`
-
 export const Footer = styled.div`
   display: flex;
   align-items: center;
@@ -80,8 +69,3 @@ export const MyLink = styled.a`
   }
 `;
 
-export const Logout = styled(NavLink)`
-  display: flex;
-  gap: 8px;
-  align-items: center;
-`;

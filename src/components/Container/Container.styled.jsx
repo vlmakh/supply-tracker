@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 export const Container = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
