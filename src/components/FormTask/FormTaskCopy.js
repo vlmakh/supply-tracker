@@ -29,7 +29,7 @@ export const FormTaskCopy = ({ handleCopyTask, task }) => {
   });
 
   const handleSubmit = newTask => {
-    console.log('send:', newTask);
+    // console.log('send:', newTask);
     setIsLoading(true);
     addTask({
       ...newTask,
@@ -40,7 +40,7 @@ export const FormTaskCopy = ({ handleCopyTask, task }) => {
       dateETA,
     })
       .then(data => {
-        console.log('return:', data);
+        // console.log('return:', data);
 
         if (data._id) {
           handleCopyTask();

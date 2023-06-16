@@ -26,7 +26,7 @@ export const FormTaskEdit = ({ handleEditTask, task }) => {
 
   const handleSubmit = newTask => {
     setIsLoading(true);
-    console.log('send:', newTask);
+    // console.log('send:', newTask);
     updateTask(task._id, {
       ...newTask,
       dateOrder,
@@ -36,7 +36,7 @@ export const FormTaskEdit = ({ handleEditTask, task }) => {
       dateETA,
     })
       .then(data => {
-        console.log('return:', data);
+        // console.log('return:', data);
         dispatch({ type: 'editTask', newTask: data, taskId: task._id });
 
         handleEditTask();
