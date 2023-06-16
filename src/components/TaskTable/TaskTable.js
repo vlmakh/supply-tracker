@@ -20,11 +20,11 @@ export const TaskTable = () => {
           <THTablet>Supplier</THTablet>
           <THDesktop>Invoice</THDesktop>
           <THDesktop>Payment</THDesktop>
-          <THDesktop>Freight</THDesktop>
+          <THTablet>Freight</THTablet>
           <THDesktop>ETD</THDesktop>
-          <THTablet>ETA</THTablet>
+          <THDesktop>ETA</THDesktop>
           <THDesktop>Comments</THDesktop>
-          <th></th>
+          <THDesktop></THDesktop>
         </tr>
       </thead>
 

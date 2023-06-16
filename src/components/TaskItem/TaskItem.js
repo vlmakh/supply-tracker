@@ -6,10 +6,12 @@ import {
   Btn,
   Name,
   Qty,
+  Unit,
   Data,
   Supplier,
-  Info,
   Freight,
+  Comment,
+  BtnDel,
 } from './TaskItem.styled';
 import { useState, useContext } from 'react';
 import { updateTaskStatus, deleteTask } from 'utils/operations';
@@ -97,7 +99,7 @@ export const TaskItem = ({ task, idx }) => {
 
         <Qty>{task.qty}</Qty>
 
-        <td>{task.unit}</td>
+        <Unit>{task.unit}</Unit>
 
         <Data today={task.dateOrder} completed={status}>
           {formatDateUTC(task.dateOrder)}
@@ -123,13 +125,13 @@ export const TaskItem = ({ task, idx }) => {
           {formatDateUTC(task.dateETA)}
         </Data>
 
-        <Info> {formatSupplier(task.comments)} </Info>
+        <Comment> {formatSupplier(task.comments)} </Comment>
 
-        <Btn>
+        <BtnDel>
           <TDButton type="button" onClick={() => handleDelete(task._id)}>
             <MdDeleteOutline size="18" />
           </TDButton>
-        </Btn>
+        </BtnDel>
       </Task>
 
       {showFormTaskEdit && (

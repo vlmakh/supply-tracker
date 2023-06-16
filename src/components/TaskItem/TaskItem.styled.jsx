@@ -40,8 +40,12 @@ export const Qty = styled.td`
   text-align: right;
 `;
 
+export const Unit = styled.td`
+  width: 24px;
+`;
+
 export const Supplier = styled.td`
-  width: 100px;
+  min-width: 160px;
 
   @media screen and (max-width: 767.98px) {
     display: none;
@@ -52,7 +56,7 @@ export const Freight = styled.td`
   width: 100px;
   text-align: center;
 
-  @media screen and (max-width: 1199.98px) {
+  @media screen and (max-width: 767.98px) {
     display: none;
   }
 `;
@@ -67,7 +71,7 @@ export const Data = styled.td`
   }
 `;
 
-export const Info = styled.td`
+export const Comment = styled.td`
   min-width: 100px;
 
   @media screen and (max-width: 1199.98px) {
@@ -77,6 +81,14 @@ export const Info = styled.td`
 
 export const Days = styled.td`
   text-align: center;
+
+  @media screen and (max-width: 1199.98px) {
+    display: none;
+  }
+`;
+
+export const BtnDel = styled.td`
+  width: 24px;
 
   @media screen and (max-width: 1199.98px) {
     display: none;
