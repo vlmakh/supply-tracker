@@ -60,18 +60,9 @@ export const Freight = styled.td`
 export const Data = styled.td`
   width: 72px;
   font-weight: 700;
-  color: ${p => formatDateUTC(p.today) === today && 'blue'};
-
-  @media screen and (max-width: 1199.98px) {
-    display: none;
-  }
-`;
-
-export const DataETA = styled.td`
-  font-weight: 700;
   color: ${p => !p.completed && formatDateUTC(p.today) === today && 'blue'};
 
-  @media screen and (max-width: 767.98px) {
+  @media screen and (max-width: 1199.98px) {
     display: none;
   }
 `;

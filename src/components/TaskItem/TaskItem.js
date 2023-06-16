@@ -8,7 +8,6 @@ import {
   Qty,
   Data,
   Supplier,
-  DataETA,
   Info,
   Freight,
 } from './TaskItem.styled';
@@ -100,21 +99,29 @@ export const TaskItem = ({ task, idx }) => {
 
         <td>{task.unit}</td>
 
-        <Data today={task.dateOrder}>{formatDateUTC(task.dateOrder)} </Data>
+        <Data today={task.dateOrder} completed={status}>
+          {formatDateUTC(task.dateOrder)}
+        </Data>
 
         <Supplier> {formatSupplier(task.supplier)}</Supplier>
 
-        <Data today={task.dateInvoice}>{formatDateUTC(task.dateInvoice)} </Data>
+        <Data today={task.dateInvoice} completed={status}>
+          {formatDateUTC(task.dateInvoice)}
+        </Data>
 
-        <Data today={task.datePayment}>{formatDateUTC(task.datePayment)} </Data>
+        <Data today={task.datePayment} completed={status}>
+          {formatDateUTC(task.datePayment)}{' '}
+        </Data>
 
         <Freight>{task.freight}</Freight>
 
-        <Data today={task.dateETD}> {formatDateUTC(task.dateETD)}</Data>
+        <Data today={task.dateETD} completed={status}>
+          {formatDateUTC(task.dateETD)}
+        </Data>
 
-        <DataETA today={task.dateETA} completed={status}>
+        <Data today={task.dateETA} completed={status}>
           {formatDateUTC(task.dateETA)}
-        </DataETA>
+        </Data>
 
         <Info> {formatSupplier(task.comments)} </Info>
 
