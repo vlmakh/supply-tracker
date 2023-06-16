@@ -67,6 +67,7 @@ export const FormCommon = ({
                 {...field}
                 selected={dateOrder}
                 onChange={date => setDateOrder(date)}
+                calendarStartDay={1}
               />
             </div>
           )}
@@ -88,6 +89,7 @@ export const FormCommon = ({
                 dateFormat="dd.MM.yyyy"
                 selected={dateInvoice}
                 onChange={date => setDateInvoice(date)}
+                calendarStartDay={1}
               />
             </div>
           )}
@@ -103,6 +105,7 @@ export const FormCommon = ({
                 dateFormat="dd.MM.yyyy"
                 selected={datePayment}
                 onChange={date => setDatePayment(date)}
+                calendarStartDay={1}
               />
             </div>
           )}
@@ -130,6 +133,7 @@ export const FormCommon = ({
                 dateFormat="dd.MM.yyyy"
                 selected={dateETD}
                 onChange={date => setDateETD(date)}
+                calendarStartDay={1}
               />
             </div>
           )}
@@ -146,6 +150,7 @@ export const FormCommon = ({
                 dateFormat="dd.MM.yyyy"
                 selected={dateETA}
                 onChange={date => setDateETA(date)}
+                calendarStartDay={1}
               />
             </div>
           )}
