@@ -38,6 +38,11 @@ export const TaskItem = ({ task, idx }) => {
   };
 
   const handleCompleteTask = (id, status) => {
+    if (task.dateETA < task.dateOrder) {
+      alert('ETA date must be later than order date');
+      return;
+    }
+
     updateTaskStatus(id, status)
       .then(data => {
         setStatus(!status);
@@ -99,16 +104,16 @@ export const TaskItem = ({ task, idx }) => {
 
         <Supplier> {formatSupplier(task.supplier)}</Supplier>
 
-        <Data today={task.dateInvoice}>{task.dateInvoice} </Data>
+        <Data today={task.dateInvoice}>{formatDateUTC(task.dateInvoice)} </Data>
 
-        <Data today={task.datePayment}>{task.datePayment} </Data>
+        <Data today={task.datePayment}>{formatDateUTC(task.datePayment)} </Data>
 
         <Freight>{task.freight}</Freight>
 
-        <Data today={task.dateETD}> {task.dateETD}</Data>
+        <Data today={task.dateETD}> {formatDateUTC(task.dateETD)}</Data>
 
         <DataETA today={task.dateETA} completed={status}>
-          {task.dateETA}
+          {formatDateUTC(task.dateETA)}
         </DataETA>
 
         <Info> {formatSupplier(task.comments)} </Info>

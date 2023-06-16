@@ -3,7 +3,7 @@ import {
   Input,
   Qty,
   Unit,
-  DateInput,
+  // DateInput,
   Comments,
   FormField,
   ErrorStyled,
@@ -12,7 +12,18 @@ import {
 import { Field } from 'formik';
 import 'react-datepicker/dist/react-datepicker.css';
 
-export const FormCommon = ({ dateOrder, setDateOrder }) => {
+export const FormCommon = ({
+  dateOrder,
+  setDateOrder,
+  dateInvoice,
+  setDateInvoice,
+  datePayment,
+  setDatePayment,
+  dateETD,
+  setDateETD,
+  dateETA,
+  setDateETA,
+}) => {
   // const DatepickerField = ({ field, form, ...props }) => (
   //   <div>
   //     <DatePickerStyled
@@ -56,6 +67,7 @@ export const FormCommon = ({ dateOrder, setDateOrder }) => {
                 {...field}
                 selected={dateOrder}
                 onChange={date => setDateOrder(date)}
+                calendarStartDay={1}
               />
             </div>
           )}
@@ -70,12 +82,34 @@ export const FormCommon = ({ dateOrder, setDateOrder }) => {
 
       <FormField>
         <FieldName>Invoice</FieldName>
-        <DateInput type="text" name="dateInvoice"></DateInput>
+        <Field type="text" name="dateInvoice">
+          {() => (
+            <div>
+              <DatePickerStyled
+                dateFormat="dd.MM.yyyy"
+                selected={dateInvoice}
+                onChange={date => setDateInvoice(date)}
+                calendarStartDay={1}
+              />
+            </div>
+          )}
+        </Field>
       </FormField>
 
       <FormField>
         <FieldName>Payment</FieldName>
-        <DateInput type="text" name="datePayment"></DateInput>
+        <Field type="text" name="datePayment">
+          {() => (
+            <div>
+              <DatePickerStyled
+                dateFormat="dd.MM.yyyy"
+                selected={datePayment}
+                onChange={date => setDatePayment(date)}
+                calendarStartDay={1}
+              />
+            </div>
+          )}
+        </Field>
       </FormField>
 
       <FormField>
@@ -92,12 +126,35 @@ export const FormCommon = ({ dateOrder, setDateOrder }) => {
 
       <FormField>
         <FieldName>ETD</FieldName>
-        <DateInput type="text" name="dateETD"></DateInput>
+        <Field type="text" name="dateETD">
+          {() => (
+            <div>
+              <DatePickerStyled
+                dateFormat="dd.MM.yyyy"
+                selected={dateETD}
+                onChange={date => setDateETD(date)}
+                calendarStartDay={1}
+              />
+            </div>
+          )}
+        </Field>
+        <ErrorStyled component="div" name="dateETD" />
       </FormField>
 
       <FormField>
         <FieldName>ETA</FieldName>
-        <DateInput type="text" name="dateETA"></DateInput>
+        <Field type="text" name="dateETA">
+          {() => (
+            <div>
+              <DatePickerStyled
+                dateFormat="dd.MM.yyyy"
+                selected={dateETA}
+                onChange={date => setDateETA(date)}
+                calendarStartDay={1}
+              />
+            </div>
+          )}
+        </Field>
         <ErrorStyled component="div" name="dateETA" />
       </FormField>
 

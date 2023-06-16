@@ -1,5 +1,5 @@
 import { FormStyled, FormTitle } from './FormTask.styled';
-import { formatDate } from 'utils/formatDate';
+// import { formatDate } from 'utils/formatDate';
 import { useState, useEffect, useContext } from 'react';
 import { Formik } from 'formik';
 import { IoClose } from 'react-icons/io5';
@@ -10,7 +10,14 @@ import { addTask } from 'utils/operations';
 import { TaskContext } from 'utils/context';
 
 export const FormTaskCopy = ({ handleCopyTask, task }) => {
-  const [dateOrder, setDateOrder] = useState(new Date());
+  const today = new Date();
+  const [dateOrder, setDateOrder] = useState(today);
+  const [dateInvoice, setDateInvoice] = useState(today.getTime() + 86_400_000);
+  const [datePayment, setDatePayment] = useState(
+    today.getTime() + 2 * 86_400_000
+  );
+  const [dateETD, setDateETD] = useState(today.getTime() + 3 * 86_400_000);
+  const [dateETA, setDateETA] = useState(today.getTime() + 4 * 86_400_000);
   const { dispatch, setIsLoading } = useContext(TaskContext);
 
   useEffect(() => {
@@ -22,9 +29,19 @@ export const FormTaskCopy = ({ handleCopyTask, task }) => {
   });
 
   const handleSubmit = newTask => {
+    // console.log('send:', newTask);
     setIsLoading(true);
-    addTask({ ...newTask, dateOrder })
+    addTask({
+      ...newTask,
+      dateOrder,
+      dateInvoice,
+      datePayment,
+      dateETD,
+      dateETA,
+    })
       .then(data => {
+        // console.log('return:', data);
+
         if (data._id) {
           handleCopyTask();
 
@@ -41,11 +58,11 @@ export const FormTaskCopy = ({ handleCopyTask, task }) => {
     }
   };
 
-  const today = new Date();
-  const dateInvoice = new Date(today.getTime() + 86_400_000);
-  const datePayment = new Date(today.getTime() + 2 * 86_400_000);
-  const dateETD = new Date(today.getTime() + 3 * 86_400_000);
-  const dateETA = new Date(today.getTime() + 4 * 86_400_000);
+  // const today = new Date();
+  // const dateInvoice = new Date(today.getTime() + 86_400_000);
+  // const datePayment = new Date(today.getTime() + 2 * 86_400_000);
+  // const dateETD = new Date(today.getTime() + 3 * 86_400_000);
+  // const dateETA = new Date(today.getTime() + 4 * 86_400_000);
 
   return (
     <Formik
@@ -56,11 +73,11 @@ export const FormTaskCopy = ({ handleCopyTask, task }) => {
         unit: task.unit,
         dateOrder,
         supplier: task.supplier,
-        dateInvoice: formatDate(dateInvoice),
-        datePayment: formatDate(datePayment),
+        dateInvoice,
+        datePayment,
         freight: task.freight,
-        dateETD: formatDate(dateETD),
-        dateETA: formatDate(dateETA),
+        dateETD,
+        dateETA,
         comments: task.comments,
       }}
       validationSchema={schema}
@@ -72,7 +89,18 @@ export const FormTaskCopy = ({ handleCopyTask, task }) => {
 
         <FormTitle>Add new task</FormTitle>
 
-        <FormCommon dateOrder={dateOrder} setDateOrder={setDateOrder} />
+        <FormCommon
+          dateOrder={dateOrder}
+          setDateOrder={setDateOrder}
+          dateInvoice={dateInvoice}
+          setDateInvoice={setDateInvoice}
+          datePayment={datePayment}
+          setDatePayment={setDatePayment}
+          dateETD={dateETD}
+          setDateETD={setDateETD}
+          dateETA={dateETA}
+          setDateETA={setDateETA}
+        />
 
         <AddTaskFormButton type="submit">Add</AddTaskFormButton>
       </FormStyled>

@@ -78,6 +78,7 @@ export const SharedLayout = ({
                   selectsStart
                   startDate={startDate}
                   endDate={endDate}
+                  calendarStartDay={1}
                 />
                 <DatePickerStyled
                   dateFormat="dd.MM.yyyy"
@@ -87,6 +88,7 @@ export const SharedLayout = ({
                   startDate={startDate}
                   endDate={endDate}
                   minDate={startDate}
+                  calendarStartDay={1}
                 />
 
                 <button type="button" onClick={handleApplyRange}>
