@@ -6,6 +6,7 @@ import { CloseButton, AddTaskFormButton } from 'components/Base/Buttons.styled';
 import { FormCommon } from './FormCommon';
 import { updateTask } from 'utils/operations';
 import { TaskContext } from 'utils/context';
+import { schema } from './yupSchema';
 
 export const FormTaskEdit = ({ handleEditTask, task }) => {
   const [dateOrder, setDateOrder] = useState(Date.parse(task.dateOrder));
@@ -67,6 +68,7 @@ export const FormTaskEdit = ({ handleEditTask, task }) => {
         dateETA,
         comments: task.comments,
       }}
+      validationSchema={schema}
     >
       <FormStyled>
         <CloseButton type="button" onClick={handleEditTask}>
