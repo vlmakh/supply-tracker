@@ -8,6 +8,7 @@ import { addTask } from 'utils/operations';
 import { AddTaskButton } from 'components/Base/Buttons.styled';
 import { TaskContext } from 'utils/context';
 import { Loader } from 'components/Loader/Loader';
+import { MdOutlineAddCircleOutline } from 'react-icons/md';
 
 export default function TaskPage({ isLoggedIn }) {
   const { dispatch, tasks, isLoading, setIsLoading } = useContext(TaskContext);
@@ -41,7 +42,7 @@ export default function TaskPage({ isLoggedIn }) {
 
         <Box p={4}>
           <AddTaskButton type="button" onClick={handleModal}>
-            Add task
+            <MdOutlineAddCircleOutline size="48" />
           </AddTaskButton>
         </Box>
 

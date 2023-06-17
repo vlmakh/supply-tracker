@@ -1,8 +1,8 @@
 export const theme = {
   colors: {
-    main: '#112734', // dark blue
+    main: '#004200', // dark green
     secondary: '#ffffff7f',
-    accent: '#4b99bc', // light blue
+    accent: 'green', // green
     text: '#212121',
   },
   space: [0, 2, 4, 8, 16, 32, 64, 128, 256],
