@@ -57,6 +57,7 @@ export const SharedLayout = ({
     logout().then(() => {
       setIsLoggedIn(false);
       setToken(null);
+      setShowUserMenu(false);
     });
     // .finally(() => setIsLoading(false));
   };
