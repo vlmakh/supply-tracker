@@ -56,7 +56,7 @@ export const Comment = styled.div`
   visibility: hidden;
   z-index: 99;
 
-  transition: opacity 300ms ease-in;
+  transition: opacity 250ms ease-in;
 `;
 
 export const Qty = styled.td`

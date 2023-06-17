@@ -11,19 +11,20 @@ export const Menu = styled.div`
   background-color: white;
 
   box-shadow: ${p => p.theme.shadows.box};
+
+  opacity: 0;
+  visibility: hidden;
+  z-index: 99;
+  transition: opacity 250ms ease-in;
 `;
 
-export const UserName = styled.span`
-  text-decoration: none;
+export const UserName = styled.p`
   color: #212121;
   font-weight: 700;
-
-  @media screen and (max-width: 767.98px) {
-    display: none;
-  }
 `;
 
 export const Logout = styled(NavLink)`
+  margin-top: 16px;
   font-weight: 700;
   display: flex;
   gap: 8px;

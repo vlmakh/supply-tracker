@@ -32,9 +32,4 @@ export const CloseButton = styled.button`
   margin-left: auto;
 `;
 
-export const UserMenuBtn = styled.button`
-  border: none;
-  background-color: transparent;
-  padding: 0;
-  cursor: pointer;
-`;
+

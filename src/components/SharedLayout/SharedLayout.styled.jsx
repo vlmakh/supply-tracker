@@ -14,8 +14,21 @@ export const Header = styled.div`
   top: 0;
   z-index: 100;
   width: 100%;
-  padding: 4px 0;
   background-color: white;
+`;
+
+export const UserMenuBtn = styled.div`
+  position: relative;
+  border: none;
+  background-color: transparent;
+  padding: 2px 0;
+  height: 100%;
+  cursor: pointer;
+
+  &:hover > div {
+    opacity: 1;
+    visibility: visible;
+  }
 `;
 
 export const Green = styled.span`

@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import { Suspense, useContext, useState } from 'react';
+import { Suspense, useContext } from 'react';
 import {
   Layout,
   Header,
@@ -8,6 +8,7 @@ import {
   Footer,
   MyLink,
   Green,
+  UserMenuBtn,
 } from './SharedLayout.styled';
 import { DatePickerStyled } from 'components/FormTask/FormTask.styled';
 import { Container } from 'components/Container/Container.styled';
@@ -19,7 +20,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { Box } from 'components/Base/Box';
 import { UserMenu } from 'components/UserMenu/UserMenu';
 import { HiOutlineUserCircle } from 'react-icons/hi';
-import { UserMenuBtn } from 'components/Base/Buttons.styled';
+// import {  } from 'components/Base/Buttons.styled';
 
 export const SharedLayout = ({
   user,
@@ -33,21 +34,15 @@ export const SharedLayout = ({
   setToken,
 }) => {
   const { tasks, setIsLoading } = useContext(TaskContext);
-  const [showUserMenu, setShowUserMenu] = useState(false);
   const today = new Date();
 
   const handleApplyRange = () => {
     hadleGetTasksByRange(startDate, endDate);
   };
 
-  const handleShowUserMenu = () => {
-    setShowUserMenu(!showUserMenu);
-  };
-
   const calcCompleted = array => {
     if (array.length) {
       const completedTasks = array.filter(item => item.completed).length;
-      // console.log(completedTasks);
       return completedTasks;
     }
   };
@@ -57,7 +52,6 @@ export const SharedLayout = ({
     logout().then(() => {
       setIsLoggedIn(false);
       setToken(null);
-      setShowUserMenu(false);
     });
     // .finally(() => setIsLoading(false));
   };
@@ -75,7 +69,7 @@ export const SharedLayout = ({
               )}
               <DateToday>{formatDate(today)}</DateToday>
 
-              <Box display="flex">
+              <Box display="flex" py={2}>
                 <DatePickerStyled
                   dateFormat="dd.MM.yyyy"
                   selected={startDate}
@@ -101,11 +95,11 @@ export const SharedLayout = ({
                 </button>
               </Box>
 
-              <UserMenuBtn type="button" onClick={handleShowUserMenu}>
+              <UserMenuBtn>
                 <HiOutlineUserCircle size="24" />
-              </UserMenuBtn>
 
-              {showUserMenu && <UserMenu handleLogout={handleLogout} />}
+                <UserMenu handleLogout={handleLogout} user={user} />
+              </UserMenuBtn>
             </>
           ) : (
             <Box width="80px" mx="auto">
