@@ -24,9 +24,16 @@ export const UserName = styled.p`
 `;
 
 export const Logout = styled(NavLink)`
+  text-decoration: none;
+  color: #212121;
   margin-top: 16px;
   font-weight: 700;
   display: flex;
   gap: 8px;
   align-items: center;
+  transition: color 250ms ease-in;
+
+  &:hover {
+    color: green;
+  } 
 `;

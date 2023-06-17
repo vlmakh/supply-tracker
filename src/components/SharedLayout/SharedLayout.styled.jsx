@@ -23,6 +23,11 @@ export const ApplyBtn = styled.button`
   padding: 0;
   margin-left: 4px;
   cursor: pointer;
+  transition: color 250ms ease-in;
+
+  &:hover {
+    color: green;
+  } 
 `;
 
 
@@ -30,9 +35,14 @@ export const UserMenuBtn = styled.div`
   position: relative;
   border: none;
   background-color: transparent;
-  padding: 2px 0;
+  padding: 2px 0 2px 8px;
   height: 100%;
   cursor: pointer;
+  transition: color 250ms ease-in;
+
+  &:hover {
+    color: green;
+  } 
 
   &:hover > div {
     opacity: 1;

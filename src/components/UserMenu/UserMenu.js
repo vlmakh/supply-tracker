@@ -6,7 +6,7 @@ export const UserMenu = ({ handleLogout, user }) => {
     <Menu>
       <UserName>{user}</UserName>
       <Logout to="/" onClick={handleLogout}>
-        <span>Logout</span> <IoMdLogOut size="18" />
+        <span>Logout</span> <IoMdLogOut size="24" />
       </Logout>
     </Menu>
   );
