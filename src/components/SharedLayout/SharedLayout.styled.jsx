@@ -17,6 +17,15 @@ export const Header = styled.div`
   background-color: white;
 `;
 
+export const ApplyBtn = styled.button`
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  margin-left: 4px;
+  cursor: pointer;
+`;
+
+
 export const UserMenuBtn = styled.div`
   position: relative;
   border: none;

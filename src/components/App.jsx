@@ -2,13 +2,13 @@ import { ThemeProvider } from '@emotion/react';
 import { theme } from 'utils/theme';
 import { SharedLayout } from './SharedLayout/SharedLayout';
 import { Routes, Route } from 'react-router-dom';
-import { useState, useEffect, lazy, useReducer } from 'react';
+import { useState, useEffect, lazy, useReducer, useMemo } from 'react';
 import { reducer } from 'utils/reducer';
 import { checkCurrentUser } from 'utils/operations';
 import { Toaster } from 'react-hot-toast';
 import Modal from 'components/Modal/Modal';
 import { Loader } from 'components/Loader/Loader';
-import { getTasks, getTasksByRange } from 'utils/operations';
+import { getTasksByRange } from 'utils/operations';
 import { TaskContext } from 'utils/context';
 
 const HomePage = lazy(() => import('pages/HomePage'));
@@ -27,10 +27,10 @@ export const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [tasks, dispatch] = useReducer(reducer, []);
 
-  const today = new Date()
+  const today = useMemo(() => new Date(), []);
   const getYear = today.getFullYear(); 
   const getMonth = today.getMonth(); 
-  const firstOfMonth = new Date(getYear, getMonth, 1);
+  const firstOfMonth = useMemo(() => new Date(getYear, getMonth, 1), [getMonth, getYear]);
 
   const [startDate, setStartDate] = useState(firstOfMonth); 
   const [endDate, setEndDate] = useState(today);
@@ -54,7 +54,7 @@ export const App = () => {
 
   useEffect(() => {
     if (isLoggedIn) {setIsLoading(true);
-    getTasks()
+    getTasksByRange(firstOfMonth, today)
       .then(tasks => {
         dispatch({ type: 'getTasks', tasks });
       })
@@ -62,7 +62,7 @@ export const App = () => {
       .finally(() => {
         setIsLoading(false);
       });}
-  }, [isLoggedIn]);
+  }, [firstOfMonth, isLoggedIn, today]);
 
   const hadleGetTasksByRange = (start, end) => {
     setIsLoading(true);

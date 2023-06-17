@@ -9,6 +9,7 @@ import {
   MyLink,
   Green,
   UserMenuBtn,
+  ApplyBtn,
 } from './SharedLayout.styled';
 import { DatePickerStyled } from 'components/FormTask/FormTask.styled';
 import { Container } from 'components/Container/Container.styled';
@@ -20,6 +21,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { Box } from 'components/Base/Box';
 import { UserMenu } from 'components/UserMenu/UserMenu';
 import { HiOutlineUserCircle } from 'react-icons/hi';
+import { MdRestartAlt } from 'react-icons/md';
 // import {  } from 'components/Base/Buttons.styled';
 
 export const SharedLayout = ({
@@ -69,7 +71,7 @@ export const SharedLayout = ({
               )}
               <DateToday>{formatDate(today)}</DateToday>
 
-              <Box display="flex" py={2}>
+              <Box display="flex" py={1}>
                 <DatePickerStyled
                   dateFormat="dd.MM.yyyy"
                   selected={startDate}
@@ -90,9 +92,9 @@ export const SharedLayout = ({
                   calendarStartDay={1}
                 />
 
-                <button type="button" onClick={handleApplyRange}>
-                  Apply
-                </button>
+                <ApplyBtn type="button" onClick={handleApplyRange}>
+                  <MdRestartAlt size="24" />
+                </ApplyBtn>
               </Box>
 
               <UserMenuBtn>
