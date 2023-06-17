@@ -5,12 +5,12 @@ import {
   Num,
   Btn,
   Name,
+  Comment,
   Qty,
   Unit,
   Data,
   Supplier,
   Freight,
-  Comment,
   BtnDel,
 } from './TaskItem.styled';
 import { useState, useContext } from 'react';
@@ -95,6 +95,8 @@ export const TaskItem = ({ task, idx }) => {
           <TDButton type="button" onClick={handleEditTask} disabled={status}>
             {task.name}
           </TDButton>
+
+          <Comment>{task.comments}</Comment>
         </Name>
 
         <Qty>{task.qty}</Qty>
@@ -125,7 +127,7 @@ export const TaskItem = ({ task, idx }) => {
           {formatDate(task.dateETA)}
         </Data>
 
-        <Comment> {formatSupplier(task.comments)} </Comment>
+        {/* <Comment> {formatSupplier(task.comments)} </Comment> */}
 
         <BtnDel>
           <TDButton type="button" onClick={() => handleDelete(task._id)}>

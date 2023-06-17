@@ -32,8 +32,31 @@ export const Btn = styled.td`
 `;
 
 export const Name = styled.td`
+  position: relative;
   min-width: 200px;
   text-align: left;
+
+  &:hover > div {
+    opacity: 1;
+    visibility: visible;
+  }
+`;
+
+export const Comment = styled.div`
+  position: absolute;
+  top: 24px;
+  left: 100px;
+
+  background-color: white;
+  box-shadow: ${p => p.theme.shadows.box};
+  min-width: 240px;
+  min-height: 48px;
+
+  opacity: 0;
+  visibility: hidden;
+  z-index: 99;
+
+  transition: opacity 300ms ease-in;
 `;
 
 export const Qty = styled.td`
@@ -68,14 +91,6 @@ export const Data = styled.td`
 
   @media screen and (max-width: 1199.98px) {
     display: none;
-  }
-`;
-
-export const Comment = styled.td`
-  min-width: 100px;
-
-  @media screen and (max-width: 1199.98px) {
-    display: none;  
   }
 `;
 
