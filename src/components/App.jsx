@@ -53,7 +53,7 @@ export const App = () => {
   }, [token]);
 
   useEffect(() => {
-    setIsLoading(true);
+    if (isLoggedIn) {setIsLoading(true);
     getTasks()
       .then(tasks => {
         dispatch({ type: 'getTasks', tasks });
@@ -61,7 +61,7 @@ export const App = () => {
       .catch(error => {})
       .finally(() => {
         setIsLoading(false);
-      });
+      });}
   }, [isLoggedIn]);
 
   const hadleGetTasksByRange = (start, end) => {
