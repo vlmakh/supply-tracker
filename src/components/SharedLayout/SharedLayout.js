@@ -65,7 +65,7 @@ export const SharedLayout = ({
     <Layout>
       <Header>
         <Container>
-          {isLoggedIn && (
+          {isLoggedIn ? (
             <>
               {tasks && (
                 <TaskCalc>
@@ -106,6 +106,10 @@ export const SharedLayout = ({
 
               {showUserMenu && <UserMenu handleLogout={handleLogout} />}
             </>
+          ) : (
+            <Box width="80px" mx="auto">
+              <DateToday>{formatDate(today)}</DateToday>
+            </Box>
           )}
         </Container>
       </Header>
