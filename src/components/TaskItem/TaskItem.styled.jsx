@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { formatDate, formatDateUTC } from 'utils/formatDate';
+import { formatDate } from 'utils/formatDate';
 const today = formatDate(new Date());
 
 export const Task = styled.tr`
@@ -64,7 +64,7 @@ export const Freight = styled.td`
 export const Data = styled.td`
   width: 72px;
   font-weight: 700;
-  color: ${p => !p.completed && formatDateUTC(p.today) === today && 'blue'};
+  color: ${p => !p.completed && formatDate(p.today) === today && 'blue'};
 
   @media screen and (max-width: 1199.98px) {
     display: none;

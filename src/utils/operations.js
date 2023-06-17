@@ -1,6 +1,6 @@
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import { formatDateRequest } from './formatDate';
+import { formatDateCut } from './formatDate';
 
 axios.defaults.baseURL = process.env.REACT_APP_MAIN_URL;
 
@@ -106,9 +106,9 @@ export const getTasks = async () => {
 export const getTasksByRange = async (startDate, endDate) => {
   try {
     const response = await axios.get(
-      `api/tasks/range?startDate=${formatDateRequest(
+      `api/tasks/range?startDate=${formatDateCut(
         startDate
-      )}&endDate=${formatDateRequest(endDate)}T23:59:59.000Z`
+      )}&endDate=${formatDateCut(endDate)}T23:59:59.000Z`
     );
 
     return response.data;

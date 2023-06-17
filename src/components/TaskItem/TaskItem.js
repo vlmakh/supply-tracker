@@ -23,7 +23,7 @@ import Modal from 'components/Modal/Modal';
 import { FormTaskEdit } from 'components/FormTask/FormTaskEdit';
 import { FormTaskCopy } from 'components/FormTask/FormTaskCopy';
 import { TaskContext } from 'utils/context';
-import { formatDateUTC } from 'utils/formatDate';
+import { formatDate, formatDateCut } from 'utils/formatDate';
 import { Loader } from 'components/Loader/Loader';
 
 export const TaskItem = ({ task, idx }) => {
@@ -39,7 +39,7 @@ export const TaskItem = ({ task, idx }) => {
   };
 
   const handleCompleteTask = (id, status) => {
-    if (task.dateETA < task.dateOrder) {
+    if (formatDateCut(task.dateETA) < formatDateCut(task.dateOrder)) {
       alert('ETA date must be later than order date');
       return;
     }
@@ -102,27 +102,27 @@ export const TaskItem = ({ task, idx }) => {
         <Unit>{task.unit}</Unit>
 
         <Data today={task.dateOrder} completed={status}>
-          {formatDateUTC(task.dateOrder)}
+          {formatDate(task.dateOrder)}
         </Data>
 
         <Supplier> {formatSupplier(task.supplier)}</Supplier>
 
         <Data today={task.dateInvoice} completed={status}>
-          {formatDateUTC(task.dateInvoice)}
+          {formatDate(task.dateInvoice)}
         </Data>
 
         <Data today={task.datePayment} completed={status}>
-          {formatDateUTC(task.datePayment)}{' '}
+          {formatDate(task.datePayment)}{' '}
         </Data>
 
         <Freight>{task.freight}</Freight>
 
         <Data today={task.dateETD} completed={status}>
-          {formatDateUTC(task.dateETD)}
+          {formatDate(task.dateETD)}
         </Data>
 
         <Data today={task.dateETA} completed={status}>
-          {formatDateUTC(task.dateETA)}
+          {formatDate(task.dateETA)}
         </Data>
 
         <Comment> {formatSupplier(task.comments)} </Comment>

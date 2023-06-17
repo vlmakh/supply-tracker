@@ -6,17 +6,17 @@ export const formatDate = date => {
   }
 };
 
-export const formatDateUTC = date => {
-  // const dateTime = '2022-07-27T08:36:12';
+// export const formatDateUTC = date => {
+//   // const dateTime = '2022-07-27T08:36:12';
 
-  if (date) {
-    const result = date.split('T')[0].split('-').reverse().join('.');
+//   if (date) {
+//     const result = date.split('T')[0].split('-').reverse().join('.');
 
-    return result;
-  }
-};
+//     return result;
+//   }
+// };
 
-export const formatDateRequest = date => {
+export const formatDateCut = date => {
   if (date) {
     return format(Date.parse(date), 'yyyy-MM-dd');
   }
