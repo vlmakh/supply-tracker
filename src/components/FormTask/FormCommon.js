@@ -22,6 +22,7 @@ export const FormCommon = ({
   setDateETD,
   dateETA,
   setDateETA,
+  // comments,
 }) => {
   // const DatepickerField = ({ field, form, ...props }) => (
   //   <div>
@@ -77,6 +78,7 @@ export const FormCommon = ({
       <FormField>
         <FieldName>Supplier</FieldName>
         <Input type="text" name="supplier"></Input>
+        <ErrorStyled component="div" name="supplier" />
       </FormField>
 
       <FormField>
@@ -160,7 +162,13 @@ export const FormCommon = ({
 
       <FormField>
         <FieldName>Comments</FieldName>
-        <Comments as="textarea" rows="4" name="comments"></Comments>
+        <Comments
+          as="textarea"
+          rows="4"
+          name="comments"
+          // defaultValue={comments}
+        ></Comments>
+        <ErrorStyled component="div" name="comments" />
       </FormField>
     </>
   );

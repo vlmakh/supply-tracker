@@ -86,6 +86,7 @@ export const FormTaskEdit = ({ handleEditTask, task }) => {
           setDateETD={setDateETD}
           dateETA={dateETA}
           setDateETA={setDateETA}
+          // comments={task.comments}
         />
 
         <AddTaskFormButton type="submit">Save</AddTaskFormButton>
