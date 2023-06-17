@@ -3,7 +3,7 @@ import {
   Checkbox,
   CheckBtn,
   Num,
-  Btn,
+  Exec,
   Name,
   Comment,
   Qty,
@@ -11,11 +11,13 @@ import {
   Data,
   Supplier,
   Freight,
+  Delete,
+  BtnCopy,
   BtnDel,
+  BtnName,
 } from './TaskItem.styled';
 import { useState, useContext } from 'react';
 import { updateTaskStatus, deleteTask } from 'utils/operations';
-import { TDButton } from 'components/Base/Buttons.styled';
 import { FaCheck, FaArrowAltCircleRight } from 'react-icons/fa';
 import { MdContentCopy } from 'react-icons/md';
 import { MdDeleteOutline } from 'react-icons/md';
@@ -71,7 +73,7 @@ export const TaskItem = ({ task, idx }) => {
       <Task completed={status}>
         <Num>{idx + 1} </Num>
 
-        <Btn>
+        <Exec>
           <Checkbox type="checkbox" checked={status} readOnly />
           <CheckBtn
             type="button"
@@ -83,18 +85,18 @@ export const TaskItem = ({ task, idx }) => {
               <FaArrowAltCircleRight size="18" />
             )}
           </CheckBtn>
-        </Btn>
+        </Exec>
 
-        <Btn>
-          <TDButton type="button" onClick={handleCopyTask}>
+        <Exec>
+          <BtnCopy type="button" onClick={handleCopyTask}>
             <MdContentCopy size="18" />
-          </TDButton>
-        </Btn>
+          </BtnCopy>
+        </Exec>
 
         <Name>
-          <TDButton type="button" onClick={handleEditTask} disabled={status}>
+          <BtnName type="button" onClick={handleEditTask} disabled={status}>
             {task.name}
-          </TDButton>
+          </BtnName>
 
           <Comment>{task.comments}</Comment>
         </Name>
@@ -127,13 +129,11 @@ export const TaskItem = ({ task, idx }) => {
           {formatDate(task.dateETA)}
         </Data>
 
-        {/* <Comment> {formatSupplier(task.comments)} </Comment> */}
-
-        <BtnDel>
-          <TDButton type="button" onClick={() => handleDelete(task._id)}>
+        <Delete>
+          <BtnDel type="button" onClick={() => handleDelete(task._id)}>
             <MdDeleteOutline size="18" />
-          </TDButton>
-        </BtnDel>
+          </BtnDel>
+        </Delete>
       </Task>
 
       {showFormTaskEdit && (

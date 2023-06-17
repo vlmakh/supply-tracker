@@ -7,6 +7,7 @@ export const TDButton = styled.button`
   width: 100%;
   text-align: left;
   cursor: ${p => !p.disabled && 'pointer'};
+  transition: all 250ms ease-in;
 `;
 
 export const AddTaskButton = styled.button`

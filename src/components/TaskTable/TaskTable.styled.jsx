@@ -25,6 +25,7 @@ export const Table = styled.table`
   td {
     font-size: 14px;
     border: 1px solid darkgrey;
+    padding: 0;
   }
 `;
 

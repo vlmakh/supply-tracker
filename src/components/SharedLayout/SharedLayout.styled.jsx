@@ -27,9 +27,8 @@ export const ApplyBtn = styled.button`
 
   &:hover {
     color: green;
-  } 
+  }
 `;
-
 
 export const UserMenuBtn = styled.div`
   position: relative;
@@ -42,7 +41,7 @@ export const UserMenuBtn = styled.div`
 
   &:hover {
     color: green;
-  } 
+  }
 
   &:hover > div {
     opacity: 1;
@@ -100,4 +99,3 @@ export const MyLink = styled.a`
     color: ${p => p.theme.colors.accent};
   }
 `;
-

@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { formatDate } from 'utils/formatDate';
+import { TDButton } from 'components/Base/Buttons.styled';
 const today = formatDate(new Date());
 
 export const Task = styled.tr`
@@ -27,7 +28,7 @@ export const Num = styled.td`
   text-align: right;
 `;
 
-export const Btn = styled.td`
+export const Exec = styled.td`
   width: 24px;
 `;
 
@@ -35,11 +36,6 @@ export const Name = styled.td`
   position: relative;
   min-width: 200px;
   text-align: left;
-
-  &:hover > div {
-    opacity: 1;
-    visibility: visible;
-  }
 `;
 
 export const Comment = styled.div`
@@ -103,10 +99,35 @@ export const Days = styled.td`
   }
 `;
 
-export const BtnDel = styled.td`
+export const Delete = styled.td`
   width: 24px;
 
   @media screen and (max-width: 1199.98px) {
     display: none;
+  }
+`;
+
+export const BtnCopy = styled(TDButton)`
+  &:hover {
+    color: green;
+  }
+`;
+
+export const BtnDel = styled(TDButton)`
+  &:hover {
+    color: red;
+  }
+`;
+
+export const BtnName = styled(TDButton)`
+  padding: 1px 2px;
+
+  &:hover {
+    background-color: ${p => !p.disabled && '#a4faa4'};
+  }
+
+  &:hover + div {
+    opacity: 1;
+    visibility: visible;
   }
 `;
