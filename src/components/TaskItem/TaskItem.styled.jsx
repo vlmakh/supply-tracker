@@ -44,8 +44,8 @@ export const Name = styled.td`
 
 export const Comment = styled.div`
   position: absolute;
-  top: 24px;
-  left: 100px;
+  top: 32px;
+  left: 0;
 
   background-color: white;
   box-shadow: ${p => p.theme.shadows.box};
