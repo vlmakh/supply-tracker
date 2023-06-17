@@ -33,8 +33,8 @@ export const TaskItem = ({ task, idx }) => {
   const { dispatch, isLoading } = useContext(TaskContext);
 
   const formatSupplier = name => {
-    if (name && name.length > 18) {
-      return name.slice(0, 17) + '...';
+    if (name && name.length > 21) {
+      return name.slice(0, 20) + '...';
     } else return name;
   };
 

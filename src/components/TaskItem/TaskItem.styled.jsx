@@ -51,6 +51,7 @@ export const Comment = styled.div`
   box-shadow: ${p => p.theme.shadows.box};
   min-width: 240px;
   min-height: 48px;
+  padding: 8px 4px;
 
   opacity: 0;
   visibility: hidden;
