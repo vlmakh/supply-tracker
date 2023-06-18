@@ -13,31 +13,16 @@ import { Field } from 'formik';
 import 'react-datepicker/dist/react-datepicker.css';
 // import uk from 'date-fns/locale/uk';
 
-export const FormCommon = ({
-  dateOrder,
-  setDateOrder,
-  dateInvoice,
-  setDateInvoice,
-  datePayment,
-  setDatePayment,
-  dateETD,
-  setDateETD,
-  dateETA,
-  setDateETA,
-}) => {
-  // const DatepickerField = ({ field, form, ...props }) => (
-  //   <div>
-  //     <DatePickerStyled
-  //       dateFormat="dd.MM.yyyy"
-  //       {...field}
-  //       {...props}
-  //       selected={field.value}
-  //       onChange={val => form.setFieldValue(field.name, val)}
-  //     />
-  //   </div>
-  // );
-
+export const FormCommon = ({ dates, setDates }) => {
   // registerLocale('uk', uk);
+  const { dateOrder, dateInvoice, datePayment, dateETD, dateETA } = dates;
+
+  // const handleSetDate = (oldState, newState) => {
+  //   setDates(prevState => ({
+  //     ...prevState,
+  //     oldState: newState,
+  //   }));
+  // };
 
   return (
     <>
@@ -68,7 +53,12 @@ export const FormCommon = ({
               <DatePickerStyled
                 dateFormat="dd.MM.yyyy"
                 selected={dateOrder}
-                onChange={date => setDateOrder(date)}
+                onChange={date =>
+                  setDates(prevState => ({
+                    ...prevState,
+                    dateOrder: date,
+                  }))
+                }
                 calendarStartDay={1}
                 // locale="uk"
               />
@@ -92,7 +82,12 @@ export const FormCommon = ({
               <DatePickerStyled
                 dateFormat="dd.MM.yyyy"
                 selected={dateInvoice}
-                onChange={date => setDateInvoice(date)}
+                onChange={date =>
+                  setDates(prevState => ({
+                    ...prevState,
+                    dateInvoice: date,
+                  }))
+                }
                 calendarStartDay={1}
                 autoComplete="off"
                 // locale="uk"
@@ -110,7 +105,12 @@ export const FormCommon = ({
               <DatePickerStyled
                 dateFormat="dd.MM.yyyy"
                 selected={datePayment}
-                onChange={date => setDatePayment(date)}
+                onChange={date =>
+                  setDates(prevState => ({
+                    ...prevState,
+                    datePayment: date,
+                  }))
+                }
                 calendarStartDay={1}
                 // locale="uk"
               />
@@ -139,7 +139,12 @@ export const FormCommon = ({
               <DatePickerStyled
                 dateFormat="dd.MM.yyyy"
                 selected={dateETD}
-                onChange={date => setDateETD(date)}
+                onChange={date =>
+                  setDates(prevState => ({
+                    ...prevState,
+                    dateETD: date,
+                  }))
+                }
                 calendarStartDay={1}
                 // locale="uk"
               />
@@ -157,7 +162,12 @@ export const FormCommon = ({
               <DatePickerStyled
                 dateFormat="dd.MM.yyyy"
                 selected={dateETA}
-                onChange={date => setDateETA(date)}
+                onChange={date =>
+                  setDates(prevState => ({
+                    ...prevState,
+                    dateETA: date,
+                  }))
+                }
                 calendarStartDay={1}
                 // locale="uk"
               />

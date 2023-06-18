@@ -10,13 +10,15 @@ import { FormCommon } from './FormCommon';
 export const FormTaskAdd = ({ handleModal, handleAddTask }) => {
   const today = new Date();
 
-  const [dateOrder, setDateOrder] = useState(today);
-  const [dateInvoice, setDateInvoice] = useState(today.getTime() + 86_400_000);
-  const [datePayment, setDatePayment] = useState(
-    today.getTime() + 2 * 86_400_000
-  );
-  const [dateETD, setDateETD] = useState(today.getTime() + 3 * 86_400_000);
-  const [dateETA, setDateETA] = useState(today.getTime() + 4 * 86_400_000);
+  const [dates, setDates] = useState({
+    dateOrder: today,
+    dateInvoice: today.getTime() + 86_400_000,
+    datePayment: today.getTime() + 2 * 86_400_000,
+    dateETD: today.getTime() + 3 * 86_400_000,
+    dateETA: today.getTime() + 4 * 86_400_000,
+  });
+
+  const { dateOrder, dateInvoice, datePayment, dateETD, dateETA } = dates;
 
   useEffect(() => {
     window.addEventListener('keydown', handleEscape);
@@ -64,18 +66,7 @@ export const FormTaskAdd = ({ handleModal, handleAddTask }) => {
 
         <FormTitle>Add new task</FormTitle>
 
-        <FormCommon
-          dateOrder={dateOrder}
-          setDateOrder={setDateOrder}
-          dateInvoice={dateInvoice}
-          setDateInvoice={setDateInvoice}
-          datePayment={datePayment}
-          setDatePayment={setDatePayment}
-          dateETD={dateETD}
-          setDateETD={setDateETD}
-          dateETA={dateETA}
-          setDateETA={setDateETA}
-        />
+        <FormCommon dates={dates} setDates={setDates} />
 
         <AddTaskFormButton type="submit">Add</AddTaskFormButton>
       </FormStyled>
