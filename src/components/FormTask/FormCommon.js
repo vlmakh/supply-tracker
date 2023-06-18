@@ -9,7 +9,9 @@ import {
   DatePickerStyled,
 } from './FormTask.styled';
 import { Field } from 'formik';
+// import { registerLocale } from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+// import uk from 'date-fns/locale/uk';
 
 export const FormCommon = ({
   dateOrder,
@@ -22,7 +24,6 @@ export const FormCommon = ({
   setDateETD,
   dateETA,
   setDateETA,
-  // comments,
 }) => {
   // const DatepickerField = ({ field, form, ...props }) => (
   //   <div>
@@ -35,6 +36,8 @@ export const FormCommon = ({
   //     />
   //   </div>
   // );
+
+  // registerLocale('uk', uk);
 
   return (
     <>
@@ -60,14 +63,14 @@ export const FormCommon = ({
       <FormField>
         <FieldName>Order</FieldName>
         <Field type="text" name="dateOrder">
-          {({ field }) => (
+          {() => (
             <div>
               <DatePickerStyled
                 dateFormat="dd.MM.yyyy"
-                {...field}
                 selected={dateOrder}
                 onChange={date => setDateOrder(date)}
                 calendarStartDay={1}
+                // locale="uk"
               />
             </div>
           )}
@@ -92,6 +95,7 @@ export const FormCommon = ({
                 onChange={date => setDateInvoice(date)}
                 calendarStartDay={1}
                 autoComplete="off"
+                // locale="uk"
               />
             </div>
           )}
@@ -108,6 +112,7 @@ export const FormCommon = ({
                 selected={datePayment}
                 onChange={date => setDatePayment(date)}
                 calendarStartDay={1}
+                // locale="uk"
               />
             </div>
           )}
@@ -136,6 +141,7 @@ export const FormCommon = ({
                 selected={dateETD}
                 onChange={date => setDateETD(date)}
                 calendarStartDay={1}
+                // locale="uk"
               />
             </div>
           )}
@@ -153,6 +159,7 @@ export const FormCommon = ({
                 selected={dateETA}
                 onChange={date => setDateETA(date)}
                 calendarStartDay={1}
+                // locale="uk"
               />
             </div>
           )}
@@ -162,12 +169,7 @@ export const FormCommon = ({
 
       <FormField>
         <FieldName>Comments</FieldName>
-        <Comments
-          as="textarea"
-          rows="4"
-          name="comments"
-          // defaultValue={comments}
-        ></Comments>
+        <Comments as="textarea" rows="4" name="comments"></Comments>
         <ErrorStyled component="div" name="comments" />
       </FormField>
     </>
