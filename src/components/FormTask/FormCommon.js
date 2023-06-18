@@ -17,13 +17,6 @@ export const FormCommon = ({ dates, setDates }) => {
   // registerLocale('uk', uk);
   const { dateOrder, dateInvoice, datePayment, dateETD, dateETA } = dates;
 
-  // const handleSetDate = (oldState, newState) => {
-  //   setDates(prevState => ({
-  //     ...prevState,
-  //     oldState: newState,
-  //   }));
-  // };
-
   return (
     <>
       <FormField>
