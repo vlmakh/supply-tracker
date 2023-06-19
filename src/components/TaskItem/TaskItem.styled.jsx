@@ -51,7 +51,7 @@ export const Comment = styled.div`
 
   opacity: 0;
   visibility: hidden;
-  z-index: 99;
+  z-index: 999;
 
   transition: opacity 250ms ease-in;
 `;

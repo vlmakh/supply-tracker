@@ -38,6 +38,15 @@ export const AddTaskFormButton = styled.button`
   cursor: pointer;
   margin-top: 16px;
   padding: 4px;
+  border-radius: 4px;
+  background-color: #004200;
+  color: white;
+
+  transition: background-color 250ms ease-in;
+
+  &:hover {
+    background-color: green;
+  }
 `;
 
 export const CloseButton = styled.button`
@@ -47,6 +56,12 @@ export const CloseButton = styled.button`
   padding: 0;
   cursor: pointer;
   margin-left: auto;
+
+  transition: color 250ms ease-in;
+
+  &:hover {
+    color: green;
+  }
 `;
 
 

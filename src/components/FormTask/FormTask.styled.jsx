@@ -30,6 +30,7 @@ export const FieldName = styled.span`
   width: 80px;
   text-align: right;
   margin-right: 16px;
+ 
 `
 
 export const FormField = styled.div`
@@ -38,22 +39,31 @@ export const FormField = styled.div`
   position: relative;
   width: 100%;
   margin-top: 16px;
-  
+   
 `;
 
 export const Input = styled(Field)`
   padding: 4px;
   width: 60%;
+  &:focus-visible {
+    outline: 1px solid green;
+  }
 `;
 
 export const Qty = styled(Field)`
   padding: 4px;
   width: 40%;
+  &:focus-visible {
+    outline: 1px solid green;
+  }
 `;
 
 export const Unit = styled(Field)`
   padding: 4px;
   width: 20%;
+  &:focus-visible {
+    outline: 1px solid green;
+  }
 `;
 
 export const DateInput = styled(Field)`
@@ -64,12 +74,18 @@ export const DateInput = styled(Field)`
 export const DatePickerStyled = styled(DatePicker)`
   padding: 4px;
   width: 80px;
+  &:focus-visible {
+    outline: 1px solid green;
+  }
 `;
 
 export const Comments = styled(Field)`
   padding: 4px;
   width: 60%;
   resize: none;
+  &:focus-visible {
+    outline: 1px solid green;
+  }
 `;
 
 

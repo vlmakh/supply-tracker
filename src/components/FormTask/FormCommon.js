@@ -63,7 +63,7 @@ export const FormCommon = ({ dates, setDates }) => {
 
       <FormField>
         <FieldName>Supplier</FieldName>
-        <Input type="text" name="supplier"></Input>
+        <Input type="text" name="supplier" placeholder="supplier"></Input>
         <ErrorStyled component="div" name="supplier" />
       </FormField>
 
@@ -172,7 +172,12 @@ export const FormCommon = ({ dates, setDates }) => {
 
       <FormField>
         <FieldName>Comments</FieldName>
-        <Comments as="textarea" rows="4" name="comments"></Comments>
+        <Comments
+          as="textarea"
+          rows="4"
+          name="comments"
+          placeholder="comments"
+        ></Comments>
         <ErrorStyled component="div" name="comments" />
       </FormField>
     </>
