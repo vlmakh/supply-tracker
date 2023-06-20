@@ -63,9 +63,12 @@ export const TaskItem = ({ task, idx }) => {
   };
 
   const handleDelete = id => {
-    deleteTask(id)
-      .then(dispatch({ type: 'deleteTask', taskId: id }))
-      .catch(err => console.log(err.message));
+    const result = window.confirm('Confirm task delete?');
+    if (result) {
+      deleteTask(id)
+        .then(dispatch({ type: 'deleteTask', taskId: id }))
+        .catch(err => console.log(err.message));
+    }
   };
 
   return (
