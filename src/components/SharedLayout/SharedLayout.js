@@ -26,6 +26,7 @@ import { MdRestartAlt } from 'react-icons/md';
 
 export const SharedLayout = ({
   user,
+  email,
   isLoggedIn,
   setIsLoggedIn,
   startDate,
@@ -100,7 +101,11 @@ export const SharedLayout = ({
               <UserMenuBtn>
                 <HiOutlineUserCircle size="24" />
 
-                <UserMenu handleLogout={handleLogout} user={user} />
+                <UserMenu
+                  handleLogout={handleLogout}
+                  user={user}
+                  email={email}
+                />
               </UserMenuBtn>
             </>
           ) : (

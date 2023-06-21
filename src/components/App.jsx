@@ -14,7 +14,8 @@ import { TaskContext } from 'utils/context';
 const HomePage = lazy(() => import('pages/HomePage'));
 const Login = lazy(() => import('components/Login/Login'));
 const Signup = lazy(() => import('components/Signup/Signup'));
-const TaskPage = lazy(() => import('pages/TasksPage'));
+const TasksPage = lazy(() => import('pages/TasksPage'));
+const AccountPage = lazy(() => import('pages/AccountPage'));
 const ErrorPage = lazy(() => import('pages/ErrorPage'));
 
 const savedData = JSON.parse(localStorage.getItem('splmgr'));
@@ -115,7 +116,18 @@ export const App = () => {
             <Route
               path="tasks"
               element={
-                <TaskPage
+                <TasksPage
+                  isLoggedIn={isLoggedIn}
+                  // isLoading={isLoading}
+                  // setIsLoading={setIsLoading}
+                />
+              }
+            />
+
+            <Route
+              path="account"
+              element={
+                <AccountPage
                   isLoggedIn={isLoggedIn}
                   // isLoading={isLoading}
                   // setIsLoading={setIsLoading}

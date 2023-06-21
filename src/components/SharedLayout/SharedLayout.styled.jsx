@@ -46,6 +46,7 @@ export const UserMenuBtn = styled.div`
   &:hover > div {
     opacity: 1;
     visibility: visible;
+    transform: translateY(0);
   }
 `;
 

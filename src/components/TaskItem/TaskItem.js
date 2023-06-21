@@ -46,10 +46,12 @@ export const TaskItem = ({ task, idx }) => {
       return;
     }
 
+    // setIsLoading(true);
     updateTaskStatus(id, status)
       .then(data => {
         setStatus(!status);
         dispatch({ type: 'editTask', newTask: data, taskId: id });
+        // setIsLoading(false);
       })
       .catch(e => console.log(e.message));
   };

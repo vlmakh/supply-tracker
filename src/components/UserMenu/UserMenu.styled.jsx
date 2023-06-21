@@ -9,16 +9,18 @@ export const Menu = styled.div`
   width: 240px;
   padding: 16px;
   background-color: white;
+  border-radius: 8px;
 
   box-shadow: ${p => p.theme.shadows.box};
 
   opacity: 0;
   visibility: hidden;
   z-index: 99;
-  transition: opacity 250ms ease-in;
+  transition: opacity 250ms ease-in, transform 250ms ease-in;
+  transform: translateY(24px);
 `;
 
-export const UserName = styled.p`
+export const UserEmail = styled.p`
   color: #212121;
   font-weight: 700;
 `;
