@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { NavLink } from 'react-router-dom';
 
 export const Layout = styled.div`
   display: grid;
@@ -60,7 +61,9 @@ export const Green = styled.span`
   padding: 2px 0;
 `;
 
-export const TaskCalc = styled.div`
+export const TaskCalc = styled(NavLink)`
+text-decoration: none;
+color: #212121;
   font-weight: 700;
   width: 60px;
 `;

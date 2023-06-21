@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 export const Menu = styled.div`
   position: absolute;
-  top: 32px;
+  top: 31px;
   right: 0;
 
   width: 240px;
@@ -21,8 +21,13 @@ export const Menu = styled.div`
 `;
 
 export const UserEmail = styled.p`
-  color: #212121;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: grey;
   font-weight: 700;
+  padding-bottom: 16px;
+  border-bottom: 1px solid grey;
 `;
 
 export const Logout = styled(NavLink)`

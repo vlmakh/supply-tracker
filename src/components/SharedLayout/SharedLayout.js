@@ -66,7 +66,7 @@ export const SharedLayout = ({
           {isLoggedIn ? (
             <>
               {tasks && (
-                <TaskCalc>
+                <TaskCalc to="/">
                   {tasks.length} / <Green>{calcCompleted(tasks) ?? '0'} </Green>
                 </TaskCalc>
               )}

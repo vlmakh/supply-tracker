@@ -1,6 +1,7 @@
 import { Menu, Logout, UserEmail } from './UserMenu.styled';
 import { IoMdLogOut } from 'react-icons/io';
 import { FaUserCircle } from 'react-icons/fa';
+import { MdOutlineManageAccounts } from 'react-icons/md';
 
 export const UserMenu = ({ handleLogout, user, email }) => {
   return (
@@ -10,10 +11,14 @@ export const UserMenu = ({ handleLogout, user, email }) => {
         {email}
       </UserEmail>
 
-      <Logout to="/account">{user}</Logout>
+      <Logout to="/account">
+        <MdOutlineManageAccounts size="24" />
+        {user}
+      </Logout>
 
       <Logout to="/" onClick={handleLogout}>
-        <span>Logout</span> <IoMdLogOut size="24" />
+        <IoMdLogOut size="24" />
+        <span>Logout</span>
       </Logout>
     </Menu>
   );
