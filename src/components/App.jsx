@@ -29,11 +29,14 @@ export const App = () => {
   const [tasks, dispatch] = useReducer(reducer, []);
 
   const today = useMemo(() => new Date(), []);
-  const getYear = today.getFullYear(); 
-  const getMonth = today.getMonth(); 
-  const firstOfMonth = useMemo(() => new Date(getYear, getMonth, 1), [getMonth, getYear]);
+  const getYear = today.getFullYear();
+  const getMonth = today.getMonth();
+  const firstOfMonth = useMemo(
+    () => new Date(getYear, getMonth, 1),
+    [getMonth, getYear]
+  );
 
-  const [startDate, setStartDate] = useState(firstOfMonth); 
+  const [startDate, setStartDate] = useState(firstOfMonth);
   const [endDate, setEndDate] = useState(today);
 
   useEffect(() => {
@@ -50,19 +53,21 @@ export const App = () => {
   useEffect(() => {
     setToken(token);
     setIsLoading(false);
-    localStorage.setItem('splmgr', JSON.stringify(token))
+    localStorage.setItem('splmgr', JSON.stringify(token));
   }, [token]);
 
   useEffect(() => {
-    if (isLoggedIn) {setIsLoading(true);
-    getTasksByRange(firstOfMonth, today)
-      .then(tasks => {
-        dispatch({ type: 'getTasks', tasks });
-      })
-      .catch(error => {})
-      .finally(() => {
-        setIsLoading(false);
-      });}
+    if (isLoggedIn) {
+      setIsLoading(true);
+      getTasksByRange(firstOfMonth, today)
+        .then(tasks => {
+          dispatch({ type: 'getTasks', tasks });
+        })
+        .catch(error => {})
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
   }, [firstOfMonth, isLoggedIn, today]);
 
   const hadleGetTasksByRange = (start, end) => {
@@ -75,11 +80,13 @@ export const App = () => {
       .finally(() => {
         setIsLoading(false);
       });
-  }
+  };
 
   return (
     <ThemeProvider theme={theme}>
-      <TaskContext.Provider value={{ dispatch, tasks, isLoading, setIsLoading }}>
+      <TaskContext.Provider
+        value={{ dispatch, tasks, isLoading, setIsLoading }}
+      >
         <Routes>
           <Route
             path="/"
