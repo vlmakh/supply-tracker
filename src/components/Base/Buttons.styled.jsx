@@ -10,6 +10,24 @@ export const TDButton = styled.button`
   transition: all 250ms ease-in;
 `;
 
+export const Button = styled.button`
+  display: grid;
+  place-content: center;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 8px;
+  border: none;
+  border-radius: 50%;
+  background-color: #004200;
+
+  transition: background-color 250ms ease-in;
+
+  &:hover {
+    background-color: green;
+  }
+`;
+
 export const AddTaskButton = styled.button`
   position: fixed;
   right: 32px;

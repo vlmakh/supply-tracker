@@ -50,6 +50,7 @@ export const FormUserName = ({ setUser, email }) => {
 
   return (
     <>
+      <h4>Change name</h4>
       <Formik
         onSubmit={handleUpdateName}
         initialValues={{
@@ -69,6 +70,7 @@ export const FormUserName = ({ setUser, email }) => {
         </FormStyled>
       </Formik>
 
+      <h4>Change password</h4>
       <Formik
         onSubmit={handleUpdatePass}
         initialValues={{
