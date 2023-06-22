@@ -18,7 +18,6 @@ export const Button = styled.button`
   cursor: pointer;
   padding: 8px;
   border: none;
-  border-radius: 50%;
   background-color: #004200;
 
   transition: background-color 250ms ease-in;

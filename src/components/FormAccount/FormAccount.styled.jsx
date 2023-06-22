@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { Form, Field, ErrorMessage } from 'formik';
+import { Button } from 'components/Base/Buttons.styled';
 
 export const FormStyled = styled(Form)`
   text-align: center;
@@ -27,8 +28,7 @@ export const FieldName = styled.span`
   width: 80px;
   text-align: right;
   margin-right: 16px;
- 
-`
+`;
 
 export const Label = styled.label`
   display: flex;
@@ -36,7 +36,6 @@ export const Label = styled.label`
   position: relative;
   width: 100%;
   margin-top: 16px;
-   
 `;
 
 export const Input = styled(Field)`
@@ -46,6 +45,13 @@ export const Input = styled(Field)`
     outline: 1px solid green;
   }
 `;
+
+export const FormButton = styled(Button)`
+    border-radius: 4px;
+    margin-left: 16px;
+    width: 100px;
+`;
+    
 export const ErrorStyled = styled(ErrorMessage)`
   position: absolute;
   left: 100px;

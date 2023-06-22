@@ -6,7 +6,7 @@ import Modal from 'components/Modal/Modal';
 import { Loader } from 'components/Loader/Loader';
 import { FormUserName } from 'components/FormAccount/FormUserName';
 
-export default function AccountPage({ user, isLoggedIn }) {
+export default function AccountPage({ email, setUser, isLoggedIn }) {
   const { isLoading } = useContext(TaskContext);
 
   return (
@@ -14,7 +14,7 @@ export default function AccountPage({ user, isLoggedIn }) {
       {!isLoggedIn && <Navigate to="/" />}
 
       <Box mt={5} mx="auto">
-        <FormUserName />
+        <FormUserName email={email} setUser={setUser} />
       </Box>
 
       {isLoading && (

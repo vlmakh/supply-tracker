@@ -4,7 +4,13 @@ import { updateUserName, updateUserPass } from 'utils/operations';
 import * as yup from 'yup';
 import { useState } from 'react';
 import { MdOutlineArrowBack } from 'react-icons/md';
-import { FormStyled, Label, Input, ErrorStyled } from './FormAccount.styled';
+import {
+  FormStyled,
+  Label,
+  Input,
+  ErrorStyled,
+  FormButton,
+} from './FormAccount.styled';
 
 let schemaName = yup.object().shape({
   name: yup.string().min(4).required(),
@@ -63,9 +69,9 @@ export const FormUserName = ({ setUser, email }) => {
             <Input name="name" type="text" placeholder="New name"></Input>
             <ErrorStyled component="div" name="name" />
 
-            <button type="submit" disabled={isNameUpdating}>
+            <FormButton type="submit" disabled={isNameUpdating}>
               {isNameUpdating ? 'Please wait...' : 'Update name'}
-            </button>
+            </FormButton>
           </Label>
         </FormStyled>
       </Formik>
@@ -99,9 +105,9 @@ export const FormUserName = ({ setUser, email }) => {
             ></Input>
             <ErrorStyled component="div" name="passwordConfirm" />
 
-            <button type="submit" disabled={isPassUpdating}>
+            <FormButton type="submit" disabled={isPassUpdating}>
               {isPassUpdating ? 'Please wait...' : 'Update pass'}
-            </button>
+            </FormButton>
           </Label>
         </FormStyled>
       </Formik>

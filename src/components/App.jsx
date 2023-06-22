@@ -136,6 +136,8 @@ export const App = () => {
               element={
                 <AccountPage
                   isLoggedIn={isLoggedIn}
+                  email={email}
+                  setUser={setUser}
                   // isLoading={isLoading}
                   // setIsLoading={setIsLoading}
                 />
