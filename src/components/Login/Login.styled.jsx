@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { Form, Field, ErrorMessage } from 'formik';
 import { NavLink } from 'react-router-dom';
+import { Button } from 'components/Base/Buttons.styled';
 
 export const HomeBox = styled.div`  
     width: 400px;
@@ -35,17 +36,18 @@ export const MenuLink = styled(NavLink)`
   padding: 16px 0;
   font-size: 16px;
   font-weight: 700;
-  color: #212121;
+  color: white;
   border-bottom: ${p => p.theme.borders.dark};
   text-decoration: none;
   transition: background-color 250ms linear;
+  background-color: lightgreen;
 
   &.active {
-    background-color: ${p => p.theme.colors.bcgLink};
+    background-color: ${p => p.theme.colors.second};
   }
 
   :hover {
-    background-color: ${p => p.theme.colors.bcgSec};
+    background-color: ${p => p.theme.colors.accent};
   }
 `;
 
@@ -98,24 +100,8 @@ export const StyledErrorMsg = styled(ErrorMessage)`
   color: ${p => p.theme.colors.textPrim};
 `;
 
-export const Button = styled.button`
-  cursor: pointer;
+export const LoginButton = styled(Button)`
   width: 100%;
-  padding: 8px;
-  font-size: 16px;
-  font-weight: 600;
   border-radius: 4px;
-  border: none;
-  margin: 0 auto;
-  background-color: darkgrey;
-  transition: background-color 250ms linear;
-
-  :hover,
-  :focus {
-    background-color: ${p => (p.disabled ? 'darkgrey': 'grey')};
-  }
-
-  :focus-visible {
-    outline: none;
-  }
+  margin: 0 auto; 
 `;
