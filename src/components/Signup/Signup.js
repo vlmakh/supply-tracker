@@ -1,5 +1,5 @@
 import {
-  Button,
+  LoginButton,
   StyledForm,
   StyledField,
   Label,
@@ -83,9 +83,9 @@ export default function Signup() {
           <StyledErrorMsg component="div" name="passwordConfirm" />
         </Label>
 
-        <Button type="submit" disabled={isProcessing}>
+        <LoginButton type="submit" disabled={isProcessing}>
           {isProcessing ? 'Please wait...' : 'Register'}
-        </Button>
+        </LoginButton>
       </StyledForm>
     </Formik>
   );

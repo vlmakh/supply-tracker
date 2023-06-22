@@ -3,7 +3,7 @@ import {
   StyledField,
   Label,
   StyledErrorMsg,
-  Button,
+  LoginButton,
 } from './Login.styled';
 import { Formik } from 'formik';
 import { login } from 'utils/operations';
@@ -61,9 +61,9 @@ export default function Login({ setUser, setToken, setIsLoggedIn }) {
           <StyledErrorMsg component="div" name="password" />
         </Label>
 
-        <Button type="submit" disabled={isProcessing}>
+        <LoginButton type="submit" disabled={isProcessing}>
           {isProcessing ? 'Please wait...' : 'Login'}
-        </Button>
+        </LoginButton>
       </StyledForm>
     </Formik>
   );

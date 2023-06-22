@@ -1,9 +1,8 @@
-import { FormStyled, FormTitle } from './FormTask.styled';
-
+import { FormStyled, FormTitle, AddTaskFormButton } from './FormTask.styled';
 import { useState, useEffect } from 'react';
 import { Formik } from 'formik';
 import { IoClose } from 'react-icons/io5';
-import { CloseButton, AddTaskFormButton } from 'components/Base/Buttons.styled';
+import { CloseButton } from 'components/Base/Buttons.styled';
 import { schema } from './yupSchema';
 import { FormCommon } from './FormCommon';
 

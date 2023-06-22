@@ -45,9 +45,11 @@ export const App = () => {
         setUser(data.name);
         setEmail(data.email);
         setIsLoggedIn(true);
-        setIsLoading(false);
       })
-      .catch(error => {});
+      .catch(error => {})
+      .finally(() => {
+        setIsLoading(false);
+      });
   });
 
   useEffect(() => {
@@ -122,13 +124,7 @@ export const App = () => {
 
             <Route
               path="tasks"
-              element={
-                <TasksPage
-                  isLoggedIn={isLoggedIn}
-                  // isLoading={isLoading}
-                  // setIsLoading={setIsLoading}
-                />
-              }
+              element={<TasksPage isLoggedIn={isLoggedIn} />}
             />
 
             <Route
@@ -136,8 +132,8 @@ export const App = () => {
               element={
                 <AccountPage
                   isLoggedIn={isLoggedIn}
-                  // isLoading={isLoading}
-                  // setIsLoading={setIsLoading}
+                  email={email}
+                  setUser={setUser}
                 />
               }
             />

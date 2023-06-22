@@ -56,7 +56,6 @@ export const SharedLayout = ({
       setIsLoggedIn(false);
       setToken(null);
     });
-    // .finally(() => setIsLoading(false));
   };
 
   return (
@@ -66,7 +65,7 @@ export const SharedLayout = ({
           {isLoggedIn ? (
             <>
               {tasks && (
-                <TaskCalc to="/">
+                <TaskCalc to="/tasks">
                   {tasks.length} / <Green>{calcCompleted(tasks) ?? '0'} </Green>
                 </TaskCalc>
               )}
