@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { Form, Field, ErrorMessage } from 'formik';
 import DatePicker from 'react-datepicker';
+import { Button } from 'components/Base/Buttons.styled';
 
 export const FormStyled = styled(Form)`
   text-align: center;
@@ -30,8 +31,7 @@ export const FieldName = styled.span`
   width: 80px;
   text-align: right;
   margin-right: 16px;
- 
-`
+`;
 
 export const FormField = styled.div`
   display: flex;
@@ -39,7 +39,6 @@ export const FormField = styled.div`
   position: relative;
   width: 100%;
   margin-top: 16px;
-   
 `;
 
 export const Input = styled(Field)`
@@ -88,7 +87,6 @@ export const Comments = styled(Field)`
   }
 `;
 
-
 export const FormBtn = styled.button`
   display: flex;
   align-items: center;
@@ -119,4 +117,10 @@ export const ErrorStyled = styled(ErrorMessage)`
   font-size: 10px;
   background-color: white;
   color: #212121;
+`;
+
+export const AddTaskFormButton = styled(Button)`
+  width: 50%;
+  margin: 16px auto 0;
+  border-radius: 4px;
 `;

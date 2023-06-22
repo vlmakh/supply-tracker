@@ -27,43 +27,11 @@ export const Button = styled.button`
   }
 `;
 
-export const AddTaskButton = styled.button`
+export const AddTaskButton = styled(Button)`
   position: fixed;
   right: 32px;
   bottom: 40px;
-
-  display: grid;
-  place-content: center;
-  color: white;
-  font-weight: 700;
-  cursor: pointer;
-  padding: 8px;
-  border: none;
   border-radius: 50%;
-  background-color: #004200;
-
-  transition: background-color 250ms ease-in;
-
-  &:hover {
-    background-color: green;
-  }
-`;
-
-export const AddTaskFormButton = styled.button`
-  width: 50%;
-  font-weight: 700;
-  cursor: pointer;
-  margin-top: 16px;
-  padding: 4px;
-  border-radius: 4px;
-  background-color: #004200;
-  color: white;
-
-  transition: background-color 250ms ease-in;
-
-  &:hover {
-    background-color: green;
-  }
 `;
 
 export const CloseButton = styled.button`
@@ -80,5 +48,3 @@ export const CloseButton = styled.button`
     color: green;
   }
 `;
-
-
