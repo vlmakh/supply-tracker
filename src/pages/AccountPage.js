@@ -4,6 +4,7 @@ import { TaskContext } from 'utils/context';
 import { useContext } from 'react';
 import Modal from 'components/Modal/Modal';
 import { Loader } from 'components/Loader/Loader';
+import { FormUserName } from 'components/FormAccount/FormUserName';
 
 export default function AccountPage({ user, isLoggedIn }) {
   const { isLoading } = useContext(TaskContext);
@@ -13,7 +14,7 @@ export default function AccountPage({ user, isLoggedIn }) {
       {!isLoggedIn && <Navigate to="/" />}
 
       <Box mt={5} mx="auto">
-        User Account
+        <FormUserName />
       </Box>
 
       {isLoading && (
