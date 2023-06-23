@@ -47,7 +47,7 @@ export const MenuLink = styled(NavLink)`
   }
 
   :hover {
-    background-color: ${p => p.theme.colors.accent};
+    background-color: ${p => p.theme.colors.second};
   }
 `;
 
