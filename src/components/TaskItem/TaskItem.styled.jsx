@@ -101,10 +101,7 @@ export const Days = styled.td`
 
 export const Delete = styled.td`
   width: 24px;
-
-  @media screen and (max-width: 1199.98px) {
-    display: none;
-  }
+  text-align: right;
 `;
 
 export const BtnCopy = styled(TDButton)`

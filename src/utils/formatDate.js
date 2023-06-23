@@ -21,3 +21,19 @@ export const formatDateCut = date => {
     return format(Date.parse(date), 'yyyy-MM-dd');
   }
 };
+
+export const formatDateMS = date => {
+  if (date) {
+    return format(Date.parse(date), 'T');
+  }
+
+  return Math.round(date);
+};
+
+export const formatDateDays = date => {
+  if (date < 0 || !date) {
+    return 0;
+  }
+
+  return Math.round(date / 86_400_000);
+};

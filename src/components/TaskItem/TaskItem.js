@@ -13,19 +13,24 @@ import {
   Freight,
   Delete,
   BtnCopy,
-  BtnDel,
+  // BtnDel,
   BtnName,
 } from './TaskItem.styled';
 import { useState, useContext } from 'react';
-import { updateTaskStatus, deleteTask } from 'utils/operations';
+import { updateTaskStatus } from 'utils/operations';
 import { FaCheck, FaArrowAltCircleRight } from 'react-icons/fa';
 import { MdContentCopy } from 'react-icons/md';
-import { MdDeleteOutline } from 'react-icons/md';
+// import { MdDeleteOutline } from 'react-icons/md';
 import Modal from 'components/Modal/Modal';
 import { FormTaskEdit } from 'components/FormTask/FormTaskEdit';
 import { FormTaskCopy } from 'components/FormTask/FormTaskCopy';
 import { TaskContext } from 'utils/context';
-import { formatDate, formatDateCut } from 'utils/formatDate';
+import {
+  formatDate,
+  formatDateCut,
+  formatDateMS,
+  formatDateDays,
+} from 'utils/formatDate';
 import { Loader } from 'components/Loader/Loader';
 
 export const TaskItem = ({ task, idx }) => {
@@ -64,14 +69,14 @@ export const TaskItem = ({ task, idx }) => {
     setShowFormTaskEdit(!showFormTaskEdit);
   };
 
-  const handleDelete = id => {
-    const result = window.confirm('Confirm task delete?');
-    if (result) {
-      deleteTask(id)
-        .then(dispatch({ type: 'deleteTask', taskId: id }))
-        .catch(err => console.log(err.message));
-    }
-  };
+  // const handleDelete = id => {
+  //   const result = window.confirm('Confirm task delete?');
+  //   if (result) {
+  //     deleteTask(id)
+  //       .then(dispatch({ type: 'deleteTask', taskId: id }))
+  //       .catch(err => console.log(err.message));
+  //   }
+  // };
 
   return (
     <>
@@ -135,9 +140,12 @@ export const TaskItem = ({ task, idx }) => {
         </Data>
 
         <Delete>
-          <BtnDel type="button" onClick={() => handleDelete(task._id)}>
+          {/* <BtnDel type="button" onClick={() => handleDelete(task._id)}>
             <MdDeleteOutline size="18" />
-          </BtnDel>
+          </BtnDel> */}
+          {formatDateDays(
+            formatDateMS(task.dateETA) - formatDateMS(task.dateOrder)
+          )}
         </Delete>
       </Task>
 
