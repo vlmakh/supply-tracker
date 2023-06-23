@@ -11,7 +11,7 @@ import {
   Data,
   Supplier,
   Freight,
-  Delete,
+  Days,
   BtnCopy,
   // BtnDel,
   BtnName,
@@ -139,14 +139,14 @@ export const TaskItem = ({ task, idx }) => {
           {formatDate(task.dateETA)}
         </Data>
 
-        <Delete>
+        <Days>
           {/* <BtnDel type="button" onClick={() => handleDelete(task._id)}>
             <MdDeleteOutline size="18" />
           </BtnDel> */}
           {formatDateDays(
             formatDateMS(task.dateETA) - formatDateMS(task.dateOrder)
           )}
-        </Delete>
+        </Days>
       </Task>
 
       {showFormTaskEdit && (

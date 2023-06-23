@@ -92,14 +92,6 @@ export const Data = styled.td`
 `;
 
 export const Days = styled.td`
-  text-align: center;
-
-  @media screen and (max-width: 1199.98px) {
-    display: none;
-  }
-`;
-
-export const Delete = styled.td`
   width: 24px;
   text-align: right;
 `;
