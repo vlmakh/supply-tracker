@@ -40,7 +40,7 @@ export const MenuLink = styled(NavLink)`
   border-bottom: ${p => p.theme.borders.dark};
   text-decoration: none;
   transition: background-color 250ms linear;
-  background-color: lightgreen;
+  background-color: ${p => p.theme.colors.accent};
 
   &.active {
     background-color: ${p => p.theme.colors.second};
@@ -104,4 +104,9 @@ export const LoginButton = styled(Button)`
   width: 100%;
   border-radius: 4px;
   margin: 0 auto; 
+  background-color: ${p => p.disabled && 'grey'};
+
+   &:hover {
+    background-color: ${p => p.disabled && 'grey'};
+  }
 `;
