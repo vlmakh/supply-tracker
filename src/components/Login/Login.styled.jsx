@@ -101,6 +101,8 @@ export const StyledErrorMsg = styled(ErrorMessage)`
 `;
 
 export const LoginButton = styled(Button)`
+  display: flex;
+  justify-content: center;
   width: 100%;
   border-radius: 4px;
   margin: 0 auto; 

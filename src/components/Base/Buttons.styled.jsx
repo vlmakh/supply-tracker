@@ -11,8 +11,7 @@ export const TDButton = styled.button`
 `;
 
 export const Button = styled.button`
-  display: grid;
-  place-content: center;
+  
   color: white;
   font-weight: 700;
   cursor: pointer;
@@ -28,6 +27,8 @@ export const Button = styled.button`
 `;
 
 export const AddTaskButton = styled(Button)`
+  display: grid;
+  place-content: center;
   position: fixed;
   right: 32px;
   bottom: 40px;

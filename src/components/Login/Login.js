@@ -9,6 +9,7 @@ import { Formik } from 'formik';
 import { login } from 'utils/operations';
 import * as yup from 'yup';
 import { useState } from 'react';
+import { LoginLoader } from 'components/Loader/LoginLoader';
 
 let schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -62,7 +63,8 @@ export default function Login({ setUser, setToken, setIsLoggedIn }) {
         </Label>
 
         <LoginButton type="submit" disabled={isProcessing}>
-          {isProcessing ? 'Please wait...' : 'Login'}
+          {isProcessing ? 'Please wait...' : 'Login'}{' '}
+          <LoginLoader isProcessing={isProcessing} />
         </LoginButton>
       </StyledForm>
     </Formik>
