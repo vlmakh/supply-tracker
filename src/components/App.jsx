@@ -18,12 +18,12 @@ const TasksPage = lazy(() => import('pages/TasksPage'));
 const AccountPage = lazy(() => import('pages/AccountPage'));
 const ErrorPage = lazy(() => import('pages/ErrorPage'));
 
-const savedData = JSON.parse(localStorage.getItem('splmgr'));
+const savedToken = JSON.parse(localStorage.getItem('splmgr'));
 
 export const App = () => {
   const [user, setUser] = useState(null);
   const [email, setEmail] = useState(null);
-  const [token, setToken] = useState(savedData ?? null);
+  const [token, setToken] = useState(savedToken ?? null);
   const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [tasks, dispatch] = useReducer(reducer, []);
@@ -113,7 +113,6 @@ export const App = () => {
                 element={
                   <Login
                     setUser={setUser}
-                    token={token}
                     setToken={setToken}
                     setIsLoggedIn={setIsLoggedIn}
                   />
