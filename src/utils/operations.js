@@ -78,10 +78,9 @@ export const updateUserName = async ({ name, email }) => {
   }
 };
 
-export const updateUserPass = async ({ email, password }) => {
+export const updateUserPass = async ({ password }) => {
   try {
     const response = await axios.post(`api/users/updatePass`, {
-      email,
       password,
     });
 

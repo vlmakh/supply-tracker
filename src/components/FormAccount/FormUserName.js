@@ -47,7 +47,7 @@ export const FormUserName = ({ setUser, email }) => {
   const handleUpdatePass = (values, { resetForm }) => {
     setIsPassUpdating(true);
 
-    updateUserPass({ ...values, email })
+    updateUserPass(values)
       .then(() => {
         resetForm();
       })
