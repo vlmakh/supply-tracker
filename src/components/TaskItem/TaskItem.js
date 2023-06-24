@@ -31,13 +31,14 @@ import {
   formatDateMS,
   formatDateDays,
 } from 'utils/formatDate';
-import { Loader } from 'components/Loader/Loader';
+import { TaskLoader } from 'components/Loader/TaskLoader';
 
 export const TaskItem = ({ task, idx }) => {
   const [status, setStatus] = useState(task.completed);
   const [showFormTaskEdit, setShowFormTaskEdit] = useState(false);
   const [showFormTaskCopy, setShowFormTaskCopy] = useState(false);
-  const { dispatch, isLoading } = useContext(TaskContext);
+  const { dispatch } = useContext(TaskContext);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const formatSupplier = name => {
     if (name && name.length > 21) {
@@ -47,18 +48,21 @@ export const TaskItem = ({ task, idx }) => {
 
   const handleCompleteTask = (id, status) => {
     if (formatDateCut(task.dateETA) < formatDateCut(task.dateOrder)) {
-      alert('ETA date must be later than order date');
+      alert("ETA date can't be earlier than order date");
       return;
     }
 
-    // setIsLoading(true);
+    setIsProcessing(true);
+
     updateTaskStatus(id, status)
       .then(data => {
         setStatus(!status);
         dispatch({ type: 'editTask', newTask: data, taskId: id });
-        // setIsLoading(false);
       })
-      .catch(e => console.log(e.message));
+      .catch(e => console.log(e.message))
+      .finally(() => {
+        setIsProcessing(false);
+      });
   };
 
   const handleCopyTask = () => {
@@ -89,11 +93,17 @@ export const TaskItem = ({ task, idx }) => {
             type="button"
             onClick={() => handleCompleteTask(task._id, status)}
           >
-            {status ? (
+            {/* {status ? (
               <FaCheck size="18" />
             ) : (
               <FaArrowAltCircleRight size="18" />
-            )}
+            )} */}
+
+            {status && !isProcessing && <FaCheck size="18" />}
+
+            {!status && !isProcessing && <FaArrowAltCircleRight size="18" />}
+
+            <TaskLoader isProcessing={isProcessing} />
           </CheckBtn>
         </Exec>
 
@@ -158,12 +168,6 @@ export const TaskItem = ({ task, idx }) => {
       {showFormTaskCopy && (
         <Modal onClose={handleCopyTask}>
           <FormTaskCopy handleCopyTask={handleCopyTask} task={task} />
-        </Modal>
-      )}
-
-      {isLoading && (
-        <Modal>
-          <Loader />
         </Modal>
       )}
     </>
