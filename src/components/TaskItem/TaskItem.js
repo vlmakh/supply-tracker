@@ -93,12 +93,6 @@ export const TaskItem = ({ task, idx }) => {
             type="button"
             onClick={() => handleCompleteTask(task._id, status)}
           >
-            {/* {status ? (
-              <FaCheck size="18" />
-            ) : (
-              <FaArrowAltCircleRight size="18" />
-            )} */}
-
             {status && !isProcessing && <FaCheck size="18" />}
 
             {!status && !isProcessing && <FaArrowAltCircleRight size="18" />}
