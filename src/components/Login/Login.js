@@ -16,7 +16,7 @@ let schema = yup.object().shape({
   password: yup.string().min(6).required(),
 });
 
-export default function Login({ setUser, setToken, setIsLoggedIn }) {
+export default function Login({ setToken, setIsLoggedIn }) {
   const [isProcessing, setIsProcessing] = useState(false);
 
   const handleSubmit = (values, { resetForm }) => {
@@ -26,7 +26,6 @@ export default function Login({ setUser, setToken, setIsLoggedIn }) {
       .then(data => {
         resetForm();
         setToken(data.token);
-        setUser(data.user.name);
         setIsLoggedIn(true);
       })
       .catch(error => {})

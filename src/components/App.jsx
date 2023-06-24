@@ -21,8 +21,7 @@ const ErrorPage = lazy(() => import('pages/ErrorPage'));
 const savedToken = JSON.parse(localStorage.getItem('splmgr'));
 
 export const App = () => {
-  const [user, setUser] = useState(null);
-  const [email, setEmail] = useState(null);
+  const [user, setUser] = useState({});
   const [token, setToken] = useState(savedToken ?? null);
   const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -40,27 +39,27 @@ export const App = () => {
   const [endDate, setEndDate] = useState(today);
 
   useEffect(() => {
+    setToken(token);
+
+    localStorage.setItem('splmgr', JSON.stringify(token));
+
     checkCurrentUser(token)
       .then(data => {
-        setUser(data.name);
-        setEmail(data.email);
-        setIsLoggedIn(true);
+        if (data.name) {
+          setUser({ ...data });
+          setIsLoggedIn(true);
+        }
       })
       .catch(error => {})
       .finally(() => {
         setIsLoading(false);
       });
-  });
-
-  useEffect(() => {
-    setToken(token);
-    setIsLoading(false);
-    localStorage.setItem('splmgr', JSON.stringify(token));
   }, [token]);
 
   useEffect(() => {
     if (isLoggedIn) {
       setIsLoading(true);
+
       getTasksByRange(firstOfMonth, today)
         .then(tasks => {
           dispatch({ type: 'getTasks', tasks });
@@ -74,6 +73,7 @@ export const App = () => {
 
   const hadleGetTasksByRange = (start, end) => {
     setIsLoading(true);
+
     getTasksByRange(start, end)
       .then(tasks => {
         dispatch({ type: 'getTasks', tasks });
@@ -95,7 +95,6 @@ export const App = () => {
             element={
               <SharedLayout
                 user={user}
-                email={email}
                 setIsLoggedIn={setIsLoggedIn}
                 isLoggedIn={isLoggedIn}
                 startDate={startDate}
@@ -104,6 +103,7 @@ export const App = () => {
                 setEndDate={setEndDate}
                 hadleGetTasksByRange={hadleGetTasksByRange}
                 setToken={setToken}
+                setUser={setUser}
               />
             }
           >
@@ -112,7 +112,6 @@ export const App = () => {
                 index
                 element={
                   <Login
-                    setUser={setUser}
                     setToken={setToken}
                     setIsLoggedIn={setIsLoggedIn}
                   />
@@ -131,7 +130,7 @@ export const App = () => {
               element={
                 <AccountPage
                   isLoggedIn={isLoggedIn}
-                  email={email}
+                  email={user.email}
                   setUser={setUser}
                 />
               }

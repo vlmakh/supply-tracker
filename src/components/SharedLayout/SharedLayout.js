@@ -22,11 +22,9 @@ import { Box } from 'components/Base/Box';
 import { UserMenu } from 'components/UserMenu/UserMenu';
 import { HiOutlineUserCircle } from 'react-icons/hi';
 import { MdRestartAlt } from 'react-icons/md';
-// import {  } from 'components/Base/Buttons.styled';
 
 export const SharedLayout = ({
   user,
-  email,
   isLoggedIn,
   setIsLoggedIn,
   startDate,
@@ -35,6 +33,7 @@ export const SharedLayout = ({
   setEndDate,
   hadleGetTasksByRange,
   setToken,
+  setUser,
 }) => {
   const { tasks, setIsLoading } = useContext(TaskContext);
   const today = new Date();
@@ -52,10 +51,14 @@ export const SharedLayout = ({
 
   const handleLogout = () => {
     setIsLoading(true);
-    logout().then(() => {
-      setIsLoggedIn(false);
-      setToken(null);
-    });
+    logout()
+      .then(() => {
+        setToken(null);
+      })
+      .finally(() => {
+        setUser({});
+        setIsLoggedIn(false);
+      });
   };
 
   return (
@@ -102,8 +105,8 @@ export const SharedLayout = ({
 
                 <UserMenu
                   handleLogout={handleLogout}
-                  user={user}
-                  email={email}
+                  name={user.name}
+                  email={user.email}
                 />
               </UserMenuBtn>
             </>

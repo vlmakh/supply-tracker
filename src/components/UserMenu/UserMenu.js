@@ -3,7 +3,7 @@ import { IoMdLogOut } from 'react-icons/io';
 import { FaUserCircle } from 'react-icons/fa';
 import { MdOutlineManageAccounts } from 'react-icons/md';
 
-export const UserMenu = ({ handleLogout, user, email }) => {
+export const UserMenu = ({ handleLogout, name, email }) => {
   return (
     <Menu>
       <UserEmail>
@@ -13,7 +13,7 @@ export const UserMenu = ({ handleLogout, user, email }) => {
 
       <Logout to="/account">
         <MdOutlineManageAccounts size="24" />
-        {user}
+        {name}
       </Logout>
 
       <Logout to="/" onClick={handleLogout}>

@@ -32,7 +32,10 @@ export const FormUserName = ({ setUser, email }) => {
 
     updateUserName({ ...values, email })
       .then(data => {
-        setUser(data.name);
+        setUser(prevState => ({
+          ...prevState,
+          name: data.name,
+        }));
         resetForm();
       })
       .catch(error => {})
