@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { Form, Field, ErrorMessage } from 'formik';
 import { Button } from 'components/Base/Buttons.styled';
+import { NavLink } from 'react-router-dom';
 
 export const FormStyled = styled(Form)`
   text-align: center;
@@ -18,10 +19,10 @@ export const FormStyled = styled(Form)`
   }
 `;
 
-export const FormTitle = styled.p`
+export const FormTitle = styled.h4`
   font-size: 16px;
   font-weight: 700;
-  margin-bottom: 16px;
+  margin-top: 16px;
 `;
 
 export const FieldName = styled.span`
@@ -62,3 +63,18 @@ export const ErrorStyled = styled(ErrorMessage)`
   background-color: white;
   color: #212121;
 `;
+
+export const BackLink = styled(NavLink)`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  text-decoration: none;
+  color: #004200;
+
+  transition: color 250ms ease-in;
+
+  &:hover {
+    color: green;
+  }
+`
