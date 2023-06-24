@@ -30,7 +30,7 @@ export const FormUserName = ({ setUser, email }) => {
   const handleUpdateName = (values, { resetForm }) => {
     setIsNameUpdating(true);
 
-    updateUserName({ ...values, email })
+    updateUserName(values)
       .then(data => {
         setUser(prevState => ({
           ...prevState,

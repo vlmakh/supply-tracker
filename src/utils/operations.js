@@ -62,9 +62,9 @@ export const logout = async () => {
   }
 };
 
-export const updateUserName = async ({ name, email }) => {
+export const updateUserName = async ({ name }) => {
   try {
-    const response = await axios.post(`api/users/updateName`, { email, name });
+    const response = await axios.post(`api/users/updateName`, { name });
 
     toast.success(() => (
       <span>
