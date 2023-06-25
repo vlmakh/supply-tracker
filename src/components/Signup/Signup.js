@@ -10,6 +10,7 @@ import * as yup from 'yup';
 import { signup } from 'utils/operations';
 import { useState } from 'react';
 import { LoginLoader } from 'components/Loader/LoginLoader';
+import { t } from 'i18next';
 
 let schema = yup.object().shape({
   name: yup.string().required(),
@@ -17,7 +18,7 @@ let schema = yup.object().shape({
   password: yup.string().min(6).required(),
   passwordConfirm: yup
     .string()
-    .oneOf([yup.ref('password'), null], 'Passwords must match'),
+    .oneOf([yup.ref('password'), null], `${t('login.passMustMatch')}`),
 });
 
 export default function Signup() {
@@ -57,13 +58,13 @@ export default function Signup() {
         </Label>
 
         <Label htmlFor="name">
-          <span>name</span>
+          <span>{t('login.name')}</span>
           <StyledField name="name" type="text" placeholder=" "></StyledField>
           <StyledErrorMsg component="div" name="name" />
         </Label>
 
         <Label htmlFor="password">
-          <span>password </span>
+          <span>{t('login.pass')}</span>
           <StyledField
             name="password"
             type="password"
@@ -74,7 +75,7 @@ export default function Signup() {
         </Label>
 
         <Label htmlFor="passwordConfirm">
-          <span>re-password </span>
+          <span>{t('login.rePass')}</span>
           <StyledField
             name="passwordConfirm"
             type="password"
@@ -85,7 +86,7 @@ export default function Signup() {
         </Label>
 
         <LoginButton type="submit" disabled={isProcessing}>
-          {isProcessing ? 'Please wait...' : 'Register'}{' '}
+          {isProcessing ? `${t('buttons.wait')}` : `${t('buttons.signup')}`}{' '}
           <LoginLoader isProcessing={isProcessing} />
         </LoginButton>
       </StyledForm>

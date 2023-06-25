@@ -28,7 +28,7 @@ export const FormTitle = styled.p`
 `;
 
 export const FieldName = styled.span`
-  width: 80px;
+  width: 108px;
   text-align: right;
   margin-right: 16px;
 `;

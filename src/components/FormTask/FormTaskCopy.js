@@ -7,6 +7,7 @@ import { schema } from './yupSchema';
 import { FormCommon } from './FormCommon';
 import { addTask } from 'utils/operations';
 import { TaskContext } from 'utils/context';
+import { t } from 'i18next';
 
 export const FormTaskCopy = ({ handleCopyTask, task }) => {
   const today = new Date();
@@ -84,11 +85,11 @@ export const FormTaskCopy = ({ handleCopyTask, task }) => {
           <IoClose size="20" />
         </CloseButton>
 
-        <FormTitle>Add new task</FormTitle>
+        <FormTitle>{t('formTask.add')}</FormTitle>
 
         <FormCommon dates={dates} setDates={setDates} />
 
-        <AddTaskFormButton type="submit">Add</AddTaskFormButton>
+        <AddTaskFormButton type="submit">{t('buttons.add')}</AddTaskFormButton>
       </FormStyled>
     </Formik>
   );

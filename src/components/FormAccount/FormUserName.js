@@ -2,7 +2,6 @@ import { Formik } from 'formik';
 import { updateUserName } from 'utils/operations';
 import * as yup from 'yup';
 import { useState } from 'react';
-
 import {
   FormStyled,
   FormTitle,
@@ -11,6 +10,7 @@ import {
   ErrorStyled,
   FormButton,
 } from './FormAccount.styled';
+import { t } from 'i18next';
 
 let schemaName = yup.object().shape({
   name: yup.string().min(4).required(),
@@ -38,8 +38,6 @@ export const FormUserName = ({ setUser, email }) => {
 
   return (
     <>
-      <FormTitle>Change name</FormTitle>
-
       <Formik
         onSubmit={handleUpdateName}
         initialValues={{
@@ -48,12 +46,20 @@ export const FormUserName = ({ setUser, email }) => {
         validationSchema={schemaName}
       >
         <FormStyled>
+          <FormTitle>{t('account.changeName')}</FormTitle>
+
           <Label htmlFor="name">
-            <Input name="name" type="text" placeholder="New name"></Input>
+            <Input
+              name="name"
+              type="text"
+              placeholder={t('account.newName')}
+            ></Input>
             <ErrorStyled component="div" name="name" />
 
             <FormButton type="submit" disabled={isNameUpdating}>
-              {isNameUpdating ? 'Please wait...' : 'Update name'}
+              {isNameUpdating
+                ? `${t('buttons.wait')}`
+                : `${t('buttons.update')}`}
             </FormButton>
           </Label>
         </FormStyled>

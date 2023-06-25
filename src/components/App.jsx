@@ -2,7 +2,7 @@ import { ThemeProvider } from '@emotion/react';
 import { theme } from 'utils/theme';
 import { SharedLayout } from './SharedLayout/SharedLayout';
 import { Routes, Route } from 'react-router-dom';
-import { useState, useEffect, lazy, useReducer, useMemo } from 'react';
+import { useState, useEffect, lazy, useReducer, useMemo, useCallback } from 'react';
 import { reducer } from 'utils/reducer';
 import { checkCurrentUser } from 'utils/operations';
 import { Toaster } from 'react-hot-toast';
@@ -10,6 +10,7 @@ import Modal from 'components/Modal/Modal';
 import { Loader } from 'components/Loader/Loader';
 import { getTasksByRange } from 'utils/operations';
 import { TaskContext } from 'utils/context';
+import { useTranslation } from 'react-i18next';
 
 const HomePage = lazy(() => import('pages/HomePage'));
 const Login = lazy(() => import('components/Login/Login'));
@@ -19,13 +20,16 @@ const AccountPage = lazy(() => import('pages/AccountPage'));
 const ErrorPage = lazy(() => import('pages/ErrorPage'));
 
 const savedToken = JSON.parse(localStorage.getItem('splmgr'));
+const savedLang = JSON.parse(localStorage.getItem('splmgr-lang'));
 
 export const App = () => {
   const [user, setUser] = useState({});
   const [token, setToken] = useState(savedToken ?? null);
+  const [currentLang, setCurrentLang] = useState(savedLang ?? 'en');
   const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [tasks, dispatch] = useReducer(reducer, []);
+
 
   const today = useMemo(() => new Date(), []);
   const getYear = today.getFullYear();
@@ -37,6 +41,14 @@ export const App = () => {
 
   const [startDate, setStartDate] = useState(firstOfMonth);
   const [endDate, setEndDate] = useState(today);
+
+  const { i18n } = useTranslation();
+  const changeLanguage = useCallback(
+    (language) => {
+      i18n.changeLanguage(language);
+    },
+    [i18n]
+  );
 
   useEffect(() => {
     setToken(token);
@@ -71,6 +83,13 @@ export const App = () => {
     }
   }, [firstOfMonth, isLoggedIn, today]);
 
+  useEffect(() => {
+    localStorage.setItem('splmgr-lang', JSON.stringify(currentLang));
+
+    changeLanguage(currentLang);
+  }, [changeLanguage, currentLang])
+
+  
   const hadleGetTasksByRange = (start, end) => {
     setIsLoading(true);
 
@@ -87,7 +106,7 @@ export const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <TaskContext.Provider
-        value={{ dispatch, tasks, isLoading, setIsLoading }}
+        value={{ dispatch, tasks, isLoading, setIsLoading, currentLang }}
       >
         <Routes>
           <Route
@@ -132,6 +151,8 @@ export const App = () => {
                   isLoggedIn={isLoggedIn}
                   email={user.email}
                   setUser={setUser}
+                  currentLang={currentLang}
+                  setCurrentLang={setCurrentLang}
                 />
               }
             />

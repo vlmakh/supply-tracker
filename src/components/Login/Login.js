@@ -10,6 +10,7 @@ import { login } from 'utils/operations';
 import * as yup from 'yup';
 import { useState } from 'react';
 import { LoginLoader } from 'components/Loader/LoginLoader';
+import { t } from 'i18next';
 
 let schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -51,7 +52,7 @@ export default function Login({ setToken, setIsLoggedIn }) {
         </Label>
 
         <Label htmlFor="password">
-          <span>password </span>
+          <span>{t('login.pass')}</span>
           <StyledField
             name="password"
             type="password"
@@ -62,7 +63,7 @@ export default function Login({ setToken, setIsLoggedIn }) {
         </Label>
 
         <LoginButton type="submit" disabled={isProcessing}>
-          {isProcessing ? 'Please wait...' : 'Login'}{' '}
+          {isProcessing ? `${t('buttons.wait')}` : `${t('buttons.login')}`}{' '}
           <LoginLoader isProcessing={isProcessing} />
         </LoginButton>
       </StyledForm>

@@ -22,6 +22,8 @@ import { Box } from 'components/Base/Box';
 import { UserMenu } from 'components/UserMenu/UserMenu';
 import { HiOutlineUserCircle } from 'react-icons/hi';
 import { MdRestartAlt } from 'react-icons/md';
+import uk from 'date-fns/locale/uk';
+import { registerLocale } from 'react-datepicker';
 
 export const SharedLayout = ({
   user,
@@ -35,8 +37,9 @@ export const SharedLayout = ({
   setToken,
   setUser,
 }) => {
-  const { tasks, setIsLoading } = useContext(TaskContext);
+  const { tasks, setIsLoading, currentLang } = useContext(TaskContext);
   const today = new Date();
+  registerLocale('uk', uk);
 
   const handleApplyRange = () => {
     hadleGetTasksByRange(startDate, endDate);
@@ -83,6 +86,7 @@ export const SharedLayout = ({
                   startDate={startDate}
                   endDate={endDate}
                   calendarStartDay={1}
+                  locale={currentLang}
                 />
                 <DatePickerStyled
                   dateFormat="dd.MM.yyyy"
@@ -93,6 +97,7 @@ export const SharedLayout = ({
                   endDate={endDate}
                   minDate={startDate}
                   calendarStartDay={1}
+                  locale={currentLang}
                 />
 
                 <ApplyBtn type="button" onClick={handleApplyRange}>

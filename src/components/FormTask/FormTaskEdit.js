@@ -7,6 +7,7 @@ import { FormCommon } from './FormCommon';
 import { updateTask } from 'utils/operations';
 import { TaskContext } from 'utils/context';
 import { schema } from './yupSchema';
+import { t } from 'i18next';
 
 export const FormTaskEdit = ({ handleEditTask, task }) => {
   const [dates, setDates] = useState({
@@ -79,11 +80,11 @@ export const FormTaskEdit = ({ handleEditTask, task }) => {
           <IoClose size="20" />
         </CloseButton>
 
-        <FormTitle>Edit task</FormTitle>
+        <FormTitle>{t('formTask.edit')}</FormTitle>
 
         <FormCommon dates={dates} setDates={setDates} />
 
-        <AddTaskFormButton type="submit">Save</AddTaskFormButton>
+        <AddTaskFormButton type="submit">{t('buttons.save')}</AddTaskFormButton>
       </FormStyled>
     </Formik>
   );
