@@ -7,7 +7,7 @@ export const FormStyled = styled(Form)`
   text-align: center;
   width: 100%;
   padding: 16px 16px 32px;
-  border-bottom: 1px solid lightgray;
+  border-top: 1px solid lightgray;
   background-color: white;
 
   @media screen and (max-width: 499px) {
@@ -20,9 +20,9 @@ export const FormStyled = styled(Form)`
 `;
 
 export const FormTitle = styled.h4`
+  text-align: left;
   font-size: 16px;
   font-weight: 700;
-  margin-top: 16px;
 `;
 
 export const FieldName = styled.span`
@@ -48,11 +48,11 @@ export const Input = styled(Field)`
 `;
 
 export const FormButton = styled(Button)`
-    border-radius: 4px;
-    margin-left: 16px;
-    width: 100px;
+  border-radius: 4px;
+  margin-left: 16px;
+  width: 100px;
 `;
-    
+
 export const ErrorStyled = styled(ErrorMessage)`
   position: absolute;
   left: 100px;
@@ -68,7 +68,7 @@ export const BackLink = styled(NavLink)`
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-top: 16px;
+  padding: 16px 16px 32px;
   text-decoration: none;
   color: #004200;
 
@@ -77,4 +77,4 @@ export const BackLink = styled(NavLink)`
   &:hover {
     color: green;
   }
-`
+`;

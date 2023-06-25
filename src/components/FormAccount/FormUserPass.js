@@ -10,6 +10,7 @@ import {
   ErrorStyled,
   FormButton,
 } from './FormAccount.styled';
+import { t } from 'i18next';
 
 let schemaPass = yup.object().shape({
   password: yup.string().min(6).required(),
@@ -36,8 +37,6 @@ export const FormUserPass = ({ setUser, email }) => {
 
   return (
     <>
-      <FormTitle>Change password</FormTitle>
-
       <Formik
         onSubmit={handleUpdatePass}
         initialValues={{
@@ -47,6 +46,8 @@ export const FormUserPass = ({ setUser, email }) => {
         validationSchema={schemaPass}
       >
         <FormStyled>
+          <FormTitle>{t('account.changePass')}</FormTitle>
+
           <Label htmlFor="password">
             <Input
               name="password"
