@@ -5,6 +5,7 @@ import { IoClose } from 'react-icons/io5';
 import { CloseButton } from 'components/Base/Buttons.styled';
 import { schema } from './yupSchema';
 import { FormCommon } from './FormCommon';
+import { t } from 'i18next';
 
 export const FormTaskAdd = ({ handleModal, handleAddTask }) => {
   const today = new Date();
@@ -63,11 +64,11 @@ export const FormTaskAdd = ({ handleModal, handleAddTask }) => {
           <IoClose size="20" />
         </CloseButton>
 
-        <FormTitle>Add new task</FormTitle>
+        <FormTitle>{t('formTask.add')}</FormTitle>
 
         <FormCommon dates={dates} setDates={setDates} />
 
-        <AddTaskFormButton type="submit">Add</AddTaskFormButton>
+        <AddTaskFormButton type="submit">{t('buttons.add')}</AddTaskFormButton>
       </FormStyled>
     </Formik>
   );

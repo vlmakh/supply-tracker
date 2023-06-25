@@ -14,6 +14,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import uk from 'date-fns/locale/uk';
 import { TaskContext } from 'utils/context';
 import { useContext } from 'react';
+import { t } from 'i18next';
 
 export const FormCommon = ({ dates, setDates }) => {
   registerLocale('uk', uk);
@@ -23,15 +24,15 @@ export const FormCommon = ({ dates, setDates }) => {
   return (
     <>
       <FormField>
-        <FieldName>Name</FieldName>
-        <Input type="text" name="name" placeholder="name"></Input>
+        <FieldName>{t('formTask.name')}</FieldName>
+        <Input type="text" name="name" placeholder=""></Input>
         <ErrorStyled component="div" name="name" />
       </FormField>
 
       <FormField>
-        <FieldName>Quantity</FieldName>
+        <FieldName>{t('formTask.qty')}</FieldName>
 
-        <Qty type="text" name="qty" placeholder="quantity"></Qty>
+        <Qty type="text" name="qty" placeholder=""></Qty>
         <ErrorStyled component="div" name="qty" />
 
         <Unit as="select" name="unit">
@@ -42,7 +43,7 @@ export const FormCommon = ({ dates, setDates }) => {
       </FormField>
 
       <FormField>
-        <FieldName>Order</FieldName>
+        <FieldName>{t('formTask.order')}</FieldName>
         <Field type="text" name="dateOrder">
           {() => (
             <div>
@@ -65,13 +66,13 @@ export const FormCommon = ({ dates, setDates }) => {
       </FormField>
 
       <FormField>
-        <FieldName>Supplier</FieldName>
-        <Input type="text" name="supplier" placeholder="supplier"></Input>
+        <FieldName>{t('formTask.supplier')}</FieldName>
+        <Input type="text" name="supplier" placeholder=""></Input>
         <ErrorStyled component="div" name="supplier" />
       </FormField>
 
       <FormField>
-        <FieldName>Invoice</FieldName>
+        <FieldName>{t('formTask.invoice')}</FieldName>
         <Field type="text" name="dateInvoice">
           {() => (
             <div>
@@ -86,7 +87,7 @@ export const FormCommon = ({ dates, setDates }) => {
                 }
                 calendarStartDay={1}
                 autoComplete="off"
-                // locale="uk"
+                locale={currentLang}
               />
             </div>
           )}
@@ -94,7 +95,7 @@ export const FormCommon = ({ dates, setDates }) => {
       </FormField>
 
       <FormField>
-        <FieldName>Payment</FieldName>
+        <FieldName>{t('formTask.payment')}</FieldName>
         <Field type="text" name="datePayment">
           {() => (
             <div>
@@ -108,7 +109,7 @@ export const FormCommon = ({ dates, setDates }) => {
                   }))
                 }
                 calendarStartDay={1}
-                // locale="uk"
+                locale={currentLang}
               />
             </div>
           )}
@@ -116,7 +117,7 @@ export const FormCommon = ({ dates, setDates }) => {
       </FormField>
 
       <FormField>
-        <FieldName>Freight</FieldName>
+        <FieldName>{t('formTask.freight')}</FieldName>
 
         <Input as="select" name="freight">
           <option value="Nova poshta">Nova poshta</option>
@@ -142,7 +143,7 @@ export const FormCommon = ({ dates, setDates }) => {
                   }))
                 }
                 calendarStartDay={1}
-                // locale="uk"
+                locale={currentLang}
               />
             </div>
           )}
@@ -165,7 +166,7 @@ export const FormCommon = ({ dates, setDates }) => {
                   }))
                 }
                 calendarStartDay={1}
-                // locale="uk"
+                locale={currentLang}
               />
             </div>
           )}
@@ -174,12 +175,12 @@ export const FormCommon = ({ dates, setDates }) => {
       </FormField>
 
       <FormField>
-        <FieldName>Comments</FieldName>
+        <FieldName>{t('formTask.comments')}</FieldName>
         <Comments
           as="textarea"
           rows="4"
           name="comments"
-          placeholder="comments"
+          placeholder=""
         ></Comments>
         <ErrorStyled component="div" name="comments" />
       </FormField>
