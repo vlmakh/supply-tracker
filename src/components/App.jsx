@@ -106,7 +106,7 @@ export const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <TaskContext.Provider
-        value={{ dispatch, tasks, isLoading, setIsLoading }}
+        value={{ dispatch, tasks, isLoading, setIsLoading, currentLang }}
       >
         <Routes>
           <Route

@@ -9,13 +9,16 @@ import {
   DatePickerStyled,
 } from './FormTask.styled';
 import { Field } from 'formik';
-// import { registerLocale } from 'react-datepicker';
+import { registerLocale } from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-// import uk from 'date-fns/locale/uk';
+import uk from 'date-fns/locale/uk';
+import { TaskContext } from 'utils/context';
+import { useContext } from 'react';
 
 export const FormCommon = ({ dates, setDates }) => {
-  // registerLocale('uk', uk);
+  registerLocale('uk', uk);
   const { dateOrder, dateInvoice, datePayment, dateETD, dateETA } = dates;
+  const { currentLang } = useContext(TaskContext);
 
   return (
     <>
@@ -53,7 +56,7 @@ export const FormCommon = ({ dates, setDates }) => {
                   }))
                 }
                 calendarStartDay={1}
-                // locale="uk"
+                locale={currentLang}
               />
             </div>
           )}

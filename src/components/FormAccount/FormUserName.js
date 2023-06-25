@@ -49,7 +49,11 @@ export const FormUserName = ({ setUser, email }) => {
           <FormTitle>{t('account.changeName')}</FormTitle>
 
           <Label htmlFor="name">
-            <Input name="name" type="text" placeholder="New name"></Input>
+            <Input
+              name="name"
+              type="text"
+              placeholder={t('account.newName')}
+            ></Input>
             <ErrorStyled component="div" name="name" />
 
             <FormButton type="submit" disabled={isNameUpdating}>

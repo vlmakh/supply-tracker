@@ -7,6 +7,7 @@ import {
 } from 'components/Login/Login.styled';
 import { Navigate, Outlet } from 'react-router-dom';
 import logo from 'images/task-manager.png';
+import { t } from 'i18next';
 
 export default function HomePage({ isLoggedIn }) {
   return (
@@ -20,8 +21,8 @@ export default function HomePage({ isLoggedIn }) {
 
         <FormBox>
           <LinkBox>
-            <MenuLink to="/">Login</MenuLink>
-            <MenuLink to="/signup">Registration</MenuLink>
+            <MenuLink to="/">{t('login.login')}</MenuLink>
+            <MenuLink to="/signup">{t('login.signup')}</MenuLink>
           </LinkBox>
 
           <Outlet />
