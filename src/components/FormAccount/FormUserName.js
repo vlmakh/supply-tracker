@@ -53,7 +53,9 @@ export const FormUserName = ({ setUser, email }) => {
             <ErrorStyled component="div" name="name" />
 
             <FormButton type="submit" disabled={isNameUpdating}>
-              {isNameUpdating ? 'Please wait...' : 'Update name'}
+              {isNameUpdating
+                ? `${t('buttons.wait')}`
+                : `${t('buttons.update')}`}
             </FormButton>
           </Label>
         </FormStyled>

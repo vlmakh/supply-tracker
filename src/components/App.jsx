@@ -20,11 +20,12 @@ const AccountPage = lazy(() => import('pages/AccountPage'));
 const ErrorPage = lazy(() => import('pages/ErrorPage'));
 
 const savedToken = JSON.parse(localStorage.getItem('splmgr'));
+const savedLang = JSON.parse(localStorage.getItem('splmgr-lang'));
 
 export const App = () => {
   const [user, setUser] = useState({});
   const [token, setToken] = useState(savedToken ?? null);
-  const [currentLang, setCurrentLang] = useState('en');
+  const [currentLang, setCurrentLang] = useState(savedLang ?? 'en');
   const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [tasks, dispatch] = useReducer(reducer, []);
@@ -83,7 +84,8 @@ export const App = () => {
   }, [firstOfMonth, isLoggedIn, today]);
 
   useEffect(() => {
-    console.log('currentLang: ', currentLang)
+    localStorage.setItem('splmgr-lang', JSON.stringify(currentLang));
+
     changeLanguage(currentLang);
   }, [changeLanguage, currentLang])
 
@@ -149,6 +151,7 @@ export const App = () => {
                   isLoggedIn={isLoggedIn}
                   email={user.email}
                   setUser={setUser}
+                  currentLang={currentLang}
                   setCurrentLang={setCurrentLang}
                 />
               }

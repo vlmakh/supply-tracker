@@ -22,6 +22,7 @@ export default function AccountPage({
   email,
   setUser,
   isLoggedIn,
+  currentLang,
   setCurrentLang,
 }) {
   const { isLoading } = useContext(TaskContext);
@@ -37,7 +38,7 @@ export default function AccountPage({
       <Box mt={5} mx="auto">
         <BackLink to="/tasks">
           <MdOutlineArrowBack size="24" />
-          Back to tasks
+          {t('account.toTasks')}
         </BackLink>
 
         <FormUserName email={email} setUser={setUser} />
@@ -47,7 +48,7 @@ export default function AccountPage({
         <Formik
           onSubmit={turnLang}
           initialValues={{
-            lang: 'English',
+            lang: currentLang,
           }}
         >
           <FormStyled>
@@ -59,7 +60,7 @@ export default function AccountPage({
                 <option value="uk">Українська</option>
               </Input>
 
-              <FormButton type="submit">Apply</FormButton>
+              <FormButton type="submit">{t('buttons.update')}</FormButton>
             </Label>
           </FormStyled>
         </Formik>

@@ -52,7 +52,7 @@ export const FormUserPass = ({ setUser, email }) => {
             <Input
               name="password"
               type="password"
-              placeholder="New password"
+              placeholder={t('account.newPass')}
               autoComplete="off"
             ></Input>
             <ErrorStyled component="div" name="password" />
@@ -62,13 +62,15 @@ export const FormUserPass = ({ setUser, email }) => {
             <Input
               name="passwordConfirm"
               type="password"
-              placeholder="Repeat new password"
+              placeholder={t('account.repeatNewPass')}
               autoComplete="off"
             ></Input>
             <ErrorStyled component="div" name="passwordConfirm" />
 
             <FormButton type="submit" disabled={isPassUpdating}>
-              {isPassUpdating ? 'Please wait...' : 'Update pass'}
+              {isPassUpdating
+                ? `${t('buttons.wait')}`
+                : `${t('buttons.update')}`}
             </FormButton>
           </Label>
         </FormStyled>
