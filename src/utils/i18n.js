@@ -31,6 +31,16 @@ export const resources = {
         name: 'Name',
         passMustMatch: 'Passwords must match',
       },
+      taskTable: {
+        name: 'Name',
+        qty: 'Qty',
+        unit: 'Unit',
+        order: 'Order',
+        supplier: 'Supplier',
+        invoice: 'Invoice',
+        payment: 'Payment',
+        freight: 'Freight',
+      },
       account: {
         toTasks: 'Back to tasks',
         changePass: 'Change password',
@@ -89,6 +99,16 @@ export const resources = {
         rePass: 'повтор паролю',
         name: "Ім'я",
         passMustMatch: 'Паролі мають співпадати',
+      },
+      taskTable: {
+        name: 'Назва',
+        qty: 'Кільк',
+        unit: 'Од',
+        order: 'Замовл',
+        supplier: 'Постачальник',
+        invoice: 'Рахунок',
+        payment: 'Оплата',
+        freight: 'Доставка',
       },
       account: {
         toTasks: 'Назад до задач',

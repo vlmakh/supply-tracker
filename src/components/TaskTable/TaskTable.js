@@ -2,6 +2,7 @@ import { Table, THTablet, THDesktop } from './TaskTable.styled';
 import { TaskItem } from 'components/TaskItem/TaskItem';
 import { useContext } from 'react';
 import { TaskContext } from 'utils/context';
+import { t } from 'i18next';
 
 export const TaskTable = () => {
   const { tasks } = useContext(TaskContext);
@@ -13,14 +14,14 @@ export const TaskTable = () => {
           <th></th>
           <th></th>
           <th></th>
-          <th>Name</th>
-          <th>Qty</th>
-          <th>Unit</th>
-          <THDesktop>Order</THDesktop>
-          <THTablet>Supplier</THTablet>
-          <THDesktop>Invoice</THDesktop>
-          <THDesktop>Payment</THDesktop>
-          <THTablet>Freight</THTablet>
+          <th>{t('taskTable.name')}</th>
+          <th>{t('taskTable.qty')}</th>
+          <th>{t('taskTable.unit')}</th>
+          <THDesktop>{t('taskTable.order')}</THDesktop>
+          <THTablet>{t('taskTable.supplier')}</THTablet>
+          <THDesktop>{t('taskTable.invoice')}</THDesktop>
+          <THDesktop>{t('taskTable.payment')}</THDesktop>
+          <THTablet>{t('taskTable.freight')}</THTablet>
           <THDesktop>ETD</THDesktop>
           <THDesktop>ETA</THDesktop>
           <th></th>
