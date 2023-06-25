@@ -1,7 +1,8 @@
 import styled from '@emotion/styled';
-import { formatDate } from 'utils/formatDate';
+import { formatDate, formatDateMS } from 'utils/formatDate';
 import { TDButton } from 'components/Base/Buttons.styled';
-const today = formatDate(new Date());
+const today = new Date();
+const formattedToday = formatDate(new Date());
 
 export const Task = styled.tr`
   color: ${p => (p.completed ? 'lightgrey' : '#212121')};
@@ -84,7 +85,21 @@ export const Freight = styled.td`
 export const Data = styled.td`
   width: 72px;
   font-weight: 700;
-  color: ${p => !p.completed && formatDate(p.today) === today && 'blue'};
+  color: ${
+    p => {
+      if (
+        formatDateMS(p.today) < today &&
+        formatDate(p.today) !== formattedToday
+      ) {
+        return 'lightgrey';
+      }
+      if (!p.completed && formatDate(p.today) === formattedToday) {
+        return 'blue';
+      }
+    }
+
+    // !p.completed && formatDate(p.today) === formattedToday && 'blue'
+  };
 
   @media screen and (max-width: 1199.98px) {
     display: none;
