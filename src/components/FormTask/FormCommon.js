@@ -36,9 +36,9 @@ export const FormCommon = ({ dates, setDates }) => {
         <ErrorStyled component="div" name="qty" />
 
         <Unit as="select" name="unit">
-          <option value="pcs">pcs</option>
-          <option value="m">m</option>
-          <option value="kg">kg</option>
+          <option value={t('formTask.pcs')}>{t('formTask.pcs')}</option>
+          <option value={t('formTask.m')}>{t('formTask.m')}</option>
+          <option value={t('formTask.kg')}>{t('formTask.kg')}</option>
         </Unit>
       </FormField>
 
@@ -120,11 +120,13 @@ export const FormCommon = ({ dates, setDates }) => {
         <FieldName>{t('formTask.freight')}</FieldName>
 
         <Input as="select" name="freight">
-          <option value="Nova poshta">Nova poshta</option>
+          <option value={t('formTask.nova')}>{t('formTask.nova')}</option>
+          <option value={t('formTask.sat')}>{t('formTask.sat')}</option>
+          <option value={t('formTask.delivery')}>
+            {t('formTask.delivery')}
+          </option>
           <option value="FCA">FCA</option>
           <option value="DAP">DAP</option>
-          <option value="SAT">SAT</option>
-          <option value="Delivery">Delivery</option>
         </Input>
       </FormField>
 
