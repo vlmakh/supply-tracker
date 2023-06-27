@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import { Suspense, useContext } from 'react';
+import { Suspense, useContext, useState } from 'react';
 import {
   Layout,
   Header,
@@ -10,6 +10,7 @@ import {
   Green,
   UserMenuBtn,
   ApplyBtn,
+  UnselectedBtn,
 } from './SharedLayout.styled';
 import { DatePickerStyled } from 'components/FormTask/FormTask.styled';
 import { Container } from 'components/Container/Container.styled';
@@ -21,7 +22,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { Box } from 'components/Base/Box';
 import { UserMenu } from 'components/UserMenu/UserMenu';
 import { HiOutlineUserCircle } from 'react-icons/hi';
-import { MdRestartAlt } from 'react-icons/md';
+import { MdRestartAlt, MdRemoveDone } from 'react-icons/md';
 import uk from 'date-fns/locale/uk';
 import { registerLocale } from 'react-datepicker';
 
@@ -36,8 +37,12 @@ export const SharedLayout = ({
   hadleGetTasksByRange,
   setToken,
   setUser,
+  showAllTasksInCurrentMonth,
+  firstOfMonth,
 }) => {
-  const { tasks, setIsLoading, currentLang } = useContext(TaskContext);
+  const { dispatch, tasks, setIsLoading, currentLang } =
+    useContext(TaskContext);
+  const [showUncompleted, setShowUncompleted] = useState(false);
   const today = new Date();
   registerLocale('uk', uk);
 
@@ -49,6 +54,18 @@ export const SharedLayout = ({
     if (array.length) {
       const completedTasks = array.filter(item => item.completed).length;
       return completedTasks;
+    }
+  };
+
+  const showUncompletedTasks = () => {
+    if (showUncompleted === false) {
+      setShowUncompleted(true);
+
+      dispatch({ type: 'uncompletedTasks' });
+    } else {
+      setShowUncompleted(false);
+
+      showAllTasksInCurrentMonth(firstOfMonth, today);
     }
   };
 
@@ -75,6 +92,14 @@ export const SharedLayout = ({
                   {tasks.length} / <Green>{calcCompleted(tasks) ?? '0'} </Green>
                 </TaskCalc>
               )}
+
+              <UnselectedBtn
+                onClick={showUncompletedTasks}
+                pressed={showUncompleted}
+              >
+                <MdRemoveDone size="24" />
+              </UnselectedBtn>
+
               <DateToday>{formatDate(today)}</DateToday>
 
               <Box display="flex" py={1}>

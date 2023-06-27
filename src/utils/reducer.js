@@ -20,6 +20,12 @@ export const reducer = (tasks, action) => {
         return task._id === action.taskId ? action.newTask : task;
       });
 
+    case 'uncompletedTasks':
+      return tasks.filter(task => task.completed === false);
+
+    case 'allTasks':
+      return tasks;
+
     default:
       return tasks;
   }

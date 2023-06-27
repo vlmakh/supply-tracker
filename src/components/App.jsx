@@ -2,7 +2,14 @@ import { ThemeProvider } from '@emotion/react';
 import { theme } from 'utils/theme';
 import { SharedLayout } from './SharedLayout/SharedLayout';
 import { Routes, Route } from 'react-router-dom';
-import { useState, useEffect, lazy, useReducer, useMemo, useCallback } from 'react';
+import {
+  useState,
+  useEffect,
+  lazy,
+  useReducer,
+  useMemo,
+  useCallback,
+} from 'react';
 import { reducer } from 'utils/reducer';
 import { checkCurrentUser } from 'utils/operations';
 import { Toaster } from 'react-hot-toast';
@@ -30,7 +37,6 @@ export const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [tasks, dispatch] = useReducer(reducer, []);
 
-
   const today = useMemo(() => new Date(), []);
   const getYear = today.getFullYear();
   const getMonth = today.getMonth();
@@ -44,7 +50,7 @@ export const App = () => {
 
   const { i18n } = useTranslation();
   const changeLanguage = useCallback(
-    (language) => {
+    language => {
       i18n.changeLanguage(language);
     },
     [i18n]
@@ -72,24 +78,27 @@ export const App = () => {
     if (isLoggedIn) {
       setIsLoading(true);
 
-      getTasksByRange(firstOfMonth, today)
-        .then(tasks => {
-          dispatch({ type: 'getTasks', tasks });
-        })
-        .catch(error => {})
-        .finally(() => {
-          setIsLoading(false);
-        });
+      showAllTasksInCurrentMonth(firstOfMonth, today);
     }
   }, [firstOfMonth, isLoggedIn, today]);
+
+  const showAllTasksInCurrentMonth = (firstOfMonth, today) => {
+    getTasksByRange(firstOfMonth, today)
+      .then(tasks => {
+        dispatch({ type: 'getTasks', tasks });
+      })
+      .catch(error => {})
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
 
   useEffect(() => {
     localStorage.setItem('splmgr-lang', JSON.stringify(currentLang));
 
     changeLanguage(currentLang);
-  }, [changeLanguage, currentLang])
+  }, [changeLanguage, currentLang]);
 
-  
   const hadleGetTasksByRange = (start, end) => {
     setIsLoading(true);
 
@@ -123,6 +132,8 @@ export const App = () => {
                 hadleGetTasksByRange={hadleGetTasksByRange}
                 setToken={setToken}
                 setUser={setUser}
+                showAllTasksInCurrentMonth={showAllTasksInCurrentMonth}
+                firstOfMonth={firstOfMonth}
               />
             }
           >
@@ -130,10 +141,7 @@ export const App = () => {
               <Route
                 index
                 element={
-                  <Login
-                    setToken={setToken}
-                    setIsLoggedIn={setIsLoggedIn}
-                  />
+                  <Login setToken={setToken} setIsLoggedIn={setIsLoggedIn} />
                 }
               />
               <Route path="/signup" element={<Signup />} />

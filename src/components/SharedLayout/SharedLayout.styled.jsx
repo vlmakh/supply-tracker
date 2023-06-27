@@ -18,6 +18,20 @@ export const Header = styled.div`
   background-color: white;
 `;
 
+export const UnselectedBtn = styled.button`
+  border: ${p => p.pressed ? '1px solid grey' : 'none'};
+  background-color: ${p => p.pressed ? 'lightgrey' : 'transparent'} ;
+  padding: 4px;
+  cursor: pointer;
+  transition: color 250ms ease-in;
+
+  transition: color 250ms ease-in;
+
+  &:hover {
+    color: green;
+  }
+`;
+
 export const ApplyBtn = styled.button`
   border: none;
   background-color: transparent;
