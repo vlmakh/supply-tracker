@@ -89,7 +89,9 @@ export const SharedLayout = ({
             <>
               {tasks && (
                 <TaskCalc to="/tasks">
-                  {tasks.length} / <Green>{calcCompleted(tasks) ?? '0'} </Green>
+                  <b>{tasks.length}</b> /{' '}
+                  <Green>{calcCompleted(tasks) ?? '0'} </Green> /{' '}
+                  {Math.round((calcCompleted(tasks) / tasks.length) * 100)}%
                 </TaskCalc>
               )}
 

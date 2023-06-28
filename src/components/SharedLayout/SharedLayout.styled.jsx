@@ -19,8 +19,8 @@ export const Header = styled.div`
 `;
 
 export const UnselectedBtn = styled.button`
-  border: ${p => p.pressed ? '1px solid grey' : 'none'};
-  background-color: ${p => p.pressed ? 'lightgrey' : 'transparent'} ;
+  border: ${p => (p.pressed ? '1px solid grey' : 'none')};
+  background-color: ${p => (p.pressed ? 'lightgrey' : 'transparent')};
   padding: 4px;
   cursor: pointer;
   transition: color 250ms ease-in;
@@ -66,20 +66,19 @@ export const UserMenuBtn = styled.div`
 `;
 
 export const Green = styled.span`
-  min-width: 24px;
   display: inline-flex;
   justify-content: center;
+  min-width: 24px;
+  padding: 2px 0;
   border-radius: 50%;
   background-color: green;
   color: white;
-  padding: 2px 0;
+  font-weight: 700;
 `;
 
 export const TaskCalc = styled(NavLink)`
-text-decoration: none;
-color: #212121;
-  font-weight: 700;
-  width: 60px;
+  text-decoration: none;
+  color: #212121;
 `;
 
 export const DateToday = styled.p`
