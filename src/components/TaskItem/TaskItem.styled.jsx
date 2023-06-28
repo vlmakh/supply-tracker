@@ -55,6 +55,7 @@ export const Comment = styled.div`
   z-index: 999;
 
   transition: opacity 250ms ease-in;
+  word-break: break-all;
 `;
 
 export const Qty = styled.td`
