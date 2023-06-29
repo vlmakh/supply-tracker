@@ -5,7 +5,6 @@ export const TDButton = styled.button`
   background-color: transparent;
   padding: 0;
   width: 100%;
-  text-align: left;
   cursor: ${p => !p.disabled && 'pointer'};
   transition: all 250ms ease-in;
 `;

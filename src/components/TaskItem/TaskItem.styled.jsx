@@ -29,7 +29,7 @@ export const Num = styled.td`
   text-align: right;
 `;
 
-export const Exec = styled.td`
+export const Exec = styled.td`  
   width: 24px;
 `;
 

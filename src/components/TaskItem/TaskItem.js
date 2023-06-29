@@ -13,14 +13,14 @@ import {
   Freight,
   Days,
   BtnCopy,
-  // BtnDel,
+  BtnDel,
   BtnName,
 } from './TaskItem.styled';
 import { useState, useContext } from 'react';
-import { updateTaskStatus } from 'utils/operations';
+import { updateTaskStatus, deleteTask } from 'utils/operations';
 import { FaCheck, FaArrowAltCircleRight } from 'react-icons/fa';
 import { MdContentCopy } from 'react-icons/md';
-// import { MdDeleteOutline } from 'react-icons/md';
+import { MdDeleteOutline } from 'react-icons/md';
 import Modal from 'components/Modal/Modal';
 import { FormTaskEdit } from 'components/FormTask/FormTaskEdit';
 import { FormTaskCopy } from 'components/FormTask/FormTaskCopy';
@@ -73,14 +73,14 @@ export const TaskItem = ({ task, idx }) => {
     setShowFormTaskEdit(!showFormTaskEdit);
   };
 
-  // const handleDelete = id => {
-  //   const result = window.confirm('Confirm task delete?');
-  //   if (result) {
-  //     deleteTask(id)
-  //       .then(dispatch({ type: 'deleteTask', taskId: id }))
-  //       .catch(err => console.log(err.message));
-  //   }
-  // };
+  const handleDelete = id => {
+    const result = window.confirm('Confirm task delete?');
+    if (result) {
+      deleteTask(id)
+        .then(dispatch({ type: 'deleteTask', taskId: id }))
+        .catch(err => console.log(err.message));
+    }
+  };
 
   return (
     <>
@@ -144,13 +144,16 @@ export const TaskItem = ({ task, idx }) => {
         </Data>
 
         <Days>
-          {/* <BtnDel type="button" onClick={() => handleDelete(task._id)}>
-            <MdDeleteOutline size="18" />
-          </BtnDel> */}
           {formatDateDays(
             formatDateMS(task.dateETA) - formatDateMS(task.dateOrder)
           )}
         </Days>
+
+        <Exec>
+          <BtnDel type="button" onClick={() => handleDelete(task._id)}>
+            <MdDeleteOutline size="18" />
+          </BtnDel>
+        </Exec>
       </Task>
 
       {showFormTaskEdit && (
