@@ -1,6 +1,5 @@
 import { Formik } from 'formik';
-import { updateUserPass } from 'utils/operations';
-import * as yup from 'yup';
+// import { updateUserPass } from 'utils/operations';
 import { useState } from 'react';
 import {
   FormStyled,
@@ -12,50 +11,50 @@ import {
 } from './FormAccount.styled';
 import { t } from 'i18next';
 
-let schemaPass = yup.object().shape({
-  password: yup.string().min(6).required(),
-});
-
 export const FormUserDept = ({ setUser, email }) => {
   const [isDeptUpdating, setIsDeptUpdating] = useState(false);
 
-  const handleUpdatePass = (values, { resetForm }) => {
+  const handleUpdateDept = values => {
     setIsDeptUpdating(true);
 
-    updateUserPass(values)
-      .then(() => {
-        resetForm();
-      })
-      .catch(error => {})
-      .finally(() => {
-        setIsDeptUpdating(false);
-      });
+    console.log(values);
+    setIsDeptUpdating(false);
+
+    // updateUserPass(values)
+    //   .then(() => {
+    //     resetForm();
+    //   })
+    //   .catch(error => {})
+    //   .finally(() => {
+    //     setIsDeptUpdating(false);
+    //   });
   };
 
   return (
     <>
       <Formik
-        onSubmit={handleUpdatePass}
+        onSubmit={handleUpdateDept}
         initialValues={{
-          password: '',
+          department: '',
         }}
-        validationSchema={schemaPass}
       >
         <FormStyled>
           <FormTitle>{t('account.department')}</FormTitle>
 
           <Label htmlFor="department">
-            <Input
-              name="department"
-              type="text"
-              //   placeholder=''
-              autoComplete="off"
-              as="select"
-            >
-              <option value="importPS">{t('account.importPS')}</option>
-              <option value="supplyPS">{t('account.supplyPS')}</option>
-              <option value="importUT">{t('account.importUT')}</option>
-              <option value="supplyUT">{t('account.supplyUT')}</option>
+            <Input name="department" as="select">
+              <option value={t('account.importPS')}>
+                {t('account.importPS')}
+              </option>
+              <option value={t('account.supplyPS')}>
+                {t('account.supplyPS')}
+              </option>
+              <option value={t('account.importUT')}>
+                {t('account.importUT')}
+              </option>
+              <option value={t('account.supplyUT')}>
+                {t('account.supplyUT')}
+              </option>
             </Input>
             <ErrorStyled component="div" name="department" />
 
