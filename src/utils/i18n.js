@@ -49,6 +49,11 @@ export const resources = {
         newName: 'new Name',
         newPass: 'new password',
         repeatNewPass: 'repeat new password',
+        department: 'Department',
+        importPS: 'Polysteel import',
+        supplyPS: 'Polysteel supply',
+        importUT: 'Uterm import',
+        supplyUT: 'Uterm supply',
       },
       formTask: {
         add: 'Add new task',
@@ -118,6 +123,11 @@ export const resources = {
         newName: "нове Ім'я",
         newPass: 'новий пароль',
         repeatNewPass: 'повторити новий пароль',
+        department: 'Відділ',
+        importPS: 'Полістіл імпорт',
+        supplyPS: 'Полістіл постачання',
+        importUT: 'Ютерм імпорт',
+        supplyUT: 'Ютерм постачання',
       },
       formTask: {
         add: 'Додати нову задачу',

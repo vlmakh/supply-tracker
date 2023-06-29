@@ -17,6 +17,7 @@ import {
 } from 'components/FormAccount/FormAccount.styled';
 import { Formik } from 'formik';
 import { t } from 'i18next';
+import { FormUserDept } from 'components/FormAccount/FormUserDept';
 
 export default function AccountPage({
   email,
@@ -64,6 +65,8 @@ export default function AccountPage({
             </Label>
           </FormStyled>
         </Formik>
+
+        <FormUserDept />
       </Box>
 
       {isLoading && (
