@@ -22,12 +22,10 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { Box } from 'components/Base/Box';
 import { UserMenu } from 'components/UserMenu/UserMenu';
 import { HiOutlineUserCircle } from 'react-icons/hi';
-import { FaAmazonPay } from 'react-icons/fa';
 import { MdRestartAlt, MdRemoveDone } from 'react-icons/md';
-import { AiOutlineFile, AiOutlineFileText } from 'react-icons/ai';
-import { BsBoxArrowRight, BsBoxArrowInRight } from 'react-icons/bs';
 import uk from 'date-fns/locale/uk';
 import { registerLocale } from 'react-datepicker';
+import { TaskMenu } from 'components/TaskMenu/TaskMenu';
 
 export const SharedLayout = ({
   user,
@@ -98,34 +96,11 @@ export const SharedLayout = ({
                 </TaskCalc>
               )}
 
-              <Box display="flex">
-                <MenuBtn
-                  onClick={showUncompletedTasks}
-                  pressed={showUncompleted}
-                >
-                  <MdRemoveDone size="24" />
-                </MenuBtn>
+              <MenuBtn onClick={showUncompletedTasks} pressed={showUncompleted}>
+                <MdRemoveDone size="24" />
+              </MenuBtn>
 
-                <MenuBtn>
-                  <AiOutlineFile size="24" />
-                </MenuBtn>
-
-                <MenuBtn>
-                  <AiOutlineFileText size="24" />
-                </MenuBtn>
-
-                <MenuBtn>
-                  <FaAmazonPay size="24" />
-                </MenuBtn>
-
-                <MenuBtn>
-                  <BsBoxArrowRight size="24" />
-                </MenuBtn>
-
-                <MenuBtn>
-                  <BsBoxArrowInRight size="24" />
-                </MenuBtn>
-              </Box>
+              <TaskMenu />
 
               <DateToday>{formatDate(today)}</DateToday>
 
