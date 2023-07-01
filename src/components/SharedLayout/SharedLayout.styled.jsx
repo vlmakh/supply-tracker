@@ -18,10 +18,10 @@ export const Header = styled.div`
   background-color: white;
 `;
 
-export const UnselectedBtn = styled.button`
+export const MenuBtn = styled.button`
   border: ${p => (p.pressed ? '1px solid grey' : 'none')};
   background-color: ${p => (p.pressed ? 'lightgrey' : 'transparent')};
-  padding: 4px;
+  padding: 4px 8px;
   cursor: pointer;
   transition: color 250ms ease-in;
 
