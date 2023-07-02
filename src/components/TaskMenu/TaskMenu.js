@@ -38,7 +38,7 @@ export const TaskMenu = ({ showAllTasksInCurrentMonth, firstOfMonth }) => {
       <FormMenu>
         <Box role="group" display="flex">
           <Label>
-            <MenuField type="radio" name="picked" value="Zero" />
+            <MenuField type="radio" name="picked" value="all" />
             <MdOutlinePlaylistRemove size="24" />
           </Label>
 
@@ -48,27 +48,27 @@ export const TaskMenu = ({ showAllTasksInCurrentMonth, firstOfMonth }) => {
         </Label> */}
 
           <Label>
-            <MenuField type="radio" name="picked" value="Two" />
+            <MenuField type="radio" name="picked" value="dateOrder" />
             <AiOutlineFile size="24" />
           </Label>
 
           <Label>
-            <MenuField type="radio" name="picked" value="Three" />
+            <MenuField type="radio" name="picked" value="dateInvoice" />
             <AiOutlineFileText size="24" />
           </Label>
 
           <Label>
-            <MenuField type="radio" name="picked" value="Four" />
+            <MenuField type="radio" name="picked" value="datePayment" />
             <FaAmazonPay size="24" />
           </Label>
 
           <Label>
-            <MenuField type="radio" name="picked" value="Five" />
+            <MenuField type="radio" name="picked" value="dateETD" />
             <BsBoxArrowRight size="24" />
           </Label>
 
           <Label>
-            <MenuField type="radio" name="picked" value="Six" />
+            <MenuField type="radio" name="picked" value="dateETA" />
             <BsBoxArrowInRight size="24" />
           </Label>
         </Box>
