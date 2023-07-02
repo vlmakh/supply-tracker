@@ -132,8 +132,6 @@ export const App = () => {
                 hadleGetTasksByRange={hadleGetTasksByRange}
                 setToken={setToken}
                 setUser={setUser}
-                showAllTasksInCurrentMonth={showAllTasksInCurrentMonth}
-                firstOfMonth={firstOfMonth}
               />
             }
           >

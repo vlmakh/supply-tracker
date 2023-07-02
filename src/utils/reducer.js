@@ -23,9 +23,6 @@ export const reducer = (tasks, action) => {
     case 'uncompletedTasks':
       return tasks.filter(task => task.completed === false);
 
-    case 'allTasks':
-      return tasks;
-
     default:
       return tasks;
   }
