@@ -7,9 +7,11 @@ export const FormMenu = styled(Form)`
 
 export const MenuField = styled(Field)`
     margin-left: 8px;
-  /* display: none; */
+    visibility: hidden;
+    height: 0px;
+    width: 0px;
 
-  &:checked + label {
+  &:checked + svg {
     color: green;
   }
 `;

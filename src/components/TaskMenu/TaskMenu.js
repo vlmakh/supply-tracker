@@ -1,4 +1,5 @@
 import { FormMenu, MenuField, Label } from './TaskMenu.styled';
+import { Box } from 'components/Base/Box';
 // import { useState, useContext } from 'react';
 // import { TaskContext } from 'utils/context';
 import { Formik } from 'formik';
@@ -24,9 +25,9 @@ export const TaskMenu = ({ showAllTasksInCurrentMonth, firstOfMonth }) => {
   //     }
   //   };
 
-  const handleChange = () => {
-    console.log('values');
-  };
+  // const handleChange = () => {
+  //   console.log('values');
+  // };
 
   return (
     <Formik
@@ -35,55 +36,42 @@ export const TaskMenu = ({ showAllTasksInCurrentMonth, firstOfMonth }) => {
       }}
     >
       <FormMenu>
-        <MenuField
-          type="radio"
-          name="picked"
-          value="Zero"
-          onChange={handleChange}
-        />
-        <Label htmlFor="picked">
-          <MdOutlinePlaylistRemove size="24" />
-        </Label>
+        <Box role="group" display="flex">
+          <Label>
+            <MenuField type="radio" name="picked" value="Zero" />
+            <MdOutlinePlaylistRemove size="24" />
+          </Label>
 
-        {/* <MenuField type="radio" name="picked" value="One" />
+          {/* <MenuField type="radio" name="picked" value="One" />
         <Label htmlFor="picked">
           <MdRemoveDone size="24" />
         </Label> */}
 
-        <MenuField
-          type="radio"
-          name="picked"
-          value="Two"
-          onChange={handleChange}
-        />
-        <Label htmlFor="Two">
-          <AiOutlineFile size="24" />
-        </Label>
+          <Label>
+            <MenuField type="radio" name="picked" value="Two" />
+            <AiOutlineFile size="24" />
+          </Label>
 
-        <MenuField
-          type="radio"
-          name="picked"
-          value="Three"
-          onChange={handleChange}
-        />
-        <Label htmlFor="Three">
-          <AiOutlineFileText size="24" />
-        </Label>
+          <Label>
+            <MenuField type="radio" name="picked" value="Three" />
+            <AiOutlineFileText size="24" />
+          </Label>
 
-        <MenuField type="radio" name="picked" value="Four" />
-        <Label htmlFor="Four">
-          <FaAmazonPay size="24" />
-        </Label>
+          <Label>
+            <MenuField type="radio" name="picked" value="Four" />
+            <FaAmazonPay size="24" />
+          </Label>
 
-        <MenuField type="radio" name="picked" value="Five" />
-        <Label htmlFor="Five">
-          <BsBoxArrowRight size="24" />
-        </Label>
+          <Label>
+            <MenuField type="radio" name="picked" value="Five" />
+            <BsBoxArrowRight size="24" />
+          </Label>
 
-        <MenuField type="radio" name="picked" value="Six" />
-        <Label htmlFor="Six">
-          <BsBoxArrowInRight size="24" />
-        </Label>
+          <Label>
+            <MenuField type="radio" name="picked" value="Six" />
+            <BsBoxArrowInRight size="24" />
+          </Label>
+        </Box>
       </FormMenu>
     </Formik>
   );
