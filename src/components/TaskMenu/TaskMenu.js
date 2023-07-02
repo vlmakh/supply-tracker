@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import { TaskContext } from 'utils/context';
 import { Formik } from 'formik';
 import { MdOutlinePlaylistRemove, MdRemoveDone } from 'react-icons/md';
-import { AiOutlineFile, AiOutlineFileText } from 'react-icons/ai';
+import { AiOutlineFileAdd, AiOutlineFileText } from 'react-icons/ai';
 import { BsBoxArrowRight, BsBoxArrowInRight } from 'react-icons/bs';
 import { FaAmazonPay } from 'react-icons/fa';
 import {
@@ -161,7 +161,7 @@ export const TaskMenu = ({ hadleGetTasksByRange, startDate }) => {
               value="dateOrderTasks"
               onClick={() => handleClick('dateOrderTasks')}
             />
-            <AiOutlineFile size="24" />
+            <AiOutlineFileAdd size="24" />
           </Label>
 
           <Label>
