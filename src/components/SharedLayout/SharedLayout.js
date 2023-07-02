@@ -38,8 +38,6 @@ export const SharedLayout = ({
   hadleGetTasksByRange,
   setToken,
   setUser,
-  showAllTasksInCurrentMonth,
-  firstOfMonth,
 }) => {
   const { dispatch, tasks, setIsLoading, currentLang } =
     useContext(TaskContext);
@@ -66,7 +64,7 @@ export const SharedLayout = ({
     } else {
       setShowUncompleted(false);
 
-      showAllTasksInCurrentMonth(firstOfMonth, today);
+      hadleGetTasksByRange(startDate, today);
     }
   };
 
@@ -100,7 +98,10 @@ export const SharedLayout = ({
                 <MdRemoveDone size="24" />
               </MenuBtn>
 
-              <TaskMenu />
+              <TaskMenu
+                hadleGetTasksByRange={hadleGetTasksByRange}
+                startDate={startDate}
+              />
 
               <DateToday>{formatDate(today)}</DateToday>
 
