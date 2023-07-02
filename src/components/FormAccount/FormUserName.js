@@ -16,7 +16,7 @@ let schemaName = yup.object().shape({
   name: yup.string().min(4).required(),
 });
 
-export const FormUserName = ({ setUser, email }) => {
+export const FormUserName = ({ setUser, name }) => {
   const [isNameUpdating, setIsNameUpdating] = useState(false);
 
   const handleUpdateName = (values, { resetForm }) => {
@@ -41,7 +41,7 @@ export const FormUserName = ({ setUser, email }) => {
       <Formik
         onSubmit={handleUpdateName}
         initialValues={{
-          name: '',
+          name,
         }}
         validationSchema={schemaName}
       >

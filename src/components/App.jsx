@@ -155,7 +155,7 @@ export const App = () => {
               element={
                 <AccountPage
                   isLoggedIn={isLoggedIn}
-                  email={user.email}
+                  name={user.name}
                   setUser={setUser}
                   currentLang={currentLang}
                   setCurrentLang={setCurrentLang}

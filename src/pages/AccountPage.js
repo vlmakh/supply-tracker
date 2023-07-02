@@ -20,7 +20,7 @@ import { t } from 'i18next';
 import { FormUserDept } from 'components/FormAccount/FormUserDept';
 
 export default function AccountPage({
-  email,
+  name,
   setUser,
   isLoggedIn,
   currentLang,
@@ -42,7 +42,7 @@ export default function AccountPage({
           {t('account.toTasks')}
         </BackLink>
 
-        <FormUserName email={email} setUser={setUser} />
+        <FormUserName name={name} setUser={setUser} />
 
         <FormUserPass setUser={setUser} />
 
