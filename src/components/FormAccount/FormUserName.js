@@ -41,7 +41,7 @@ export const FormUserName = ({ setUser, name }) => {
       <Formik
         onSubmit={handleUpdateName}
         initialValues={{
-          name,
+          name: '',
         }}
         validationSchema={schemaName}
       >

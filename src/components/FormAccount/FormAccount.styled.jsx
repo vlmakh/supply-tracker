@@ -51,6 +51,8 @@ export const FormButton = styled(Button)`
   border-radius: 4px;
   margin-left: 16px;
   width: 100px;
+
+  background-color: ${p => p.disabled && 'grey'};
 `;
 
 export const ErrorStyled = styled(ErrorMessage)`

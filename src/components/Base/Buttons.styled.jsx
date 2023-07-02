@@ -11,14 +11,12 @@ export const TDButton = styled.button`
 `;
 
 export const Button = styled.button`
-  
   color: white;
   font-weight: 700;
-  cursor: pointer;
+  cursor: ${p => !p.disabled && 'pointer'};
   padding: 8px;
   border: none;
   background-color: #004200;
-
   transition: background-color 250ms ease-in;
 
   &:hover {

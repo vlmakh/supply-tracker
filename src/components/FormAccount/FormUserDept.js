@@ -42,7 +42,7 @@ export const FormUserDept = ({ setUser, email }) => {
           <FormTitle>{t('account.department')}</FormTitle>
 
           <Label htmlFor="department">
-            <Input name="department" as="select">
+            <Input name="department" as="select" disabled>
               <option value={t('account.importPS')}>
                 {t('account.importPS')}
               </option>
@@ -58,7 +58,7 @@ export const FormUserDept = ({ setUser, email }) => {
             </Input>
             <ErrorStyled component="div" name="department" />
 
-            <FormButton type="submit" disabled={isDeptUpdating}>
+            <FormButton type="submit" disabled>
               {isDeptUpdating
                 ? `${t('buttons.wait')}`
                 : `${t('buttons.update')}`}

@@ -17,7 +17,6 @@ import {
 } from 'components/FormAccount/FormAccount.styled';
 import { Formik } from 'formik';
 import { t } from 'i18next';
-import { FormUserDept } from 'components/FormAccount/FormUserDept';
 
 export default function AccountPage({
   name,
@@ -42,6 +41,11 @@ export default function AccountPage({
           {t('account.toTasks')}
         </BackLink>
 
+        <Box p="16px 16px 32px" borderTop="1px solid lightgray">
+          <h4>{name}</h4>
+          <p>{t('account.supplyPS')}</p>
+        </Box>
+
         <FormUserName name={name} setUser={setUser} />
 
         <FormUserPass setUser={setUser} />
@@ -65,8 +69,6 @@ export default function AccountPage({
             </Label>
           </FormStyled>
         </Formik>
-
-        <FormUserDept />
       </Box>
 
       {isLoading && (
