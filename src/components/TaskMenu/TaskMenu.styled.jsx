@@ -19,9 +19,6 @@ export const MenuField = styled(Field)`
 export const Label = styled.label`
   cursor: pointer;
   padding: 4px 8px 4px 4px;
-
-  transition: color 250ms ease-in;
-
   transition: color 250ms ease-in;
 
   &:hover {

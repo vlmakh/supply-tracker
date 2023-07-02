@@ -7,45 +7,115 @@ import { MdOutlinePlaylistRemove, MdRemoveDone } from 'react-icons/md';
 import { AiOutlineFile, AiOutlineFileText } from 'react-icons/ai';
 import { BsBoxArrowRight, BsBoxArrowInRight } from 'react-icons/bs';
 import { FaAmazonPay } from 'react-icons/fa';
+import {
+  getTasksByDateOrder,
+  getTasksByDateInvoice,
+  getTasksByDatePayment,
+  getTasksByDateETD,
+  getTasksByDateETA,
+} from 'utils/operations';
 
 export const TaskMenu = ({ hadleGetTasksByRange, startDate }) => {
-  const { dispatch } = useContext(TaskContext);
+  const { dispatch, setIsLoading } = useContext(TaskContext);
   const today = new Date();
+
+  const hadleGetTasksByDateOrder = start => {
+    setIsLoading(true);
+
+    getTasksByDateOrder(start)
+      .then(tasks => {
+        dispatch({ type: 'getTasks', tasks });
+      })
+      .catch(error => console.log(error))
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
+  const hadleGetTasksByDateInvoice = start => {
+    setIsLoading(true);
+
+    getTasksByDateInvoice(start)
+      .then(tasks => {
+        dispatch({ type: 'getTasks', tasks });
+      })
+      .catch(error => console.log(error))
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
+  const hadleGetTasksByDatePayment = start => {
+    setIsLoading(true);
+
+    getTasksByDatePayment(start)
+      .then(tasks => {
+        dispatch({ type: 'getTasks', tasks });
+      })
+      .catch(error => console.log(error))
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
+  const hadleGetTasksByDateETD = start => {
+    setIsLoading(true);
+
+    getTasksByDateETD(start)
+      .then(tasks => {
+        dispatch({ type: 'getTasks', tasks });
+      })
+      .catch(error => console.log(error))
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
+  const hadleGetTasksByDateETA = start => {
+    setIsLoading(true);
+
+    getTasksByDateETA(start)
+      .then(tasks => {
+        dispatch({ type: 'getTasks', tasks });
+      })
+      .catch(error => console.log(error))
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
 
   const handleClick = value => {
     switch (value) {
+      case 'allTasks':
+        hadleGetTasksByRange(startDate, today);
+        break;
       case 'uncompletedTasks':
         dispatch({ type: 'uncompletedTasks' });
         break;
       case 'dateOrderTasks':
-        console.log('dateOrderTasks');
-        // dispatch({ type: 'dateOrderTasks' });
+        hadleGetTasksByDateOrder(today);
         break;
       case 'dateInvoiceTasks':
-        console.log('dateInvoiceTasks');
-        // dispatch({ type: 'dateInvoiceTasks' });
+        hadleGetTasksByDateInvoice(today);
         break;
       case 'datePaymentTasks':
-        console.log('datePaymentTasks');
-        // dispatch({ type: 'datePaymentTasks' });
+        hadleGetTasksByDatePayment(today);
         break;
       case 'dateETDTasks':
-        console.log('dateETDTasks');
-        // dispatch({ type: 'dateETDTasks' });
+        hadleGetTasksByDateETD(today);
         break;
       case 'dateETATasks':
-        console.log('dateETATasks');
-        // dispatch({ type: 'dateETATasks' });
+        hadleGetTasksByDateETA(today);
         break;
       default:
-        hadleGetTasksByRange(startDate, today);
+        return;
     }
   };
 
   return (
     <Formik
       initialValues={{
-        picked: '',
+        picked: 'allTasks',
       }}
     >
       <FormMenu>
@@ -54,7 +124,7 @@ export const TaskMenu = ({ hadleGetTasksByRange, startDate }) => {
             <MenuField
               type="radio"
               name="picked"
-              value="all"
+              value="allTasks"
               onClick={() => handleClick('allTasks')}
             />
             <MdOutlinePlaylistRemove size="24" />
