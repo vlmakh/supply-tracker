@@ -145,7 +145,7 @@ export const TaskItem = ({ task, idx }) => {
 
         <Days>
           {formatDateDays(
-            formatDateMS(task.dateETA) - formatDateMS(task.dateOrder)
+            formatDateMS(task.dateETA) - formatDateMS(task.dateInvoice)
           )}
         </Days>
 

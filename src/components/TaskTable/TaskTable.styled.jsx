@@ -20,6 +20,7 @@ export const Table = styled.table`
     text-transform: uppercase;
     background-color: darkcyan;
     color: #fff;
+    min-width: 24px;
   }
 
   td {

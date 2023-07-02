@@ -81,6 +81,10 @@ export const SharedLayout = ({
       });
   };
 
+  const percentCompleted = Math.round(
+    (calcCompleted(tasks) / tasks.length) * 100
+  );
+
   return (
     <Layout>
       <Header>
@@ -91,7 +95,7 @@ export const SharedLayout = ({
                 <TaskCalc to="/tasks">
                   <b>{tasks.length}</b> /{' '}
                   <Green>{calcCompleted(tasks) ?? '0'} </Green> /{' '}
-                  {Math.round((calcCompleted(tasks) / tasks.length) * 100)}%
+                  {percentCompleted || '0'}%
                 </TaskCalc>
               )}
 
@@ -114,6 +118,7 @@ export const SharedLayout = ({
                   endDate={endDate}
                   calendarStartDay={1}
                   locale={currentLang}
+                  maxDate={today}
                 />
                 <DatePickerStyled
                   dateFormat="dd.MM.yyyy"
