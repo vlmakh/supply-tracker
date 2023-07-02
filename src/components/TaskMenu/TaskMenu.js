@@ -8,6 +8,7 @@ import { AiOutlineFile, AiOutlineFileText } from 'react-icons/ai';
 import { BsBoxArrowRight, BsBoxArrowInRight } from 'react-icons/bs';
 import { FaAmazonPay } from 'react-icons/fa';
 import {
+  getUncompletedTasksByRange,
   getTasksByDateOrder,
   getTasksByDateInvoice,
   getTasksByDatePayment,
@@ -18,6 +19,19 @@ import {
 export const TaskMenu = ({ hadleGetTasksByRange, startDate }) => {
   const { dispatch, setIsLoading } = useContext(TaskContext);
   const today = new Date();
+
+  const hadleGetUncompletedTasksByRange = (start, end) => {
+    setIsLoading(true);
+
+    getUncompletedTasksByRange(start, end)
+      .then(tasks => {
+        dispatch({ type: 'getTasks', tasks });
+      })
+      .catch(error => console.log(error))
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
 
   const hadleGetTasksByDateOrder = start => {
     setIsLoading(true);
@@ -90,7 +104,7 @@ export const TaskMenu = ({ hadleGetTasksByRange, startDate }) => {
         hadleGetTasksByRange(startDate, today);
         break;
       case 'uncompletedTasks':
-        dispatch({ type: 'uncompletedTasks' });
+        hadleGetUncompletedTasksByRange(startDate, today);
         break;
       case 'dateOrderTasks':
         hadleGetTasksByDateOrder(today);

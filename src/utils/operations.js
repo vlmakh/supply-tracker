@@ -168,6 +168,20 @@ export const updateTaskStatus = async (taskId, status) => {
   }
 };
 
+export const getUncompletedTasksByRange = async (startDate, endDate) => {
+  try {
+    const response = await axios.get(
+      `api/tasks/uncompleted?startDate=${formatDateCut(
+        startDate
+      )}&endDate=${formatDateCut(endDate)}T23:59:59.000Z`
+    );
+
+    return response.data;
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
 export const getTasksByDateOrder = async date => {
   try {
     const response = await axios.get(
