@@ -12,6 +12,7 @@ import {
   Supplier,
   Freight,
   Days,
+  Delete,
   BtnCopy,
   BtnDel,
   BtnName,
@@ -149,11 +150,11 @@ export const TaskItem = ({ task, idx }) => {
           )}
         </Days>
 
-        <Exec>
+        <Delete>
           <BtnDel type="button" onClick={() => handleDelete(task._id)}>
             <MdDeleteOutline size="18" />
           </BtnDel>
-        </Exec>
+        </Delete>
       </Task>
 
       {showFormTaskEdit && (

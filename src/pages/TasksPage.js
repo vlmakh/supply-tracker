@@ -1,4 +1,5 @@
 import { Box } from 'components/Base/Box';
+import { TaskTableWrap } from 'components/Container/Container.styled';
 import { TaskTable } from 'components/TaskTable/TaskTable';
 import { useState, useContext } from 'react';
 import { Navigate } from 'react-router-dom';
@@ -41,7 +42,7 @@ export default function TaskPage({ isLoggedIn }) {
     <>
       {!isLoggedIn && <Navigate to="/" />}
 
-      <Box mt={5} mx="auto">
+      <TaskTableWrap>
         {!isLoading && tasks && <TaskTable />}
 
         <Box p={4}>
@@ -62,7 +63,7 @@ export default function TaskPage({ isLoggedIn }) {
             />
           </Modal>
         )}
-      </Box>
+      </TaskTableWrap>
 
       {isLoading && (
         <Modal>

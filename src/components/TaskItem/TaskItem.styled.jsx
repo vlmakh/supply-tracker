@@ -97,9 +97,7 @@ export const Data = styled.td`
       if (!p.completed && formatDate(p.today) === formattedToday) {
         return 'blue';
       }
-    }
-
-    // !p.completed && formatDate(p.today) === formattedToday && 'blue'
+    }    
   };
 
   @media screen and (max-width: 1199.98px) {
@@ -110,6 +108,14 @@ export const Data = styled.td`
 export const Days = styled.td`
   width: 24px;
   text-align: right;
+`;
+
+export const Delete = styled.td`  
+  width: 24px;
+
+  @media screen and (max-width: 1199.98px) {
+    display: none;
+  }
 `;
 
 export const BtnCopy = styled(TDButton)`

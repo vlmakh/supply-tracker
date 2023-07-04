@@ -65,10 +65,6 @@ export const SharedLayout = ({
       });
   };
 
-  const percentCompleted = Math.round(
-    (calcCompleted(tasks) / tasks.length) * 100
-  );
-
   return (
     <Layout>
       <Header>
@@ -78,8 +74,7 @@ export const SharedLayout = ({
               {tasks && (
                 <TaskCalc to="/tasks">
                   <b>{tasks.length}</b> /{' '}
-                  <Green>{calcCompleted(tasks) ?? '0'} </Green> /{' '}
-                  {percentCompleted || '0'}%
+                  <Green>{calcCompleted(tasks) ?? '0'} </Green>
                 </TaskCalc>
               )}
 
