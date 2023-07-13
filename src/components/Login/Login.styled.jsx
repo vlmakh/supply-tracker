@@ -114,7 +114,7 @@ export const LoginButton = styled(Button)`
   justify-content: center;
   width: 100%;
   border-radius: 4px;
-  margin: 0 auto; 
+  margin: 0 auto 16px; 
   background-color: ${p => p.disabled && 'grey'};
 
    &:hover {
