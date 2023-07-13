@@ -3,55 +3,68 @@ import { Form, Field, ErrorMessage } from 'formik';
 import { NavLink } from 'react-router-dom';
 import { Button } from 'components/Base/Buttons.styled';
 
-export const HomeBox = styled.div`  
-    width: 400px;
+export const FormWrap = styled.div`  
+    width: 100%;
     margin: 40px auto 0;  
+`;
+
+export const GreenLine = styled.div`  
+    /* width: 400px; */
+    padding: 16px 0;
+    /* margin-top: 32px; */
+    margin-bottom: 40px;
+    background-color: lightgreen;
+
 `;
 
 export const FormBox = styled.div`
   width: 360px;
-  height: 300px;
+  /* height: 300px; */
   margin: 16px auto;
   background-color: white;
-  border: ${p => p.theme.borders.dark};
-  border-radius: ${p => p.theme.radii.normal};
-  box-shadow: ${p => p.theme.shadows.box};
+  /* border: ${p => p.theme.borders.dark}; */
+  /* border-radius: ${p => p.theme.radii.normal}; */
+  /* box-shadow: ${p => p.theme.shadows.box}; */
   overflow: hidden;
 `;
 
-export const LinkBox = styled.div`
-  display: flex;
-  justify-content: space-around;
-  text-align: center;
-`;
+// export const LinkBox = styled.div`
+//   display: flex;
+//   justify-content: space-around;
+//   text-align: center;
+// `;
 
-export const MenuLink = styled(NavLink)`
-  width: 50%;
-  padding: 16px 0;
-  font-size: 16px;
-  font-weight: 700;
-  color: white;
-  border-bottom: ${p => p.theme.borders.dark};
-  text-decoration: none;
-  transition: background-color 250ms linear;
-  background-color: ${p => p.theme.colors.accent};
+// export const MenuLink = styled(NavLink)`
+//   width: 50%;
+//   padding: 16px 0;
+//   font-size: 16px;
+//   font-weight: 700;
+//   color: white;
+//   border-bottom: ${p => p.theme.borders.dark};
+//   text-decoration: none;
+//   transition: background-color 250ms linear;
+//   background-color: ${p => p.theme.colors.accent};
 
-  &.active {
-    background-color: ${p => p.theme.colors.second};
-  }
+//   &.active {
+//     background-color: ${p => p.theme.colors.second};
+//   }
 
-  :hover {
-    background-color: ${p => p.theme.colors.second};
-  }
-`;
+//   :hover {
+//     background-color: ${p => p.theme.colors.second};
+//   }
+// `;
 
 export const StyledForm = styled(Form)`
   padding: 16px 24px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  height: 248px;
+  /* height: 248px; */
 `;
+
+export const FormTitle = styled.h2`
+  margin-bottom: 16px;
+`
 
 export const TextLink = styled(NavLink)`
   text-align: right;
@@ -70,7 +83,8 @@ export const TextLink = styled(NavLink)`
 `;
 
 export const StyledField = styled(Field)`
-  padding: 4px 8px;
+  padding: 8px 4px;
+  width: 100%;
 
   :focus-visible {
     outline: none;
@@ -81,7 +95,8 @@ export const Label = styled.label`
   position: relative;
   display: flex;
   justify-content: space-between;
-  font-weight: 600;
+  margin-top: 8px;
+  margin-bottom: 16px;
 `;
 
 export const StyledErrorMsg = styled(ErrorMessage)`

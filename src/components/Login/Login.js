@@ -1,5 +1,7 @@
+import { Link } from 'react-router-dom';
 import {
   StyledForm,
+  FormTitle,
   StyledField,
   Label,
   StyledErrorMsg,
@@ -45,14 +47,16 @@ export default function Login({ setToken, setIsLoggedIn }) {
       validationSchema={schema}
     >
       <StyledForm>
+        <FormTitle>{t('login.login')}</FormTitle>
+
+        <p>email</p>
         <Label htmlFor="email">
-          <span>email</span>
           <StyledField name="email" type="text" placeholder=" "></StyledField>
           <StyledErrorMsg component="div" name="email" />
         </Label>
 
+        <p>{t('login.pass')}</p>
         <Label htmlFor="password">
-          <span>{t('login.pass')}</span>
           <StyledField
             name="password"
             type="password"
@@ -66,6 +70,8 @@ export default function Login({ setToken, setIsLoggedIn }) {
           {isProcessing ? `${t('buttons.wait')}` : `${t('buttons.login')}`}{' '}
           <LoginLoader isProcessing={isProcessing} />
         </LoginButton>
+
+        <Link to="/signup">{t('login.signup')}</Link>
       </StyledForm>
     </Formik>
   );

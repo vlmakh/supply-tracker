@@ -10,7 +10,7 @@ export const Layout = styled.div`
 `;
 
 export const Header = styled.div`
-  border-bottom: 1px solid grey;
+  /* border-bottom: 1px solid grey; */
   position: fixed;
   top: 0;
   z-index: 100;

@@ -1,27 +1,20 @@
-import {
-  HomeBox,
-  FormBox,
-  LinkBox,
-  MenuLink,
-} from 'components/Login/Login.styled';
+import { FormWrap, GreenLine, FormBox } from 'components/Login/Login.styled';
 import { Navigate, Outlet } from 'react-router-dom';
-import { t } from 'i18next';
+// import { t } from 'i18next';
+// import { Box } from 'components/Base/Box';
 
 export default function HomePage({ isLoggedIn }) {
   return (
     <>
       {isLoggedIn && <Navigate to="/tasks" />}
 
-      <HomeBox>
-        <FormBox>
-          <LinkBox>
-            <MenuLink to="/">{t('login.login')}</MenuLink>
-            <MenuLink to="/signup">{t('login.signup')}</MenuLink>
-          </LinkBox>
+      <FormWrap>
+        <GreenLine></GreenLine>
 
+        <FormBox>
           <Outlet />
         </FormBox>
-      </HomeBox>
+      </FormWrap>
     </>
   );
 }
