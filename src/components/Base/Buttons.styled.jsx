@@ -11,16 +11,17 @@ export const TDButton = styled.button`
 `;
 
 export const Button = styled.button`
-  color: white;
   font-weight: 700;
   cursor: ${p => !p.disabled && 'pointer'};
   padding: 8px;
-  border: none;
-  background-color: #004200;
+  border: 2px solid ${p => p.theme.colors.accent};
+  background-color: ${p => p.theme.colors.accent};
+  color: white;
   transition: background-color 250ms ease-in;
 
   &:hover {
-    background-color: green;
+    background-color: white;
+    color: ${p => p.theme.colors.accent};
   }
 `;
 

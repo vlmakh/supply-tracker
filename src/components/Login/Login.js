@@ -1,9 +1,11 @@
 import {
   StyledForm,
+  FormTitle,
   StyledField,
   Label,
   StyledErrorMsg,
   LoginButton,
+  TextLink,
 } from './Login.styled';
 import { Formik } from 'formik';
 import { login } from 'utils/operations';
@@ -11,10 +13,12 @@ import * as yup from 'yup';
 import { useState } from 'react';
 import { LoginLoader } from 'components/Loader/LoginLoader';
 import { t } from 'i18next';
+import logo from 'images/polysteel.webp';
+import { Box } from 'components/Base/Box';
 
 let schema = yup.object().shape({
-  email: yup.string().email().required(),
-  password: yup.string().min(6).required(),
+  email: yup.string().email().required(t('login.required')),
+  password: yup.string().min(6).required(t('login.required')),
 });
 
 export default function Login({ setToken, setIsLoggedIn }) {
@@ -45,27 +49,37 @@ export default function Login({ setToken, setIsLoggedIn }) {
       validationSchema={schema}
     >
       <StyledForm>
-        <Label htmlFor="email">
-          <span>email</span>
-          <StyledField name="email" type="text" placeholder=" "></StyledField>
-          <StyledErrorMsg component="div" name="email" />
-        </Label>
+        <Box>
+          <FormTitle>{t('login.login')}</FormTitle>
 
-        <Label htmlFor="password">
-          <span>{t('login.pass')}</span>
-          <StyledField
-            name="password"
-            type="password"
-            placeholder=" "
-            autoComplete="off"
-          ></StyledField>
-          <StyledErrorMsg component="div" name="password" />
-        </Label>
+          <p>email</p>
+          <Label htmlFor="email">
+            <StyledField name="email" type="text" placeholder=" "></StyledField>
+            <StyledErrorMsg component="div" name="email" />
+          </Label>
 
-        <LoginButton type="submit" disabled={isProcessing}>
-          {isProcessing ? `${t('buttons.wait')}` : `${t('buttons.login')}`}{' '}
-          <LoginLoader isProcessing={isProcessing} />
-        </LoginButton>
+          <p>{t('login.pass')}</p>
+          <Label htmlFor="password">
+            <StyledField
+              name="password"
+              type="password"
+              placeholder=" "
+              autoComplete="off"
+            ></StyledField>
+            <StyledErrorMsg component="div" name="password" />
+          </Label>
+
+          <LoginButton type="submit" disabled={isProcessing}>
+            {isProcessing ? `${t('buttons.wait')}` : `${t('buttons.login')}`}{' '}
+            <LoginLoader isProcessing={isProcessing} />
+          </LoginButton>
+
+          <TextLink to="/signup">{t('login.signup')}</TextLink>
+        </Box>
+
+        <Box mt={4}>
+          <img src={logo} alt="logo" width="200" />
+        </Box>
       </StyledForm>
     </Formik>
   );

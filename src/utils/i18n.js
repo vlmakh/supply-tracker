@@ -30,6 +30,7 @@ export const resources = {
         rePass: 're-password',
         name: 'Name',
         passMustMatch: 'Passwords must match',
+        required: 'required field',
       },
       taskTable: {
         name: 'Name',
@@ -104,6 +105,7 @@ export const resources = {
         rePass: 'повтор паролю',
         name: "Ім'я",
         passMustMatch: 'Паролі мають співпадати',
+        required: "обов'язкове поле",
       },
       taskTable: {
         name: 'Назва',

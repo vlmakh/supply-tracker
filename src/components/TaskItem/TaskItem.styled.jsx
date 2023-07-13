@@ -95,7 +95,7 @@ export const Data = styled.td`
         return 'lightgrey';
       }
       if (!p.completed && formatDate(p.today) === formattedToday) {
-        return 'blue';
+        return 'green';
       }
     }    
   };

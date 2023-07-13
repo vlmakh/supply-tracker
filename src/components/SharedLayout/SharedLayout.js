@@ -10,6 +10,7 @@ import {
   Green,
   UserMenuBtn,
   ApplyBtn,
+  ImgBox,
 } from './SharedLayout.styled';
 import { DatePickerStyled } from 'components/FormTask/FormTask.styled';
 import { Container } from 'components/Container/Container.styled';
@@ -25,6 +26,7 @@ import { MdRestartAlt } from 'react-icons/md';
 import uk from 'date-fns/locale/uk';
 import { registerLocale } from 'react-datepicker';
 import { TaskMenu } from 'components/TaskMenu/TaskMenu';
+import logo from 'images/task-manager-60.png';
 
 export const SharedLayout = ({
   user,
@@ -125,8 +127,11 @@ export const SharedLayout = ({
               </UserMenuBtn>
             </>
           ) : (
-            <Box width="80px" mx="auto">
-              <DateToday>{formatDate(today)}</DateToday>
+            <Box display="flex" alignItems="center" py={2}>
+              <ImgBox>
+                <img src={logo} alt="logo" width="32" />
+              </ImgBox>
+              <b>POLYSTEEL SUPPLY TRACKER</b>
             </Box>
           )}
         </Container>

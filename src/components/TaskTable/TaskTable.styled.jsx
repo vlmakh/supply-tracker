@@ -18,7 +18,7 @@ export const Table = styled.table`
 
   th {
     text-transform: uppercase;
-    background-color: darkcyan;
+    background-color: ${p => p.theme.colors.accent};
     color: #fff;
     min-width: 24px;
   }
