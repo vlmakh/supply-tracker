@@ -8,12 +8,6 @@ export const HomeBox = styled.div`
     margin: 40px auto 0;  
 `;
 
-export const ImgBox = styled.div`
-  width: 80px;
-  margin: 0 auto;
-  
-`;
-
 export const FormBox = styled.div`
   width: 360px;
   height: 300px;

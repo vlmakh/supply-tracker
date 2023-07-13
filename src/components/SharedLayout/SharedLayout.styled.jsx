@@ -89,6 +89,11 @@ export const DateToday = styled.p`
   }
 `;
 
+export const ImgBox = styled.div`
+  width: 32px;  
+  margin-right: 16px;
+`;
+
 export const Footer = styled.div`
   display: flex;
   align-items: center;
