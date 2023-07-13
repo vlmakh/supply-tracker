@@ -26,7 +26,7 @@ import { MdRestartAlt } from 'react-icons/md';
 import uk from 'date-fns/locale/uk';
 import { registerLocale } from 'react-datepicker';
 import { TaskMenu } from 'components/TaskMenu/TaskMenu';
-import logo from 'images/task-manager.png';
+import logo from 'images/task-manager-60.png';
 
 export const SharedLayout = ({
   user,

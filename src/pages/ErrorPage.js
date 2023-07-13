@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Box } from 'components/Base/Box';
-import logo from 'images/task-manager.png';
+import logo from 'images/task-manager-512.png';
 
 export default function ErrorPage() {
   return (
