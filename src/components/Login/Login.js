@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import {
   StyledForm,
   FormTitle,
@@ -6,6 +5,7 @@ import {
   Label,
   StyledErrorMsg,
   LoginButton,
+  TextLink,
 } from './Login.styled';
 import { Formik } from 'formik';
 import { login } from 'utils/operations';
@@ -15,8 +15,8 @@ import { LoginLoader } from 'components/Loader/LoginLoader';
 import { t } from 'i18next';
 
 let schema = yup.object().shape({
-  email: yup.string().email().required(),
-  password: yup.string().min(6).required(),
+  email: yup.string().email().required(t('login.required')),
+  password: yup.string().min(6).required(t('login.required')),
 });
 
 export default function Login({ setToken, setIsLoggedIn }) {
@@ -71,7 +71,7 @@ export default function Login({ setToken, setIsLoggedIn }) {
           <LoginLoader isProcessing={isProcessing} />
         </LoginButton>
 
-        <Link to="/signup">{t('login.signup')}</Link>
+        <TextLink to="/signup">{t('login.signup')}</TextLink>
       </StyledForm>
     </Formik>
   );

@@ -33,18 +33,12 @@ export const FormTitle = styled.h2`
 `;
 
 export const TextLink = styled(NavLink)`
-  text-align: right;
-  width: 100%;
-  color: ${p => p.theme.colors.bcgSec};
+  color: ${p => p.theme.colors.main};
   text-decoration: none;
   transition: color 250ms linear;
 
-  &.active {
-    color: ${p => p.theme.colors.textPrim};
-  }
-
   :hover {
-    color: ${p => p.theme.colors.textPrim};
+    color: ${p => p.theme.colors.accent};
   }
 `;
 
