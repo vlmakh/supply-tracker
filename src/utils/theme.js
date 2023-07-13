@@ -2,7 +2,7 @@ export const theme = {
   colors: {
     main: '#212121', // dark
     second: '#004200',
-    accent: 'green', // green
+    accent: '#009846', // polysteel
     text: '#212121',
   },
   space: [0, 2, 4, 8, 16, 32, 64, 128, 256],

@@ -11,7 +11,7 @@ export const FormWrap = styled.div`
 export const GreenLine = styled.div`
   padding: 16px 0;
   margin-bottom: 40px;
-  background-color: lightgreen;
+  background-color: ${p => p.theme.colors.accent};
 `;
 
 export const FormBox = styled.div`
@@ -19,6 +19,10 @@ export const FormBox = styled.div`
   margin: 16px auto;
   background-color: white;
   overflow: hidden;
+
+  /* @media screen and (min-width: 1200px) {
+    width: 900px;
+  } */
 `;
 
 export const StyledForm = styled(Form)`
@@ -26,6 +30,11 @@ export const StyledForm = styled(Form)`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+
+  /* @media screen and (min-width: 1200px) {
+    flex-direction: row;
+    justify-content: space-between;
+  } */
 `;
 
 export const FormTitle = styled.h2`
@@ -53,7 +62,7 @@ export const StyledField = styled(Field)`
   }
 
   :hover, :focus {
-    border: 2px solid green;
+    border: 2px solid ${p => p.theme.colors.accent};
   }
 `;
 

@@ -16,11 +16,11 @@ export const Button = styled.button`
   cursor: ${p => !p.disabled && 'pointer'};
   padding: 8px;
   border: none;
-  background-color: green;
+  background-color: ${p => p.theme.colors.accent};
   transition: background-color 250ms ease-in;
 
   &:hover {
-    background-color: #004200;
+    background-color: green;
   }
 `;
 

@@ -10,12 +10,12 @@ export const Layout = styled.div`
 `;
 
 export const Header = styled.div`
-  /* border-bottom: 1px solid grey; */
   position: fixed;
   top: 0;
   z-index: 100;
   width: 100%;
   background-color: white;
+  border-bottom: 1px solid ${p => p.theme.colors.accent};
 `;
 
 export const MenuBtn = styled.button`
@@ -71,7 +71,7 @@ export const Green = styled.span`
   min-width: 24px;
   padding: 2px 0;
   border-radius: 50%;
-  background-color: green;
+  background-color: ${p => p.theme.colors.accent};
   color: white;
   font-weight: 700;
 `;
@@ -99,7 +99,7 @@ export const Footer = styled.div`
   align-items: center;
   justify-content: center;
   gap: ${p => p.theme.space[4]}px;
-  border-top: 1px solid grey;
+  border-top: 1px solid ${p => p.theme.colors.accent};
   width: 100%;
   height: ${p => p.theme.space[5]}px;
   font-size: ${p => p.theme.fontSizes.xs};

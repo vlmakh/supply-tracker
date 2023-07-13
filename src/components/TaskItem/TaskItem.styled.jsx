@@ -22,7 +22,7 @@ export const CheckBtn = styled.button`
   background-color: transparent;
   width: 24px;
   padding: 0;
-  color: green;
+  color: ${p => p.theme.colors.accent};
 `;
 
 export const Num = styled.td`
@@ -95,7 +95,7 @@ export const Data = styled.td`
         return 'lightgrey';
       }
       if (!p.completed && formatDate(p.today) === formattedToday) {
-        return 'blue';
+        return 'green';
       }
     }    
   };
