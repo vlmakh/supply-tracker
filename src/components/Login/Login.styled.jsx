@@ -5,7 +5,7 @@ import { Button } from 'components/Base/Buttons.styled';
 
 export const FormWrap = styled.div`
   width: 100%;
-  margin: 40px auto 0;
+  margin: 36px auto 0;
 `;
 
 export const GreenLine = styled.div`

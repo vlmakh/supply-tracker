@@ -22,7 +22,7 @@ export const CheckBtn = styled.button`
   background-color: transparent;
   width: 24px;
   padding: 0;
-  color: ${p => p.theme.colors.accent};
+  color: green;
 `;
 
 export const Num = styled.td`
