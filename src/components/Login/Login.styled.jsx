@@ -3,68 +3,34 @@ import { Form, Field, ErrorMessage } from 'formik';
 import { NavLink } from 'react-router-dom';
 import { Button } from 'components/Base/Buttons.styled';
 
-export const FormWrap = styled.div`  
-    width: 100%;
-    margin: 40px auto 0;  
+export const FormWrap = styled.div`
+  width: 100%;
+  margin: 40px auto 0;
 `;
 
-export const GreenLine = styled.div`  
-    /* width: 400px; */
-    padding: 16px 0;
-    /* margin-top: 32px; */
-    margin-bottom: 40px;
-    background-color: lightgreen;
-
+export const GreenLine = styled.div`
+  padding: 16px 0;
+  margin-bottom: 40px;
+  background-color: lightgreen;
 `;
 
 export const FormBox = styled.div`
   width: 360px;
-  /* height: 300px; */
   margin: 16px auto;
   background-color: white;
-  /* border: ${p => p.theme.borders.dark}; */
-  /* border-radius: ${p => p.theme.radii.normal}; */
-  /* box-shadow: ${p => p.theme.shadows.box}; */
   overflow: hidden;
 `;
-
-// export const LinkBox = styled.div`
-//   display: flex;
-//   justify-content: space-around;
-//   text-align: center;
-// `;
-
-// export const MenuLink = styled(NavLink)`
-//   width: 50%;
-//   padding: 16px 0;
-//   font-size: 16px;
-//   font-weight: 700;
-//   color: white;
-//   border-bottom: ${p => p.theme.borders.dark};
-//   text-decoration: none;
-//   transition: background-color 250ms linear;
-//   background-color: ${p => p.theme.colors.accent};
-
-//   &.active {
-//     background-color: ${p => p.theme.colors.second};
-//   }
-
-//   :hover {
-//     background-color: ${p => p.theme.colors.second};
-//   }
-// `;
 
 export const StyledForm = styled(Form)`
   padding: 16px 24px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  /* height: 248px; */
 `;
 
 export const FormTitle = styled.h2`
   margin-bottom: 16px;
-`
+`;
 
 export const TextLink = styled(NavLink)`
   text-align: right;
@@ -85,9 +51,15 @@ export const TextLink = styled(NavLink)`
 export const StyledField = styled(Field)`
   padding: 8px 4px;
   width: 100%;
+  border-radius: 4px;
+  transition: border 250ms linear;
 
   :focus-visible {
     outline: none;
+  }
+
+  :hover, :focus {
+    border: 2px solid green;
   }
 `;
 
@@ -114,10 +86,10 @@ export const LoginButton = styled(Button)`
   justify-content: center;
   width: 100%;
   border-radius: 4px;
-  margin: 0 auto 16px; 
+  margin: 0 auto 16px;
   background-color: ${p => p.disabled && 'grey'};
 
-   &:hover {
+  &:hover {
     background-color: ${p => p.disabled && 'grey'};
   }
 `;
