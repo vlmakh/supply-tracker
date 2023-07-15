@@ -13,7 +13,6 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import { LoginLoader } from 'components/Loader/LoginLoader';
 import { Box } from 'components/Base/Box';
-import logo from 'images/polysteel.webp';
 import { t } from 'i18next';
 
 let schema = yup.object().shape({
@@ -75,10 +74,6 @@ export default function Login({ setToken, setIsLoggedIn }) {
           </LoginButton>
 
           <TextLink to="/signup">{t('login.signup')}</TextLink>
-        </Box>
-
-        <Box mt={4}>
-          <img src={logo} alt="logo" width="200" />
         </Box>
       </StyledForm>
     </Formik>

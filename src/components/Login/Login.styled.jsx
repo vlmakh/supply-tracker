@@ -16,25 +16,25 @@ export const GreenLine = styled.div`
 
 export const FormBox = styled.div`
   width: 360px;
-  margin: 16px auto;
+  margin: 0 auto;
   background-color: white;
   overflow: hidden;
 
-  /* @media screen and (min-width: 1200px) {
-    width: 900px;
-  } */
+  @media screen and (min-width: 1024px) {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin: 0;
+  }
 `;
 
 export const StyledForm = styled(Form)`
+  width: 360px;
   padding: 16px 24px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-
-  /* @media screen and (min-width: 1200px) {
-    flex-direction: row;
-    justify-content: space-between;
-  } */
 `;
 
 export const FormTitle = styled.h2`
@@ -61,7 +61,8 @@ export const StyledField = styled(Field)`
     outline: none;
   }
 
-  :hover, :focus {
+  :hover,
+  :focus {
     border: 2px solid ${p => p.theme.colors.accent};
   }
 `;

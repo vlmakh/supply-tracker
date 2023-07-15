@@ -42,7 +42,7 @@ export const FormUserDept = ({ setUser, email }) => {
           <FormTitle>{t('account.department')}</FormTitle>
 
           <Label htmlFor="department">
-            <Input name="department" as="select" disabled>
+            <Input name="department" as="select">
               <option value={t('account.importPS')}>
                 {t('account.importPS')}
               </option>
