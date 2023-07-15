@@ -1,12 +1,12 @@
-import { FormStyled, FormTitle, AddTaskFormButton } from './FormTask.styled';
 import { useState, useEffect, useContext } from 'react';
-import { Formik } from 'formik';
-import { IoClose } from 'react-icons/io5';
-import { CloseButton } from 'components/Base/Buttons.styled';
-import { FormCommon } from './FormCommon';
 import { updateTask } from 'utils/operations';
 import { TaskContext } from 'utils/context';
+import { FormStyled, FormTitle, AddTaskFormButton } from './FormTask.styled';
+import { Formik } from 'formik';
+import { CloseButton } from 'components/Base/Buttons.styled';
+import { FormCommon } from './FormCommon';
 import { schema } from './yupSchema';
+import { IoClose } from 'react-icons/io5';
 import { t } from 'i18next';
 
 export const FormTaskEdit = ({ handleEditTask, task }) => {
@@ -32,7 +32,7 @@ export const FormTaskEdit = ({ handleEditTask, task }) => {
 
   const handleSubmit = newTask => {
     setIsLoading(true);
-    // console.log('send:', newTask);
+
     updateTask(task._id, {
       ...newTask,
       dateOrder,
@@ -42,7 +42,6 @@ export const FormTaskEdit = ({ handleEditTask, task }) => {
       dateETA,
     })
       .then(data => {
-        // console.log('return:', data);
         dispatch({ type: 'editTask', newTask: data, taskId: task._id });
 
         handleEditTask();

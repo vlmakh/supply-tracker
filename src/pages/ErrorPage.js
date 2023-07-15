@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import { Box } from 'components/Base/Box';
-import logo from 'images/task-manager-512.png';
+import logo from 'images/logo256.webp';
 
 export default function ErrorPage() {
   return (
-    <Box mt={5}>
+    <Box mt={6}>
       <Box width="200px" mx="auto">
         <img src={logo} alt="logo" width="200" />
       </Box>

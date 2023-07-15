@@ -1,7 +1,7 @@
-import { Table, THTablet, THDesktop } from './TaskTable.styled';
-import { TaskItem } from 'components/TaskItem/TaskItem';
 import { useContext } from 'react';
 import { TaskContext } from 'utils/context';
+import { Table, THTablet, THDesktop } from './TaskTable.styled';
+import { TaskItem } from 'components/TaskItem/TaskItem';
 import { t } from 'i18next';
 
 export const TaskTable = () => {

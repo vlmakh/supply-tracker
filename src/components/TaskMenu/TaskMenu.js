@@ -1,12 +1,4 @@
-import { FormMenu, MenuField, Label } from './TaskMenu.styled';
-import { Box } from 'components/Base/Box';
 import { useContext } from 'react';
-import { TaskContext } from 'utils/context';
-import { Formik } from 'formik';
-import { MdOutlinePlaylistRemove, MdRemoveDone } from 'react-icons/md';
-import { AiOutlineFileAdd, AiOutlineFileText } from 'react-icons/ai';
-import { BsBoxArrowRight, BsBoxArrowInRight } from 'react-icons/bs';
-import { FaAmazonPay } from 'react-icons/fa';
 import {
   getUncompletedTasksByRange,
   getTasksByDateOrder,
@@ -15,6 +7,14 @@ import {
   getTasksByDateETD,
   getTasksByDateETA,
 } from 'utils/operations';
+import { TaskContext } from 'utils/context';
+import { FormMenu, MenuField, Label } from './TaskMenu.styled';
+import { Formik } from 'formik';
+import { Box } from 'components/Base/Box';
+import { MdOutlinePlaylistRemove, MdRemoveDone } from 'react-icons/md';
+import { AiOutlineFileAdd, AiOutlineFileText } from 'react-icons/ai';
+import { BsBoxArrowRight, BsBoxArrowInRight } from 'react-icons/bs';
+import { FaAmazonPay } from 'react-icons/fa';
 
 export const TaskMenu = ({ hadleGetTasksByRange, startDate }) => {
   const { dispatch, setIsLoading } = useContext(TaskContext);

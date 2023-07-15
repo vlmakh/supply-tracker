@@ -1,7 +1,7 @@
-import { Box } from 'components/Base/Box';
+import { useContext } from 'react';
 import { Navigate } from 'react-router-dom';
 import { TaskContext } from 'utils/context';
-import { useContext } from 'react';
+import { Box } from 'components/Base/Box';
 import Modal from 'components/Modal/Modal';
 import { Loader } from 'components/Loader/Loader';
 import { FormUserName } from 'components/FormAccount/FormUserName';

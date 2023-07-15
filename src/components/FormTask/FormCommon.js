@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import { TaskContext } from 'utils/context';
 import {
   FieldName,
   Input,
@@ -12,8 +14,6 @@ import { Field } from 'formik';
 import { registerLocale } from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import uk from 'date-fns/locale/uk';
-import { TaskContext } from 'utils/context';
-import { useContext } from 'react';
 import { t } from 'i18next';
 
 export const FormCommon = ({ dates, setDates }) => {

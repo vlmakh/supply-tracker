@@ -1,5 +1,8 @@
-import { Outlet } from 'react-router-dom';
 import { Suspense, useContext } from 'react';
+import { Outlet } from 'react-router-dom';
+import { logout } from 'utils/operations';
+import { TaskContext } from 'utils/context';
+import { formatDate } from 'utils/formatDate';
 import {
   Layout,
   Header,
@@ -14,18 +17,15 @@ import {
 } from './SharedLayout.styled';
 import { DatePickerStyled } from 'components/FormTask/FormTask.styled';
 import { Container } from 'components/Container/Container.styled';
-import { LogoVM } from 'components/LogoVM/LogoVM';
-import { formatDate } from 'utils/formatDate';
-import { logout } from 'utils/operations';
-import { TaskContext } from 'utils/context';
 import 'react-datepicker/dist/react-datepicker.css';
-import { Box } from 'components/Base/Box';
 import { UserMenu } from 'components/UserMenu/UserMenu';
-import { HiOutlineUserCircle } from 'react-icons/hi';
-import { MdRestartAlt } from 'react-icons/md';
 import uk from 'date-fns/locale/uk';
 import { registerLocale } from 'react-datepicker';
 import { TaskMenu } from 'components/TaskMenu/TaskMenu';
+import { Box } from 'components/Base/Box';
+import { LogoVM } from 'components/LogoVM/LogoVM';
+import { HiOutlineUserCircle } from 'react-icons/hi';
+import { MdRestartAlt } from 'react-icons/md';
 import logo from 'images/logo256.webp';
 
 export const SharedLayout = ({

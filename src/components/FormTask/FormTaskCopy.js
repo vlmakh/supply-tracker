@@ -1,12 +1,12 @@
-import { FormStyled, FormTitle, AddTaskFormButton } from './FormTask.styled';
 import { useState, useEffect, useContext } from 'react';
+import { addTask } from 'utils/operations';
+import { TaskContext } from 'utils/context';
+import { FormStyled, FormTitle, AddTaskFormButton } from './FormTask.styled';
 import { Formik } from 'formik';
-import { IoClose } from 'react-icons/io5';
 import { CloseButton } from 'components/Base/Buttons.styled';
 import { schema } from './yupSchema';
 import { FormCommon } from './FormCommon';
-import { addTask } from 'utils/operations';
-import { TaskContext } from 'utils/context';
+import { IoClose } from 'react-icons/io5';
 import { t } from 'i18next';
 
 export const FormTaskCopy = ({ handleCopyTask, task }) => {

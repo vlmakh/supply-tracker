@@ -1,10 +1,10 @@
-import { FormStyled, FormTitle, AddTaskFormButton } from './FormTask.styled';
 import { useState, useEffect } from 'react';
+import { FormStyled, FormTitle, AddTaskFormButton } from './FormTask.styled';
 import { Formik } from 'formik';
-import { IoClose } from 'react-icons/io5';
 import { CloseButton } from 'components/Base/Buttons.styled';
 import { schema } from './yupSchema';
 import { FormCommon } from './FormCommon';
+import { IoClose } from 'react-icons/io5';
 import { t } from 'i18next';
 
 export const FormTaskAdd = ({ handleModal, handleAddTask }) => {

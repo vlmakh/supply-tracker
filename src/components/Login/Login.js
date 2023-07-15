@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { login } from 'utils/operations';
 import {
   StyledForm,
   FormTitle,
@@ -8,13 +10,11 @@ import {
   TextLink,
 } from './Login.styled';
 import { Formik } from 'formik';
-import { login } from 'utils/operations';
 import * as yup from 'yup';
-import { useState } from 'react';
 import { LoginLoader } from 'components/Loader/LoginLoader';
-import { t } from 'i18next';
-import logo from 'images/polysteel.webp';
 import { Box } from 'components/Base/Box';
+import logo from 'images/polysteel.webp';
+import { t } from 'i18next';
 
 let schema = yup.object().shape({
   email: yup.string().email().required(t('login.required')),

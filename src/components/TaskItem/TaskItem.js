@@ -1,3 +1,12 @@
+import { useState, useContext } from 'react';
+import { updateTaskStatus, deleteTask } from 'utils/operations';
+import { TaskContext } from 'utils/context';
+import {
+  formatDate,
+  formatDateCut,
+  formatDateMS,
+  formatDateDays,
+} from 'utils/formatDate';
 import {
   Task,
   Checkbox,
@@ -17,21 +26,12 @@ import {
   BtnDel,
   BtnName,
 } from './TaskItem.styled';
-import { useState, useContext } from 'react';
-import { updateTaskStatus, deleteTask } from 'utils/operations';
-import { FaCheck, FaArrowAltCircleRight } from 'react-icons/fa';
-import { MdContentCopy } from 'react-icons/md';
-import { MdDeleteOutline } from 'react-icons/md';
 import Modal from 'components/Modal/Modal';
 import { FormTaskEdit } from 'components/FormTask/FormTaskEdit';
 import { FormTaskCopy } from 'components/FormTask/FormTaskCopy';
-import { TaskContext } from 'utils/context';
-import {
-  formatDate,
-  formatDateCut,
-  formatDateMS,
-  formatDateDays,
-} from 'utils/formatDate';
+import { FaCheck, FaArrowAltCircleRight } from 'react-icons/fa';
+import { MdContentCopy } from 'react-icons/md';
+import { MdDeleteOutline } from 'react-icons/md';
 import { TaskLoader } from 'components/Loader/TaskLoader';
 
 export const TaskItem = ({ task, idx }) => {

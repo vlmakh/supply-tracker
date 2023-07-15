@@ -1,7 +1,7 @@
-import { Formik } from 'formik';
-import { updateUserPass } from 'utils/operations';
-import * as yup from 'yup';
 import { useState } from 'react';
+import { updateUserPass } from 'utils/operations';
+import { Formik } from 'formik';
+import * as yup from 'yup';
 import {
   FormStyled,
   FormTitle,

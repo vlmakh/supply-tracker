@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { signup } from 'utils/operations';
 import {
   LoginButton,
   StyledForm,
@@ -9,8 +11,6 @@ import {
 } from 'components/Login/Login.styled';
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import { signup } from 'utils/operations';
-import { useState } from 'react';
 import { LoginLoader } from 'components/Loader/LoginLoader';
 import { t } from 'i18next';
 
