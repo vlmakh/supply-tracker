@@ -1,10 +1,5 @@
 import { ThemeProvider } from '@emotion/react';
-import { Routes, Route } from 'react-router-dom';
-import { checkCurrentUser, getTasksByRange } from 'utils/operations';
 import { theme } from 'utils/theme';
-import { TaskContext } from 'utils/context';
-import { reducer } from 'utils/reducer';
-import { SharedLayout } from './SharedLayout/SharedLayout';
 import {
   useState,
   useEffect,
@@ -13,6 +8,11 @@ import {
   useMemo,
   useCallback,
 } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { checkCurrentUser, getTasksByRange } from 'utils/operations';
+import { TaskContext } from 'utils/context';
+import { reducer } from 'utils/reducer';
+import { SharedLayout } from './SharedLayout/SharedLayout';
 import Modal from 'components/Modal/Modal';
 import { Loader } from 'components/Loader/Loader';
 import { useTranslation } from 'react-i18next';
