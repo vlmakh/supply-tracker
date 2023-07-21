@@ -3,6 +3,17 @@ import toast from 'react-hot-toast';
 import { formatDateCut } from './formatDate';
 
 axios.defaults.baseURL = process.env.REACT_APP_MAIN_URL;
+axios.defaults.withCredentials = true;
+
+// const $api = axios.create({
+//   baseURL: process.env.REACT_APP_MAIN_URL,
+//   withCredentials: true,
+// });
+
+// axios.interceptors.request.use(
+//   config =>
+//     (config.headers.Authorization = `Bearer ${localStorage.getItem('splmgr')}`)
+// );
 
 const token = {
   set(token) {
@@ -12,6 +23,41 @@ const token = {
     axios.defaults.headers.common.Authorization = '';
   },
 };
+
+axios.interceptors.response.use(
+  config => {
+    return config;
+  },
+
+  async error => {
+    const originalRequest = error.config;
+
+    if (
+      error.response.status === 401 &&
+      error.config &&
+      !error.config._isRetry
+    ) {
+      originalRequest._isRetry = true;
+
+      try {
+        const res = await axios.get(`api/users/refresh`);
+
+        token.set(res.data.token);
+
+        console.log(res);
+
+        localStorage.setItem('splmgr', JSON.stringify(res.data.token));
+
+        return axios.request(originalRequest);
+      } catch (e) {
+        console.log('Unauthorized');
+      }
+    }
+
+    throw error;
+    // return Promise.reject(error);
+  }
+);
 
 const errorMsg = "Something's wrong. Please refresh page and try again";
 
