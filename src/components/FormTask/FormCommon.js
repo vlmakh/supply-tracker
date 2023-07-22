@@ -39,6 +39,8 @@ export const FormCommon = ({ dates, setDates }) => {
           <option value={t('formTask.pcs')}>{t('formTask.pcs')}</option>
           <option value={t('formTask.m')}>{t('formTask.m')}</option>
           <option value={t('formTask.kg')}>{t('formTask.kg')}</option>
+          <option value={t('formTask.lit')}>{t('formTask.lit')}</option>
+          <option value={t('formTask.pos')}>{t('formTask.pos')}</option>
         </Unit>
       </FormField>
 
