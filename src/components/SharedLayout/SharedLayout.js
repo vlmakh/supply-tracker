@@ -60,10 +60,12 @@ export const SharedLayout = ({
     logout()
       .then(() => {
         setToken(null);
+        localStorage.setItem('splmgr', null);
       })
       .finally(() => {
         setUser({});
         setIsLoggedIn(false);
+        setIsLoading(false);
       });
   };
 

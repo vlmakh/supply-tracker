@@ -10,19 +10,22 @@ axios.defaults.withCredentials = true;
 //   withCredentials: true,
 // });
 
-// axios.interceptors.request.use(
-//   config =>
-//     (config.headers.Authorization = `Bearer ${localStorage.getItem('splmgr')}`)
-// );
+axios.interceptors.request.use(config => {
+  config.headers.Authorization = `Bearer ${JSON.parse(
+    localStorage.getItem('splmgr')
+  )}`;
 
-const token = {
-  set(token) {
-    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-  },
-  unset() {
-    axios.defaults.headers.common.Authorization = '';
-  },
-};
+  return config;
+});
+
+// const token = {
+//   set(token) {
+//     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+//   },
+//   unset() {
+//     axios.defaults.headers.common.Authorization = '';
+//   },
+// };
 
 axios.interceptors.response.use(
   config => {
@@ -42,15 +45,13 @@ axios.interceptors.response.use(
       try {
         const res = await axios.get(`api/users/refresh`);
 
-        token.set(res.data.token);
-
-        console.log(res);
+        // token.set(res.data.token);
 
         localStorage.setItem('splmgr', JSON.stringify(res.data.token));
 
         return axios.request(originalRequest);
-      } catch (e) {
-        console.log('Unauthorized');
+      } catch (error) {
+        toast.error(error.message);
       }
     }
 
@@ -77,7 +78,7 @@ export const login = async credentials => {
   try {
     const response = await axios.post(`api/users/login`, credentials);
 
-    token.set(response.data.token);
+    // token.set(response.data.token);
 
     return response.data;
   } catch (error) {
@@ -85,24 +86,24 @@ export const login = async credentials => {
   }
 };
 
-export const checkCurrentUser = async savedToken => {
-  if (savedToken === null) {
-    return;
-  }
+export const checkCurrentUser = async () => {
+  // const savedToken = JSON.parse(localStorage.getItem('splmgr'));
 
-  token.set(savedToken);
+  // if (savedToken === null) {
+  //   return;
+  // }
 
-  try {
-    const response = await axios.get(`api/users/current`);
-    return response.data;
-  } catch (error) {}
+  // token.set(savedToken);
+
+  const response = await axios.get(`api/users/current`);
+  return response.data;
 };
 
 export const logout = async () => {
   try {
     await axios.get(`api/users/logout`);
 
-    token.unset();
+    // token.unset();
   } catch (error) {
     toast.error(error.message);
   }

@@ -56,22 +56,38 @@ export const App = () => {
   );
 
   useEffect(() => {
-    setToken(token);
-
-    localStorage.setItem('splmgr', JSON.stringify(token));
-
-    checkCurrentUser(token)
+    checkCurrentUser()
       .then(data => {
         if (data.name) {
           setUser({ ...data });
           setIsLoggedIn(true);
         }
       })
-      .catch(error => {})
+      .catch(error => {
+        setIsLoggedIn(false);
+      })
       .finally(() => {
         setIsLoading(false);
       });
-  }, [token]);
+  }, []);
+
+  // useEffect(() => {
+  //   setToken(token);
+
+  //   localStorage.setItem('splmgr', JSON.stringify(token));
+
+  // checkCurrentUser()
+  //   .then(data => {
+  //     if (data.name) {
+  //       setUser({ ...data });
+  //       setIsLoggedIn(true);
+  //     }
+  //   })
+  //   .catch(error => {})
+  //   .finally(() => {
+  //     setIsLoading(false);
+  //   });
+  // }, [token]);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -129,6 +145,7 @@ export const App = () => {
                 endDate={endDate}
                 setEndDate={setEndDate}
                 hadleGetTasksByRange={hadleGetTasksByRange}
+                token={token}
                 setToken={setToken}
                 setUser={setUser}
               />
@@ -138,7 +155,11 @@ export const App = () => {
               <Route
                 index
                 element={
-                  <Login setToken={setToken} setIsLoggedIn={setIsLoggedIn} />
+                  <Login
+                    setUser={setUser}
+                    setToken={setToken}
+                    setIsLoggedIn={setIsLoggedIn}
+                  />
                 }
               />
               <Route path="/signup" element={<Signup />} />
