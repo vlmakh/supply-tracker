@@ -5,11 +5,6 @@ import { formatDateCut } from './formatDate';
 axios.defaults.baseURL = process.env.REACT_APP_MAIN_URL;
 axios.defaults.withCredentials = true;
 
-// const $api = axios.create({
-//   baseURL: process.env.REACT_APP_MAIN_URL,
-//   withCredentials: true,
-// });
-
 axios.interceptors.request.use(config => {
   config.headers.Authorization = `Bearer ${JSON.parse(
     localStorage.getItem('splmgr')
@@ -56,7 +51,6 @@ axios.interceptors.response.use(
     }
 
     throw error;
-    // return Promise.reject(error);
   }
 );
 
