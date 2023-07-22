@@ -20,7 +20,7 @@ let schema = yup.object().shape({
   password: yup.string().min(6).required(t('login.required')),
 });
 
-export default function Login({ setToken, setIsLoggedIn }) {
+export default function Login({ setUser, setIsLoggedIn }) {
   const [isProcessing, setIsProcessing] = useState(false);
 
   const handleSubmit = (values, { resetForm }) => {
@@ -29,7 +29,8 @@ export default function Login({ setToken, setIsLoggedIn }) {
     login(values)
       .then(data => {
         resetForm();
-        setToken(data.token);
+        localStorage.setItem('splmgr', JSON.stringify(data.token));
+        setUser({ ...data.user });
         setIsLoggedIn(true);
       })
       .catch(error => {})

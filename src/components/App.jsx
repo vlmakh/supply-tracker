@@ -25,12 +25,10 @@ const TasksPage = lazy(() => import('pages/TasksPage'));
 const AccountPage = lazy(() => import('pages/AccountPage'));
 const ErrorPage = lazy(() => import('pages/ErrorPage'));
 
-const savedToken = JSON.parse(localStorage.getItem('splmgr'));
 const savedLang = JSON.parse(localStorage.getItem('splmgr-lang'));
 
 export const App = () => {
   const [user, setUser] = useState({});
-  const [token, setToken] = useState(savedToken ?? null);
   const [currentLang, setCurrentLang] = useState(savedLang ?? 'en');
   const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -56,22 +54,38 @@ export const App = () => {
   );
 
   useEffect(() => {
-    setToken(token);
-
-    localStorage.setItem('splmgr', JSON.stringify(token));
-
-    checkCurrentUser(token)
+    checkCurrentUser()
       .then(data => {
         if (data.name) {
           setUser({ ...data });
           setIsLoggedIn(true);
         }
       })
-      .catch(error => {})
+      .catch(error => {
+        setIsLoggedIn(false);
+      })
       .finally(() => {
         setIsLoading(false);
       });
-  }, [token]);
+  }, []);
+
+  // useEffect(() => {
+  //   setToken(token);
+
+  //   localStorage.setItem('splmgr', JSON.stringify(token));
+
+  // checkCurrentUser()
+  //   .then(data => {
+  //     if (data.name) {
+  //       setUser({ ...data });
+  //       setIsLoggedIn(true);
+  //     }
+  //   })
+  //   .catch(error => {})
+  //   .finally(() => {
+  //     setIsLoading(false);
+  //   });
+  // }, [token]);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -129,7 +143,6 @@ export const App = () => {
                 endDate={endDate}
                 setEndDate={setEndDate}
                 hadleGetTasksByRange={hadleGetTasksByRange}
-                setToken={setToken}
                 setUser={setUser}
               />
             }
@@ -138,7 +151,10 @@ export const App = () => {
               <Route
                 index
                 element={
-                  <Login setToken={setToken} setIsLoggedIn={setIsLoggedIn} />
+                  <Login
+                    setUser={setUser}
+                    setIsLoggedIn={setIsLoggedIn}
+                  />
                 }
               />
               <Route path="/signup" element={<Signup />} />

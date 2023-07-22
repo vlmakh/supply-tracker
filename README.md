@@ -11,4 +11,4 @@ react-hot-toast, react-icons, react-loader-spinner, styled-system, i18next.
 Adaptive layout for mobie, tablet, desktop.
 
 The application helps to manage the current tasks of the supply department in
-real time during its every step (Order, Invoice, Payment, Delivery, Arrival).
+real time during its every step (Order, Invoice, Payment, Departure, Arrival).

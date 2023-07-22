@@ -3,15 +3,62 @@ import toast from 'react-hot-toast';
 import { formatDateCut } from './formatDate';
 
 axios.defaults.baseURL = process.env.REACT_APP_MAIN_URL;
+axios.defaults.withCredentials = true;
 
-const token = {
-  set(token) {
-    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+// const $api = axios.create({
+//   baseURL: process.env.REACT_APP_MAIN_URL,
+//   withCredentials: true,
+// });
+
+axios.interceptors.request.use(config => {
+  config.headers.Authorization = `Bearer ${JSON.parse(
+    localStorage.getItem('splmgr')
+  )}`;
+
+  return config;
+});
+
+// const token = {
+//   set(token) {
+//     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+//   },
+//   unset() {
+//     axios.defaults.headers.common.Authorization = '';
+//   },
+// };
+
+axios.interceptors.response.use(
+  config => {
+    return config;
   },
-  unset() {
-    axios.defaults.headers.common.Authorization = '';
-  },
-};
+
+  async error => {
+    const originalRequest = error.config;
+
+    if (
+      error.response.status === 401 &&
+      error.config &&
+      !error.config._isRetry
+    ) {
+      originalRequest._isRetry = true;
+
+      try {
+        const res = await axios.get(`api/users/refresh`);
+
+        // token.set(res.data.token);
+
+        localStorage.setItem('splmgr', JSON.stringify(res.data.token));
+
+        return axios.request(originalRequest);
+      } catch (error) {
+        toast.error(error.message);
+      }
+    }
+
+    throw error;
+    // return Promise.reject(error);
+  }
+);
 
 const errorMsg = "Something's wrong. Please refresh page and try again";
 
@@ -31,7 +78,7 @@ export const login = async credentials => {
   try {
     const response = await axios.post(`api/users/login`, credentials);
 
-    token.set(response.data.token);
+    // token.set(response.data.token);
 
     return response.data;
   } catch (error) {
@@ -39,24 +86,24 @@ export const login = async credentials => {
   }
 };
 
-export const checkCurrentUser = async savedToken => {
-  if (savedToken === null) {
-    return;
-  }
+export const checkCurrentUser = async () => {
+  // const savedToken = JSON.parse(localStorage.getItem('splmgr'));
 
-  token.set(savedToken);
+  // if (savedToken === null) {
+  //   return;
+  // }
 
-  try {
-    const response = await axios.get(`api/users/current`);
-    return response.data;
-  } catch (error) {}
+  // token.set(savedToken);
+
+  const response = await axios.get(`api/users/current`);
+  return response.data;
 };
 
 export const logout = async () => {
   try {
     await axios.get(`api/users/logout`);
 
-    token.unset();
+    // token.unset();
   } catch (error) {
     toast.error(error.message);
   }
