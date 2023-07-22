@@ -58,7 +58,7 @@ export const SharedLayout = ({
     setIsLoading(true);
     logout()
       .then(() => {
-        localStorage.setItem('splmgr', null);
+        localStorage.removeItem('splmgr');
       })
       .finally(() => {
         setUser({});
