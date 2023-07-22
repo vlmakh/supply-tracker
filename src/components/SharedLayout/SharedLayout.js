@@ -37,7 +37,6 @@ export const SharedLayout = ({
   endDate,
   setEndDate,
   hadleGetTasksByRange,
-  setToken,
   setUser,
 }) => {
   const { tasks, setIsLoading, currentLang } = useContext(TaskContext);
@@ -59,7 +58,6 @@ export const SharedLayout = ({
     setIsLoading(true);
     logout()
       .then(() => {
-        setToken(null);
         localStorage.setItem('splmgr', null);
       })
       .finally(() => {

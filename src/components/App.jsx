@@ -25,12 +25,10 @@ const TasksPage = lazy(() => import('pages/TasksPage'));
 const AccountPage = lazy(() => import('pages/AccountPage'));
 const ErrorPage = lazy(() => import('pages/ErrorPage'));
 
-const savedToken = JSON.parse(localStorage.getItem('splmgr'));
 const savedLang = JSON.parse(localStorage.getItem('splmgr-lang'));
 
 export const App = () => {
   const [user, setUser] = useState({});
-  const [token, setToken] = useState(savedToken ?? null);
   const [currentLang, setCurrentLang] = useState(savedLang ?? 'en');
   const [isLoading, setIsLoading] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -145,8 +143,6 @@ export const App = () => {
                 endDate={endDate}
                 setEndDate={setEndDate}
                 hadleGetTasksByRange={hadleGetTasksByRange}
-                token={token}
-                setToken={setToken}
                 setUser={setUser}
               />
             }
@@ -157,7 +153,6 @@ export const App = () => {
                 element={
                   <Login
                     setUser={setUser}
-                    setToken={setToken}
                     setIsLoggedIn={setIsLoggedIn}
                   />
                 }
