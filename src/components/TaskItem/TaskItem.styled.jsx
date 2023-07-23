@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { formatDate, formatDateMS } from 'utils/formatDate';
 import { TDButton } from 'components/Base/Buttons.styled';
+import { Field } from 'formik';
 const today = new Date();
 const formattedToday = formatDate(new Date());
 
@@ -141,4 +142,14 @@ export const BtnName = styled(TDButton)`
     opacity: 1;
     visibility: visible;
   }
+`;
+
+export const Label = styled.label`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const Select = styled(Field)`
+  border: none;
 `;

@@ -67,25 +67,7 @@ export const App = () => {
       .finally(() => {
         setIsLoading(false);
       });
-  }, []);
-
-  // useEffect(() => {
-  //   setToken(token);
-
-  //   localStorage.setItem('splmgr', JSON.stringify(token));
-
-  // checkCurrentUser()
-  //   .then(data => {
-  //     if (data.name) {
-  //       setUser({ ...data });
-  //       setIsLoggedIn(true);
-  //     }
-  //   })
-  //   .catch(error => {})
-  //   .finally(() => {
-  //     setIsLoading(false);
-  //   });
-  // }, [token]);
+  }, []);  
 
   useEffect(() => {
     if (isLoggedIn) {

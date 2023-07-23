@@ -33,6 +33,8 @@ import { FaCheck, FaArrowAltCircleRight } from 'react-icons/fa';
 import { MdContentCopy } from 'react-icons/md';
 import { MdDeleteOutline } from 'react-icons/md';
 import { TaskLoader } from 'components/Loader/TaskLoader';
+import { FormChangeUser } from 'components/TaskItem/FormChangeUser';
+import { formatUser } from 'utils/formatUser';
 
 export const TaskItem = ({ task, idx }) => {
   const [status, setStatus] = useState(task.completed);
@@ -40,6 +42,12 @@ export const TaskItem = ({ task, idx }) => {
   const [showFormTaskCopy, setShowFormTaskCopy] = useState(false);
   const { dispatch } = useContext(TaskContext);
   const [isProcessing, setIsProcessing] = useState(false);
+
+  const formatName = name => {
+    if (name && name.length > 25) {
+      return name.slice(0, 25) + '...';
+    } else return name;
+  };
 
   const formatSupplier = name => {
     if (name && name.length > 21) {
@@ -110,10 +118,12 @@ export const TaskItem = ({ task, idx }) => {
 
         <Name>
           <BtnName type="button" onClick={handleEditTask} disabled={status}>
-            {task.name}
+            {formatName(task.name)}
           </BtnName>
 
-          <Comment>{task.comments}</Comment>
+          <Comment>
+            <b>{task.name}</b> <br /> {task.comments}
+          </Comment>
         </Name>
 
         <Qty>{task.qty}</Qty>
@@ -155,6 +165,14 @@ export const TaskItem = ({ task, idx }) => {
             <MdDeleteOutline size="18" />
           </BtnDel>
         </Delete>
+
+        {/* {task.owner && <td>{formatUser(task.owner)}</td>} */}
+
+        {task.owner && (
+          <td>
+            <FormChangeUser taskOwner={formatUser(task.owner)} />
+          </td>
+        )}
       </Task>
 
       {showFormTaskEdit && (
