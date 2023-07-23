@@ -110,16 +110,6 @@ export const updateUserPass = async ({ password }) => {
   }
 };
 
-// export const getTasks = async () => {
-//   try {
-//     const response = await axios.get(`api/tasks`);
-
-//     return response.data;
-//   } catch (error) {
-//     console.log(error.message);
-//   }
-// };
-
 export const getTasksByRange = async (startDate, endDate) => {
   try {
     const response = await axios.get(
