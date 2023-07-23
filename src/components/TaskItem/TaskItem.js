@@ -97,7 +97,12 @@ export const TaskItem = ({ task, idx }) => {
         <Num>{idx + 1} </Num>
 
         <Exec>
-          <Checkbox type="checkbox" checked={status} readOnly />
+          <Checkbox
+            name="readyTask"
+            type="checkbox"
+            checked={status}
+            readOnly
+          />
           <CheckBtn
             type="button"
             onClick={() => handleCompleteTask(task._id, status)}
@@ -165,8 +170,6 @@ export const TaskItem = ({ task, idx }) => {
             <MdDeleteOutline size="18" />
           </BtnDel>
         </Delete>
-
-        {/* {task.owner && <td>{formatUser(task.owner)}</td>} */}
 
         {task.owner && (
           <td>

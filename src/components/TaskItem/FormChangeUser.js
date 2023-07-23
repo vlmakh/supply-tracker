@@ -22,8 +22,8 @@ export const FormChangeUser = ({ taskOwner }) => {
       }}
     >
       <Form>
-        <Label htmlFor="userName">
-          <Select name="userName" as="select">
+        <Label>
+          <Select name="userName" as="select" autoComplete="off">
             {userList.map(user => {
               return (
                 <option key={user.id} value={user.name}>
