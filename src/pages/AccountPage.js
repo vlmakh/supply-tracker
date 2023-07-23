@@ -43,7 +43,7 @@ export default function AccountPage({
 
         <Box p="16px 16px 32px" borderTop="1px solid lightgray">
           <h4>{name}</h4>
-          <p>{t('account.supplyPS')}</p>
+          <p>{t('account.supply')}</p>
         </Box>
 
         <FormUserName name={name} setUser={setUser} />

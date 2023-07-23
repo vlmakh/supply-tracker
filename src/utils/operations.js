@@ -13,15 +13,6 @@ axios.interceptors.request.use(config => {
   return config;
 });
 
-// const token = {
-//   set(token) {
-//     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-//   },
-//   unset() {
-//     axios.defaults.headers.common.Authorization = '';
-//   },
-// };
-
 axios.interceptors.response.use(
   config => {
     return config;
@@ -39,8 +30,6 @@ axios.interceptors.response.use(
 
       try {
         const res = await axios.get(`api/users/refresh`);
-
-        // token.set(res.data.token);
 
         localStorage.setItem('splmgr', JSON.stringify(res.data.token));
 
@@ -72,8 +61,6 @@ export const login = async credentials => {
   try {
     const response = await axios.post(`api/users/login`, credentials);
 
-    // token.set(response.data.token);
-
     return response.data;
   } catch (error) {
     toast.error(error.response.data.message);
@@ -81,14 +68,6 @@ export const login = async credentials => {
 };
 
 export const checkCurrentUser = async () => {
-  // const savedToken = JSON.parse(localStorage.getItem('splmgr'));
-
-  // if (savedToken === null) {
-  //   return;
-  // }
-
-  // token.set(savedToken);
-
   const response = await axios.get(`api/users/current`);
   return response.data;
 };
@@ -96,8 +75,6 @@ export const checkCurrentUser = async () => {
 export const logout = async () => {
   try {
     await axios.get(`api/users/logout`);
-
-    // token.unset();
   } catch (error) {
     toast.error(error.message);
   }
