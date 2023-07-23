@@ -44,7 +44,7 @@ export const TaskItem = ({ task, idx }) => {
   const [status, setStatus] = useState(task.completed);
   const [showFormTaskEdit, setShowFormTaskEdit] = useState(false);
   const [showFormTaskCopy, setShowFormTaskCopy] = useState(false);
-  const { dispatch } = useContext(TaskContext);
+  const { dispatch, user } = useContext(TaskContext);
   const [isProcessing, setIsProcessing] = useState(false);
 
   const formatName = name => {
@@ -188,7 +188,7 @@ export const TaskItem = ({ task, idx }) => {
           </BtnDel>
         </Delete>
 
-        {task.owner && (
+        {user.role === 'HEAD' && (
           <td>
             <FormChangeUser
               taskOwner={findUserName(task.owner)}

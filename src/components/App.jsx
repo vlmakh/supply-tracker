@@ -110,14 +110,13 @@ export const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <TaskContext.Provider
-        value={{ dispatch, tasks, isLoading, setIsLoading, currentLang }}
+        value={{ dispatch, tasks, isLoading, setIsLoading, currentLang, user }}
       >
         <Routes>
           <Route
             path="/"
             element={
-              <SharedLayout
-                user={user}
+              <SharedLayout                
                 setIsLoggedIn={setIsLoggedIn}
                 isLoggedIn={isLoggedIn}
                 startDate={startDate}

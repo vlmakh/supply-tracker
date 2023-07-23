@@ -29,7 +29,6 @@ import { MdRestartAlt } from 'react-icons/md';
 import logo from 'images/logo256.webp';
 
 export const SharedLayout = ({
-  user,
   isLoggedIn,
   setIsLoggedIn,
   startDate,
@@ -39,7 +38,7 @@ export const SharedLayout = ({
   hadleGetTasksByRange,
   setUser,
 }) => {
-  const { tasks, setIsLoading, currentLang } = useContext(TaskContext);
+  const { user, tasks, setIsLoading, currentLang } = useContext(TaskContext);
   const today = new Date();
   registerLocale('uk', uk);
 

@@ -10,15 +10,10 @@ export const FormChangeUser = ({
   taskId,
   isProcessing,
 }) => {
-  // const [isUserUpdating, setIsUserUpdating] = useState(false);
-
   const handleSubmit = values => {
     const id = findUserId(values.userName);
 
     handleChangeOwner(taskId, id);
-
-    console.log(taskId, id);
-    // setIsUserUpdating(false);
   };
 
   return (
