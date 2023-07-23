@@ -13,9 +13,6 @@ export const reducer = (tasks, action) => {
       return tasks.filter(task => task._id !== action.taskId);
 
     case 'editTask':
-      //   const idx = tasks.findIndex(task => task._id === action.taskId);
-      //   tasks.splice(idx, 1, action.newTask);
-      //   return tasks;
       return tasks.map(task => {
         return task._id === action.taskId ? action.newTask : task;
       });
