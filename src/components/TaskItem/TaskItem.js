@@ -183,7 +183,11 @@ export const TaskItem = ({ task, idx }) => {
         </Days>
 
         <Delete>
-          <BtnDel type="button" onClick={() => handleDelete(task._id)}>
+          <BtnDel
+            type="button"
+            onClick={() => handleDelete(task._id)}
+            disabled={status}
+          >
             <MdDeleteOutline size="18" />
           </BtnDel>
         </Delete>
@@ -191,6 +195,7 @@ export const TaskItem = ({ task, idx }) => {
         {user.role === 'HEAD' && (
           <td>
             <FormChangeUser
+              status={status}
               taskOwner={findUserName(task.owner)}
               handleChangeOwner={handleChangeOwner}
               taskId={task._id}

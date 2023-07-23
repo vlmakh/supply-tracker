@@ -121,13 +121,13 @@ export const Delete = styled.td`
 
 export const BtnCopy = styled(TDButton)`
   &:hover {
-    color: green;
+    color: ${p => !p.disabled && 'green'};
   }
 `;
 
 export const BtnDel = styled(TDButton)`
   &:hover {
-    color: red;
+    color: ${p => !p.disabled && 'red'};
   }
 `;
 

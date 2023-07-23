@@ -9,6 +9,7 @@ export const FormChangeUser = ({
   handleChangeOwner,
   taskId,
   isProcessing,
+  status,
 }) => {
   const handleSubmit = values => {
     const id = findUserId(values.userName);
@@ -25,7 +26,12 @@ export const FormChangeUser = ({
     >
       <Form>
         <Label>
-          <Select name="userName" as="select" autoComplete="off">
+          <Select
+            name="userName"
+            as="select"
+            autoComplete="off"
+            disabled={status}
+          >
             {userList.map(user => {
               return (
                 <option key={user.id} value={user.name}>
@@ -35,7 +41,7 @@ export const FormChangeUser = ({
             })}
           </Select>
 
-          <BtnCopy type="submit" disabled={isProcessing}>
+          <BtnCopy type="submit" disabled={isProcessing || status}>
             <MdRestartAlt size="20" />
           </BtnCopy>
         </Label>
