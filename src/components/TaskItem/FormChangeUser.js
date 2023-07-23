@@ -1,22 +1,29 @@
-import { useState } from 'react';
 import { Formik, Form } from 'formik';
 import { Label, BtnCopy, Select } from '../TaskItem/TaskItem.styled';
 import { MdRestartAlt } from 'react-icons/md';
 import { userList } from 'utils/userList';
+import { findUserId } from 'utils/findUser';
 
-export const FormChangeUser = ({ taskOwner }) => {
-  const [isUserUpdating, setIsUserUpdating] = useState(false);
+export const FormChangeUser = ({
+  taskOwner,
+  handleChangeOwner,
+  taskId,
+  isProcessing,
+}) => {
+  // const [isUserUpdating, setIsUserUpdating] = useState(false);
 
-  const handleUpdateUser = values => {
-    setIsUserUpdating(true);
+  const handleSubmit = values => {
+    const id = findUserId(values.userName);
 
-    console.log(values);
-    setIsUserUpdating(false);
+    handleChangeOwner(taskId, id);
+
+    console.log(taskId, id);
+    // setIsUserUpdating(false);
   };
 
   return (
     <Formik
-      onSubmit={handleUpdateUser}
+      onSubmit={handleSubmit}
       initialValues={{
         userName: taskOwner,
       }}
@@ -33,7 +40,7 @@ export const FormChangeUser = ({ taskOwner }) => {
             })}
           </Select>
 
-          <BtnCopy type="submit" disabled={isUserUpdating}>
+          <BtnCopy type="submit" disabled={isProcessing}>
             <MdRestartAlt size="20" />
           </BtnCopy>
         </Label>

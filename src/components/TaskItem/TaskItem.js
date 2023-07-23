@@ -1,5 +1,9 @@
 import { useState, useContext } from 'react';
-import { updateTaskStatus, deleteTask } from 'utils/operations';
+import {
+  updateTaskStatus,
+  deleteTask,
+  updateTaskOwner,
+} from 'utils/operations';
 import { TaskContext } from 'utils/context';
 import {
   formatDate,
@@ -34,7 +38,7 @@ import { MdContentCopy } from 'react-icons/md';
 import { MdDeleteOutline } from 'react-icons/md';
 import { TaskLoader } from 'components/Loader/TaskLoader';
 import { FormChangeUser } from 'components/TaskItem/FormChangeUser';
-import { formatUser } from 'utils/formatUser';
+import { findUserName } from 'utils/findUser';
 
 export const TaskItem = ({ task, idx }) => {
   const [status, setStatus] = useState(task.completed);
@@ -44,8 +48,8 @@ export const TaskItem = ({ task, idx }) => {
   const [isProcessing, setIsProcessing] = useState(false);
 
   const formatName = name => {
-    if (name && name.length > 25) {
-      return name.slice(0, 25) + '...';
+    if (name && name.length > 28) {
+      return name.slice(0, 27) + '...';
     } else return name;
   };
 
@@ -67,6 +71,19 @@ export const TaskItem = ({ task, idx }) => {
       .then(data => {
         setStatus(!status);
         dispatch({ type: 'editTask', newTask: data, taskId: id });
+      })
+      .catch(e => console.log(e.message))
+      .finally(() => {
+        setIsProcessing(false);
+      });
+  };
+
+  const handleChangeOwner = (taskId, newOwnerId) => {
+    setIsProcessing(true);
+
+    updateTaskOwner(taskId, newOwnerId)
+      .then(data => {
+        dispatch({ type: 'editTask', newTask: data, taskId });
       })
       .catch(e => console.log(e.message))
       .finally(() => {
@@ -173,7 +190,12 @@ export const TaskItem = ({ task, idx }) => {
 
         {task.owner && (
           <td>
-            <FormChangeUser taskOwner={formatUser(task.owner)} />
+            <FormChangeUser
+              taskOwner={findUserName(task.owner)}
+              handleChangeOwner={handleChangeOwner}
+              taskId={task._id}
+              isProcessing={isProcessing}
+            />
           </td>
         )}
       </Task>

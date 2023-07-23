@@ -68,8 +68,12 @@ export const login = async credentials => {
 };
 
 export const checkCurrentUser = async () => {
-  const response = await axios.get(`api/users/current`);
-  return response.data;
+  try {
+    const response = await axios.get(`api/users/current`);
+    return response.data;
+  } catch (error) {
+    console.log(error.message);
+  }
 };
 
 export const logout = async () => {
@@ -168,6 +172,18 @@ export const updateTaskStatus = async (taskId, status) => {
   try {
     const response = await axios.patch(`api/tasks/${taskId}/status`, {
       completed: !status,
+    });
+
+    return response.data;
+  } catch (error) {
+    toast.error(errorMsg);
+  }
+};
+
+export const updateTaskOwner = async (taskId, newOwnerId) => {
+  try {
+    const response = await axios.patch(`api/tasks/${taskId}/owner`, {
+      newOwnerId,
     });
 
     return response.data;

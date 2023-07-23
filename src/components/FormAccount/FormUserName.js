@@ -16,7 +16,7 @@ let schemaName = yup.object().shape({
   name: yup.string().min(4).required(),
 });
 
-export const FormUserName = ({ setUser, name }) => {
+export const FormUserName = ({ setUser }) => {
   const [isNameUpdating, setIsNameUpdating] = useState(false);
 
   const handleUpdateName = (values, { resetForm }) => {
@@ -37,33 +37,29 @@ export const FormUserName = ({ setUser, name }) => {
   };
 
   return (
-    <>
-      <Formik
-        onSubmit={handleUpdateName}
-        initialValues={{
-          name: '',
-        }}
-        validationSchema={schemaName}
-      >
-        <FormStyled>
-          <FormTitle>{t('account.changeName')}</FormTitle>
+    <Formik
+      onSubmit={handleUpdateName}
+      initialValues={{
+        name: '',
+      }}
+      validationSchema={schemaName}
+    >
+      <FormStyled>
+        <FormTitle>{t('account.changeName')}</FormTitle>
 
-          <Label htmlFor="name">
-            <Input
-              name="name"
-              type="text"
-              placeholder={t('account.newName')}
-            ></Input>
-            <ErrorStyled component="div" name="name" />
+        <Label htmlFor="name">
+          <Input
+            name="name"
+            type="text"
+            placeholder={t('account.newName')}
+          ></Input>
+          <ErrorStyled component="div" name="name" />
 
-            <FormButton type="submit" disabled={isNameUpdating}>
-              {isNameUpdating
-                ? `${t('buttons.wait')}`
-                : `${t('buttons.update')}`}
-            </FormButton>
-          </Label>
-        </FormStyled>
-      </Formik>
-    </>
+          <FormButton type="submit" disabled={isNameUpdating}>
+            {isNameUpdating ? `${t('buttons.wait')}` : `${t('buttons.update')}`}
+          </FormButton>
+        </Label>
+      </FormStyled>
+    </Formik>
   );
 };
