@@ -2,11 +2,9 @@ import { Suspense, useContext } from 'react';
 import { Outlet } from 'react-router-dom';
 import { logout } from 'utils/operations';
 import { TaskContext } from 'utils/context';
-import { formatDate } from 'utils/formatDate';
 import {
   Layout,
   Header,
-  DateToday,
   TaskCalc,
   Footer,
   MyLink,
@@ -22,6 +20,7 @@ import { UserMenu } from 'components/UserMenu/UserMenu';
 import uk from 'date-fns/locale/uk';
 import { registerLocale } from 'react-datepicker';
 import { TaskMenu } from 'components/TaskMenu/TaskMenu';
+import { TaskSearch } from 'components/TaskSearch/TaskSearch';
 import { Box } from 'components/Base/Box';
 import { LogoVM } from 'components/LogoVM/LogoVM';
 import { HiOutlineUserCircle } from 'react-icons/hi';
@@ -79,14 +78,14 @@ export const SharedLayout = ({
                 </TaskCalc>
               )}
 
+              <TaskSearch />
+
               <TaskMenu
                 hadleGetTasksByRange={hadleGetTasksByRange}
                 startDate={startDate}
               />
 
-              <DateToday>{formatDate(today)}</DateToday>
-
-              <Box display="flex" py={1}>
+              <Box display="flex" py={1} ml={5}>
                 <DatePickerStyled
                   dateFormat="dd.MM.yyyy"
                   selected={startDate}
