@@ -5,6 +5,8 @@ import { formatDateCut } from './formatDate';
 axios.defaults.baseURL = process.env.REACT_APP_MAIN_URL;
 axios.defaults.withCredentials = true;
 
+const errorMsg = "Something's wrong. Please refresh page and try again";
+
 axios.interceptors.request.use(config => {
   config.headers.Authorization = `Bearer ${JSON.parse(
     localStorage.getItem('splmgr')
@@ -35,15 +37,13 @@ axios.interceptors.response.use(
 
         return axios.request(originalRequest);
       } catch (error) {
-        toast.error(error.message);
+        toast.error(errorMsg);
       }
     }
 
     throw error;
   }
 );
-
-const errorMsg = "Something's wrong. Please refresh page and try again";
 
 export const signup = async credentials => {
   try {
