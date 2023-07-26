@@ -6,10 +6,15 @@ export const StyledForm = styled.form`
   align-items: center; */
 `;
 
-export const Label = styled.label`  
+export const Label = styled.label`
   display: flex;
   gap: 8px;
   align-items: center;
+  position: relative;
+
+  :hover button {
+    color: grey;
+  }
 `;
 
 export const Input = styled.input`
@@ -24,4 +29,18 @@ export const Input = styled.input`
   :focus {
     border: 2px solid ${p => p.theme.colors.accent};
   }
+`;
+
+export const ClearBtn = styled.button`
+  position: absolute;
+  padding: 0 4px;
+  top: 4px;
+  right: 0;
+  border: none;
+  color: transparent;
+  background-color: transparent;
+
+  cursor: pointer;
+
+  transition: color 250ms linear;
 `;
