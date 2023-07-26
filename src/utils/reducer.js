@@ -20,6 +20,11 @@ export const reducer = (tasks, action) => {
     case 'uncompletedTasks':
       return tasks.filter(task => task.completed === false);
 
+    case 'filter':
+      return action.tasks.filter(task =>
+        task.name.toLowerCase().includes(action.query.toLowerCase())
+      );
+
     default:
       return tasks;
   }

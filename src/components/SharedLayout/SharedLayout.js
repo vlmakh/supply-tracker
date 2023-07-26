@@ -78,7 +78,7 @@ export const SharedLayout = ({
                 </TaskCalc>
               )}
 
-              <TaskSearch />
+              <TaskSearch startDate={startDate} endDate={endDate} />
 
               <TaskMenu
                 hadleGetTasksByRange={hadleGetTasksByRange}
