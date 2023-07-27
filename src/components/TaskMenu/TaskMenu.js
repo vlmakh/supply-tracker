@@ -8,8 +8,8 @@ import {
   getTasksByDateETA,
 } from 'utils/operations';
 import { TaskContext } from 'utils/context';
-import { FormMenu, MenuField, Label } from './TaskMenu.styled';
-import { Formik } from 'formik';
+import { MenuField, Label } from './TaskMenu.styled';
+import { Formik, Form } from 'formik';
 import { Box } from 'components/Base/Box';
 import { MdOutlinePlaylistRemove, MdRemoveDone } from 'react-icons/md';
 import { AiOutlineFileAdd, AiOutlineFileText } from 'react-icons/ai';
@@ -132,7 +132,7 @@ export const TaskMenu = ({ hadleGetTasksByRange, startDate }) => {
         picked: 'allTasks',
       }}
     >
-      <FormMenu>
+      <Form>
         <Box role="group" display="flex">
           <Label>
             <MenuField
@@ -204,7 +204,7 @@ export const TaskMenu = ({ hadleGetTasksByRange, startDate }) => {
             <BsBoxArrowInRight size="24" />
           </Label>
         </Box>
-      </FormMenu>
+      </Form>
     </Formik>
   );
 };

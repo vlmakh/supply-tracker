@@ -1,14 +1,5 @@
 import styled from '@emotion/styled';
-import { Form, Field } from 'formik';
-
-export const FormMenu = styled(Form)`
-  display: flex;
-  /* margin-left: 32px;
-
-  @media screen and (max-width: 767px) {
-    margin-left: 8px;
-  } */
-`;
+import { Field } from 'formik';
 
 export const MenuField = styled(Field)`
     margin-left: 8px;
