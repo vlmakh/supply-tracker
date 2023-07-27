@@ -7,28 +7,26 @@ import { IoIosCloseCircle } from 'react-icons/io';
 
 export const TaskSearch = ({ startDate, endDate }) => {
   const [query, setQuery] = useState('');
-  const { dispatch, setIsLoading } = useContext(TaskContext);
+  const { dispatch } = useContext(TaskContext);
 
   const handleInputChange = e => {
     setQuery(e.target.value);
 
     getTasksByRange(startDate, endDate)
       .then(tasks => dispatch({ type: 'filter', tasks, query: e.target.value }))
-      .catch(error => {})
-      .finally(() => {
-        setIsLoading(false);
-      });
+      .catch(error => {});
   };
 
   const clearInput = () => {
+    if (!query) {
+      return;
+    }
+
     setQuery('');
 
     getTasksByRange(startDate, endDate)
       .then(tasks => dispatch({ type: 'getTasks', tasks }))
-      .catch(error => {})
-      .finally(() => {
-        setIsLoading(false);
-      });
+      .catch(error => {});
   };
 
   return (
