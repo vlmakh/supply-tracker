@@ -1,10 +1,5 @@
 import styled from '@emotion/styled';
-
-export const StyledForm = styled.form`
-  /* display: flex;
-  gap: 8px;
-  align-items: center; */
-`;
+import { DebounceInput } from 'react-debounce-input';
 
 export const Label = styled.label`
   display: flex;
@@ -17,7 +12,7 @@ export const Label = styled.label`
   }
 `;
 
-export const Input = styled.input`
+export const Input = styled(DebounceInput)`
   padding: 4px 8px;
   border-radius: 4px;
 

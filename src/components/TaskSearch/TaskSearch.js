@@ -1,10 +1,9 @@
-import { StyledForm, Label, Input, ClearBtn } from './TaskSearch.styled';
+import { Label, Input, ClearBtn } from './TaskSearch.styled';
 import { BsSearch } from 'react-icons/bs';
 import { useState, useContext } from 'react';
 import { TaskContext } from 'utils/context';
 import { getTasksByRange } from 'utils/operations';
 import { IoIosCloseCircle } from 'react-icons/io';
-// import { debounce } from 'debounce';
 
 export const TaskSearch = ({ startDate, endDate }) => {
   const [query, setQuery] = useState('');
@@ -33,18 +32,21 @@ export const TaskSearch = ({ startDate, endDate }) => {
   };
 
   return (
-    <>
-      <StyledForm>
-        <Label>
-          <BsSearch size="24" />
+    <form>
+      <Label>
+        <BsSearch size="24" />
 
-          <Input onChange={handleInputChange} value={query} name="query" />
+        <Input
+          onChange={handleInputChange}
+          value={query}
+          name="query"
+          debounceTimeout={500}
+        />
 
-          <ClearBtn type="button" onClick={clearInput}>
-            <IoIosCloseCircle size="20" />
-          </ClearBtn>
-        </Label>
-      </StyledForm>
-    </>
+        <ClearBtn type="button" onClick={clearInput}>
+          <IoIosCloseCircle size="20" />
+        </ClearBtn>
+      </Label>
+    </form>
   );
 };
