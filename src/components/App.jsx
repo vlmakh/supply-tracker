@@ -69,18 +69,7 @@ export const App = () => {
 
       hadleGetTasksByRange(firstOfMonth, today);
     }
-  }, [firstOfMonth, today, user.email]);
-
-  // const showAllTasksInCurrentMonth = (start, end) => {
-  //   getTasksByRange(start, end)
-  //     .then(tasks => {
-  //       dispatch({ type: 'getTasks', tasks });
-  //     })
-  //     .catch(error => {})
-  //     .finally(() => {
-  //       setIsLoading(false);
-  //     });
-  // };
+  }, [firstOfMonth, today, user.email]); 
 
   useEffect(() => {
     localStorage.setItem('splmgr-lang', JSON.stringify(currentLang));
@@ -88,9 +77,7 @@ export const App = () => {
     changeLanguage(currentLang);
   }, [changeLanguage, currentLang]);
 
-  const hadleGetTasksByRange = (start, end) => {
-    setIsLoading(true);
-
+  const hadleGetTasksByRange = (start, end) => {   
     getTasksByRange(start, end)
       .then(tasks => {
         dispatch({ type: 'getTasks', tasks });

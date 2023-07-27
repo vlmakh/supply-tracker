@@ -16,7 +16,7 @@ import { AiOutlineFileAdd, AiOutlineFileText } from 'react-icons/ai';
 import { BsBoxArrowRight, BsBoxArrowInRight } from 'react-icons/bs';
 import { FaAmazonPay } from 'react-icons/fa';
 
-export const TaskMenu = ({ hadleGetTasksByRange, startDate }) => {
+export const TaskMenu = ({ hadleGetTasksByRange, startDate, endDate }) => {
   const { dispatch, setIsLoading } = useContext(TaskContext);
   const today = new Date();
 
@@ -101,10 +101,10 @@ export const TaskMenu = ({ hadleGetTasksByRange, startDate }) => {
   const handleClick = value => {
     switch (value) {
       case 'allTasks':
-        hadleGetTasksByRange(startDate, today);
+        hadleGetTasksByRange(startDate, endDate);
         break;
       case 'uncompletedTasks':
-        hadleGetUncompletedTasksByRange(startDate, today);
+        hadleGetUncompletedTasksByRange(startDate, endDate);
         break;
       case 'dateOrderTasks':
         hadleGetTasksByDateOrder(today);

@@ -80,6 +80,7 @@ export const SharedLayout = ({
               <TaskMenu
                 hadleGetTasksByRange={hadleGetTasksByRange}
                 startDate={startDate}
+                endDate={endDate}
               />
 
               <Box display="flex" py={1} ml={5}>
