@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 import { TaskContext } from 'utils/context';
 import { addTask } from 'utils/operations';
 import { Box } from 'components/Base/Box';
-import { TaskTableWrap } from 'components/Container/Container.styled';
+import { MainWrap } from 'components/Container/Container.styled';
 import { TaskTable } from 'components/TaskTable/TaskTable';
 import Modal from 'components/Modal/Modal';
 import { FormTaskAdd } from 'components/FormTask/FormTaskAdd';
@@ -38,7 +38,7 @@ export default function TaskPage({ isLoggedIn }) {
     <>
       {!isLoggedIn && <Navigate to="/" />}
 
-      <TaskTableWrap>
+      <MainWrap>
         {!isLoading && tasks && <TaskTable />}
 
         <Box p={4}>
@@ -59,7 +59,7 @@ export default function TaskPage({ isLoggedIn }) {
             />
           </Modal>
         )}
-      </TaskTableWrap>
+      </MainWrap>
 
       {isLoading && (
         <Modal>
