@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { Navigate } from 'react-router-dom';
 import { TaskContext } from 'utils/context';
 import { Box } from 'components/Base/Box';
+import { MainWrap } from 'components/Container/Container.styled';
 import Modal from 'components/Modal/Modal';
 import { Loader } from 'components/Loader/Loader';
 import { FormUserName } from 'components/FormAccount/FormUserName';
@@ -35,7 +36,7 @@ export default function AccountPage({
     <>
       {!isLoggedIn && <Navigate to="/" />}
 
-      <Box mt={5} mx="auto">
+      <MainWrap>
         <BackLink to="/tasks">
           <MdOutlineArrowBack size="24" />
           {t('account.toTasks')}
@@ -69,7 +70,7 @@ export default function AccountPage({
             </Label>
           </FormStyled>
         </Formik>
-      </Box>
+      </MainWrap>
 
       {isLoading && (
         <Modal>

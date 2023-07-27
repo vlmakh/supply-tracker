@@ -13,7 +13,6 @@ export const Container = styled.div`
 
   @media screen and (min-width: 768px) {
     max-width: 768px;
-    
   }
 
   @media screen and (min-width: 1200px) {
@@ -21,11 +20,14 @@ export const Container = styled.div`
   }
 `;
 
-export const TaskTableWrap = styled.div`
+export const MainWrap = styled.div`
   margin: 32px auto 0;
 
   @media screen and (max-width: 767.98px) {
-    margin-top: 68px;
-    
+    margin-top: 96px;
   }
-`
+
+  @media screen and (min-width: 768px) and (max-width: 1199.98px) {
+    margin-top: 66px;
+  }
+`;
