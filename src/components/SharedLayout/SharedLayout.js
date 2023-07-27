@@ -28,16 +28,14 @@ import { MdRestartAlt } from 'react-icons/md';
 import logo from 'images/logo256.webp';
 
 export const SharedLayout = ({
-  isLoggedIn,
-  setIsLoggedIn,
   startDate,
   setStartDate,
   endDate,
   setEndDate,
   hadleGetTasksByRange,
-  setUser,
 }) => {
-  const { user, tasks, setIsLoading, currentLang } = useContext(TaskContext);
+  const { user, setUser, tasks, setIsLoading, currentLang } =
+    useContext(TaskContext);
   const today = new Date();
   registerLocale('uk', uk);
 
@@ -60,7 +58,6 @@ export const SharedLayout = ({
       })
       .finally(() => {
         setUser({});
-        setIsLoggedIn(false);
         setIsLoading(false);
       });
   };
@@ -69,7 +66,7 @@ export const SharedLayout = ({
     <Layout>
       <Header>
         <Container>
-          {isLoggedIn ? (
+          {user.email ? (
             <>
               {tasks && (
                 <TaskCalc to="/tasks">

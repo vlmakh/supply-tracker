@@ -31,7 +31,6 @@ export const App = () => {
   const [user, setUser] = useState({});
   const [currentLang, setCurrentLang] = useState(savedLang ?? 'en');
   const [isLoading, setIsLoading] = useState(true);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [tasks, dispatch] = useReducer(reducer, []);
 
   const today = useMemo(() => new Date(), []);
@@ -58,35 +57,30 @@ export const App = () => {
       .then(data => {
         if (data.name) {
           setUser({ ...data });
-          setIsLoggedIn(true);
         }
       })
-      .catch(error => {
-        setIsLoggedIn(false);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, []);  
+      .catch(error => {})
+      .finally(() => {setIsLoading(false);});
+  }, [user.email]);
 
   useEffect(() => {
-    if (isLoggedIn) {
+    if (user.email) {
       setIsLoading(true);
 
-      showAllTasksInCurrentMonth(firstOfMonth, today);
+      hadleGetTasksByRange(firstOfMonth, today);
     }
-  }, [firstOfMonth, isLoggedIn, today]);
+  }, [firstOfMonth, today, user.email]);
 
-  const showAllTasksInCurrentMonth = (firstOfMonth, today) => {
-    getTasksByRange(firstOfMonth, today)
-      .then(tasks => {
-        dispatch({ type: 'getTasks', tasks });
-      })
-      .catch(error => {})
-      .finally(() => {
-        setIsLoading(false);
-      });
-  };
+  // const showAllTasksInCurrentMonth = (start, end) => {
+  //   getTasksByRange(start, end)
+  //     .then(tasks => {
+  //       dispatch({ type: 'getTasks', tasks });
+  //     })
+  //     .catch(error => {})
+  //     .finally(() => {
+  //       setIsLoading(false);
+  //     });
+  // };
 
   useEffect(() => {
     localStorage.setItem('splmgr-lang', JSON.stringify(currentLang));
@@ -110,54 +104,39 @@ export const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <TaskContext.Provider
-        value={{ dispatch, tasks, isLoading, setIsLoading, currentLang, user }}
+        value={{
+          dispatch,
+          tasks,
+          isLoading,
+          setIsLoading,
+          currentLang,
+          setCurrentLang,
+          user,
+          setUser,
+        }}
       >
         <Routes>
           <Route
             path="/"
             element={
-              <SharedLayout                
-                setIsLoggedIn={setIsLoggedIn}
-                isLoggedIn={isLoggedIn}
+              <SharedLayout
                 startDate={startDate}
                 setStartDate={setStartDate}
                 endDate={endDate}
                 setEndDate={setEndDate}
                 hadleGetTasksByRange={hadleGetTasksByRange}
-                setUser={setUser}
               />
             }
           >
-            <Route path="/" element={<HomePage isLoggedIn={isLoggedIn} />}>
-              <Route
-                index
-                element={
-                  <Login
-                    setUser={setUser}
-                    setIsLoggedIn={setIsLoggedIn}
-                  />
-                }
-              />
+            <Route path="/" element={<HomePage />}>
+              <Route index element={<Login />} />
+
               <Route path="/signup" element={<Signup />} />
             </Route>
 
-            <Route
-              path="tasks"
-              element={<TasksPage isLoggedIn={isLoggedIn} />}
-            />
+            <Route path="tasks" element={<TasksPage />} />
 
-            <Route
-              path="account"
-              element={
-                <AccountPage
-                  isLoggedIn={isLoggedIn}
-                  name={user.name}
-                  setUser={setUser}
-                  currentLang={currentLang}
-                  setCurrentLang={setCurrentLang}
-                />
-              }
-            />
+            <Route path="account" element={<AccountPage />} />
 
             <Route path="*" element={<ErrorPage />} />
           </Route>

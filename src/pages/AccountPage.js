@@ -19,14 +19,9 @@ import {
 import { Formik } from 'formik';
 import { t } from 'i18next';
 
-export default function AccountPage({
-  name,
-  setUser,
-  isLoggedIn,
-  currentLang,
-  setCurrentLang,
-}) {
-  const { isLoading } = useContext(TaskContext);
+export default function AccountPage() {
+  const { isLoading, user, setUser, currentLang, setCurrentLang } =
+    useContext(TaskContext);
 
   const turnLang = values => {
     setCurrentLang(values.lang);
@@ -34,7 +29,7 @@ export default function AccountPage({
 
   return (
     <>
-      {!isLoggedIn && <Navigate to="/" />}
+      {!user.email && <Navigate to="/" />}
 
       <MainWrap>
         <BackLink to="/tasks">
@@ -43,11 +38,11 @@ export default function AccountPage({
         </BackLink>
 
         <Box p="16px 16px 32px" borderTop="1px solid lightgray">
-          <h4>{name}</h4>
+          <h4>{user.name}</h4>
           <p>{t('account.supply')}</p>
         </Box>
 
-        <FormUserName name={name} setUser={setUser} />
+        <FormUserName name={user.name} setUser={setUser} />
 
         <FormUserPass setUser={setUser} />
 

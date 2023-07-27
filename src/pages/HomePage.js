@@ -1,12 +1,16 @@
+import { useContext } from 'react';
+import { TaskContext } from 'utils/context';
 import { FormWrap, GreenLine, FormBox } from 'components/Login/Login.styled';
 import { Navigate, Outlet } from 'react-router-dom';
 import { Box } from 'components/Base/Box';
 import logo from 'images/polysteel.webp';
 
-export default function HomePage({ isLoggedIn }) {
+export default function HomePage() {
+  const { user } = useContext(TaskContext);
+
   return (
     <>
-      {isLoggedIn && <Navigate to="/tasks" />}
+      {user.email && <Navigate to="/tasks" />}
 
       <FormWrap>
         <GreenLine></GreenLine>

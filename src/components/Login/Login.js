@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { TaskContext } from 'utils/context';
 import { login } from 'utils/operations';
 import {
   StyledForm,
@@ -20,7 +21,9 @@ let schema = yup.object().shape({
   password: yup.string().min(6).required(t('login.required')),
 });
 
-export default function Login({ setUser, setIsLoggedIn }) {
+export default function Login() {
+  const { setUser } = useContext(TaskContext);
+
   const [isProcessing, setIsProcessing] = useState(false);
 
   const handleSubmit = (values, { resetForm }) => {
@@ -31,7 +34,6 @@ export default function Login({ setUser, setIsLoggedIn }) {
         resetForm();
         localStorage.setItem('splmgr', JSON.stringify(data.token));
         setUser({ ...data.user });
-        setIsLoggedIn(true);
       })
       .catch(error => {})
       .finally(() => {

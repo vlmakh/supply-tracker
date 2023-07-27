@@ -12,8 +12,9 @@ import { Loader } from 'components/Loader/Loader';
 import { MdOutlineAddCircleOutline } from 'react-icons/md';
 import { t } from 'i18next';
 
-export default function TaskPage({ isLoggedIn }) {
-  const { dispatch, tasks, isLoading, setIsLoading } = useContext(TaskContext);
+export default function TaskPage() {
+  const { dispatch, tasks, isLoading, setIsLoading, user } =
+    useContext(TaskContext);
   const [showFormTaskAdd, setShowFormTaskAdd] = useState(false);
 
   const handleModal = () => {
@@ -36,7 +37,7 @@ export default function TaskPage({ isLoggedIn }) {
 
   return (
     <>
-      {!isLoggedIn && <Navigate to="/" />}
+      {!user.email && <Navigate to="/" />}
 
       <MainWrap>
         {!isLoading && tasks && <TaskTable />}
