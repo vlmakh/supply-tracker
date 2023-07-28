@@ -32,6 +32,7 @@ export const App = () => {
   const [currentLang, setCurrentLang] = useState(savedLang ?? 'en');
   const [isLoading, setIsLoading] = useState(true);
   const [tasks, dispatch] = useReducer(reducer, []);
+  
 
   const today = useMemo(() => new Date(), []);
   const getYear = today.getFullYear();

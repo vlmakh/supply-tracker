@@ -40,7 +40,7 @@ import { TaskLoader } from 'components/Loader/TaskLoader';
 import { FormChangeUser } from 'components/TaskItem/FormChangeUser';
 import { findUserName } from 'utils/findUser';
 
-export const TaskItem = ({ task, idx }) => {
+export const TaskItem = ({ task, idx, userList }) => {
   const [status, setStatus] = useState(task.completed);
   const [showFormTaskEdit, setShowFormTaskEdit] = useState(false);
   const [showFormTaskCopy, setShowFormTaskCopy] = useState(false);
@@ -196,10 +196,11 @@ export const TaskItem = ({ task, idx }) => {
           <td>
             <FormChangeUser
               status={status}
-              taskOwner={findUserName(task.owner)}
+              taskOwner={findUserName(task.owner, userList)}
               handleChangeOwner={handleChangeOwner}
               taskId={task._id}
               isProcessing={isProcessing}
+              userList={userList}
             />
           </td>
         )}

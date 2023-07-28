@@ -275,3 +275,13 @@ export const getTasksByDateETA = async date => {
     console.log(error.message);
   }
 };
+
+export const getAllUsers = async date => {
+  try {
+    const response = await axios.get('api/users/users');
+
+    return response.data;
+  } catch (error) {
+    console.log(error.message);
+  }
+};

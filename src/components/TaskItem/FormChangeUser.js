@@ -1,7 +1,6 @@
 import { Formik, Form } from 'formik';
 import { Label, BtnCopy, Select } from '../TaskItem/TaskItem.styled';
 import { MdRestartAlt } from 'react-icons/md';
-import { userList } from 'utils/userList';
 import { findUserId } from 'utils/findUser';
 
 export const FormChangeUser = ({
@@ -10,9 +9,10 @@ export const FormChangeUser = ({
   taskId,
   isProcessing,
   status,
+  userList,
 }) => {
   const handleSubmit = values => {
-    const id = findUserId(values.userName);
+    const id = findUserId(values.userName, userList);
 
     handleChangeOwner(taskId, id);
   };

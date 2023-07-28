@@ -1,11 +1,18 @@
-import { useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { TaskContext } from 'utils/context';
+import { getAllUsers } from 'utils/operations';
 import { Table, THTablet, THDesktop } from './TaskTable.styled';
 import { TaskItem } from 'components/TaskItem/TaskItem';
 import { t } from 'i18next';
 
 export const TaskTable = () => {
-  const { tasks } = useContext(TaskContext);
+  const { tasks, user } = useContext(TaskContext);
+  const [userList, setUserList] = useState([]);
+
+  useEffect(() => {
+    if (user.role === 'HEAD' || user.role === 'ADMIN')
+      getAllUsers().then(data => setUserList([...data]));
+  }, [user.role]);
 
   return (
     <Table>
@@ -31,7 +38,14 @@ export const TaskTable = () => {
 
       <tbody>
         {tasks.map((task, idx) => {
-          return <TaskItem key={task._id} task={task} idx={idx} />;
+          return (
+            <TaskItem
+              key={task._id}
+              task={task}
+              idx={idx}
+              userList={userList}
+            />
+          );
         })}
       </tbody>
     </Table>
