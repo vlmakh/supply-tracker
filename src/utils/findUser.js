@@ -7,5 +7,5 @@ export const findUserName = (userId, userList) => {
 export const findUserId = (name, userList) => {
   const userId = userList.filter(user => user.name === name)[0];
 
-  return !userId ? 'unknown user' : userId.id;
+  return !userId ? 'unknown user' : userId._id;
 };
