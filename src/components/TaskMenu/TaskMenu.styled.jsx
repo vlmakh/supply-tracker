@@ -1,5 +1,21 @@
 import styled from '@emotion/styled';
 import { Field } from 'formik';
+import { NavLink } from 'react-router-dom';
+
+export const StyledLinkBtn = styled(NavLink)`
+  margin-left: 16px;
+  color: ${p => p.theme.colors.main};
+  transition: color 250ms ease-in;
+
+  &.active {
+    color: ${p => p.theme.colors.accent};
+  }
+
+  :hover,
+  :focus {
+    color: ${p => p.theme.colors.accent};
+  }
+`;
 
 export const MenuField = styled(Field)`
     margin-left: 8px;

@@ -20,6 +20,7 @@ import { UserMenu } from 'components/UserMenu/UserMenu';
 import uk from 'date-fns/locale/uk';
 import { registerLocale } from 'react-datepicker';
 import { TaskMenu } from 'components/TaskMenu/TaskMenu';
+import { TaskMenuToday } from 'components/TaskMenu/TaskMenuToday';
 import { TaskSearch } from 'components/TaskSearch/TaskSearch';
 import { Box } from 'components/Base/Box';
 import { LogoVM } from 'components/LogoVM/LogoVM';
@@ -82,6 +83,8 @@ export const SharedLayout = ({
                 startDate={startDate}
                 endDate={endDate}
               />
+
+              <TaskMenuToday />
 
               <Box display="flex" py={1} ml={5}>
                 <DatePickerStyled
