@@ -32,9 +32,9 @@ export const FormChangeUser = ({
             autoComplete="off"
             disabled={status}
           >
-            {userList.map(user => {
+            {userList.map((user, idx) => {
               return (
-                <option key={user.id} value={user.name}>
+                <option key={idx} value={user.name}>
                   {user.name}
                 </option>
               );

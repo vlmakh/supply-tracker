@@ -83,6 +83,7 @@ export const SharedLayout = ({
                   calendarStartDay={1}
                   locale={currentLang}
                   maxDate={today}
+                  name="startDate"
                 />
                 <DatePickerStyled
                   dateFormat="dd.MM.yyyy"
@@ -94,6 +95,7 @@ export const SharedLayout = ({
                   minDate={startDate}
                   calendarStartDay={1}
                   locale={currentLang}
+                  name="endDate"
                 />
               </Box>
 
