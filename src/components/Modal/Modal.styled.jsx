@@ -9,7 +9,7 @@ export const Overlay = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: transparent;
   z-index: 1200;
 `;
 
@@ -19,6 +19,5 @@ export const ModalWindow = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   max-height: calc(100vh - 24px);
-  /* overflow-y: clip; */
   overflow-x: visible;
 `;

@@ -79,6 +79,8 @@ export const App = () => {
   }, [changeLanguage, currentLang]);
 
   const hadleGetTasksByRange = (start, end) => {   
+    setIsLoading(true);
+
     getTasksByRange(start, end)
       .then(tasks => {
         dispatch({ type: 'getTasks', tasks });

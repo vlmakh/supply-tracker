@@ -40,7 +40,7 @@ export default function TaskPage() {
       {!user.email && <Navigate to="/" />}
 
       <MainWrap>
-        {!isLoading && tasks && <TaskTable />}
+        {tasks && <TaskTable />}
 
         <Box p={4}>
           <AddTaskButton
