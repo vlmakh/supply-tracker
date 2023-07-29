@@ -9,7 +9,7 @@ import {
   useCallback,
 } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { checkCurrentUser, getTasksByRange } from 'utils/operations';
+import { checkCurrentUser, getUncompletedTasksByRange } from 'utils/operations';
 import { TaskContext } from 'utils/context';
 import { reducer } from 'utils/reducer';
 import { SharedLayout } from './SharedLayout/SharedLayout';
@@ -32,7 +32,6 @@ export const App = () => {
   const [currentLang, setCurrentLang] = useState(savedLang ?? 'en');
   const [isLoading, setIsLoading] = useState(true);
   const [tasks, dispatch] = useReducer(reducer, []);
-  
 
   const today = useMemo(() => new Date(), []);
   const getYear = today.getFullYear();
@@ -61,7 +60,9 @@ export const App = () => {
         }
       })
       .catch(error => {})
-      .finally(() => {setIsLoading(false);});
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, [user.email]);
 
   useEffect(() => {
@@ -70,7 +71,7 @@ export const App = () => {
 
       hadleGetTasksByRange(firstOfMonth, today);
     }
-  }, [firstOfMonth, today, user.email]); 
+  }, [firstOfMonth, today, user.email]);
 
   useEffect(() => {
     localStorage.setItem('splmgr-lang', JSON.stringify(currentLang));
@@ -78,10 +79,10 @@ export const App = () => {
     changeLanguage(currentLang);
   }, [changeLanguage, currentLang]);
 
-  const hadleGetTasksByRange = (start, end) => {   
+  const hadleGetTasksByRange = (start, end) => {
     setIsLoading(true);
 
-    getTasksByRange(start, end)
+    getUncompletedTasksByRange(start, end)
       .then(tasks => {
         dispatch({ type: 'getTasks', tasks });
       })
@@ -124,7 +125,16 @@ export const App = () => {
               <Route path="/signup" element={<Signup />} />
             </Route>
 
-            <Route path="tasks" element={<TasksPage />} />
+            <Route
+              path="tasks/:category"
+              element={
+                <TasksPage
+                  startDate={startDate}
+                  endDate={endDate}
+                  today={today}
+                />
+              }
+            />
 
             <Route path="account" element={<AccountPage />} />
 

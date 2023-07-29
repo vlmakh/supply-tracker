@@ -73,8 +73,15 @@ export const DateInput = styled(Field)`
 export const DatePickerStyled = styled(DatePicker)`
   padding: 4px;
   width: 80px;
-  &:focus-visible {
-    outline: 1px solid green;
+  border-radius: 4px;
+
+  :focus-visible {
+    outline: none;
+  }
+
+  :hover,
+  :focus {
+    border: 2px solid ${p => p.theme.colors.accent};
   }
 `;
 

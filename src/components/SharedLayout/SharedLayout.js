@@ -10,7 +10,7 @@ import {
   MyLink,
   Green,
   UserMenuBtn,
-  ApplyBtn,
+  // ApplyBtn,
   ImgBox,
 } from './SharedLayout.styled';
 import { DatePickerStyled } from 'components/FormTask/FormTask.styled';
@@ -20,12 +20,11 @@ import { UserMenu } from 'components/UserMenu/UserMenu';
 import uk from 'date-fns/locale/uk';
 import { registerLocale } from 'react-datepicker';
 import { TaskMenu } from 'components/TaskMenu/TaskMenu';
-import { TaskMenuToday } from 'components/TaskMenu/TaskMenuToday';
 import { TaskSearch } from 'components/TaskSearch/TaskSearch';
 import { Box } from 'components/Base/Box';
 import { LogoVM } from 'components/LogoVM/LogoVM';
 import { HiOutlineUserCircle } from 'react-icons/hi';
-import { MdRestartAlt } from 'react-icons/md';
+// import { MdRestartAlt } from 'react-icons/md';
 import logo from 'images/logo256.webp';
 
 export const SharedLayout = ({
@@ -40,9 +39,9 @@ export const SharedLayout = ({
   const today = new Date();
   registerLocale('uk', uk);
 
-  const handleApplyRange = () => {
-    hadleGetTasksByRange(startDate, endDate);
-  };
+  // const handleApplyRange = () => {
+  //   hadleGetTasksByRange(startDate, endDate);
+  // };
 
   const calcCompleted = array => {
     if (array.length) {
@@ -70,7 +69,7 @@ export const SharedLayout = ({
           {user.email ? (
             <>
               {tasks && (
-                <TaskCalc to="/tasks">
+                <TaskCalc to="/tasks/uncompleted">
                   <b>{tasks.length}</b> /{' '}
                   <Green>{calcCompleted(tasks) ?? '0'} </Green>
                 </TaskCalc>
@@ -78,13 +77,7 @@ export const SharedLayout = ({
 
               <TaskSearch startDate={startDate} endDate={endDate} />
 
-              <TaskMenu
-                hadleGetTasksByRange={hadleGetTasksByRange}
-                startDate={startDate}
-                endDate={endDate}
-              />
-
-              <TaskMenuToday />
+              <TaskMenu />
 
               <Box display="flex" py={1} ml={5}>
                 <DatePickerStyled
@@ -110,9 +103,9 @@ export const SharedLayout = ({
                   locale={currentLang}
                 />
 
-                <ApplyBtn type="button" onClick={handleApplyRange}>
+                {/* <ApplyBtn type="button" onClick={handleApplyRange}>
                   <MdRestartAlt size="24" />
-                </ApplyBtn>
+                </ApplyBtn> */}
               </Box>
 
               <UserMenuBtn>
