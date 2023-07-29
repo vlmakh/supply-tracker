@@ -6,7 +6,7 @@ import logo from 'images/logo256.webp';
 export default function ErrorPage() {
   return (
     <MainWrap>
-      <Box width="200px" mx="auto">
+      <Box width="200px" mx="auto" mt={4}>
         <img src={logo} alt="logo" width="200" />
       </Box>
 
