@@ -1,5 +1,5 @@
-import { useContext } from 'react';
-import { Navigate } from 'react-router-dom';
+import { useContext, useRef } from 'react';
+import { Navigate, useLocation } from 'react-router-dom';
 import { TaskContext } from 'utils/context';
 import { Box } from 'components/Base/Box';
 import { MainWrap } from 'components/Container/Container.styled';
@@ -22,6 +22,8 @@ import { t } from 'i18next';
 export default function AccountPage() {
   const { isLoading, user, setUser, currentLang, setCurrentLang } =
     useContext(TaskContext);
+  const location = useLocation();
+  const backLink = useRef(location.state?.from ?? '/tasks/uncompleted');
 
   const turnLang = values => {
     setCurrentLang(values.lang);
@@ -32,7 +34,7 @@ export default function AccountPage() {
       {!user.email && <Navigate to="/" />}
 
       <MainWrap>
-        <BackLink to="/tasks/uncompleted">
+        <BackLink to={backLink.current}>
           <MdOutlineArrowBack size="24" />
           {t('account.toTasks')}
         </BackLink>
