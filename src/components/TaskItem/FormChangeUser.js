@@ -12,9 +12,9 @@ export const FormChangeUser = ({
   userList,
 }) => {
   const handleSubmit = values => {
-    const id = findUserId(values.userName, userList);
+    const userId = findUserId(values.userName, userList);
 
-    handleChangeOwner(taskId, id);
+    handleChangeOwner(taskId, values.userName, userId);
   };
 
   return (
@@ -32,9 +32,9 @@ export const FormChangeUser = ({
             autoComplete="off"
             disabled={status}
           >
-            {userList.map(user => {
+            {userList.map((user, idx) => {
               return (
-                <option key={user.id} value={user.name}>
+                <option key={idx} value={user.name}>
                   {user.name}
                 </option>
               );

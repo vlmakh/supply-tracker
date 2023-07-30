@@ -56,7 +56,13 @@ export default function Login() {
 
           <p>email</p>
           <Label htmlFor="email">
-            <StyledField name="email" type="text" placeholder=" "></StyledField>
+            <StyledField
+              name="email"
+              id="email"
+              type="text"
+              placeholder=" "
+              autoComplete="on"
+            ></StyledField>
             <StyledErrorMsg component="div" name="email" />
           </Label>
 
@@ -64,6 +70,7 @@ export default function Login() {
           <Label htmlFor="password">
             <StyledField
               name="password"
+              id="password"
               type="password"
               placeholder=" "
               autoComplete="off"

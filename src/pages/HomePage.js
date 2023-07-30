@@ -10,7 +10,7 @@ export default function HomePage() {
 
   return (
     <>
-      {user.email && <Navigate to="/tasks" />}
+      {user.email && <Navigate to="/tasks/uncompleted" />}
 
       <FormWrap>
         <GreenLine></GreenLine>

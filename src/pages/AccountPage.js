@@ -32,7 +32,7 @@ export default function AccountPage() {
       {!user.email && <Navigate to="/" />}
 
       <MainWrap>
-        <BackLink to="/tasks">
+        <BackLink to="/tasks/uncompleted">
           <MdOutlineArrowBack size="24" />
           {t('account.toTasks')}
         </BackLink>
