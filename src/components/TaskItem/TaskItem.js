@@ -38,7 +38,6 @@ import { MdContentCopy } from 'react-icons/md';
 import { MdDeleteOutline } from 'react-icons/md';
 import { TaskLoader } from 'components/Loader/TaskLoader';
 import { FormChangeUser } from 'components/TaskItem/FormChangeUser';
-import { findUserName } from 'utils/findUser';
 
 export const TaskItem = ({ task, idx, userList }) => {
   const [status, setStatus] = useState(task.completed);
@@ -78,10 +77,10 @@ export const TaskItem = ({ task, idx, userList }) => {
       });
   };
 
-  const handleChangeOwner = (taskId, newOwnerId) => {
+  const handleChangeOwner = (taskId, newOwnerId, newUserId) => {
     setIsProcessing(true);
 
-    updateTaskOwner(taskId, newOwnerId)
+    updateTaskOwner(taskId, newOwnerId, newUserId)
       .then(data => {
         dispatch({ type: 'editTask', newTask: data, taskId });
       })
@@ -196,7 +195,7 @@ export const TaskItem = ({ task, idx, userList }) => {
           <td>
             <FormChangeUser
               status={status}
-              taskOwner={findUserName(task.owner, userList)}
+              taskOwner={task.ownerName}
               handleChangeOwner={handleChangeOwner}
               taskId={task._id}
               isProcessing={isProcessing}

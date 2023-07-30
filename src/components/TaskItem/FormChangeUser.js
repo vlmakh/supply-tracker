@@ -12,9 +12,9 @@ export const FormChangeUser = ({
   userList,
 }) => {
   const handleSubmit = values => {
-    const id = findUserId(values.userName, userList);
+    const userId = findUserId(values.userName, userList);
 
-    handleChangeOwner(taskId, id);
+    handleChangeOwner(taskId, values.userName, userId);
   };
 
   return (

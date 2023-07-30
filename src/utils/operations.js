@@ -180,10 +180,11 @@ export const updateTaskStatus = async (taskId, status) => {
   }
 };
 
-export const updateTaskOwner = async (taskId, newOwnerId) => {
+export const updateTaskOwner = async (taskId, userName, userId) => {
   try {
     const response = await axios.patch(`api/tasks/${taskId}/owner`, {
-      newOwnerId,
+      userName,
+      userId,
     });
 
     return response.data;
