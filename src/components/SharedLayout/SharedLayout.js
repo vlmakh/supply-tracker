@@ -26,6 +26,7 @@ import { HiOutlineUserCircle } from 'react-icons/hi';
 import logo from 'images/logo256.webp';
 
 export const SharedLayout = ({
+  today,
   startDate,
   setStartDate,
   endDate,
@@ -33,7 +34,7 @@ export const SharedLayout = ({
 }) => {
   const { user, setUser, tasks, setIsLoading, currentLang } =
     useContext(TaskContext);
-  const today = new Date();
+
   registerLocale('uk', uk);
 
   const calcCompleted = array => {

@@ -111,6 +111,7 @@ export const App = () => {
             path="/"
             element={
               <SharedLayout
+                today={today}
                 startDate={startDate}
                 setStartDate={setStartDate}
                 endDate={endDate}
