@@ -10,7 +10,6 @@ import { AddTaskButton } from 'components/Base/Buttons.styled';
 import { Loader } from 'components/Loader/Loader';
 import { MdOutlineAddCircleOutline } from 'react-icons/md';
 import { t } from 'i18next';
-
 import { useUserStore, useTaskStore } from 'utils/store';
 
 export default function TaskPage({ startDate, endDate, today }) {

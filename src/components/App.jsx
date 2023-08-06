@@ -4,14 +4,11 @@ import {
   useState,
   useEffect,
   lazy,
-  // useReducer,
   useMemo,
   useCallback,
 } from 'react';
 import { Routes, Route } from 'react-router-dom';
-// import { getUncompletedTasksByRange } from 'utils/operations';
 import { TaskContext } from 'utils/context';
-// import { reducer } from 'utils/reducer';
 import { SharedLayout } from './SharedLayout/SharedLayout';
 import Modal from 'components/Modal/Modal';
 import { Loader } from 'components/Loader/Loader';
@@ -35,9 +32,7 @@ export const App = () => {
 
   const [currentLang, setCurrentLang] = useState(savedLang ?? 'en');
 
-  // const [tasks, dispatch] = useReducer(reducer, []);
-  const tasks = useTaskStore(state => state.tasks);
-  const hadleGetUncompletedTasksByRange = useTaskStore(state => state.hadleGetUncompletedTasksByRange);
+  const {tasks, hadleGetUncompletedTasksByRange} = useTaskStore(state => state.tasks);  
 
   const today = useMemo(() => new Date(), []);
   const getYear = today.getFullYear();
@@ -67,8 +62,7 @@ export const App = () => {
       return;
     }
 
-    hadleGetUncompletedTasksByRange(firstOfMonth, today)
-    // hadleGetTasksByRange(firstOfMonth, today);
+    hadleGetUncompletedTasksByRange(firstOfMonth, today);
   }, [firstOfMonth, today, email, hadleGetUncompletedTasksByRange]);
 
   useEffect(() => {
@@ -78,17 +72,7 @@ export const App = () => {
   }, [changeLanguage, currentLang]);
 
   const hadleGetTasksByRange = (start, end) => {
-    // setIsLoading(true);
-
-    hadleGetUncompletedTasksByRange( start, end)
-    // getUncompletedTasksByRange(start, end)
-    //   .then(tasks => {
-    //     dispatch({ type: 'getTasks', tasks });
-    //   })
-    //   .catch(error => {})
-    //   .finally(() => {
-    //     // setIsLoading(false);
-    //   });
+    hadleGetUncompletedTasksByRange(start, end);
   };
 
   return (

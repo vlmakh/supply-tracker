@@ -1,6 +1,5 @@
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
-// import { TaskContext } from 'utils/context';
 import {
   Layout,
   Header,
@@ -34,7 +33,6 @@ export const SharedLayout = ({
   endDate,
   setEndDate,
 }) => {
-  // const { tasks } = useContext(TaskContext);
   const tasks = useTaskStore(state => state.tasks);
 
   const user = useUserStore(state => state.user);
