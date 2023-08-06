@@ -1,6 +1,6 @@
-import { Suspense, useContext } from 'react';
+import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
-import { TaskContext } from 'utils/context';
+// import { TaskContext } from 'utils/context';
 import {
   Layout,
   Header,
@@ -25,7 +25,7 @@ import { HiOutlineUserCircle } from 'react-icons/hi';
 import logo from 'images/logo256.webp';
 import { t } from 'i18next';
 
-import { useUserStore } from 'utils/store';
+import { useUserStore, useTaskStore } from 'utils/store';
 
 export const SharedLayout = ({
   today,
@@ -34,7 +34,8 @@ export const SharedLayout = ({
   endDate,
   setEndDate,
 }) => {
-  const { tasks } = useContext(TaskContext);
+  // const { tasks } = useContext(TaskContext);
+  const tasks = useTaskStore(state => state.tasks);
 
   const user = useUserStore(state => state.user);
   const resetUser = useUserStore(state => state.resetUser);

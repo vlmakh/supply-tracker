@@ -7,6 +7,18 @@ import {
   updateUserName,
   updateUserPass,
 } from 'utils/operations';
+import {
+  getTasksByRange,
+  getUncompletedTasksByRange,
+  getTasksByDateOrder,
+  getTasksByDateInvoice,
+  getTasksByDatePayment,
+  getTasksByDateETD,
+  getTasksByDateETA,
+  deleteTask,
+  updateTaskStatus,
+  updateTaskOwner,
+} from 'utils/operations';
 
 const initialUserState = {
   user: { email: '', name: '', role: '' },
@@ -108,27 +120,187 @@ export const useUserListStore = create(set => ({
 
 export const useTaskStore = create((set, get) => ({
   tasks: [],
-  isLoading: false,
-  getTasks() {
-    const tasks = get().tasks;
-    const { length: total } = tasks;
-    const completedTasks = tasks.filter(item => item.completed).length;
-    set({ info: { total, completedTasks } });
+  info: {
+    total: 0,
+    completed: 0,
   },
-  addTask(newTask) {
+  isLoading: false,
+
+  hadleGetUncompletedTasksByRange(start, end) {
+    set({ isLoading: true });
+
+    getUncompletedTasksByRange(start, end)
+      .then(tasks => {
+        set({ tasks });
+
+        const { length: total } = tasks;
+        const completed = tasks.filter(item => item.completed).length;
+
+        set({ info: { total, completed } });
+      })
+      .catch(error => {})
+      .finally(() => {
+        set({ isLoading: false });
+      });
+  },
+
+  hadleGetTasksByRange(start, end) {
+    set({ isLoading: true });
+
+    getTasksByRange(start, end)
+      .then(tasks => {
+        set({ tasks });
+
+        const { length: total } = tasks;
+        const completed = tasks.filter(item => item.completed).length;
+
+        set({ info: { total, completed } });
+      })
+      .catch(error => console.log(error))
+      .finally(() => {
+        set({ isLoading: false });
+      });
+  },
+
+  hadleGetTasksByDateOrder(start) {
+    set({ isLoading: true });
+
+    getTasksByDateOrder(start)
+      .then(tasks => {
+        set({ tasks });
+
+        const { length: total } = tasks;
+        const completed = tasks.filter(item => item.completed).length;
+
+        set({ info: { total, completed } });
+      })
+      .catch(error => console.log(error))
+      .finally(() => {
+        set({ isLoading: false });
+      });
+  },
+
+  hadleGetTasksByDateInvoice(start) {
+    set({ isLoading: true });
+
+    getTasksByDateInvoice(start)
+      .then(tasks => {
+        set({ tasks });
+
+        const { length: total } = tasks;
+        const completed = tasks.filter(item => item.completed).length;
+
+        set({ info: { total, completed } });
+      })
+      .catch(error => console.log(error))
+      .finally(() => {
+        set({ isLoading: false });
+      });
+  },
+
+  hadleGetTasksByDatePayment(start) {
+    set({ isLoading: true });
+
+    getTasksByDatePayment(start)
+      .then(tasks => {
+        set({ tasks });
+
+        const { length: total } = tasks;
+        const completed = tasks.filter(item => item.completed).length;
+
+        set({ info: { total, completed } });
+      })
+      .catch(error => console.log(error))
+      .finally(() => {
+        set({ isLoading: false });
+      });
+  },
+
+  hadleGetTasksByDateETD(start) {
+    set({ isLoading: true });
+
+    getTasksByDateETD(start)
+      .then(tasks => {
+        set({ tasks });
+
+        const { length: total } = tasks;
+        const completed = tasks.filter(item => item.completed).length;
+
+        set({ info: { total, completed } });
+      })
+      .catch(error => console.log(error))
+      .finally(() => {
+        set({ isLoading: false });
+      });
+  },
+
+  hadleGetTasksByDateETA(start) {
+    set({ isLoading: true });
+
+    getTasksByDateETA(start)
+      .then(tasks => {
+        set({ tasks });
+
+        const { length: total } = tasks;
+        const completed = tasks.filter(item => item.completed).length;
+
+        set({ info: { total, completed } });
+      })
+      .catch(error => console.log(error))
+      .finally(() => {
+        set({ isLoading: false });
+      });
+  },
+
+  addNewTask(newTask) {
     const tasks = [...get().tasks, newTask];
     set({ tasks });
   },
-  editTask(newTask, taskId) {
-    const tasks = get().tasks.map(task =>
-      task._id === taskId ? newTask : task
-    );
-    set({ tasks });
+
+  handleUpdateTaskStatus(id, status) {
+    set({ isLoading: true });
+
+    updateTaskStatus(id, status)
+      .then(data => {
+        const tasks = get().tasks.map(task => (task._id === id ? data : task));
+        set({ tasks });
+      })
+      .catch(e => console.log(e.message))
+      .finally(() => {
+        set({ isLoading: false });
+      });
   },
-  deleteTask(taskId) {
-    const tasks = get().tasks.filter(task => task._id !== taskId);
-    set({ tasks });
+
+  handleUpdateTaskOwner(taskId, newOwnerId, newUserId) {
+    set({ isLoading: true });
+
+    updateTaskOwner(taskId, newOwnerId, newUserId)
+      .then(data => {
+        const tasks = get().tasks.map(task =>
+          task._id === taskId ? data : task
+        );
+        set({ tasks });
+      })
+      .catch(e => console.log(e.message))
+      .finally(() => {
+        set({ isLoading: false });
+      });
   },
+
+  handleDeleteTask(taskId) {
+    set({ isLoading: true });
+
+    deleteTask(taskId)
+      .then(() => {
+        const tasks = get().tasks.filter(task => task._id !== taskId);
+        set({ tasks });
+      })
+      .catch(err => console.log(err.message))
+      .finally(() => {
+        set({ isLoading: false });
+      });
+  },
+
   filter(query) {
     const tasks = get().tasks.filter(task =>
       task.name.toLowerCase().includes(query.toLowerCase())

@@ -4,20 +4,20 @@ import {
   useState,
   useEffect,
   lazy,
-  useReducer,
+  // useReducer,
   useMemo,
   useCallback,
 } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { getUncompletedTasksByRange } from 'utils/operations';
+// import { getUncompletedTasksByRange } from 'utils/operations';
 import { TaskContext } from 'utils/context';
-import { reducer } from 'utils/reducer';
+// import { reducer } from 'utils/reducer';
 import { SharedLayout } from './SharedLayout/SharedLayout';
 import Modal from 'components/Modal/Modal';
 import { Loader } from 'components/Loader/Loader';
 import { useTranslation } from 'react-i18next';
 import { Toaster } from 'react-hot-toast';
-import { useUserStore } from 'utils/store';
+import { useUserStore, useTaskStore } from 'utils/store';
 
 const HomePage = lazy(() => import('pages/HomePage'));
 const Login = lazy(() => import('components/Login/Login'));
@@ -35,7 +35,9 @@ export const App = () => {
 
   const [currentLang, setCurrentLang] = useState(savedLang ?? 'en');
 
-  const [tasks, dispatch] = useReducer(reducer, []);
+  // const [tasks, dispatch] = useReducer(reducer, []);
+  const tasks = useTaskStore(state => state.tasks);
+  const hadleGetUncompletedTasksByRange = useTaskStore(state => state.hadleGetUncompletedTasksByRange);
 
   const today = useMemo(() => new Date(), []);
   const getYear = today.getFullYear();
@@ -65,8 +67,9 @@ export const App = () => {
       return;
     }
 
-    hadleGetTasksByRange(firstOfMonth, today);
-  }, [firstOfMonth, today, email]);
+    hadleGetUncompletedTasksByRange(firstOfMonth, today)
+    // hadleGetTasksByRange(firstOfMonth, today);
+  }, [firstOfMonth, today, email, hadleGetUncompletedTasksByRange]);
 
   useEffect(() => {
     localStorage.setItem('splmgr-lang', JSON.stringify(currentLang));
@@ -77,21 +80,22 @@ export const App = () => {
   const hadleGetTasksByRange = (start, end) => {
     // setIsLoading(true);
 
-    getUncompletedTasksByRange(start, end)
-      .then(tasks => {
-        dispatch({ type: 'getTasks', tasks });
-      })
-      .catch(error => {})
-      .finally(() => {
-        // setIsLoading(false);
-      });
+    hadleGetUncompletedTasksByRange( start, end)
+    // getUncompletedTasksByRange(start, end)
+    //   .then(tasks => {
+    //     dispatch({ type: 'getTasks', tasks });
+    //   })
+    //   .catch(error => {})
+    //   .finally(() => {
+    //     // setIsLoading(false);
+    //   });
   };
 
   return (
     <ThemeProvider theme={theme}>
       <TaskContext.Provider
         value={{
-          dispatch,
+          // dispatch,
           tasks,
           isLoading,
         }}
