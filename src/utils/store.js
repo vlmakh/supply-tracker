@@ -16,8 +16,8 @@ import {
   getTasksByDateETD,
   getTasksByDateETA,
   deleteTask,
-  updateTaskStatus,
   updateTaskOwner,
+  updateTask,
 } from 'utils/operations';
 
 const initialUserState = {
@@ -257,18 +257,11 @@ export const useTaskStore = create((set, get) => ({
     set({ tasks });
   },
 
-  handleUpdateTaskStatus(id, status) {
-    set({ isLoading: true });
-
-    updateTaskStatus(id, status)
-      .then(data => {
-        const tasks = get().tasks.map(task => (task._id === id ? data : task));
-        set({ tasks });
-      })
-      .catch(e => console.log(e.message))
-      .finally(() => {
-        set({ isLoading: false });
-      });
+  handleUpdateTaskStatus(id, data) {
+    const tasks = get().tasks.map(task =>
+      task._id === id ? { ...task, completed: data.completed } : task
+    );
+    set({ tasks });
   },
 
   handleUpdateTaskOwner(taskId, newOwnerId, newUserId) {
@@ -299,6 +292,28 @@ export const useTaskStore = create((set, get) => ({
       .finally(() => {
         set({ isLoading: false });
       });
+  },
+
+  handleUpdateTask(
+    id,
+    { newTask, dateOrder, dateInvoice, datePayment, dateETD, dateETA }
+  ) {
+    set({ isLoading: true });
+
+    updateTask(id, {
+      ...newTask,
+      dateOrder,
+      dateInvoice,
+      datePayment,
+      dateETD,
+      dateETA,
+    })
+      .then(data => {
+        const tasks = get().tasks.map(task => (task._id === id ? data : task));
+        set({ tasks });
+      })
+      .catch(err => console.log(err.message))
+      .finally(() => set({ isLoading: false }));
   },
 
   filter(query) {

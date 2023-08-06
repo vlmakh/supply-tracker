@@ -1,10 +1,5 @@
-import { useState, useContext } from 'react';
-import {
-  // updateTaskStatus,
-  // deleteTask,
-  updateTaskOwner,
-} from 'utils/operations';
-import { TaskContext } from 'utils/context';
+import { useState } from 'react';
+import { updateTaskStatus } from 'utils/operations';
 import {
   formatDate,
   formatDateCut,
@@ -42,14 +37,12 @@ import { useUserStore, useTaskStore } from 'utils/store';
 
 export const TaskItem = ({ task, idx, userList }) => {
   const role = useUserStore(state => state.user.role);
-  // const [status, setStatus] = useState(task.completed);
   const [showFormTaskEdit, setShowFormTaskEdit] = useState(false);
   const [showFormTaskCopy, setShowFormTaskCopy] = useState(false);
-  const { dispatch } = useContext(TaskContext);
-  const { handleDeleteTask, handleUpdateTaskStatus } = useTaskStore(
-    state => state
-  );
-  const [isProcessing, setIsProcessing] = useState(false);
+
+  const { handleUpdateTaskOwner, handleUpdateTaskStatus, handleDeleteTask } =
+    useTaskStore(state => state);
+  const [isProcessing, setIsProsessing] = useState(false);
 
   const formatName = name => {
     if (name && name.length > 28) {
@@ -69,40 +62,27 @@ export const TaskItem = ({ task, idx, userList }) => {
       return;
     }
 
-    handleUpdateTaskStatus(id, status);
+    setIsProsessing(true);
 
-    // setStatus(!status);
-    // setIsProcessing(true);
-
-    // updateTaskStatus(id, status)
-    //   .then(data => {
-    //     setStatus(!status);
-    //     dispatch({ type: 'editTask', newTask: data, taskId: id });
-    //   })
-    //   .catch(e => console.log(e.message))
-    //   .finally(() => {
-    //     setIsProcessing(false);
-    //   });
-  };
-
-  const handleChangeOwner = (taskId, newOwnerId, newUserId) => {
-    setIsProcessing(true);
-
-    updateTaskOwner(taskId, newOwnerId, newUserId)
+    updateTaskStatus(id, status)
       .then(data => {
-        dispatch({ type: 'editTask', newTask: data, taskId });
+        handleUpdateTaskStatus(id, data);
       })
       .catch(e => console.log(e.message))
       .finally(() => {
-        setIsProcessing(false);
+        setIsProsessing(false);
       });
+  };
+
+  const handleChangeOwner = (taskId, newOwnerId, newUserId) => {
+    handleUpdateTaskOwner(taskId, newOwnerId, newUserId);
   };
 
   const handleCopyTask = () => {
     setShowFormTaskCopy(!showFormTaskCopy);
   };
 
-  const handleEditTask = () => {
+  const toggleEditWindow = () => {
     setShowFormTaskEdit(!showFormTaskEdit);
   };
 
@@ -148,7 +128,7 @@ export const TaskItem = ({ task, idx, userList }) => {
         <Name>
           <BtnName
             type="button"
-            onClick={handleEditTask}
+            onClick={toggleEditWindow}
             disabled={task.completed}
           >
             {formatName(task.name)}
@@ -218,8 +198,8 @@ export const TaskItem = ({ task, idx, userList }) => {
       </Task>
 
       {showFormTaskEdit && (
-        <Modal onClose={handleEditTask}>
-          <FormTaskEdit handleEditTask={handleEditTask} task={task} />
+        <Modal onClose={toggleEditWindow}>
+          <FormTaskEdit toggleEditWindow={toggleEditWindow} task={task} />
         </Modal>
       )}
 

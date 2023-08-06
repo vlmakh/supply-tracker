@@ -1,6 +1,6 @@
-import { useState, useEffect, useContext } from 'react';
-import { updateTask } from 'utils/operations';
-import { TaskContext } from 'utils/context';
+import { useState, useEffect } from 'react';
+// import { updateTask } from 'utils/operations';
+// import { TaskContext } from 'utils/context';
 import { FormStyled, FormTitle, AddTaskFormButton } from './FormTask.styled';
 import { Formik } from 'formik';
 import { CloseButton } from 'components/Base/Buttons.styled';
@@ -8,8 +8,9 @@ import { FormCommon } from './FormCommon';
 import { schema } from './yupSchema';
 import { IoClose } from 'react-icons/io5';
 import { t } from 'i18next';
+import { useTaskStore } from 'utils/store';
 
-export const FormTaskEdit = ({ handleEditTask, task }) => {
+export const FormTaskEdit = ({ toggleEditWindow, task }) => {
   const [dates, setDates] = useState({
     dateOrder: Date.parse(task.dateOrder),
     dateInvoice: Date.parse(task.dateInvoice),
@@ -20,7 +21,8 @@ export const FormTaskEdit = ({ handleEditTask, task }) => {
 
   const { dateOrder, dateInvoice, datePayment, dateETD, dateETA } = dates;
 
-  const { dispatch, setIsLoading } = useContext(TaskContext);
+  // const { dispatch, setIsLoading } = useContext(TaskContext);
+  const { handleUpdateTask } = useTaskStore(state => state);
 
   useEffect(() => {
     window.addEventListener('keydown', handleEscape);
@@ -31,28 +33,40 @@ export const FormTaskEdit = ({ handleEditTask, task }) => {
   });
 
   const handleSubmit = newTask => {
-    setIsLoading(true);
+    // setIsLoading(true);
 
-    updateTask(task._id, {
-      ...newTask,
+    const data = {
+      newTask,
       dateOrder,
       dateInvoice,
       datePayment,
       dateETD,
       dateETA,
-    })
-      .then(data => {
-        dispatch({ type: 'editTask', newTask: data, taskId: task._id });
+    };
+    handleUpdateTask(task._id, data);
 
-        handleEditTask();
-      })
-      .catch(err => console.log(err.message))
-      .finally(() => setIsLoading(false));
+    toggleEditWindow();
+
+    // updateTask(task._id, {
+    //   ...newTask,
+    //   dateOrder,
+    //   dateInvoice,
+    //   datePayment,
+    //   dateETD,
+    //   dateETA,
+    // })
+    //   .then(data => {
+    //     dispatch({ type: 'editTask', newTask: data, taskId: task._id });
+
+    //     toggleEditWindow();
+    //   })
+    //   .catch(err => console.log(err.message))
+    //   .finally(() => setIsLoading(false));
   };
 
   const handleEscape = event => {
     if (event.code === 'Escape') {
-      handleEditTask();
+      toggleEditWindow();
     }
   };
 
@@ -75,7 +89,7 @@ export const FormTaskEdit = ({ handleEditTask, task }) => {
       validationSchema={schema}
     >
       <FormStyled>
-        <CloseButton type="button" onClick={handleEditTask}>
+        <CloseButton type="button" onClick={toggleEditWindow}>
           <IoClose size="20" />
         </CloseButton>
 
