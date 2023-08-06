@@ -20,8 +20,8 @@ import { Formik } from 'formik';
 import { t } from 'i18next';
 import { useUserStore } from 'utils/store';
 
-export default function AccountPage() {
-  const { currentLang, setCurrentLang } = useContext(TaskContext);
+export default function AccountPage({ setCurrentLang }) {
+  const { currentLang } = useContext(TaskContext);
 
   const user = useUserStore(state => state.user);
   const setUser = useUserStore(state => state.setUser);
@@ -30,7 +30,7 @@ export default function AccountPage() {
   const location = useLocation();
   const backLink = useRef(location.state?.from ?? '/tasks/uncompleted');
 
-  const turnLang = values => {
+  const handleLangSubmit = values => {
     setCurrentLang(values.lang);
   };
 
@@ -54,7 +54,7 @@ export default function AccountPage() {
         <FormUserPass setUser={setUser} />
 
         <Formik
-          onSubmit={turnLang}
+          onSubmit={handleLangSubmit}
           initialValues={{
             lang: currentLang,
           }}

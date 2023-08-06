@@ -8,14 +8,14 @@ import {
   updateUserPass,
 } from 'utils/operations';
 
-const initialState = {
+const initialUserState = {
   user: { email: '', name: '', role: '' },
   currentLang: 'en',
   isLoading: false,
 };
 
 export const useUserStore = create(set => ({
-  ...initialState,
+  ...initialUserState,
 
   signupUser(regData, resetForm) {
     set({ isLoading: true });
@@ -97,7 +97,7 @@ export const useUserStore = create(set => ({
         localStorage.removeItem('splmgr');
       })
       .finally(() => {
-        set(initialState);
+        set(initialUserState);
       });
   },
 }));
@@ -108,6 +108,7 @@ export const useUserListStore = create(set => ({
 
 export const useTaskStore = create((set, get) => ({
   tasks: [],
+  isLoading: false,
   getTasks() {
     const tasks = get().tasks;
     const { length: total } = tasks;
@@ -134,8 +135,4 @@ export const useTaskStore = create((set, get) => ({
     );
     set({ tasks });
   },
-}));
-
-export const useIsLoading = create(set => ({
-  isLoading: true,
 }));

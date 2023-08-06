@@ -17,7 +17,6 @@ import Modal from 'components/Modal/Modal';
 import { Loader } from 'components/Loader/Loader';
 import { useTranslation } from 'react-i18next';
 import { Toaster } from 'react-hot-toast';
-
 import { useUserStore } from 'utils/store';
 
 const HomePage = lazy(() => import('pages/HomePage'));
@@ -33,9 +32,9 @@ export const App = () => {
   const email = useUserStore(state => state.user?.email);
   const checkUser = useUserStore(state => state.checkUser);
   const isLoading = useUserStore(state => state.isLoading);
-  
+
   const [currentLang, setCurrentLang] = useState(savedLang ?? 'en');
-  
+
   const [tasks, dispatch] = useReducer(reducer, []);
 
   const today = useMemo(() => new Date(), []);
@@ -96,7 +95,6 @@ export const App = () => {
           tasks,
           isLoading,
           currentLang,
-          setCurrentLang,
         }}
       >
         <Routes>
@@ -130,7 +128,10 @@ export const App = () => {
               }
             />
 
-            <Route path="account" element={<AccountPage />} />
+            <Route
+              path="account"
+              element={<AccountPage setCurrentLang={setCurrentLang} />}
+            />
 
             <Route path="*" element={<ErrorPage />} />
           </Route>

@@ -1,6 +1,5 @@
 import { Suspense, useContext } from 'react';
 import { Outlet } from 'react-router-dom';
-// import { logout } from 'utils/operations';
 import { TaskContext } from 'utils/context';
 import {
   Layout,
