@@ -4,15 +4,17 @@ import { getAllUsers } from 'utils/operations';
 import { Table, THTablet, THDesktop } from './TaskTable.styled';
 import { TaskItem } from 'components/TaskItem/TaskItem';
 import { t } from 'i18next';
+import { useUserStore } from 'utils/store';
 
 export const TaskTable = () => {
-  const { tasks, user } = useContext(TaskContext);
+  const { tasks } = useContext(TaskContext);
+  const role = useUserStore(state => state.user.role);
   const [userList, setUserList] = useState([]);
 
   useEffect(() => {
-    if (user.role === 'HEAD' || user.role === 'ADMIN')
+    if (role === 'HEAD' || role === 'ADMIN')
       getAllUsers().then(data => setUserList([...data]));
-  }, [user.role]);
+  }, [role]);
 
   return (
     <Table>

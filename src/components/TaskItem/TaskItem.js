@@ -38,12 +38,14 @@ import { MdContentCopy } from 'react-icons/md';
 import { MdDeleteOutline } from 'react-icons/md';
 import { TaskLoader } from 'components/Loader/TaskLoader';
 import { FormChangeUser } from 'components/TaskItem/FormChangeUser';
+import { useUserStore } from 'utils/store';
 
 export const TaskItem = ({ task, idx, userList }) => {
+  const role = useUserStore(state => state.user.role);
   const [status, setStatus] = useState(task.completed);
   const [showFormTaskEdit, setShowFormTaskEdit] = useState(false);
   const [showFormTaskCopy, setShowFormTaskCopy] = useState(false);
-  const { dispatch, user } = useContext(TaskContext);
+  const { dispatch } = useContext(TaskContext);
   const [isProcessing, setIsProcessing] = useState(false);
 
   const formatName = name => {
@@ -191,7 +193,7 @@ export const TaskItem = ({ task, idx, userList }) => {
           </BtnDel>
         </Delete>
 
-        {user.role === 'HEAD' && (
+        {role === 'HEAD' && (
           <td>
             <FormChangeUser
               status={status}

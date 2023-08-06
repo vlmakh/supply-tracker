@@ -1,6 +1,3 @@
-import { useState, useContext } from 'react';
-import { TaskContext } from 'utils/context';
-import { login } from 'utils/operations';
 import {
   StyledForm,
   FormTitle,
@@ -16,29 +13,19 @@ import { LoginLoader } from 'components/Loader/LoginLoader';
 import { Box } from 'components/Base/Box';
 import { t } from 'i18next';
 
+import { useUserStore } from 'utils/store';
+
 let schema = yup.object().shape({
   email: yup.string().email().required(t('login.required')),
   password: yup.string().min(6).required(t('login.required')),
 });
 
 export default function Login() {
-  const { setUser } = useContext(TaskContext);
-
-  const [isProcessing, setIsProcessing] = useState(false);
+  const loginUser = useUserStore(state => state.loginUser);
+  const isProcessing = useUserStore(state => state.isLoading);
 
   const handleSubmit = (values, { resetForm }) => {
-    setIsProcessing(true);
-
-    login(values)
-      .then(data => {
-        resetForm();
-        localStorage.setItem('splmgr', JSON.stringify(data.token));
-        setUser({ ...data.user });
-      })
-      .catch(error => {})
-      .finally(() => {
-        setIsProcessing(false);
-      });
+    loginUser(values, resetForm);
   };
 
   return (

@@ -1,6 +1,6 @@
 import { Suspense, useContext } from 'react';
 import { Outlet } from 'react-router-dom';
-import { logout } from 'utils/operations';
+// import { logout } from 'utils/operations';
 import { TaskContext } from 'utils/context';
 import {
   Layout,
@@ -25,6 +25,8 @@ import { LogoVM } from 'components/LogoVM/LogoVM';
 import { HiOutlineUserCircle } from 'react-icons/hi';
 import logo from 'images/logo256.webp';
 
+import { useUserStore } from 'utils/store';
+
 export const SharedLayout = ({
   today,
   startDate,
@@ -32,8 +34,10 @@ export const SharedLayout = ({
   endDate,
   setEndDate,
 }) => {
-  const { user, setUser, tasks, setIsLoading, currentLang } =
-    useContext(TaskContext);
+  const { tasks, currentLang } = useContext(TaskContext);
+
+  const user = useUserStore(state => state.user);
+  const resetUser = useUserStore(state => state.resetUser);
 
   registerLocale('uk', uk);
 
@@ -44,23 +48,11 @@ export const SharedLayout = ({
     }
   };
 
-  const handleLogout = () => {
-    setIsLoading(true);
-    logout()
-      .then(() => {
-        localStorage.removeItem('splmgr');
-      })
-      .finally(() => {
-        setUser({});
-        setIsLoading(false);
-      });
-  };
-
   return (
     <Layout>
       <Header>
         <Container>
-          {user.email ? (
+          {user?.email ? (
             <>
               {tasks && (
                 <TaskCalc to="/tasks/uncompleted">
@@ -104,7 +96,7 @@ export const SharedLayout = ({
                 <HiOutlineUserCircle size="24" />
 
                 <UserMenu
-                  handleLogout={handleLogout}
+                  handleLogout={resetUser}
                   name={user.name}
                   email={user.email}
                 />

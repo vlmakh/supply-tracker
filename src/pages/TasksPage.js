@@ -21,15 +21,19 @@ import { Loader } from 'components/Loader/Loader';
 import { MdOutlineAddCircleOutline } from 'react-icons/md';
 import { t } from 'i18next';
 
+import { useUserStore } from 'utils/store';
+
 export default function TaskPage({ startDate, endDate, today }) {
-  const { dispatch, tasks, isLoading, setIsLoading, user } =
-    useContext(TaskContext);
+  const user = useUserStore(state => state.user);
+
+  const { dispatch, tasks, isLoading } = useContext(TaskContext);
+
   const [showFormTaskAdd, setShowFormTaskAdd] = useState(false);
   const { category } = useParams();
 
   useEffect(() => {
     const hadleGetTasksByRange = (start, end) => {
-      setIsLoading(true);
+      // setIsLoading(true);
 
       getTasksByRange(start, end)
         .then(tasks => {
@@ -37,12 +41,12 @@ export default function TaskPage({ startDate, endDate, today }) {
         })
         .catch(error => console.log(error))
         .finally(() => {
-          setIsLoading(false);
+          // setIsLoading(false);
         });
     };
 
     const hadleGetUncompletedTasksByRange = (start, end) => {
-      setIsLoading(true);
+      // setIsLoading(true);
 
       getUncompletedTasksByRange(start, end)
         .then(tasks => {
@@ -50,12 +54,12 @@ export default function TaskPage({ startDate, endDate, today }) {
         })
         .catch(error => console.log(error))
         .finally(() => {
-          setIsLoading(false);
+          // setIsLoading(false);
         });
     };
 
     const hadleGetTasksByDateOrder = start => {
-      setIsLoading(true);
+      // setIsLoading(true);
 
       getTasksByDateOrder(start)
         .then(tasks => {
@@ -63,12 +67,12 @@ export default function TaskPage({ startDate, endDate, today }) {
         })
         .catch(error => console.log(error))
         .finally(() => {
-          setIsLoading(false);
+          // setIsLoading(false);
         });
     };
 
     const hadleGetTasksByDateInvoice = start => {
-      setIsLoading(true);
+      // setIsLoading(true);
 
       getTasksByDateInvoice(start)
         .then(tasks => {
@@ -76,12 +80,12 @@ export default function TaskPage({ startDate, endDate, today }) {
         })
         .catch(error => console.log(error))
         .finally(() => {
-          setIsLoading(false);
+          // setIsLoading(false);
         });
     };
 
     const hadleGetTasksByDatePayment = start => {
-      setIsLoading(true);
+      // setIsLoading(true);
 
       getTasksByDatePayment(start)
         .then(tasks => {
@@ -89,12 +93,12 @@ export default function TaskPage({ startDate, endDate, today }) {
         })
         .catch(error => console.log(error))
         .finally(() => {
-          setIsLoading(false);
+          // setIsLoading(false);
         });
     };
 
     const hadleGetTasksByDateETD = start => {
-      setIsLoading(true);
+      // setIsLoading(true);
 
       getTasksByDateETD(start)
         .then(tasks => {
@@ -102,12 +106,12 @@ export default function TaskPage({ startDate, endDate, today }) {
         })
         .catch(error => console.log(error))
         .finally(() => {
-          setIsLoading(false);
+          // setIsLoading(false);
         });
     };
 
     const hadleGetTasksByDateETA = start => {
-      setIsLoading(true);
+      // setIsLoading(true);
 
       getTasksByDateETA(start)
         .then(tasks => {
@@ -115,7 +119,7 @@ export default function TaskPage({ startDate, endDate, today }) {
         })
         .catch(error => console.log(error))
         .finally(() => {
-          setIsLoading(false);
+          // setIsLoading(false);
         });
     };
 
@@ -148,14 +152,14 @@ export default function TaskPage({ startDate, endDate, today }) {
     };
 
     handleCategory(category);
-  }, [category, dispatch, endDate, setIsLoading, startDate, today]);
+  }, [category, dispatch, endDate, startDate, today]);
 
   const handleModal = () => {
     setShowFormTaskAdd(!showFormTaskAdd);
   };
 
   const handleAddTask = newTask => {
-    setIsLoading(true);
+    // setIsLoading(true);
 
     addTask(newTask)
       .then(data => {
@@ -164,8 +168,8 @@ export default function TaskPage({ startDate, endDate, today }) {
           dispatch({ type: 'addTask', newTask: data });
         } else throw new Error();
       })
-      .catch(e => console.log(e.message))
-      .finally(() => setIsLoading(false));
+      .catch(e => console.log(e.message));
+    // .finally(() => setIsLoading(false));
   };
 
   return (

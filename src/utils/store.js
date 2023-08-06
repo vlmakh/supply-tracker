@@ -1,11 +1,36 @@
-import create from 'zustand';
-import { login, logout } from 'utils/operations';
+import { create } from 'zustand';
+import {
+  signup,
+  login,
+  logout,
+  checkCurrentUser,
+  updateUserName,
+  updateUserPass,
+} from 'utils/operations';
+
+const initialState = {
+  user: { email: '', name: '', role: '' },
+  currentLang: 'en',
+  isLoading: false,
+};
 
 export const useUserStore = create(set => ({
-  user: null,
-  currentLang: 'en',
-  isLoading: true,
-  setUser(values, resetForm) {
+  ...initialState,
+
+  signupUser(regData, resetForm) {
+    set({ isLoading: true });
+
+    signup(regData)
+      .then(() => {
+        resetForm();
+      })
+      .catch(error => {})
+      .finally(() => {
+        set({ isLoading: false });
+      });
+  },
+
+  loginUser(values, resetForm) {
     set({ isLoading: true });
 
     login(values)
@@ -13,6 +38,50 @@ export const useUserStore = create(set => ({
         resetForm();
         localStorage.setItem('splmgr', JSON.stringify(data.token));
         set({ user: data.user });
+      })
+      .catch(error => {})
+      .finally(() => {
+        set({ isLoading: false });
+      });
+  },
+
+  checkUser() {
+    set({ isLoading: true });
+
+    checkCurrentUser()
+      .then(data => {
+        if (!data) {
+          return;
+        }
+        set({ user: data });
+      })
+      .catch(error => {})
+      .finally(() => {
+        set({ isLoading: false });
+      });
+  },
+
+  updateName(values, resetForm) {
+    set({ isLoading: true });
+
+    updateUserName(values)
+      .then(data => {
+        set(({ user }) => ({ user: { ...user, name: data.name } }));
+        resetForm();
+      })
+      .catch(error => {})
+      .finally(() => {
+        set({ isLoading: false });
+      });
+  },
+
+  updatePass(values, resetForm) {
+    set({ isLoading: true });
+
+    updateUserPass(values)
+      .then(() => {
+        // set(({ user }) => ({ user: { ...user, name: data.name } }));
+        resetForm();
       })
       .catch(error => {})
       .finally(() => {
@@ -28,7 +97,7 @@ export const useUserStore = create(set => ({
         localStorage.removeItem('splmgr');
       })
       .finally(() => {
-        set({ user: null, isLoading: false });
+        set(initialState);
       });
   },
 }));

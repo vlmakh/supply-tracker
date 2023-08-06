@@ -9,7 +9,7 @@ import {
   useCallback,
 } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { checkCurrentUser, getUncompletedTasksByRange } from 'utils/operations';
+import { getUncompletedTasksByRange } from 'utils/operations';
 import { TaskContext } from 'utils/context';
 import { reducer } from 'utils/reducer';
 import { SharedLayout } from './SharedLayout/SharedLayout';
@@ -17,6 +17,8 @@ import Modal from 'components/Modal/Modal';
 import { Loader } from 'components/Loader/Loader';
 import { useTranslation } from 'react-i18next';
 import { Toaster } from 'react-hot-toast';
+
+import { useUserStore } from 'utils/store';
 
 const HomePage = lazy(() => import('pages/HomePage'));
 const Login = lazy(() => import('components/Login/Login'));
@@ -28,9 +30,12 @@ const ErrorPage = lazy(() => import('pages/ErrorPage'));
 const savedLang = JSON.parse(localStorage.getItem('splmgr-lang'));
 
 export const App = () => {
-  const [user, setUser] = useState({});
+  const email = useUserStore(state => state.user?.email);
+  const checkUser = useUserStore(state => state.checkUser);
+  const isLoading = useUserStore(state => state.isLoading);
+  
   const [currentLang, setCurrentLang] = useState(savedLang ?? 'en');
-  const [isLoading, setIsLoading] = useState(true);
+  
   const [tasks, dispatch] = useReducer(reducer, []);
 
   const today = useMemo(() => new Date(), []);
@@ -53,25 +58,16 @@ export const App = () => {
   );
 
   useEffect(() => {
-    checkCurrentUser()
-      .then(data => {
-        if (data.name) {
-          setUser({ ...data });
-        }
-      })
-      .catch(error => {})
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, [user.email]);
+    checkUser();
+  }, [checkUser]);
 
   useEffect(() => {
-    if (user.email) {
-      setIsLoading(true);
-
-      hadleGetTasksByRange(firstOfMonth, today);
+    if (!email) {
+      return;
     }
-  }, [firstOfMonth, today, user.email]);
+
+    hadleGetTasksByRange(firstOfMonth, today);
+  }, [firstOfMonth, today, email]);
 
   useEffect(() => {
     localStorage.setItem('splmgr-lang', JSON.stringify(currentLang));
@@ -80,7 +76,7 @@ export const App = () => {
   }, [changeLanguage, currentLang]);
 
   const hadleGetTasksByRange = (start, end) => {
-    setIsLoading(true);
+    // setIsLoading(true);
 
     getUncompletedTasksByRange(start, end)
       .then(tasks => {
@@ -88,7 +84,7 @@ export const App = () => {
       })
       .catch(error => {})
       .finally(() => {
-        setIsLoading(false);
+        // setIsLoading(false);
       });
   };
 
@@ -99,11 +95,8 @@ export const App = () => {
           dispatch,
           tasks,
           isLoading,
-          setIsLoading,
           currentLang,
           setCurrentLang,
-          user,
-          setUser,
         }}
       >
         <Routes>

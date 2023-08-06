@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import { updateUserName } from 'utils/operations';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import {
@@ -11,29 +9,18 @@ import {
   FormButton,
 } from './FormAccount.styled';
 import { t } from 'i18next';
+import { useUserStore } from 'utils/store';
 
 let schemaName = yup.object().shape({
   name: yup.string().min(4).required(),
 });
 
-export const FormUserName = ({ setUser }) => {
-  const [isNameUpdating, setIsNameUpdating] = useState(false);
+export const FormUserName = () => {
+  const updateName = useUserStore(state => state.updateName);
+  const isNameUpdating = useUserStore(state => state.isLoading);
 
   const handleUpdateName = (values, { resetForm }) => {
-    setIsNameUpdating(true);
-
-    updateUserName(values)
-      .then(data => {
-        setUser(prevState => ({
-          ...prevState,
-          name: data.name,
-        }));
-        resetForm();
-      })
-      .catch(error => {})
-      .finally(() => {
-        setIsNameUpdating(false);
-      });
+    updateName(values, resetForm);
   };
 
   return (

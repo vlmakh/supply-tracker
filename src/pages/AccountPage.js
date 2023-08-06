@@ -18,10 +18,15 @@ import {
 } from 'components/FormAccount/FormAccount.styled';
 import { Formik } from 'formik';
 import { t } from 'i18next';
+import { useUserStore } from 'utils/store';
 
 export default function AccountPage() {
-  const { isLoading, user, setUser, currentLang, setCurrentLang } =
-    useContext(TaskContext);
+  const { currentLang, setCurrentLang } = useContext(TaskContext);
+
+  const user = useUserStore(state => state.user);
+  const setUser = useUserStore(state => state.setUser);
+  const isLoading = useUserStore(state => state.isLoading);
+
   const location = useLocation();
   const backLink = useRef(location.state?.from ?? '/tasks/uncompleted');
 
@@ -44,7 +49,7 @@ export default function AccountPage() {
           <p>{t('account.supply')}</p>
         </Box>
 
-        <FormUserName name={user.name} setUser={setUser} />
+        <FormUserName />
 
         <FormUserPass setUser={setUser} />
 
