@@ -1,5 +1,3 @@
-import { useContext } from 'react';
-import { TaskContext } from 'utils/context';
 import {
   FieldName,
   Input,
@@ -19,7 +17,7 @@ import { t } from 'i18next';
 export const FormCommon = ({ dates, setDates }) => {
   registerLocale('uk', uk);
   const { dateOrder, dateInvoice, datePayment, dateETD, dateETA } = dates;
-  const { currentLang } = useContext(TaskContext);
+  const currentLang = t('lang').split('-')[0];
 
   return (
     <>

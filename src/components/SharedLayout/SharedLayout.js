@@ -23,6 +23,7 @@ import { Box } from 'components/Base/Box';
 import { LogoVM } from 'components/LogoVM/LogoVM';
 import { HiOutlineUserCircle } from 'react-icons/hi';
 import logo from 'images/logo256.webp';
+import { t } from 'i18next';
 
 import { useUserStore } from 'utils/store';
 
@@ -33,10 +34,11 @@ export const SharedLayout = ({
   endDate,
   setEndDate,
 }) => {
-  const { tasks, currentLang } = useContext(TaskContext);
+  const { tasks } = useContext(TaskContext);
 
   const user = useUserStore(state => state.user);
   const resetUser = useUserStore(state => state.resetUser);
+  const currentLang = t('lang').split('-')[0];
 
   registerLocale('uk', uk);
 

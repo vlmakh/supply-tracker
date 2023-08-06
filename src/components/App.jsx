@@ -94,7 +94,6 @@ export const App = () => {
           dispatch,
           tasks,
           isLoading,
-          currentLang,
         }}
       >
         <Routes>

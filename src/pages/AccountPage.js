@@ -1,6 +1,5 @@
-import { useContext, useRef } from 'react';
+import { useRef } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import { TaskContext } from 'utils/context';
 import { Box } from 'components/Base/Box';
 import { MainWrap } from 'components/Container/Container.styled';
 import Modal from 'components/Modal/Modal';
@@ -21,7 +20,7 @@ import { t } from 'i18next';
 import { useUserStore } from 'utils/store';
 
 export default function AccountPage({ setCurrentLang }) {
-  const { currentLang } = useContext(TaskContext);
+  const currentLang = t('lang').split('-')[0];
 
   const user = useUserStore(state => state.user);
   const setUser = useUserStore(state => state.setUser);
