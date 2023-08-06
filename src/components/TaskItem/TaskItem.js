@@ -78,7 +78,7 @@ export const TaskItem = ({ task, idx, userList }) => {
     handleUpdateTaskOwner(taskId, newOwnerId, newUserId);
   };
 
-  const handleCopyTask = () => {
+  const toggleCopyWindow = () => {
     setShowFormTaskCopy(!showFormTaskCopy);
   };
 
@@ -120,7 +120,7 @@ export const TaskItem = ({ task, idx, userList }) => {
         </Exec>
 
         <Exec>
-          <BtnCopy type="button" onClick={handleCopyTask}>
+          <BtnCopy type="button" onClick={toggleCopyWindow}>
             <MdContentCopy size="18" />
           </BtnCopy>
         </Exec>
@@ -204,8 +204,8 @@ export const TaskItem = ({ task, idx, userList }) => {
       )}
 
       {showFormTaskCopy && (
-        <Modal onClose={handleCopyTask}>
-          <FormTaskCopy handleCopyTask={handleCopyTask} task={task} />
+        <Modal onClose={toggleCopyWindow}>
+          <FormTaskCopy toggleCopyWindow={toggleCopyWindow} task={task} />
         </Modal>
       )}
     </>

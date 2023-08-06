@@ -18,6 +18,7 @@ import {
   deleteTask,
   updateTaskOwner,
   updateTask,
+  addTask,
 } from 'utils/operations';
 
 const initialUserState = {
@@ -253,8 +254,17 @@ export const useTaskStore = create((set, get) => ({
   },
 
   addNewTask(newTask) {
-    const tasks = [...get().tasks, newTask];
-    set({ tasks });
+    set({ isLoading: true });
+
+    addTask(newTask)
+      .then(data => {
+        const tasks = [...get().tasks, data];
+        set({ tasks });
+      })
+      .catch(error => console.log(error))
+      .finally(() => {
+        set({ isLoading: false });
+      });
   },
 
   handleUpdateTaskStatus(id, data) {

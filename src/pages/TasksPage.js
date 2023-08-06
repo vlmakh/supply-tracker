@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
-import { addTask } from 'utils/operations';
 import { Box } from 'components/Base/Box';
 import { MainWrap } from 'components/Container/Container.styled';
 import { TaskTable } from 'components/TaskTable/TaskTable';
@@ -75,23 +74,12 @@ export default function TaskPage({ startDate, endDate, today }) {
     today,
   ]);
 
-  const handleModal = () => {
+  const toggleModal = () => {
     setShowFormTaskAdd(!showFormTaskAdd);
   };
 
   const handleAddTask = newTask => {
-    // setIsLoading(true);
-
-    addTask(newTask)
-      .then(data => {
-        if (data._id) {
-          setShowFormTaskAdd(!showFormTaskAdd);
-          // dispatch({ type: 'addTask', newTask: data });
-          addNewTask(data);
-        } else throw new Error();
-      })
-      .catch(e => console.log(e.message));
-    // .finally(() => setIsLoading(false));
+    addNewTask(newTask);
   };
 
   return (
@@ -104,7 +92,7 @@ export default function TaskPage({ startDate, endDate, today }) {
         <Box p={4}>
           <AddTaskButton
             type="button"
-            onClick={handleModal}
+            onClick={toggleModal}
             aria-label={t('formTask.add')}
           >
             <MdOutlineAddCircleOutline size="48" />
@@ -112,9 +100,9 @@ export default function TaskPage({ startDate, endDate, today }) {
         </Box>
 
         {showFormTaskAdd && (
-          <Modal onClose={handleModal}>
+          <Modal onClose={toggleModal}>
             <FormTaskAdd
-              handleModal={handleModal}
+              toggleModal={toggleModal}
               handleAddTask={handleAddTask}
             />
           </Modal>

@@ -33,7 +33,7 @@ export const SharedLayout = ({
   endDate,
   setEndDate,
 }) => {
-  const tasks = useTaskStore(state => state.tasks);
+  const { tasks, info } = useTaskStore(state => state);
 
   const user = useUserStore(state => state.user);
   const resetUser = useUserStore(state => state.resetUser);
@@ -41,12 +41,7 @@ export const SharedLayout = ({
 
   registerLocale('uk', uk);
 
-  const calcCompleted = array => {
-    if (array.length) {
-      const completedTasks = array.filter(item => item.completed).length;
-      return completedTasks;
-    }
-  };
+  const calcCompleted = info.completed;
 
   return (
     <Layout>
@@ -56,8 +51,7 @@ export const SharedLayout = ({
             <>
               {tasks && (
                 <TaskCalc to="/tasks/uncompleted">
-                  <b>{tasks.length}</b> /{' '}
-                  <Green>{calcCompleted(tasks) ?? '0'} </Green>
+                  <b>{info.total}</b> / <Green>{calcCompleted ?? '0'} </Green>
                 </TaskCalc>
               )}
 

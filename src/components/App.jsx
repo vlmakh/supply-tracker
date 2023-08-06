@@ -32,7 +32,7 @@ export const App = () => {
 
   const [currentLang, setCurrentLang] = useState(savedLang ?? 'en');
 
-  const {tasks, hadleGetUncompletedTasksByRange} = useTaskStore(state => state.tasks);  
+  const {tasks, hadleGetUncompletedTasksByRange} = useTaskStore(state => state);  
 
   const today = useMemo(() => new Date(), []);
   const getYear = today.getFullYear();
