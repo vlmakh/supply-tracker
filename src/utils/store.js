@@ -115,10 +115,6 @@ export const useUserStore = create(set => ({
   },
 }));
 
-export const useUserListStore = create(set => ({
-  userList: [],
-}));
-
 export const useTaskStore = create((set, get) => ({
   tasks: [],
   info: {
@@ -343,4 +339,8 @@ export const useTaskStore = create((set, get) => ({
         set({ isLoading: false });
       });
   },
+}));
+
+export const useUserListStore = create(set => ({
+  userList: [],
 }));

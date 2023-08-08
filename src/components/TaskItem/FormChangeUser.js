@@ -5,7 +5,7 @@ import { findUserId } from 'utils/findUser';
 
 export const FormChangeUser = ({
   taskOwner,
-  handleChangeOwner,
+  onChangeOwner,
   taskId,
   isProcessing,
   status,
@@ -14,7 +14,7 @@ export const FormChangeUser = ({
   const handleSubmit = values => {
     const userId = findUserId(values.userName, userList);
 
-    handleChangeOwner(taskId, values.userName, userId);
+    onChangeOwner(taskId, values.userName, userId);
   };
 
   return (

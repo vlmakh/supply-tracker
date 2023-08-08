@@ -1,13 +1,12 @@
-import { useState, useEffect, useContext } from 'react';
-import { TaskContext } from 'utils/context';
+import { useState, useEffect } from 'react';
 import { getAllUsers } from 'utils/operations';
 import { Table, THTablet, THDesktop } from './TaskTable.styled';
 import { TaskItem } from 'components/TaskItem/TaskItem';
 import { t } from 'i18next';
-import { useUserStore } from 'utils/store';
+import { useUserStore, useTaskStore } from 'utils/store';
 
 export const TaskTable = () => {
-  const { tasks } = useContext(TaskContext);
+  const tasks = useTaskStore(state => state.tasks);
   const role = useUserStore(state => state.user.role);
   const [userList, setUserList] = useState([]);
 

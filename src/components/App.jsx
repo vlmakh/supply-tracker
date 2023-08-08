@@ -1,14 +1,7 @@
 import { ThemeProvider } from '@emotion/react';
 import { theme } from 'utils/theme';
-import {
-  useState,
-  useEffect,
-  lazy,
-  useMemo,
-  useCallback,
-} from 'react';
+import { useState, useEffect, lazy, useMemo, useCallback } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { TaskContext } from 'utils/context';
 import { SharedLayout } from './SharedLayout/SharedLayout';
 import Modal from 'components/Modal/Modal';
 import { Loader } from 'components/Loader/Loader';
@@ -32,7 +25,7 @@ export const App = () => {
 
   const [currentLang, setCurrentLang] = useState(savedLang ?? 'en');
 
-  const {tasks, hadleGetUncompletedTasksByRange} = useTaskStore(state => state);  
+  const { hadleGetUncompletedTasksByRange } = useTaskStore(state => state);
 
   const today = useMemo(() => new Date(), []);
   const getYear = today.getFullYear();
@@ -77,53 +70,45 @@ export const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <TaskContext.Provider
-        value={{
-          // dispatch,
-          tasks,
-          isLoading,
-        }}
-      >
-        <Routes>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <SharedLayout
+              today={today}
+              startDate={startDate}
+              setStartDate={setStartDate}
+              endDate={endDate}
+              setEndDate={setEndDate}
+              hadleGetTasksByRange={hadleGetTasksByRange}
+            />
+          }
+        >
+          <Route path="/" element={<HomePage />}>
+            <Route index element={<Login />} />
+
+            <Route path="/signup" element={<Signup />} />
+          </Route>
+
           <Route
-            path="/"
+            path="tasks/:category"
             element={
-              <SharedLayout
-                today={today}
+              <TasksPage
                 startDate={startDate}
-                setStartDate={setStartDate}
                 endDate={endDate}
-                setEndDate={setEndDate}
-                hadleGetTasksByRange={hadleGetTasksByRange}
+                today={today}
               />
             }
-          >
-            <Route path="/" element={<HomePage />}>
-              <Route index element={<Login />} />
+          />
 
-              <Route path="/signup" element={<Signup />} />
-            </Route>
+          <Route
+            path="account"
+            element={<AccountPage setCurrentLang={setCurrentLang} />}
+          />
 
-            <Route
-              path="tasks/:category"
-              element={
-                <TasksPage
-                  startDate={startDate}
-                  endDate={endDate}
-                  today={today}
-                />
-              }
-            />
-
-            <Route
-              path="account"
-              element={<AccountPage setCurrentLang={setCurrentLang} />}
-            />
-
-            <Route path="*" element={<ErrorPage />} />
-          </Route>
-        </Routes>
-      </TaskContext.Provider>
+          <Route path="*" element={<ErrorPage />} />
+        </Route>
+      </Routes>
 
       {isLoading && (
         <Modal>

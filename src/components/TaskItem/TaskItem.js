@@ -56,7 +56,7 @@ export const TaskItem = ({ task, idx, userList }) => {
     } else return name;
   };
 
-  const handleCompleteTask = (id, status) => {
+  const onCompleteTask = (id, status) => {
     if (formatDateCut(task.dateETA) < formatDateCut(task.dateOrder)) {
       alert("ETA date can't be earlier than order date");
       return;
@@ -74,7 +74,7 @@ export const TaskItem = ({ task, idx, userList }) => {
       });
   };
 
-  const handleChangeOwner = (taskId, newOwnerId, newUserId) => {
+  const onChangeOwner = (taskId, newOwnerId, newUserId) => {
     handleUpdateTaskOwner(taskId, newOwnerId, newUserId);
   };
 
@@ -107,7 +107,7 @@ export const TaskItem = ({ task, idx, userList }) => {
           />
           <CheckBtn
             type="button"
-            onClick={() => handleCompleteTask(task._id, task.completed)}
+            onClick={() => onCompleteTask(task._id, task.completed)}
           >
             {task.completed && !isProcessing && <FaCheck size="18" />}
 
@@ -188,7 +188,7 @@ export const TaskItem = ({ task, idx, userList }) => {
             <FormChangeUser
               status={task.completed}
               taskOwner={task.ownerName}
-              handleChangeOwner={handleChangeOwner}
+              onChangeOwner={onChangeOwner}
               taskId={task._id}
               isProcessing={isProcessing}
               userList={userList}
