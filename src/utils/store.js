@@ -257,7 +257,10 @@ export const useTaskStore = create((set, get) => ({
     addTask(newTask)
       .then(data => {
         const tasks = [...get().tasks, data];
-        set({ tasks });
+        const { length: total } = tasks;
+        const completed = tasks.filter(item => item.completed).length;
+
+        set({ tasks, info: { total, completed } });
       })
       .catch(error => console.log(error))
       .finally(() => {
@@ -269,7 +272,10 @@ export const useTaskStore = create((set, get) => ({
     const tasks = get().tasks.map(task =>
       task._id === id ? { ...task, completed: data.completed } : task
     );
-    set({ tasks });
+    const { length: total } = tasks;
+    const completed = tasks.filter(item => item.completed).length;
+
+    set({ tasks, info: { total, completed } });
   },
 
   handleUpdateTaskOwner(taskId, newOwnerId, newUserId) {
@@ -294,7 +300,10 @@ export const useTaskStore = create((set, get) => ({
     deleteTask(taskId)
       .then(() => {
         const tasks = get().tasks.filter(task => task._id !== taskId);
-        set({ tasks });
+        const { length: total } = tasks;
+        const completed = tasks.filter(item => item.completed).length;
+
+        set({ tasks, info: { total, completed } });
       })
       .catch(err => console.log(err.message))
       .finally(() => {
