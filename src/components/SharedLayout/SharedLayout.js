@@ -35,8 +35,7 @@ export const SharedLayout = ({
 }) => {
   const { tasks, info } = useTaskStore(state => state);
 
-  const user = useUserStore(state => state.user);
-  const resetUser = useUserStore(state => state.resetUser);
+  const { user, resetUser } = useUserStore(state => state);
   const currentLang = t('lang').split('-')[0];
 
   registerLocale('uk', uk);

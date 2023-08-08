@@ -9,6 +9,8 @@ export const TaskTable = () => {
   const role = useUserStore(state => state.user.role);
   const { userList, getUsers } = useUserListStore(state => state);
 
+  console.log(userList);
+
   useEffect(() => {
     if (role === 'HEAD' || role === 'ADMIN') getUsers();
   }, [getUsers, role]);

@@ -110,6 +110,7 @@ export const useUserStore = create(set => ({
       .then(() => {
         localStorage.removeItem('splmgr');
       })
+      .catch(e => console.log(e))
       .finally(() => {
         set(initialUserState);
       });
