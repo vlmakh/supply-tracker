@@ -1,22 +1,13 @@
 import { ThemeProvider } from '@emotion/react';
 import { theme } from 'utils/theme';
-import {
-  useState,
-  useEffect,
-  lazy,
-  useReducer,
-  useMemo,
-  useCallback,
-} from 'react';
+import { useState, useEffect, lazy, useMemo, useCallback } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { checkCurrentUser, getUncompletedTasksByRange } from 'utils/operations';
-import { TaskContext } from 'utils/context';
-import { reducer } from 'utils/reducer';
 import { SharedLayout } from './SharedLayout/SharedLayout';
 import Modal from 'components/Modal/Modal';
 import { Loader } from 'components/Loader/Loader';
 import { useTranslation } from 'react-i18next';
 import { Toaster } from 'react-hot-toast';
+import { useUserStore } from 'utils/store';
 
 const HomePage = lazy(() => import('pages/HomePage'));
 const Login = lazy(() => import('components/Login/Login'));
@@ -28,10 +19,10 @@ const ErrorPage = lazy(() => import('pages/ErrorPage'));
 const savedLang = JSON.parse(localStorage.getItem('splmgr-lang'));
 
 export const App = () => {
-  const [user, setUser] = useState({});
+  const checkUser = useUserStore(state => state.checkUser);
+  const isLoading = useUserStore(state => state.isLoading);
+
   const [currentLang, setCurrentLang] = useState(savedLang ?? 'en');
-  const [isLoading, setIsLoading] = useState(true);
-  const [tasks, dispatch] = useReducer(reducer, []);
 
   const today = useMemo(() => new Date(), []);
   const getYear = today.getFullYear();
@@ -53,25 +44,8 @@ export const App = () => {
   );
 
   useEffect(() => {
-    checkCurrentUser()
-      .then(data => {
-        if (data.name) {
-          setUser({ ...data });
-        }
-      })
-      .catch(error => {})
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, [user.email]);
-
-  useEffect(() => {
-    if (user.email) {
-      setIsLoading(true);
-
-      hadleGetTasksByRange(firstOfMonth, today);
-    }
-  }, [firstOfMonth, today, user.email]);
+    checkUser();
+  }, [checkUser]);
 
   useEffect(() => {
     localStorage.setItem('splmgr-lang', JSON.stringify(currentLang));
@@ -79,69 +53,46 @@ export const App = () => {
     changeLanguage(currentLang);
   }, [changeLanguage, currentLang]);
 
-  const hadleGetTasksByRange = (start, end) => {
-    setIsLoading(true);
-
-    getUncompletedTasksByRange(start, end)
-      .then(tasks => {
-        dispatch({ type: 'getTasks', tasks });
-      })
-      .catch(error => {})
-      .finally(() => {
-        setIsLoading(false);
-      });
-  };
-
   return (
     <ThemeProvider theme={theme}>
-      <TaskContext.Provider
-        value={{
-          dispatch,
-          tasks,
-          isLoading,
-          setIsLoading,
-          currentLang,
-          setCurrentLang,
-          user,
-          setUser,
-        }}
-      >
-        <Routes>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <SharedLayout
+              today={today}
+              startDate={startDate}
+              setStartDate={setStartDate}
+              endDate={endDate}
+              setEndDate={setEndDate}
+            />
+          }
+        >
+          <Route path="/" element={<HomePage />}>
+            <Route index element={<Login />} />
+
+            <Route path="/signup" element={<Signup />} />
+          </Route>
+
           <Route
-            path="/"
+            path="tasks/:category"
             element={
-              <SharedLayout
+              <TasksPage
                 startDate={startDate}
-                setStartDate={setStartDate}
                 endDate={endDate}
-                setEndDate={setEndDate}
-                hadleGetTasksByRange={hadleGetTasksByRange}
+                today={today}
               />
             }
-          >
-            <Route path="/" element={<HomePage />}>
-              <Route index element={<Login />} />
+          />
 
-              <Route path="/signup" element={<Signup />} />
-            </Route>
+          <Route
+            path="account"
+            element={<AccountPage setCurrentLang={setCurrentLang} />}
+          />
 
-            <Route
-              path="tasks/:category"
-              element={
-                <TasksPage
-                  startDate={startDate}
-                  endDate={endDate}
-                  today={today}
-                />
-              }
-            />
-
-            <Route path="account" element={<AccountPage />} />
-
-            <Route path="*" element={<ErrorPage />} />
-          </Route>
-        </Routes>
-      </TaskContext.Provider>
+          <Route path="*" element={<ErrorPage />} />
+        </Route>
+      </Routes>
 
       {isLoading && (
         <Modal>

@@ -1,10 +1,5 @@
-import { useState, useContext } from 'react';
-import {
-  updateTaskStatus,
-  deleteTask,
-  updateTaskOwner,
-} from 'utils/operations';
-import { TaskContext } from 'utils/context';
+import { useState } from 'react';
+import { updateTaskStatus } from 'utils/operations';
 import {
   formatDate,
   formatDateCut,
@@ -38,13 +33,16 @@ import { MdContentCopy } from 'react-icons/md';
 import { MdDeleteOutline } from 'react-icons/md';
 import { TaskLoader } from 'components/Loader/TaskLoader';
 import { FormChangeUser } from 'components/TaskItem/FormChangeUser';
+import { useUserStore, useTaskStore } from 'utils/store';
 
 export const TaskItem = ({ task, idx, userList }) => {
-  const [status, setStatus] = useState(task.completed);
+  const role = useUserStore(state => state.user.role);
   const [showFormTaskEdit, setShowFormTaskEdit] = useState(false);
   const [showFormTaskCopy, setShowFormTaskCopy] = useState(false);
-  const { dispatch, user } = useContext(TaskContext);
-  const [isProcessing, setIsProcessing] = useState(false);
+
+  const { handleUpdateTaskOwner, handleUpdateTaskStatus, handleDeleteTask } =
+    useTaskStore(state => state);
+  const [isProcessing, setIsProsessing] = useState(false);
 
   const formatName = name => {
     if (name && name.length > 28) {
@@ -58,87 +56,81 @@ export const TaskItem = ({ task, idx, userList }) => {
     } else return name;
   };
 
-  const handleCompleteTask = (id, status) => {
+  const onCompleteTask = (id, status) => {
     if (formatDateCut(task.dateETA) < formatDateCut(task.dateOrder)) {
       alert("ETA date can't be earlier than order date");
       return;
     }
 
-    setIsProcessing(true);
+    setIsProsessing(true);
 
     updateTaskStatus(id, status)
       .then(data => {
-        setStatus(!status);
-        dispatch({ type: 'editTask', newTask: data, taskId: id });
+        handleUpdateTaskStatus(id, data);
       })
       .catch(e => console.log(e.message))
       .finally(() => {
-        setIsProcessing(false);
+        setIsProsessing(false);
       });
   };
 
-  const handleChangeOwner = (taskId, newOwnerId, newUserId) => {
-    setIsProcessing(true);
-
-    updateTaskOwner(taskId, newOwnerId, newUserId)
-      .then(data => {
-        dispatch({ type: 'editTask', newTask: data, taskId });
-      })
-      .catch(e => console.log(e.message))
-      .finally(() => {
-        setIsProcessing(false);
-      });
+  const onChangeOwner = (taskId, newOwnerId, newUserId) => {
+    handleUpdateTaskOwner(taskId, newOwnerId, newUserId);
   };
 
-  const handleCopyTask = () => {
+  const toggleCopyWindow = () => {
     setShowFormTaskCopy(!showFormTaskCopy);
   };
 
-  const handleEditTask = () => {
+  const toggleEditWindow = () => {
     setShowFormTaskEdit(!showFormTaskEdit);
   };
 
-  const handleDelete = id => {
+  const onDelete = id => {
     const result = window.confirm('Confirm task delete?');
     if (result) {
-      deleteTask(id)
-        .then(dispatch({ type: 'deleteTask', taskId: id }))
-        .catch(err => console.log(err.message));
+      handleDeleteTask(id);
     }
   };
 
   return (
     <>
-      <Task completed={status}>
+      <Task completed={task.completed}>
         <Num>{idx + 1} </Num>
 
         <Exec>
           <Checkbox
             name="readyTask"
             type="checkbox"
-            checked={status}
+            checked={task.completed}
             readOnly
           />
           <CheckBtn
             type="button"
-            onClick={() => handleCompleteTask(task._id, status)}
+            onClick={() => onCompleteTask(task._id, task.completed)}
           >
-            {status && !isProcessing && <FaCheck size="18" />}
+            {task.completed && !isProcessing && <FaCheck size="18" />}
 
-            {!status && !isProcessing && <FaArrowAltCircleRight size="18" />}
+            {!task.completed && !isProcessing && (
+              <FaArrowAltCircleRight size="18" />
+            )}
 
             <TaskLoader isProcessing={isProcessing} />
           </CheckBtn>
         </Exec>
 
         <Exec>
-          <BtnCopy type="button" onClick={handleCopyTask}>
+          <BtnCopy type="button" onClick={toggleCopyWindow}>
             <MdContentCopy size="18" />
           </BtnCopy>
         </Exec>
 
         <Name>
-          <BtnName type="button" onClick={handleEditTask} disabled={status}>
+          <BtnName
+            type="button"
+            onClick={toggleEditWindow}
+            disabled={task.completed}
+          >
             {formatName(task.name)}
           </BtnName>
 
@@ -151,27 +143,27 @@ export const TaskItem = ({ task, idx, userList }) => {
 
         <Unit>{task.unit}</Unit>
 
-        <Data today={task.dateOrder} completed={status}>
+        <Data today={task.dateOrder} completed={task.completed}>
           {formatDate(task.dateOrder)}
         </Data>
 
         <Supplier> {formatSupplier(task.supplier)}</Supplier>
 
-        <Data today={task.dateInvoice} completed={status}>
+        <Data today={task.dateInvoice} completed={task.completed}>
           {formatDate(task.dateInvoice)}
         </Data>
 
-        <Data today={task.datePayment} completed={status}>
+        <Data today={task.datePayment} completed={task.completed}>
           {formatDate(task.datePayment)}{' '}
         </Data>
 
         <Freight>{task.freight}</Freight>
 
-        <Data today={task.dateETD} completed={status}>
+        <Data today={task.dateETD} completed={task.completed}>
           {formatDate(task.dateETD)}
         </Data>
 
-        <Data today={task.dateETA} completed={status}>
+        <Data today={task.dateETA} completed={task.completed}>
           {formatDate(task.dateETA)}
         </Data>
 
@@ -184,19 +176,19 @@ export const TaskItem = ({ task, idx, userList }) => {
         <Delete>
           <BtnDel
             type="button"
-            onClick={() => handleDelete(task._id)}
-            disabled={status}
+            onClick={() => onDelete(task._id)}
+            disabled={task.completed}
           >
             <MdDeleteOutline size="18" />
           </BtnDel>
         </Delete>
 
-        {user.role === 'HEAD' && (
+        {role === 'HEAD' && (
           <td>
             <FormChangeUser
-              status={status}
+              status={task.completed}
               taskOwner={task.ownerName}
-              handleChangeOwner={handleChangeOwner}
+              onChangeOwner={onChangeOwner}
               taskId={task._id}
               isProcessing={isProcessing}
               userList={userList}
@@ -206,14 +198,14 @@ export const TaskItem = ({ task, idx, userList }) => {
       </Task>
 
       {showFormTaskEdit && (
-        <Modal onClose={handleEditTask}>
-          <FormTaskEdit handleEditTask={handleEditTask} task={task} />
+        <Modal onClose={toggleEditWindow}>
+          <FormTaskEdit toggleEditWindow={toggleEditWindow} task={task} />
         </Modal>
       )}
 
       {showFormTaskCopy && (
-        <Modal onClose={handleCopyTask}>
-          <FormTaskCopy handleCopyTask={handleCopyTask} task={task} />
+        <Modal onClose={toggleCopyWindow}>
+          <FormTaskCopy toggleCopyWindow={toggleCopyWindow} task={task} />
         </Modal>
       )}
     </>

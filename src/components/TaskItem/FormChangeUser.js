@@ -5,7 +5,7 @@ import { findUserId } from 'utils/findUser';
 
 export const FormChangeUser = ({
   taskOwner,
-  handleChangeOwner,
+  onChangeOwner,
   taskId,
   isProcessing,
   status,
@@ -14,7 +14,7 @@ export const FormChangeUser = ({
   const handleSubmit = values => {
     const userId = findUserId(values.userName, userList);
 
-    handleChangeOwner(taskId, values.userName, userId);
+    onChangeOwner(taskId, values.userName, userId);
   };
 
   return (
@@ -32,13 +32,14 @@ export const FormChangeUser = ({
             autoComplete="off"
             disabled={status}
           >
-            {userList.map((user, idx) => {
-              return (
-                <option key={idx} value={user.name}>
-                  {user.name}
-                </option>
-              );
-            })}
+            {userList &&
+              userList.map((user, idx) => {
+                return (
+                  <option key={idx} value={user.name}>
+                    {user.name}
+                  </option>
+                );
+              })}
           </Select>
 
           <BtnCopy type="submit" disabled={isProcessing || status}>

@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import { updateUserPass } from 'utils/operations';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import {
@@ -11,6 +9,7 @@ import {
   FormButton,
 } from './FormAccount.styled';
 import { t } from 'i18next';
+import { useUserStore } from 'utils/store';
 
 let schemaPass = yup.object().shape({
   password: yup.string().min(6).required(),
@@ -19,20 +18,12 @@ let schemaPass = yup.object().shape({
     .oneOf([yup.ref('password'), null], 'Passwords must match'),
 });
 
-export const FormUserPass = ({ setUser, email }) => {
-  const [isPassUpdating, setIsPassUpdating] = useState(false);
+export const FormUserPass = () => {
+  const updatePass = useUserStore(state => state.updatePass);
+  const isPassUpdating = useUserStore(state => state.isLoading);
 
   const handleUpdatePass = (values, { resetForm }) => {
-    setIsPassUpdating(true);
-
-    updateUserPass(values)
-      .then(() => {
-        resetForm();
-      })
-      .catch(error => {})
-      .finally(() => {
-        setIsPassUpdating(false);
-      });
+    updatePass(values, resetForm);
   };
 
   return (

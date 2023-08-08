@@ -1,6 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
-import { addTask } from 'utils/operations';
-import { TaskContext } from 'utils/context';
+import { useState, useEffect } from 'react';
 import { FormStyled, FormTitle, AddTaskFormButton } from './FormTask.styled';
 import { Formik } from 'formik';
 import { CloseButton } from 'components/Base/Buttons.styled';
@@ -8,8 +6,9 @@ import { schema } from './yupSchema';
 import { FormCommon } from './FormCommon';
 import { IoClose } from 'react-icons/io5';
 import { t } from 'i18next';
+import { useTaskStore } from 'utils/store';
 
-export const FormTaskCopy = ({ handleCopyTask, task }) => {
+export const FormTaskCopy = ({ toggleCopyWindow, task }) => {
   const today = new Date();
 
   const [dates, setDates] = useState({
@@ -22,7 +21,7 @@ export const FormTaskCopy = ({ handleCopyTask, task }) => {
 
   const { dateOrder, dateInvoice, datePayment, dateETD, dateETA } = dates;
 
-  const { dispatch, setIsLoading } = useContext(TaskContext);
+  const { addNewTask } = useTaskStore(state => state);
 
   useEffect(() => {
     window.addEventListener('keydown', handleEscape);
@@ -33,32 +32,21 @@ export const FormTaskCopy = ({ handleCopyTask, task }) => {
   });
 
   const handleSubmit = newTask => {
-    // console.log('send:', newTask);
-    setIsLoading(true);
-    addTask({
+    addNewTask({
       ...newTask,
       dateOrder,
       dateInvoice,
       datePayment,
       dateETD,
       dateETA,
-    })
-      .then(data => {
-        // console.log('return:', data);
+    });
 
-        if (data._id) {
-          handleCopyTask();
-
-          dispatch({ type: 'addTask', newTask: data });
-        } else throw new Error();
-      })
-      .catch(e => console.log(e.message))
-      .finally(() => setIsLoading(false));
+    toggleCopyWindow();
   };
 
   const handleEscape = event => {
     if (event.code === 'Escape') {
-      handleCopyTask();
+      toggleCopyWindow();
     }
   };
 
@@ -81,7 +69,7 @@ export const FormTaskCopy = ({ handleCopyTask, task }) => {
       validationSchema={schema}
     >
       <FormStyled>
-        <CloseButton type="button" onClick={handleCopyTask}>
+        <CloseButton type="button" onClick={toggleCopyWindow}>
           <IoClose size="20" />
         </CloseButton>
 

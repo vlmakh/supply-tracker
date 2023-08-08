@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import { signup } from 'utils/operations';
 import {
   LoginButton,
   StyledForm,
@@ -13,6 +11,7 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import { LoginLoader } from 'components/Loader/LoginLoader';
 import { t } from 'i18next';
+import { useUserStore } from 'utils/store';
 
 let schema = yup.object().shape({
   name: yup.string().required(t('login.required')),
@@ -24,21 +23,13 @@ let schema = yup.object().shape({
 });
 
 export default function Signup() {
-  const [isProcessing, setIsProcessing] = useState(false);
+  const signupUser = useUserStore(state => state.signupUser);
+  const isProcessing = useUserStore(state => state.isLoading);
 
-  const handleSubmit = (values, { resetForm }) => {
-    const { name, email, password } = values;
+  const handleSubmit = ({ name, email, password }, { resetForm }) => {
     const regData = { name, email, password };
-    setIsProcessing(true);
 
-    signup(regData)
-      .then(() => {
-        resetForm();
-      })
-      .catch(error => {})
-      .finally(() => {
-        setIsProcessing(false);
-      });
+    signupUser(regData, resetForm);
   };
 
   return (

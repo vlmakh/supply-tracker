@@ -7,7 +7,7 @@ import { FormCommon } from './FormCommon';
 import { IoClose } from 'react-icons/io5';
 import { t } from 'i18next';
 
-export const FormTaskAdd = ({ handleModal, handleAddTask }) => {
+export const FormTaskAdd = ({ toggleModal, handleAddTask }) => {
   const today = new Date();
 
   const [dates, setDates] = useState({
@@ -33,11 +33,13 @@ export const FormTaskAdd = ({ handleModal, handleAddTask }) => {
       { ...newTask, dateOrder, dateInvoice, datePayment, dateETD, dateETA },
       resetForm
     );
+
+    toggleModal();
   };
 
   const handleEscape = event => {
     if (event.code === 'Escape') {
-      handleModal();
+      toggleModal();
     }
   };
 
@@ -60,7 +62,7 @@ export const FormTaskAdd = ({ handleModal, handleAddTask }) => {
       validationSchema={schema}
     >
       <FormStyled>
-        <CloseButton type="button" onClick={handleModal}>
+        <CloseButton type="button" onClick={toggleModal}>
           <IoClose size="20" />
         </CloseButton>
 

@@ -1,16 +1,5 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
-import { TaskContext } from 'utils/context';
-import {
-  addTask,
-  getTasksByRange,
-  getUncompletedTasksByRange,
-  getTasksByDateOrder,
-  getTasksByDateInvoice,
-  getTasksByDatePayment,
-  getTasksByDateETD,
-  getTasksByDateETA,
-} from 'utils/operations';
 import { Box } from 'components/Base/Box';
 import { MainWrap } from 'components/Container/Container.styled';
 import { TaskTable } from 'components/TaskTable/TaskTable';
@@ -20,105 +9,28 @@ import { AddTaskButton } from 'components/Base/Buttons.styled';
 import { Loader } from 'components/Loader/Loader';
 import { MdOutlineAddCircleOutline } from 'react-icons/md';
 import { t } from 'i18next';
+import { useUserStore, useTaskStore } from 'utils/store';
 
 export default function TaskPage({ startDate, endDate, today }) {
-  const { dispatch, tasks, isLoading, setIsLoading, user } =
-    useContext(TaskContext);
+  const user = useUserStore(state => state.user);
+
+  const {
+    tasks,
+    hadleGetTasksByRange,
+    hadleGetUncompletedTasksByRange,
+    hadleGetTasksByDateOrder,
+    hadleGetTasksByDateInvoice,
+    hadleGetTasksByDatePayment,
+    hadleGetTasksByDateETD,
+    hadleGetTasksByDateETA,
+    addNewTask,
+    isLoading,
+  } = useTaskStore(state => state);
+
   const [showFormTaskAdd, setShowFormTaskAdd] = useState(false);
   const { category } = useParams();
 
   useEffect(() => {
-    const hadleGetTasksByRange = (start, end) => {
-      setIsLoading(true);
-
-      getTasksByRange(start, end)
-        .then(tasks => {
-          dispatch({ type: 'getTasks', tasks });
-        })
-        .catch(error => console.log(error))
-        .finally(() => {
-          setIsLoading(false);
-        });
-    };
-
-    const hadleGetUncompletedTasksByRange = (start, end) => {
-      setIsLoading(true);
-
-      getUncompletedTasksByRange(start, end)
-        .then(tasks => {
-          dispatch({ type: 'getTasks', tasks });
-        })
-        .catch(error => console.log(error))
-        .finally(() => {
-          setIsLoading(false);
-        });
-    };
-
-    const hadleGetTasksByDateOrder = start => {
-      setIsLoading(true);
-
-      getTasksByDateOrder(start)
-        .then(tasks => {
-          dispatch({ type: 'getTasks', tasks });
-        })
-        .catch(error => console.log(error))
-        .finally(() => {
-          setIsLoading(false);
-        });
-    };
-
-    const hadleGetTasksByDateInvoice = start => {
-      setIsLoading(true);
-
-      getTasksByDateInvoice(start)
-        .then(tasks => {
-          dispatch({ type: 'getTasks', tasks });
-        })
-        .catch(error => console.log(error))
-        .finally(() => {
-          setIsLoading(false);
-        });
-    };
-
-    const hadleGetTasksByDatePayment = start => {
-      setIsLoading(true);
-
-      getTasksByDatePayment(start)
-        .then(tasks => {
-          dispatch({ type: 'getTasks', tasks });
-        })
-        .catch(error => console.log(error))
-        .finally(() => {
-          setIsLoading(false);
-        });
-    };
-
-    const hadleGetTasksByDateETD = start => {
-      setIsLoading(true);
-
-      getTasksByDateETD(start)
-        .then(tasks => {
-          dispatch({ type: 'getTasks', tasks });
-        })
-        .catch(error => console.log(error))
-        .finally(() => {
-          setIsLoading(false);
-        });
-    };
-
-    const hadleGetTasksByDateETA = start => {
-      setIsLoading(true);
-
-      getTasksByDateETA(start)
-        .then(tasks => {
-          dispatch({ type: 'getTasks', tasks });
-        })
-        .catch(error => console.log(error))
-        .finally(() => {
-          setIsLoading(false);
-        });
-    };
-
     const handleCategory = value => {
       switch (value) {
         case 'range':
@@ -148,24 +60,26 @@ export default function TaskPage({ startDate, endDate, today }) {
     };
 
     handleCategory(category);
-  }, [category, dispatch, endDate, setIsLoading, startDate, today]);
+  }, [
+    category,
+    endDate,
+    hadleGetTasksByDateETA,
+    hadleGetTasksByDateETD,
+    hadleGetTasksByDateInvoice,
+    hadleGetTasksByDateOrder,
+    hadleGetTasksByDatePayment,
+    hadleGetTasksByRange,
+    hadleGetUncompletedTasksByRange,
+    startDate,
+    today,
+  ]);
 
-  const handleModal = () => {
+  const toggleModal = () => {
     setShowFormTaskAdd(!showFormTaskAdd);
   };
 
   const handleAddTask = newTask => {
-    setIsLoading(true);
-
-    addTask(newTask)
-      .then(data => {
-        if (data._id) {
-          setShowFormTaskAdd(!showFormTaskAdd);
-          dispatch({ type: 'addTask', newTask: data });
-        } else throw new Error();
-      })
-      .catch(e => console.log(e.message))
-      .finally(() => setIsLoading(false));
+    addNewTask(newTask);
   };
 
   return (
@@ -178,7 +92,7 @@ export default function TaskPage({ startDate, endDate, today }) {
         <Box p={4}>
           <AddTaskButton
             type="button"
-            onClick={handleModal}
+            onClick={toggleModal}
             aria-label={t('formTask.add')}
           >
             <MdOutlineAddCircleOutline size="48" />
@@ -186,9 +100,9 @@ export default function TaskPage({ startDate, endDate, today }) {
         </Box>
 
         {showFormTaskAdd && (
-          <Modal onClose={handleModal}>
+          <Modal onClose={toggleModal}>
             <FormTaskAdd
-              handleModal={handleModal}
+              toggleModal={toggleModal}
               handleAddTask={handleAddTask}
             />
           </Modal>

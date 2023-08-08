@@ -1,7 +1,5 @@
-import { Suspense, useContext } from 'react';
+import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
-import { logout } from 'utils/operations';
-import { TaskContext } from 'utils/context';
 import {
   Layout,
   Header,
@@ -24,51 +22,43 @@ import { Box } from 'components/Base/Box';
 import { LogoVM } from 'components/LogoVM/LogoVM';
 import { HiOutlineUserCircle } from 'react-icons/hi';
 import logo from 'images/logo256.webp';
+import { t } from 'i18next';
+
+import { useUserStore, useTaskStore } from 'utils/store';
 
 export const SharedLayout = ({
+  today,
   startDate,
   setStartDate,
   endDate,
   setEndDate,
 }) => {
-  const { user, setUser, tasks, setIsLoading, currentLang } =
-    useContext(TaskContext);
-  const today = new Date();
+  const { tasks, info } = useTaskStore(state => state);
+
+  const { user, resetUser } = useUserStore(state => state);
+  const currentLang = t('lang').split('-')[0];
+
   registerLocale('uk', uk);
 
-  const calcCompleted = array => {
-    if (array.length) {
-      const completedTasks = array.filter(item => item.completed).length;
-      return completedTasks;
-    }
-  };
-
-  const handleLogout = () => {
-    setIsLoading(true);
-    logout()
-      .then(() => {
-        localStorage.removeItem('splmgr');
-      })
-      .finally(() => {
-        setUser({});
-        setIsLoading(false);
-      });
-  };
+  const calcCompleted = info.completed;
 
   return (
     <Layout>
       <Header>
         <Container>
-          {user.email ? (
+          {user?.email ? (
             <>
               {tasks && (
                 <TaskCalc to="/tasks/uncompleted">
-                  <b>{tasks.length}</b> /{' '}
-                  <Green>{calcCompleted(tasks) ?? '0'} </Green>
+                  <b>{info.total}</b> / <Green>{calcCompleted ?? '0'} </Green>
                 </TaskCalc>
               )}
 
-              <TaskSearch startDate={startDate} endDate={endDate} />
+              <TaskSearch
+                startDate={startDate}
+                endDate={endDate}
+                today={today}
+              />
 
               <TaskMenu />
 
@@ -103,7 +93,7 @@ export const SharedLayout = ({
                 <HiOutlineUserCircle size="24" />
 
                 <UserMenu
-                  handleLogout={handleLogout}
+                  handleLogout={resetUser}
                   name={user.name}
                   email={user.email}
                 />
