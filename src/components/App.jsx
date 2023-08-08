@@ -7,7 +7,7 @@ import Modal from 'components/Modal/Modal';
 import { Loader } from 'components/Loader/Loader';
 import { useTranslation } from 'react-i18next';
 import { Toaster } from 'react-hot-toast';
-import { useUserStore, useTaskStore } from 'utils/store';
+import { useUserStore, useTaskStore, useUserListStore } from 'utils/store';
 
 const HomePage = lazy(() => import('pages/HomePage'));
 const Login = lazy(() => import('components/Login/Login'));
@@ -45,6 +45,9 @@ export const App = () => {
     },
     [i18n]
   );
+
+  const { userList } = useUserListStore(state => state);
+  console.log(userList)
 
   useEffect(() => {
     checkUser();

@@ -20,6 +20,7 @@ import {
   updateTask,
   addTask,
 } from 'utils/operations';
+import { getAllUsers } from 'utils/operations';
 
 const initialUserState = {
   user: { email: '', name: '', role: '' },
@@ -343,4 +344,12 @@ export const useTaskStore = create((set, get) => ({
 
 export const useUserListStore = create(set => ({
   userList: [],
+
+  getUsers() {
+    getAllUsers()
+      .then(data => {
+        set({ userList: data });
+      })
+      .catch(error => console.log(error));
+  },
 }));

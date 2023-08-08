@@ -32,13 +32,14 @@ export const FormChangeUser = ({
             autoComplete="off"
             disabled={status}
           >
-            {userList.map((user, idx) => {
-              return (
-                <option key={idx} value={user.name}>
-                  {user.name}
-                </option>
-              );
-            })}
+            {userList &&
+              userList.map((user, idx) => {
+                return (
+                  <option key={idx} value={user.name}>
+                    {user.name}
+                  </option>
+                );
+              })}
           </Select>
 
           <BtnCopy type="submit" disabled={isProcessing || status}>
