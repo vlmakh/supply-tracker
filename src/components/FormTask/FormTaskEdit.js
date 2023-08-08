@@ -1,6 +1,4 @@
 import { useState, useEffect } from 'react';
-// import { updateTask } from 'utils/operations';
-// import { TaskContext } from 'utils/context';
 import { FormStyled, FormTitle, AddTaskFormButton } from './FormTask.styled';
 import { Formik } from 'formik';
 import { CloseButton } from 'components/Base/Buttons.styled';
@@ -21,7 +19,6 @@ export const FormTaskEdit = ({ toggleEditWindow, task }) => {
 
   const { dateOrder, dateInvoice, datePayment, dateETD, dateETA } = dates;
 
-  // const { dispatch, setIsLoading } = useContext(TaskContext);
   const { handleUpdateTask } = useTaskStore(state => state);
 
   useEffect(() => {
@@ -33,8 +30,6 @@ export const FormTaskEdit = ({ toggleEditWindow, task }) => {
   });
 
   const handleSubmit = newTask => {
-    // setIsLoading(true);
-
     const data = {
       newTask,
       dateOrder,
@@ -46,22 +41,6 @@ export const FormTaskEdit = ({ toggleEditWindow, task }) => {
     handleUpdateTask(task._id, data);
 
     toggleEditWindow();
-
-    // updateTask(task._id, {
-    //   ...newTask,
-    //   dateOrder,
-    //   dateInvoice,
-    //   datePayment,
-    //   dateETD,
-    //   dateETA,
-    // })
-    //   .then(data => {
-    //     dispatch({ type: 'editTask', newTask: data, taskId: task._id });
-
-    //     toggleEditWindow();
-    //   })
-    //   .catch(err => console.log(err.message))
-    //   .finally(() => setIsLoading(false));
   };
 
   const handleEscape = event => {

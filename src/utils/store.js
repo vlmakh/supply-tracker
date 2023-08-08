@@ -326,10 +326,21 @@ export const useTaskStore = create((set, get) => ({
       .finally(() => set({ isLoading: false }));
   },
 
-  filter(query) {
-    const tasks = get().tasks.filter(task =>
-      task.name.toLowerCase().includes(query.toLowerCase())
-    );
-    set({ tasks });
+  handleFilter(query, start, end) {
+    set({ isLoading: true });
+
+    getTasksByRange(start, end)
+      .then(data => {
+        const filtered = data.filter(task =>
+          task.name.toLowerCase().includes(query.toLowerCase())
+        );
+        set({
+          tasks: filtered,
+        });
+      })
+      .catch(error => console.log(error))
+      .finally(() => {
+        set({ isLoading: false });
+      });
   },
 }));

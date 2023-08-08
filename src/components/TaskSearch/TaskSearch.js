@@ -1,20 +1,17 @@
 import { Label, Input, ClearBtn } from './TaskSearch.styled';
 import { BsSearch } from 'react-icons/bs';
-import { useState, useContext } from 'react';
-import { TaskContext } from 'utils/context';
-import { getTasksByRange } from 'utils/operations';
+import { useState } from 'react';
 import { IoIosCloseCircle } from 'react-icons/io';
+import { useTaskStore } from 'utils/store';
 
 export const TaskSearch = ({ startDate, endDate }) => {
   const [query, setQuery] = useState('');
-  const { dispatch } = useContext(TaskContext);
+  const { handleFilter, hadleGetTasksByRange } = useTaskStore(state => state);
 
   const handleInputChange = e => {
     setQuery(e.target.value);
 
-    getTasksByRange(startDate, endDate)
-      .then(tasks => dispatch({ type: 'filter', tasks, query: e.target.value }))
-      .catch(error => {});
+    handleFilter(e.target.value, startDate, endDate);
   };
 
   const clearInput = () => {
@@ -24,9 +21,7 @@ export const TaskSearch = ({ startDate, endDate }) => {
 
     setQuery('');
 
-    getTasksByRange(startDate, endDate)
-      .then(tasks => dispatch({ type: 'getTasks', tasks }))
-      .catch(error => {});
+    hadleGetTasksByRange(startDate, endDate);
   };
 
   return (
