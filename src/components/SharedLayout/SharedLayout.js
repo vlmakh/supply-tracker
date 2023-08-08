@@ -55,7 +55,11 @@ export const SharedLayout = ({
                 </TaskCalc>
               )}
 
-              <TaskSearch startDate={startDate} endDate={endDate} />
+              <TaskSearch
+                startDate={startDate}
+                endDate={endDate}
+                today={today}
+              />
 
               <TaskMenu />
 
