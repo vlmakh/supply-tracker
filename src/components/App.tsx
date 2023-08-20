@@ -16,13 +16,15 @@ const TasksPage = lazy(() => import('pages/TasksPage'));
 const AccountPage = lazy(() => import('pages/AccountPage'));
 const ErrorPage = lazy(() => import('pages/ErrorPage'));
 
-const savedLang: string | null = localStorage.getItem('splmgr-lang');
+const savedLang = localStorage.getItem('splmgr-lang');
 
 export const App: FC = () => {
   const checkUser = useUserStore(state => state.checkUser);
   const isLoading = useUserStore(state => state.isLoading);
 
-  const [currentLang, setCurrentLang] = useState(savedLang ?? 'en');
+  const [currentLang, setCurrentLang] = useState(
+    typeof savedLang === 'string' ? JSON.parse(savedLang) : 'en'
+  );
 
   const today = useMemo(() => new Date(), []);
   const getYear = today.getFullYear();
