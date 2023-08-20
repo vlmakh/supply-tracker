@@ -42,7 +42,7 @@ axios.interceptors.response.use(
 
         return axios.request(originalRequest);
       } catch (error) {
-        toast.error(errorMsg);
+        console.log((error as Error).message);
       }
     }
 
