@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { create } from 'zustand';
 import {
   signup,
   login,
@@ -6,7 +6,7 @@ import {
   checkCurrentUser,
   updateUserName,
   updateUserPass,
-} from "../utils/operations";
+} from '../utils/operations';
 import {
   getTasksByRange,
   getUncompletedTasksByRange,
@@ -19,17 +19,22 @@ import {
   updateTaskOwner,
   updateTask,
   addTask,
-} from "../utils/operations";
-import { getAllUsers } from "../utils/operations";
-import { IUserState, ITaskState, IUserListState, ITask } from "../components/types";
- 
+} from '../utils/operations';
+import { getAllUsers } from '../utils/operations';
+import {
+  IUserState,
+  ITaskState,
+  IUserListState,
+  ITask,
+} from '../components/types';
+
 const initialUserState = {
-  user: { email: "", name: "", role: "" },
-  currentLang: "en",
+  user: { email: '', name: '', role: '' },
+  currentLang: 'en',
   isLoading: false,
 };
 
-export const useUserStore = create<IUserState>()((set) => ({
+export const useUserStore = create<IUserState>()(set => ({
   ...initialUserState,
 
   signupUser(regData, resetForm) {
@@ -39,7 +44,7 @@ export const useUserStore = create<IUserState>()((set) => ({
       .then(() => {
         resetForm();
       })
-      .catch((error) => {})
+      .catch(error => {})
       .finally(() => {
         set({ isLoading: false });
       });
@@ -49,12 +54,12 @@ export const useUserStore = create<IUserState>()((set) => ({
     set({ isLoading: true });
 
     login(values)
-      .then((data) => {
+      .then(data => {
         resetForm();
-        localStorage.setItem("splmgr", JSON.stringify(data.token));
+        localStorage.setItem('splmgr', JSON.stringify(data.token));
         set({ user: data.user });
       })
-      .catch((error) => {})
+      .catch(error => {})
       .finally(() => {
         set({ isLoading: false });
       });
@@ -64,13 +69,13 @@ export const useUserStore = create<IUserState>()((set) => ({
     set({ isLoading: true });
 
     checkCurrentUser()
-      .then((data) => {
+      .then(data => {
         if (!data) {
           return;
         }
         set({ user: data });
       })
-      .catch((error) => {})
+      .catch(error => {})
       .finally(() => {
         set({ isLoading: false });
       });
@@ -80,11 +85,11 @@ export const useUserStore = create<IUserState>()((set) => ({
     set({ isLoading: true });
 
     updateUserName(values)
-      .then((data) => {
+      .then(data => {
         set(({ user }) => ({ user: { ...user, name: data.name } }));
         resetForm();
       })
-      .catch((error) => {})
+      .catch(error => {})
       .finally(() => {
         set({ isLoading: false });
       });
@@ -97,7 +102,7 @@ export const useUserStore = create<IUserState>()((set) => ({
       .then(() => {
         resetForm();
       })
-      .catch((error) => {})
+      .catch(error => {})
       .finally(() => {
         set({ isLoading: false });
       });
@@ -108,9 +113,9 @@ export const useUserStore = create<IUserState>()((set) => ({
 
     logout()
       .then(() => {
-        localStorage.removeItem("splmgr");
+        localStorage.removeItem('splmgr');
       })
-      .catch((e) => console.log(e))
+      .catch(e => console.log(e))
       .finally(() => {
         set(initialUserState);
       });
@@ -129,7 +134,7 @@ export const useTaskStore = create<ITaskState>((set, get) => ({
     set({ isLoading: true });
 
     getUncompletedTasksByRange(start, end)
-      .then((tasks) => {
+      .then(tasks => {
         set({ tasks });
 
         const { length: total } = tasks;
@@ -137,7 +142,7 @@ export const useTaskStore = create<ITaskState>((set, get) => ({
 
         set({ info: { total, completed } });
       })
-      .catch((error) => {})
+      .catch(error => {})
       .finally(() => {
         set({ isLoading: false });
       });
@@ -147,7 +152,7 @@ export const useTaskStore = create<ITaskState>((set, get) => ({
     set({ isLoading: true });
 
     getTasksByRange(start, end)
-      .then((tasks) => {
+      .then(tasks => {
         set({ tasks });
 
         const { length: total } = tasks;
@@ -155,7 +160,7 @@ export const useTaskStore = create<ITaskState>((set, get) => ({
 
         set({ info: { total, completed } });
       })
-      .catch((error) => console.log(error))
+      .catch(error => console.log(error))
       .finally(() => {
         set({ isLoading: false });
       });
@@ -165,7 +170,7 @@ export const useTaskStore = create<ITaskState>((set, get) => ({
     set({ isLoading: true });
 
     getTasksByDateOrder(start)
-      .then((tasks) => {
+      .then(tasks => {
         set({ tasks });
 
         const { length: total } = tasks;
@@ -173,7 +178,7 @@ export const useTaskStore = create<ITaskState>((set, get) => ({
 
         set({ info: { total, completed } });
       })
-      .catch((error) => console.log(error))
+      .catch(error => console.log(error))
       .finally(() => {
         set({ isLoading: false });
       });
@@ -183,7 +188,7 @@ export const useTaskStore = create<ITaskState>((set, get) => ({
     set({ isLoading: true });
 
     getTasksByDateInvoice(start)
-      .then((tasks) => {
+      .then(tasks => {
         set({ tasks });
 
         const { length: total } = tasks;
@@ -191,7 +196,7 @@ export const useTaskStore = create<ITaskState>((set, get) => ({
 
         set({ info: { total, completed } });
       })
-      .catch((error) => console.log(error))
+      .catch(error => console.log(error))
       .finally(() => {
         set({ isLoading: false });
       });
@@ -201,7 +206,7 @@ export const useTaskStore = create<ITaskState>((set, get) => ({
     set({ isLoading: true });
 
     getTasksByDatePayment(start)
-      .then((tasks) => {
+      .then(tasks => {
         set({ tasks });
 
         const { length: total } = tasks;
@@ -209,7 +214,7 @@ export const useTaskStore = create<ITaskState>((set, get) => ({
 
         set({ info: { total, completed } });
       })
-      .catch((error) => console.log(error))
+      .catch(error => console.log(error))
       .finally(() => {
         set({ isLoading: false });
       });
@@ -219,7 +224,7 @@ export const useTaskStore = create<ITaskState>((set, get) => ({
     set({ isLoading: true });
 
     getTasksByDateETD(start)
-      .then((tasks) => {
+      .then(tasks => {
         set({ tasks });
 
         const { length: total } = tasks;
@@ -227,7 +232,7 @@ export const useTaskStore = create<ITaskState>((set, get) => ({
 
         set({ info: { total, completed } });
       })
-      .catch((error) => console.log(error))
+      .catch(error => console.log(error))
       .finally(() => {
         set({ isLoading: false });
       });
@@ -237,7 +242,7 @@ export const useTaskStore = create<ITaskState>((set, get) => ({
     set({ isLoading: true });
 
     getTasksByDateETA(start)
-      .then((tasks) => {
+      .then(tasks => {
         set({ tasks });
 
         const { length: total } = tasks;
@@ -245,7 +250,7 @@ export const useTaskStore = create<ITaskState>((set, get) => ({
 
         set({ info: { total, completed } });
       })
-      .catch((error) => console.log(error))
+      .catch(error => console.log(error))
       .finally(() => {
         set({ isLoading: false });
       });
@@ -255,25 +260,25 @@ export const useTaskStore = create<ITaskState>((set, get) => ({
     set({ isLoading: true });
 
     addTask(newTask)
-      .then((data) => {
+      .then(data => {
         const tasks = [...get().tasks, data];
         const { length: total } = tasks;
-        const completed = tasks.filter((item) => item.completed).length;
+        const completed = tasks.filter(item => item.completed).length;
 
         set({ tasks, info: { total, completed } });
       })
-      .catch((error) => console.log(error))
+      .catch(error => console.log(error))
       .finally(() => {
         set({ isLoading: false });
       });
   },
 
   handleUpdateTaskStatus(id, data) {
-    const tasks = get().tasks.map((task) =>
+    const tasks = get().tasks.map(task =>
       task._id === id ? { ...task, completed: data.completed } : task
     );
     const { length: total } = tasks;
-    const completed = tasks.filter((item) => item.completed).length;
+    const completed = tasks.filter(item => item.completed).length;
 
     set({ tasks, info: { total, completed } });
   },
@@ -282,13 +287,13 @@ export const useTaskStore = create<ITaskState>((set, get) => ({
     set({ isLoading: true });
 
     updateTaskOwner(taskId, newOwnerId, newUserId)
-      .then((data) => {
-        const tasks = get().tasks.map((task) =>
+      .then(data => {
+        const tasks = get().tasks.map(task =>
           task._id === taskId ? data : task
         );
         set({ tasks });
       })
-      .catch((e) => console.log(e.message))
+      .catch(e => console.log(e.message))
       .finally(() => {
         set({ isLoading: false });
       });
@@ -299,13 +304,13 @@ export const useTaskStore = create<ITaskState>((set, get) => ({
 
     deleteTask(taskId)
       .then(() => {
-        const tasks = get().tasks.filter((task) => task._id !== taskId);
+        const tasks = get().tasks.filter(task => task._id !== taskId);
         const { length: total } = tasks;
-        const completed = tasks.filter((item) => item.completed).length;
+        const completed = tasks.filter(item => item.completed).length;
 
         set({ tasks, info: { total, completed } });
       })
-      .catch((err) => console.log(err.message))
+      .catch(err => console.log(err.message))
       .finally(() => {
         set({ isLoading: false });
       });
@@ -325,13 +330,11 @@ export const useTaskStore = create<ITaskState>((set, get) => ({
       dateETD,
       dateETA,
     })
-      .then((data) => {
-        const tasks = get().tasks.map((task) =>
-          task._id === id ? data : task
-        );
+      .then(data => {
+        const tasks = get().tasks.map(task => (task._id === id ? data : task));
         set({ tasks });
       })
-      .catch((err) => console.log(err.message))
+      .catch(err => console.log(err.message))
       .finally(() => set({ isLoading: false }));
   },
 
@@ -339,7 +342,7 @@ export const useTaskStore = create<ITaskState>((set, get) => ({
     set({ isLoading: true });
 
     getTasksByRange(start, end)
-      .then((data) => {
+      .then(data => {
         const filtered = data.filter((task: ITask) =>
           task.name.toLowerCase().includes(query.toLowerCase())
         );
@@ -347,21 +350,21 @@ export const useTaskStore = create<ITaskState>((set, get) => ({
           tasks: filtered,
         });
       })
-      .catch((error) => console.log(error))
+      .catch(error => console.log(error))
       .finally(() => {
         set({ isLoading: false });
       });
   },
 }));
 
-export const useUserListStore = create<IUserListState>((set) => ({
+export const useUserListStore = create<IUserListState>(set => ({
   userList: [],
 
   getUsers() {
     getAllUsers()
-      .then((data) => {
+      .then(data => {
         set({ userList: data });
       })
-      .catch((error) => console.log(error));
+      .catch(error => console.log(error));
   },
 }));
