@@ -195,7 +195,7 @@ export const getUncompletedTasksByRange = async (startDate: string, endDate: str
     const response = await axios.get(
       `api/tasks/uncompleted?startDate=${formatDateCut(
         startDate
-      )}&endDate=${formatDateCut(endDate)}T23:59:59.000Z`
+      )}&endDate=${formatDateCut(endDate)}T20:59:59.000Z`
     );
 
     return response.data;
@@ -209,7 +209,7 @@ export const getTasksByDateOrder = async (date: string) => {
     const response = await axios.get(
       `api/tasks/dateOrder?startDate=${formatDateCut(
         date
-      )}&endDate=${formatDateCut(date)}T23:59:59.000Z`
+      )}&endDate=${formatDateCut(date)}T20:59:59.000Z`
     );
 
     return response.data;
@@ -223,7 +223,7 @@ export const getTasksByDateInvoice = async (date: string) => {
     const response = await axios.get(
       `api/tasks/dateInvoice?startDate=${formatDateCut(
         date
-      )}&endDate=${formatDateCut(date)}T23:59:59.000Z`
+      )}&endDate=${formatDateCut(date)}T20:59:59.000Z`
     );
 
     return response.data;
@@ -237,7 +237,7 @@ export const getTasksByDatePayment = async (date: string) => {
     const response = await axios.get(
       `api/tasks/datePayment?startDate=${formatDateCut(
         date
-      )}&endDate=${formatDateCut(date)}T23:59:59.000Z`
+      )}&endDate=${formatDateCut(date)}T20:59:59.000Z`
     );
 
     return response.data;
@@ -251,7 +251,7 @@ export const getTasksByDateETD = async (date: string) => {
     const response = await axios.get(
       `api/tasks/dateETD?startDate=${formatDateCut(
         date
-      )}&endDate=${formatDateCut(date)}T23:59:59.000Z`
+      )}&endDate=${formatDateCut(date)}T20:59:59.000Z`
     );
 
     return response.data;
@@ -265,7 +265,7 @@ export const getTasksByDateETA = async (date: string) => {
     const response = await axios.get(
       `api/tasks/dateETA?startDate=${formatDateCut(
         date
-      )}&endDate=${formatDateCut(date)}T23:59:59.000Z`
+      )}&endDate=${formatDateCut(date)}T20:59:59.000Z`
     );
 
     return response.data;
