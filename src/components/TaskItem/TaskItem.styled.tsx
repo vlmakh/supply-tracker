@@ -96,7 +96,17 @@ export const Data = styled.td`
         return 'lightgrey';
       }
       if (!p.completed && formatDate(p.today) === formattedToday) {
-        return 'green';
+        return 'white';
+      }
+    }    
+  };
+  background-color: ${
+  (    p: {
+    theme: any; today: string; completed: boolean; 
+}) => {
+      
+      if (!p.completed && formatDate(p.today) === formattedToday) {
+        return `${p.theme.colors.accent}`;
       }
     }    
   };
