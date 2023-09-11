@@ -36,14 +36,17 @@ export const FormTaskEdit: FC<Props> = ({ toggleEditWindow, task }) => {
   });
 
   const handleSubmit = (newTask: ITask) => {
+
     const data = {
       newTask,
-      dateOrder: dateOrder.toDateString(),
-      dateInvoice: dateInvoice.toDateString(),
-      datePayment: datePayment.toDateString(),
-      dateETD: dateETD.toDateString(),
-      dateETA: dateETA.toDateString(),
+      dateOrder: dateOrder.toString(),
+      dateInvoice: dateInvoice.toString(),
+      datePayment: datePayment.toString(),
+      dateETD: dateETD.toString(),
+      dateETA: dateETA.toString(),
     };
+
+    console.log(data)
 
     task._id && handleUpdateTask(task._id, data);
 
@@ -61,14 +64,14 @@ export const FormTaskEdit: FC<Props> = ({ toggleEditWindow, task }) => {
         name: task.name,
         qty: task.qty,
         unit: task.unit,
-        dateOrder: dateOrder.toDateString(),
+        dateOrder: dateOrder.toString(),
         supplier: task.supplier,
-        dateInvoice: dateInvoice.toDateString(),
-        datePayment: datePayment.toDateString(),
+        dateInvoice: dateInvoice.toString(),
+        datePayment: datePayment.toString(),
         freight: task.freight,
         completed: task.completed,
-        dateETD: dateETD.toDateString(),
-        dateETA: dateETA.toDateString(),
+        dateETD: dateETD.toString(),
+        dateETA: dateETA.toString(),
         comments: task.comments,}
 
   return (

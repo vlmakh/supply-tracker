@@ -37,11 +37,11 @@ export const FormTaskAdd: FC<Props> = ({ toggleModal, handleAddTask }) => {
   const handleSubmit = (newTask: Partial<ITask>) => {
     handleAddTask({
       ...newTask,
-      dateOrder: dateOrder.toDateString(),
-      dateInvoice: dateInvoice.toDateString(),
-      datePayment: datePayment.toDateString(),
-      dateETD: dateETD.toDateString(),
-      dateETA: dateETA.toDateString(),
+      dateOrder: dateOrder.toString(),
+      dateInvoice: dateInvoice.toString(),
+      datePayment: datePayment.toString(),
+      dateETD: dateETD.toString(),
+      dateETA: dateETA.toString(),
     });
 
     toggleModal();
@@ -60,13 +60,13 @@ export const FormTaskAdd: FC<Props> = ({ toggleModal, handleAddTask }) => {
         name: "",
         qty: 1,
         unit: `${t("formTask.pcs")}`,
-        dateOrder: dateOrder.toDateString(),
+        dateOrder: dateOrder.toString(),
         supplier: "-",
-        dateInvoice: dateInvoice.toDateString(),
-        datePayment: datePayment.toDateString(),
+        dateInvoice: dateInvoice.toString(),
+        datePayment: datePayment.toString(),
         freight: `${t("formTask.nova")}`,
-        dateETD: dateETD.toDateString(),
-        dateETA: dateETA.toDateString(),
+        dateETD: dateETD.toString(),
+        dateETA: dateETA.toString(),
         comments: "-",
       }}
       validationSchema={schema}

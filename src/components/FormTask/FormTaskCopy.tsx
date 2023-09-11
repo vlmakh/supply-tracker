@@ -40,11 +40,11 @@ export const FormTaskCopy: FC<Props> = ({ toggleCopyWindow, task }) => {
   const handleSubmit = (newTask: Partial<ITask>) => {
     addNewTask({
       ...newTask,
-      dateOrder: dateOrder.toDateString(),
-      dateInvoice: dateInvoice.toDateString(),
-      datePayment: datePayment.toDateString(),
-      dateETD: dateETD.toDateString(),
-      dateETA: dateETA.toDateString(),
+      dateOrder: dateOrder.toString(),
+      dateInvoice: dateInvoice.toString(),
+      datePayment: datePayment.toString(),
+      dateETD: dateETD.toString(),
+      dateETA: dateETA.toString(),
     });
 
     toggleCopyWindow();
@@ -63,14 +63,14 @@ export const FormTaskCopy: FC<Props> = ({ toggleCopyWindow, task }) => {
         name: task.name,
         qty: task.qty,
         unit: task.unit,
-        dateOrder: dateOrder.toDateString(),
+        dateOrder: dateOrder.toString(),
         supplier: task.supplier,
-        dateInvoice: dateInvoice.toDateString(),
-        datePayment: datePayment.toDateString(),
+        dateInvoice: dateInvoice.toString(),
+        datePayment: datePayment.toString(),
         freight: task.freight,
         completed: false,
-        dateETD: dateETD.toDateString(),
-        dateETA: dateETA.toDateString(),
+        dateETD: dateETD.toString(),
+        dateETA: dateETA.toString(),
         comments: task.comments,
       }}
       validationSchema={schema}
