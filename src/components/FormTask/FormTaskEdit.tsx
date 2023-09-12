@@ -1,13 +1,14 @@
-import { FC, useState, useEffect } from "react";
-import { FormStyled, FormTitle, AddTaskFormButton } from "./FormTask.styled";
-import { Formik } from "formik";
-import { CloseButton } from "components/Base/Buttons.styled";
-import { FormCommon } from "./FormCommon";
-import { schema } from "./yupSchema";
-import { IoClose } from "react-icons/io5";
-import { t } from "i18next";
-import { useTaskStore } from "utils/store";
-import { ITask, IDates } from "components/types";
+import { FC, useState, useEffect } from 'react';
+import { FormStyled, FormTitle, AddTaskFormButton } from './FormTask.styled';
+import { Formik } from 'formik';
+import { CloseButton } from 'components/Base/Buttons.styled';
+import { FormCommon } from './FormCommon';
+import { schema } from './yupSchema';
+import { IoClose } from 'react-icons/io5';
+import { t } from 'i18next';
+import { useTaskStore } from 'utils/store';
+import { ITask, IDatesNum } from 'components/types';
+import { formatDateMS } from 'utils/formatDate';
 
 type Props = {
   toggleEditWindow: () => void;
@@ -15,64 +16,64 @@ type Props = {
 };
 
 export const FormTaskEdit: FC<Props> = ({ toggleEditWindow, task }) => {
-  const [dates, setDates] = useState<IDates>({
-    dateOrder: new Date(Date.parse(task.dateOrder)),
-    dateInvoice: new Date(Date.parse(task.dateInvoice)),
-    datePayment: new Date(Date.parse(task.datePayment)),
-    dateETD: new Date(Date.parse(task.dateETD)),
-    dateETA: new Date(Date.parse(task.dateETA)),
+  const [dates, setDates] = useState<IDatesNum>({
+    dateOrder: +formatDateMS(task.dateOrder.toString()),
+    dateInvoice: +formatDateMS(task.dateInvoice.toString()),
+    datePayment: +formatDateMS(task.datePayment.toString()),
+    dateETD: +formatDateMS(task.dateETD.toString()),
+    dateETA: +formatDateMS(task.dateETA.toString()),
   });
+
+  const timeOffset = new Date().getTimezoneOffset();
 
   const { dateOrder, dateInvoice, datePayment, dateETD, dateETA } = dates;
 
-  const { handleUpdateTask } = useTaskStore((state) => state);
+  const { handleUpdateTask } = useTaskStore(state => state);
 
   useEffect(() => {
-    window.addEventListener("keydown", handleEscape);
+    window.addEventListener('keydown', handleEscape);
 
     return () => {
-      window.removeEventListener("keydown", handleEscape);
+      window.removeEventListener('keydown', handleEscape);
     };
   });
 
   const handleSubmit = (newTask: ITask) => {
-
     const data = {
       newTask,
-      dateOrder: dateOrder.toString(),
-      dateInvoice: dateInvoice.toString(),
-      datePayment: datePayment.toString(),
-      dateETD: dateETD.toString(),
-      dateETA: dateETA.toString(),
+      dateOrder: dateOrder - timeOffset * 60000,
+      dateInvoice: dateInvoice - timeOffset * 60000,
+      datePayment: datePayment - timeOffset * 60000,
+      dateETD: dateETD - timeOffset * 60000,
+      dateETA: dateETA - timeOffset * 60000,
     };
-
-    console.log(data)
 
     task._id && handleUpdateTask(task._id, data);
 
     toggleEditWindow();
   };
 
-  const handleEscape = (event: { code: string; }) => {
-    if (event.code === "Escape") {
+  const handleEscape = (event: { code: string }) => {
+    if (event.code === 'Escape') {
       toggleEditWindow();
     }
   };
 
   const initialValues: ITask = {
-        _id: task._id,
-        name: task.name,
-        qty: task.qty,
-        unit: task.unit,
-        dateOrder: dateOrder.toString(),
-        supplier: task.supplier,
-        dateInvoice: dateInvoice.toString(),
-        datePayment: datePayment.toString(),
-        freight: task.freight,
-        completed: task.completed,
-        dateETD: dateETD.toString(),
-        dateETA: dateETA.toString(),
-        comments: task.comments,}
+    _id: task._id,
+    name: task.name,
+    qty: task.qty,
+    unit: task.unit,
+    dateOrder: dateOrder,
+    supplier: task.supplier,
+    dateInvoice: dateInvoice,
+    datePayment: datePayment,
+    freight: task.freight,
+    completed: task.completed,
+    dateETD: dateETD,
+    dateETA: dateETA,
+    comments: task.comments,
+  };
 
   return (
     <Formik
@@ -85,11 +86,11 @@ export const FormTaskEdit: FC<Props> = ({ toggleEditWindow, task }) => {
           <IoClose size="20" />
         </CloseButton>
 
-        <FormTitle>{t("formTask.edit")}</FormTitle>
+        <FormTitle>{t('formTask.edit')}</FormTitle>
 
         <FormCommon dates={dates} setDates={setDates} />
 
-        <AddTaskFormButton type="submit">{t("buttons.save")}</AddTaskFormButton>
+        <AddTaskFormButton type="submit">{t('buttons.save')}</AddTaskFormButton>
       </FormStyled>
     </Formik>
   );

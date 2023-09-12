@@ -78,18 +78,26 @@ export interface IDates {
   dateETA: Date;
 }
 
+export interface IDatesNum {
+  dateOrder: number;
+  dateInvoice: number;
+  datePayment: number;
+  dateETD: number;
+  dateETA: number;
+}
+
 export interface ITask {
   _id: string;
   name: string;
   qty: number;
   unit: string;
-  dateOrder: string;
+  dateOrder: number | string;
   supplier: string;
-  dateInvoice: string;
-  datePayment: string;
+  dateInvoice: number | string;
+  datePayment: number | string;
   freight: string;
-  dateETD: string;
-  dateETA: string;
+  dateETD: number | string;
+  dateETA: number | string;
   completed: boolean;
   comments: string;
   owner?: string;
@@ -98,11 +106,11 @@ export interface ITask {
 
 export interface IUpdateTask {
   newTask: ITask;
-  dateOrder: string;
-  dateInvoice: string;
-  datePayment: string;
-  dateETD: string;
-  dateETA: string;
+  dateOrder: number;
+  dateInvoice: number;
+  datePayment: number;
+  dateETD: number;
+  dateETA: number;
 }
 
 export interface IPortalProps {
