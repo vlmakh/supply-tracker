@@ -13,12 +13,12 @@ import { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import uk from "date-fns/locale/uk";
 import { t } from "i18next";
-import { IDates } from "components/types";
+import { IDatesNum } from "components/types";
 import { FC, Dispatch, SetStateAction } from "react";
 
 type Props = {
-  dates: IDates;
-  setDates: Dispatch<SetStateAction<IDates>>;
+  dates: IDatesNum;
+  setDates: Dispatch<SetStateAction<IDatesNum>>;
 };
 
 export const FormCommon: FC<Props> = ({ dates, setDates }) => {
@@ -57,7 +57,7 @@ export const FormCommon: FC<Props> = ({ dates, setDates }) => {
               <DatePickerStyled
                 dateFormat="dd.MM.yyyy"
                 selected={dateOrder}
-                onChange={(date: Date) =>
+                onChange={(date: number) =>
                   setDates((prevState) => ({
                     ...prevState,
                     dateOrder: date,
@@ -86,7 +86,7 @@ export const FormCommon: FC<Props> = ({ dates, setDates }) => {
               <DatePickerStyled
                 dateFormat="dd.MM.yyyy"
                 selected={dateInvoice}
-                onChange={(date: Date) =>
+                onChange={(date: number) =>
                   setDates((prevState) => ({
                     ...prevState,
                     dateInvoice: date,
@@ -109,7 +109,7 @@ export const FormCommon: FC<Props> = ({ dates, setDates }) => {
               <DatePickerStyled
                 dateFormat="dd.MM.yyyy"
                 selected={datePayment}
-                onChange={(date: Date) =>
+                onChange={(date: number) =>
                   setDates((prevState) => ({
                     ...prevState,
                     datePayment: date,
@@ -145,7 +145,7 @@ export const FormCommon: FC<Props> = ({ dates, setDates }) => {
               <DatePickerStyled
                 dateFormat="dd.MM.yyyy"
                 selected={dateETD}
-                onChange={(date: Date) =>
+                onChange={(date: number) =>
                   setDates((prevState) => ({
                     ...prevState,
                     dateETD: date,
@@ -168,7 +168,7 @@ export const FormCommon: FC<Props> = ({ dates, setDates }) => {
               <DatePickerStyled
                 dateFormat="dd.MM.yyyy"
                 selected={dateETA}
-                onChange={(date: Date) =>
+                onChange={(date: number) =>
                   setDates((prevState) => ({
                     ...prevState,
                     dateETA: date,

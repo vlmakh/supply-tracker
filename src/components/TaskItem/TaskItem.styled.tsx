@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { formatDate, formatDateMS } from 'utils/formatDate';
 import { TDButton } from 'components/Base/Buttons.styled';
 import { Field } from 'formik';
-const today = new Date();
+const today = Date.now();
 const formattedToday = formatDate((new Date()).toString());
 
 export const Task = styled.tr`
@@ -90,7 +90,7 @@ export const Data = styled.td`
   color: ${
   (    p: { today: string; completed: boolean; }) => {
       if (
-        formatDateMS(p.today) < +today &&
+        formatDateMS(p.today) < today &&
         formatDate(p.today) !== formattedToday
       ) {
         return 'lightgrey';

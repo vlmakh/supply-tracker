@@ -1,6 +1,6 @@
-import { FC, useState } from "react";
-import { updateTaskStatus } from "utils/operations";
-import { formatDate, formatDateMS, formatDateDays } from "utils/formatDate";
+import { FC, useState } from 'react';
+import { updateTaskStatus } from 'utils/operations';
+import { formatDate, formatDateMS, formatDateDays } from 'utils/formatDate';
 import {
   Task,
   Checkbox,
@@ -19,17 +19,17 @@ import {
   BtnCopy,
   BtnDel,
   BtnName,
-} from "./TaskItem.styled";
-import Modal from "components/Modal/Modal";
-import { FormTaskEdit } from "components/FormTask/FormTaskEdit";
-import { FormTaskCopy } from "components/FormTask/FormTaskCopy";
-import { FaCheck, FaArrowAltCircleRight } from "react-icons/fa";
-import { MdContentCopy } from "react-icons/md";
-import { MdDeleteOutline } from "react-icons/md";
-import { TaskLoader } from "components/Loader/TaskLoader";
-import { FormChangeUser } from "components/TaskItem/FormChangeUser";
-import { useUserStore, useTaskStore } from "utils/store";
-import { ITask, IUser } from "components/types";
+} from './TaskItem.styled';
+import Modal from 'components/Modal/Modal';
+import { FormTaskEdit } from 'components/FormTask/FormTaskEdit';
+import { FormTaskCopy } from 'components/FormTask/FormTaskCopy';
+import { FaCheck, FaArrowAltCircleRight } from 'react-icons/fa';
+import { MdContentCopy } from 'react-icons/md';
+import { MdDeleteOutline } from 'react-icons/md';
+import { TaskLoader } from 'components/Loader/TaskLoader';
+import { FormChangeUser } from 'components/TaskItem/FormChangeUser';
+import { useUserStore, useTaskStore } from 'utils/store';
+import { ITask, IUser } from 'components/types';
 
 type Props = {
   task: ITask;
@@ -38,29 +38,29 @@ type Props = {
 };
 
 export const TaskItem: FC<Props> = ({ task, idx, userList }) => {
-  const role = useUserStore((state) => state.user.role);
+  const role = useUserStore(state => state.user.role);
   const [showFormTaskEdit, setShowFormTaskEdit] = useState(false);
   const [showFormTaskCopy, setShowFormTaskCopy] = useState(false);
-  const { _id = "", completed = false } = task;
+  const { _id = '', completed = false } = task;
 
   const { handleUpdateTaskOwner, handleUpdateTaskStatus, handleDeleteTask } =
-    useTaskStore((state) => state);
+    useTaskStore(state => state);
   const [isProcessing, setIsProsessing] = useState(false);
 
   const formatName = (name: string) => {
     if (name && name.length > 28) {
-      return name.slice(0, 27) + "...";
+      return name.slice(0, 27) + '...';
     } else return name;
   };
 
   const formatSupplier = (name: string) => {
     if (name && name.length > 21) {
-      return name.slice(0, 20) + "...";
+      return name.slice(0, 20) + '...';
     } else return name;
   };
 
   const onCompleteTask = (id: string, status: boolean) => {
-    if (formatDateMS(task.dateETA) < formatDateMS(task.dateOrder)) {
+    if (task.dateETA < task.dateOrder) {
       alert("ETA date can't be earlier than order date");
       return;
     }
@@ -68,10 +68,10 @@ export const TaskItem: FC<Props> = ({ task, idx, userList }) => {
     setIsProsessing(true);
 
     updateTaskStatus(id, status)
-      .then((data) => {
+      .then(data => {
         handleUpdateTaskStatus(id, data);
       })
-      .catch((e) => console.log(e.message))
+      .catch(e => console.log(e.message))
       .finally(() => {
         setIsProsessing(false);
       });
@@ -94,7 +94,7 @@ export const TaskItem: FC<Props> = ({ task, idx, userList }) => {
   };
 
   const onDelete = (id: string) => {
-    const result = window.confirm("Confirm task delete?");
+    const result = window.confirm('Confirm task delete?');
     if (result) {
       handleDeleteTask(id);
     }
@@ -151,32 +151,33 @@ export const TaskItem: FC<Props> = ({ task, idx, userList }) => {
         <Unit>{task.unit}</Unit>
 
         <Data today={task.dateOrder} completed={task.completed}>
-          {formatDate(task.dateOrder)}
+          {formatDate(task.dateOrder.toString())}
         </Data>
 
         <Supplier> {formatSupplier(task.supplier)}</Supplier>
 
         <Data today={task.dateInvoice} completed={task.completed}>
-          {formatDate(task.dateInvoice)}
+          {formatDate(task.dateInvoice.toString())}
         </Data>
 
         <Data today={task.datePayment} completed={task.completed}>
-          {formatDate(task.datePayment)}{" "}
+          {formatDate(task.datePayment.toString())}
         </Data>
 
         <Freight>{task.freight}</Freight>
 
         <Data today={task.dateETD} completed={task.completed}>
-          {formatDate(task.dateETD)}
+          {formatDate(task.dateETD.toString())}
         </Data>
 
         <Data today={task.dateETA} completed={task.completed}>
-          {formatDate(task.dateETA)}
+          {formatDate(task.dateETA.toString())}
         </Data>
 
         <Days>
           {formatDateDays(
-            +formatDateMS(task.dateETA) - +formatDateMS(task.dateInvoice)
+            +formatDateMS(task.dateETA.toString()) -
+              +formatDateMS(task.dateInvoice.toString())
           )}
         </Days>
 
@@ -190,7 +191,7 @@ export const TaskItem: FC<Props> = ({ task, idx, userList }) => {
           </BtnDel>
         </Delete>
 
-        {role === "HEAD" && (
+        {role === 'HEAD' && (
           <td>
             <FormChangeUser
               status={task.completed}
