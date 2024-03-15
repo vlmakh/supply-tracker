@@ -31,7 +31,7 @@ type Props = {
   setStartDate: Dispatch<SetStateAction<Date>>;
   endDate: Date;
   setEndDate: Dispatch<SetStateAction<Date>>;
-}
+};
 
 export const SharedLayout: FC<Props> = ({
   today,
@@ -122,11 +122,11 @@ export const SharedLayout: FC<Props> = ({
       </Suspense>
 
       <Footer>
-        <MyLink href="https://vlmakh.github.io/my-portfolio/" target="blank">
+        <p>2023</p>
+        <p>By</p>
+        <MyLink href="https://vlad-makhnenko.netlify.app/" target="blank">
           <LogoVM />
         </MyLink>
-        <p>2023</p>
-        <MyLink href="mailto:vlmakh@gmail.com">vlmakh@gmail.com</MyLink>
       </Footer>
     </Layout>
   );
