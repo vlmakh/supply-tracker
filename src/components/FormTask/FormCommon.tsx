@@ -134,6 +134,7 @@ export const FormCommon: FC<Props> = ({ dates, setDates }) => {
           </option>
           <option value={t("formTask.ukrpost")}>{t("formTask.ukrpost")}</option>
           <option value="DHL">DHL</option>
+          <option value="TMM">TMM</option>
           <option value="FCA">FCA</option>
           <option value="DAP">DAP</option>          
         </Input>
