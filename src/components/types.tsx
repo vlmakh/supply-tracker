@@ -106,11 +106,11 @@ export interface ITask {
 
 export interface IUpdateTask {
   newTask: ITask;
-  dateOrder: number;
-  dateInvoice: number;
-  datePayment: number;
-  dateETD: number;
-  dateETA: number;
+  dateOrder: string;
+  dateInvoice: string;
+  datePayment: string;
+  dateETD: string;
+  dateETA: string;
 }
 
 export interface IPortalProps {

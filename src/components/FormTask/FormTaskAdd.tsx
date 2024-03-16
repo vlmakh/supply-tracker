@@ -39,11 +39,11 @@ export const FormTaskAdd: FC<Props> = ({ toggleModal, handleAddTask }) => {
   const handleSubmit = (newTask: Partial<ITask>) => {
     handleAddTask({
       ...newTask,
-      dateOrder,
-      dateInvoice,
-      datePayment,
-      dateETD,
-      dateETA,
+      dateOrder: new Date(dateOrder).toISOString(),
+      dateInvoice: new Date(dateInvoice).toISOString(),
+      datePayment: new Date(datePayment).toISOString(),
+      dateETD: new Date(dateETD).toISOString(),
+      dateETA: new Date(dateETA).toISOString(),
     });
 
     toggleModal();

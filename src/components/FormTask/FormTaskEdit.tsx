@@ -39,11 +39,11 @@ export const FormTaskEdit: FC<Props> = ({ toggleEditWindow, task }) => {
   const handleSubmit = (newTask: ITask) => {
     const data = {
       newTask,
-      dateOrder,
-      dateInvoice,
-      datePayment,
-      dateETD,
-      dateETA,
+      dateOrder: new Date(dateOrder).toISOString(),
+      dateInvoice: new Date(dateInvoice).toISOString(),
+      datePayment: new Date(datePayment).toISOString(),
+      dateETD: new Date(dateETD).toISOString(),
+      dateETA: new Date(dateETA).toISOString(),
     };
 
     task._id && handleUpdateTask(task._id, data);
