@@ -24,8 +24,6 @@ export const FormTaskEdit: FC<Props> = ({ toggleEditWindow, task }) => {
     dateETA: +formatDateMS(task.dateETA.toString()),
   });
 
-  const timeOffset = new Date().getTimezoneOffset();
-
   const { dateOrder, dateInvoice, datePayment, dateETD, dateETA } = dates;
 
   const { handleUpdateTask } = useTaskStore(state => state);
@@ -41,11 +39,11 @@ export const FormTaskEdit: FC<Props> = ({ toggleEditWindow, task }) => {
   const handleSubmit = (newTask: ITask) => {
     const data = {
       newTask,
-      dateOrder: dateOrder - timeOffset * 60000,
-      dateInvoice: dateInvoice - timeOffset * 60000,
-      datePayment: datePayment - timeOffset * 60000,
-      dateETD: dateETD - timeOffset * 60000,
-      dateETA: dateETA - timeOffset * 60000,
+      dateOrder,
+      dateInvoice,
+      datePayment,
+      dateETD,
+      dateETA,
     };
 
     task._id && handleUpdateTask(task._id, data);
