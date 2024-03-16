@@ -19,11 +19,11 @@ export const FormTaskAdd: FC<Props> = ({ toggleModal, handleAddTask }) => {
   const timeOffset = new Date().getTimezoneOffset();
 
   const [dates, setDates] = useState<IDatesNum>({
-    dateOrder: today,
-    dateInvoice: today + 86_400_000,
-    datePayment: today + 2 * 86_400_000,
-    dateETD: today + 3 * 86_400_000,
-    dateETA: today + 4 * 86_400_000,
+    dateOrder: today - timeOffset * 60000,
+    dateInvoice: today + 86_400_000 - timeOffset * 60000,
+    datePayment: today + 2 * 86_400_000 - timeOffset * 60000,
+    dateETD: today + 3 * 86_400_000 - timeOffset * 60000,
+    dateETA: today + 4 * 86_400_000 - timeOffset * 60000,
   });
 
   const { dateOrder, dateInvoice, datePayment, dateETD, dateETA } = dates;
@@ -39,11 +39,11 @@ export const FormTaskAdd: FC<Props> = ({ toggleModal, handleAddTask }) => {
   const handleSubmit = (newTask: Partial<ITask>) => {
     handleAddTask({
       ...newTask,
-      dateOrder: dateOrder - timeOffset * 60000,
-      dateInvoice: dateInvoice - timeOffset * 60000,
-      datePayment: datePayment - timeOffset * 60000,
-      dateETD: dateETD - timeOffset * 60000,
-      dateETA: dateETA - timeOffset * 60000,
+      dateOrder,
+      dateInvoice,
+      datePayment,
+      dateETD,
+      dateETA,
     });
 
     toggleModal();
